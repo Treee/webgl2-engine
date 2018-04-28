@@ -4,7 +4,7 @@
   "description": "This package contains the code to utilize webgl2's graphics capabilities.",
   "main": "index.js",
   "scripts": {
-    "test": "ts-node node_modules/jasmine/bin/jasmine JASMINE_CONFIG_PATH=jasmine.json",
+    "test": "ts-node node_modules/jasmine/bin/jasmine jasmine src/**/*.ts",
     "build-dev": "ts-node node_modules/typescript/bin/tsc -p tsconfig.json"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "jasmine": "^3.1.0",
+    "jasmine-spec-reporter": "^4.2.1",
     "nodemon": "^1.17.3",
     "ts-node": "^6.0.1",
     "typescript": "^2.8.3"
