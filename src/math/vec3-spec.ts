@@ -38,10 +38,17 @@ describe('Vec3', () => {
         });
 
         it('correctly normalizes a different vector', () => {
-            testVector = new Vec3(0, 1, 0);
-            const expectedVector = new Vec3(0, 1, 0);
+            testVector = new Vec3(1, 1, 0);
+            const length = Math.sqrt((testVector.x * testVector.x) + (testVector.y * testVector.y) + (testVector.z * testVector.z));
+            const expectedVector = new Vec3(testVector.x / length, testVector.y / length, testVector.z / length);
             const actualVector = testVector.normalize();
             expect(actualVector).toEqual(expectedVector);
+        });
+    });
+
+    describe('Dot', () => {
+        it('', () => {
+
         });
     });
 
