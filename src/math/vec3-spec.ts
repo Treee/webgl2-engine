@@ -6,6 +6,7 @@ describe('Vec3', () => {
 
     beforeEach(() => {
         testVector = new Vec3();
+        expect(testVector).toBeDefined();
     });
 
     describe('Construction', () => {
@@ -64,6 +65,25 @@ describe('Vec3', () => {
             const expectedDotProduct = ((testVector.x * anotherVector.x) + (testVector.y * anotherVector.y) + (testVector.z * anotherVector.z));
             const actualDotProduct = testVector.dot(anotherVector);
             expect(actualDotProduct).toEqual(expectedDotProduct);
+        });
+    });
+
+    describe('Length', () => {
+        it('exists on the object', () => {
+            expect(testVector.length).toBeDefined();
+        });
+
+        it('correctly returns the length of the calling vector', () => {
+            testVector = new Vec3(1, 1, 1);
+            const expectedLength = Math.sqrt((testVector.x * testVector.x) + (testVector.y * testVector.y) + (testVector.z * testVector.z));
+            const actualLength = testVector.length();
+            expect(actualLength).toEqual(expectedLength);
+        });
+        it('correctly returns the length of another calling vector', () => {
+            testVector = new Vec3(3, -1, 4);
+            const expectedLength = Math.sqrt((testVector.x * testVector.x) + (testVector.y * testVector.y) + (testVector.z * testVector.z));
+            const actualLength = testVector.length();
+            expect(actualLength).toEqual(expectedLength);
         });
     });
 
