@@ -38,6 +38,14 @@ export class BoxGeometry {
         return this.scale.clone();
     }
 
+    rotate() {
+
+    }
+
+    private setRotation(newRotation: Vec3) {
+        this.rotation = newRotation;
+    }
+
     getRotation(): Vec3 {
         return this.rotation.clone();
     }

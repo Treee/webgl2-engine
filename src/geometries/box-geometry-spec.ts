@@ -135,4 +135,10 @@ describe('Box Geometry', () => {
         });
     });
 
+    describe('Rotate', () => {
+        it('exists on the geometry', () => {
+            expect(testBoxGeometry.rotate).toBeDefined();
+        });
+    });
+
 });
