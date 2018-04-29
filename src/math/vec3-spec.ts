@@ -107,4 +107,27 @@ describe('Vec3', () => {
         });
     });
 
+    describe('Add', () => {
+        it('exists on the object', () => {
+            expect(testVector.add).toBeDefined();
+        });
+
+        it('adds two vectors together', () => {
+            expect(testVector).toEqual(new Vec3());
+            const anotherVector = new Vec3(1, -1, 3);
+            const actualVector = testVector.add(anotherVector);
+            const expectedVector = new Vec3(1, -1, 3);
+            expect(actualVector).toEqual(expectedVector);
+        });
+
+        it('adds two other vectors together', () => {
+            expect(testVector).toEqual(new Vec3());
+            testVector = new Vec3(1, -5, 3);
+            const anotherVector = new Vec3(1, -1, 3);
+            const actualVector = testVector.add(anotherVector);
+            const expectedVector = new Vec3(2, -6, 6);
+            expect(actualVector).toEqual(expectedVector);
+        });
+    });
+
 });
