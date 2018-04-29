@@ -87,4 +87,24 @@ describe('Vec3', () => {
         });
     });
 
+    describe('Clone', () => {
+        it('exists on the object', () => {
+            expect(testVector.clone).toBeDefined();
+        });
+
+        it('correctly returns the clone of the calling vector', () => {
+            testVector = new Vec3(1, 1, 1);
+            const actualClone = testVector.clone();
+            expect(actualClone).toEqual(testVector);
+            expect(actualClone).not.toBe(testVector);
+        });
+
+        it('correctly returns the clone of another calling vector', () => {
+            testVector = new Vec3(2, -1, 5);
+            const actualClone = testVector.clone();
+            expect(actualClone).toEqual(testVector);
+            expect(actualClone).not.toBe(testVector);
+        });
+    });
+
 });
