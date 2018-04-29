@@ -91,4 +91,27 @@ describe('Box Geometry', () => {
         });
     });
 
+    describe('ScaleGeometry', () => {
+        it('exists on the geometry', () => {
+            expect(testBoxGeometry.scaleGeometry).toBeDefined();
+        });
+
+        it('scales the geometry by a given amount', () => {
+            const expectedScale = new Vec3(2, 3, 4);
+            const scaleBy = new Vec3(1, 2, 3);
+            testBoxGeometry.scaleGeometry(scaleBy);
+            const actualScale = testBoxGeometry.getScale();
+            expect(actualScale).toEqual(expectedScale);
+        });
+
+        it('scales the geometry by a different given amount', () => {
+            testBoxGeometry = new BoxGeometry(new Vec3(0, 0, 0), new Vec3(2, 2, 2));
+            const expectedScale = new Vec3(3, 4, 5);
+            const scaleBy = new Vec3(1, 2, 3);
+            testBoxGeometry.scaleGeometry(scaleBy);
+            const actualScale = testBoxGeometry.getScale();
+            expect(actualScale).toEqual(expectedScale);
+        });
+    });
+
 });

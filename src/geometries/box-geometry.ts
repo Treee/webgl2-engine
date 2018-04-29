@@ -23,6 +23,15 @@ export class BoxGeometry {
         return this.position.clone();
     }
 
+    scaleGeometry(amountToScale: Vec3) {
+        const temp = this.getScale().add(amountToScale);
+        this.setScale(temp);
+    }
+
+    private setScale(newScale: Vec3) {
+        this.scale = newScale;
+    }
+
     getScale(): Vec3 {
         return this.scale.clone();
     }
