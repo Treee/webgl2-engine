@@ -6,9 +6,10 @@ describe('Box Geometry', () => {
 
     beforeEach(() => {
         testBoxGeometry = new BoxGeometry();
-        // default values
+        // default private values
         expect(testBoxGeometry.getPosition()).toEqual(new Vec3());
         expect(testBoxGeometry.getScale()).toEqual(new Vec3(1, 1, 1));
+        expect(testBoxGeometry.getRotation()).toEqual(new Vec3(0, 0, 0));
     });
 
     describe('Construction', () => {
@@ -111,6 +112,26 @@ describe('Box Geometry', () => {
             testBoxGeometry.scaleGeometry(scaleBy);
             const actualScale = testBoxGeometry.getScale();
             expect(actualScale).toEqual(expectedScale);
+        });
+    });
+
+    describe('GetRotation', () => {
+        it('exists on the geometry', () => {
+            expect(testBoxGeometry.getRotation).toBeDefined();
+        });
+
+        it('returns the rotation vector of the geometry', () => {
+            const expectedRotation = new Vec3(0, 0, 0);
+            const actualRotation = testBoxGeometry.getRotation();
+            expect(actualRotation).toEqual(expectedRotation);
+        });
+
+        it('returns a copy of the rotation vector not a reference', () => {
+            const expectedRotation = new Vec3(1, 0, 0);
+            testBoxGeometry = new BoxGeometry(new Vec3(), new Vec3(), expectedRotation);
+            const actualRotation = testBoxGeometry.getRotation();
+            expect(actualRotation).toEqual(expectedRotation);
+            expect(actualRotation).not.toBe(expectedRotation);
         });
     });
 

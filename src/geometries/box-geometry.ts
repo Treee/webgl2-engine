@@ -4,10 +4,12 @@ export class BoxGeometry {
 
     private position: Vec3;
     private scale: Vec3;
+    private rotation: Vec3;
 
-    constructor(position?: Vec3, scale?: Vec3) {
+    constructor(position?: Vec3, scale?: Vec3, rotation?: Vec3) {
         this.position = position ? position : new Vec3();
         this.scale = scale ? scale : new Vec3(1, 1, 1);
+        this.rotation = rotation ? rotation : new Vec3(0, 0, 0);
     }
 
     translate(amountToTranslate: Vec3) {
@@ -34,6 +36,10 @@ export class BoxGeometry {
 
     getScale(): Vec3 {
         return this.scale.clone();
+    }
+
+    getRotation(): Vec3 {
+        return this.rotation.clone();
     }
 
 
