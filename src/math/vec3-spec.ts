@@ -47,8 +47,23 @@ describe('Vec3', () => {
     });
 
     describe('Dot', () => {
-        it('', () => {
+        it('exists on the object', () => {
+            expect(testVector.dot).toBeDefined();
+        });
 
+        it('correctly returns the dot product between 2 vectors', () => {
+            testVector = new Vec3(1, 0, 0);
+            let anotherVector = new Vec3(0, 1, 0);
+            const expectedDotProduct = ((testVector.x * anotherVector.x) + (testVector.y * anotherVector.y) + (testVector.z * anotherVector.z));
+            const actualDotProduct = testVector.dot(anotherVector);
+            expect(actualDotProduct).toEqual(expectedDotProduct);
+        });
+        it('correctly returns the dot product of a different vector', () => {
+            testVector = new Vec3(1, 1, 0);
+            let anotherVector = new Vec3(-1, -1, 0)
+            const expectedDotProduct = ((testVector.x * anotherVector.x) + (testVector.y * anotherVector.y) + (testVector.z * anotherVector.z));
+            const actualDotProduct = testVector.dot(anotherVector);
+            expect(actualDotProduct).toEqual(expectedDotProduct);
         });
     });
 
