@@ -14,8 +14,8 @@ export class BoxGeometry {
     }
 
     translate(amountToTranslate: Vec3): void {
-        const temp = this.getPosition().add(amountToTranslate);
-        this.setPosition(temp);
+        const newPosition = this.getPosition().add(amountToTranslate);
+        this.setPosition(newPosition);
     }
 
     private setPosition(newPosition: Vec3): void {
@@ -27,8 +27,8 @@ export class BoxGeometry {
     }
 
     scaleGeometry(amountToScale: Vec3): void {
-        const temp = this.getScale().add(amountToScale);
-        this.setScale(temp);
+        const newScale = this.getScale().add(amountToScale);
+        this.setScale(newScale);
     }
 
     private setScale(newScale: Vec3): void {
@@ -44,7 +44,8 @@ export class BoxGeometry {
         const angleInRadians = angleInDegrees * (Math.PI / 180);
         const x = Math.sin(angleInRadians);
         const y = Math.cos(angleInRadians);
-        this.setRotation(new Vec3(x, y, 0));
+        const newRotation = new Vec3(x, y, 0);
+        this.setRotation(newRotation);
     }
 
     private setRotation(newRotation: Vec3): void {
