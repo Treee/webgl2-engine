@@ -9,7 +9,8 @@ describe('Box Geometry', () => {
         // default private values
         expect(testBoxGeometry.getPosition()).toEqual(new Vec3());
         expect(testBoxGeometry.getScale()).toEqual(new Vec3(1, 1, 1));
-        expect(testBoxGeometry.getRotation()).toEqual(new Vec3(0, 0, 0));
+        // rotation is at 90 degrees by default
+        expect(testBoxGeometry.getRotation()).toEqual(new Vec3(0, 1, 0));
     });
 
     describe('Construction', () => {
@@ -121,15 +122,20 @@ describe('Box Geometry', () => {
         });
 
         it('returns the rotation vector of the geometry', () => {
-            const expectedRotation = new Vec3(0, 0, 0);
+            const expectedRotation = new Vec3(0, 1, 0);
             const actualRotation = testBoxGeometry.getRotation();
             expect(actualRotation).toEqual(expectedRotation);
         });
 
         it('returns a copy of the rotation vector not a reference', () => {
             const expectedRotation = new Vec3(1, 0, 0);
-            testBoxGeometry = new BoxGeometry(new Vec3(), new Vec3(), expectedRotation);
+            testBoxGeometry = new BoxGeometry(new Vec3(), new Vec3(), 90);
             const actualRotation = testBoxGeometry.getRotation();
+            // cos90 degrees is only approx 0
+            // check if the value is below the margin of error (10 zeros out)
+            if (actualRotation.y < 0.00000000001) {
+                actualRotation.y = 0;
+            }
             expect(actualRotation).toEqual(expectedRotation);
             expect(actualRotation).not.toBe(expectedRotation);
         });
@@ -138,6 +144,24 @@ describe('Box Geometry', () => {
     describe('Rotate', () => {
         it('exists on the geometry', () => {
             expect(testBoxGeometry.rotate).toBeDefined();
+        });
+
+        it('rotates the geometry by an angle', () => {
+            const angleInDegrees = 90;
+            const angleInRadians = angleInDegrees * (Math.PI / 180);
+            const expectedRotation = new Vec3(Math.sin(angleInRadians), Math.cos(angleInRadians), 0);
+            testBoxGeometry.rotate(angleInDegrees);
+            const actualRotation = testBoxGeometry.getRotation();
+            expect(actualRotation).toEqual(expectedRotation);
+        });
+
+        it('rotates the geometry by a different angle', () => {
+            const angleInDegrees = 45;
+            const angleInRadians = angleInDegrees * (Math.PI / 180);
+            const expectedRotation = new Vec3(Math.sin(angleInRadians), Math.cos(angleInRadians), 0);
+            testBoxGeometry.rotate(angleInDegrees);
+            const actualRotation = testBoxGeometry.getRotation();
+            expect(actualRotation).toEqual(expectedRotation);
         });
     });
 
