@@ -146,7 +146,7 @@ describe('Box Geometry', () => {
             expect(testBoxGeometry.rotate).toBeDefined();
         });
 
-        it('rotates the geometry by an angle', () => {
+        it('rotates the geometry by 90 degrees', () => {
             const angleInDegrees = 90;
             const angleInRadians = angleInDegrees * (Math.PI / 180);
             const expectedRotation = new Vec3(Math.sin(angleInRadians), Math.cos(angleInRadians), 0);
@@ -155,7 +155,7 @@ describe('Box Geometry', () => {
             expect(actualRotation).toEqual(expectedRotation);
         });
 
-        it('rotates the geometry by a different angle', () => {
+        it('rotates the geometry by 45 degreess', () => {
             const angleInDegrees = 45;
             const angleInRadians = angleInDegrees * (Math.PI / 180);
             const expectedRotation = new Vec3(Math.sin(angleInRadians), Math.cos(angleInRadians), 0);

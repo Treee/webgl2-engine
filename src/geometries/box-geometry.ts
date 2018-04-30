@@ -13,12 +13,12 @@ export class BoxGeometry {
         this.rotate(rotationAngle ? rotationAngle : 0);
     }
 
-    translate(amountToTranslate: Vec3) {
+    translate(amountToTranslate: Vec3): void {
         const temp = this.getPosition().add(amountToTranslate);
         this.setPosition(temp);
     }
 
-    private setPosition(newPosition: Vec3) {
+    private setPosition(newPosition: Vec3): void {
         this.position = newPosition;
     }
 
@@ -26,12 +26,12 @@ export class BoxGeometry {
         return this.position.clone();
     }
 
-    scaleGeometry(amountToScale: Vec3) {
+    scaleGeometry(amountToScale: Vec3): void {
         const temp = this.getScale().add(amountToScale);
         this.setScale(temp);
     }
 
-    private setScale(newScale: Vec3) {
+    private setScale(newScale: Vec3): void {
         this.scale = newScale;
     }
 
@@ -40,14 +40,14 @@ export class BoxGeometry {
     }
 
     // rotates clockwise starting from (0, 1, 0)
-    rotate(angleInDegrees: number) {
+    rotate(angleInDegrees: number): void {
         const angleInRadians = angleInDegrees * (Math.PI / 180);
         const x = Math.sin(angleInRadians);
         const y = Math.cos(angleInRadians);
         this.setRotation(new Vec3(x, y, 0));
     }
 
-    private setRotation(newRotation: Vec3) {
+    private setRotation(newRotation: Vec3): void {
         this.rotation = newRotation;
     }
 
