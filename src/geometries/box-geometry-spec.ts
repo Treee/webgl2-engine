@@ -185,4 +185,26 @@ describe('Box Geometry', () => {
         });
     });
 
+    describe('GetRotationMatrix', () => {
+        it('returns a matrix with the rotation matrix within', () => {
+            const expectedRotationMatrix = [1, -0, 0, 0, 1, 0, 0, 0, 1];
+            const actualRotationMatrix = testBoxGeometry.getRotationMatrix();
+            expect(actualRotationMatrix.toArray()).toEqual(expectedRotationMatrix);
+        });
+
+        it('returns a matrix with the 90 degree rotation matrix within', () => {
+            const expectedRotationMatrix = [0, -1, 0, 1, 0, 0, 0, 0, 1];
+            testBoxGeometry.rotate(90);
+            const actualRotationMatrix = testBoxGeometry.getRotationMatrix();
+            let rotationMatrixArray = actualRotationMatrix.toArray();
+            if (rotationMatrixArray[0] < 0.0000000001) {
+                rotationMatrixArray[0] = 0;
+            }
+            if (rotationMatrixArray[4] < 0.0000000001) {
+                rotationMatrixArray[4] = 0;
+            }
+            expect(rotationMatrixArray).toEqual(expectedRotationMatrix);
+        });
+    });
+
 });

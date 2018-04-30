@@ -57,10 +57,20 @@ export class BoxGeometry {
     // rotates clockwise starting from (0, 1, 0)
     rotate(angleInDegrees: number): void {
         const angleInRadians = angleInDegrees * (Math.PI / 180);
-        const x = Math.sin(angleInRadians);
-        const y = Math.cos(angleInRadians);
-        const newRotation = new Vec3(x, y, 0);
+        const newRotation = new Vec3(Math.sin(angleInRadians), Math.cos(angleInRadians), 0);
         this.setRotation(newRotation);
+    }
+
+    getRotationMatrix(): Mat3 {
+        const rotation = this.getRotation();
+        let rotationMatrix = new Mat3();
+        rotationMatrix.set(rotation.y, rotation.x, 0, -rotation.x, rotation.y, 0, 0, 0, 1);
+        // tempRotation.set(
+        //     y, -x, 0,
+        //     x, y, 0,
+        //     0, 0, 1
+        // );
+        return rotationMatrix;
     }
 
     private setRotation(newRotation: Vec3): void {
