@@ -126,6 +126,16 @@ describe('Box Geometry', () => {
         });
     });
 
+    describe('GetScaleMatrix', () => {
+        it('returns a matrix with the scale at position (x)a11, (y)a22, (z)a33 ignored for now', () => {
+            const newScale = new Vec3(4, 2, 3);
+            const expectedScaleMatrix = [newScale.x, 0, 0, 0, newScale.y, 0, 0, 0, 1];
+            testBoxGeometry.scaleGeometry(new Vec3(3, 1, 2));
+            const actualScaleMatrix = testBoxGeometry.getScaleMatrix();
+            expect(actualScaleMatrix.toArray()).toEqual(expectedScaleMatrix);
+        });
+    });
+
     describe('GetRotation', () => {
         it('exists on the geometry', () => {
             expect(testBoxGeometry.getRotation).toBeDefined();

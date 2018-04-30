@@ -39,6 +39,13 @@ export class BoxGeometry {
         this.setScale(newScale);
     }
 
+    getScaleMatrix(): Mat3 {
+        const scale = this.getScale();
+        let scaleMatrix = new Mat3();
+        scaleMatrix.set(scale.x, 0, 0, 0, scale.y, 0, 0, 0, 1);
+        return scaleMatrix;
+    }
+
     private setScale(newScale: Vec3): void {
         this.scale = newScale;
     }
