@@ -44,8 +44,7 @@ export class BoxGeometry {
         const angleInRadians = angleInDegrees * (Math.PI / 180);
         const x = Math.sin(angleInRadians);
         const y = Math.cos(angleInRadians);
-        const temp = new Vec3(x, y, 0);
-        this.setRotation(temp);
+        this.setRotation(new Vec3(x, y, 0));
     }
 
     private setRotation(newRotation: Vec3) {
