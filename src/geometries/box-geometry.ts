@@ -1,4 +1,5 @@
 import { Vec3 } from '../math/vec3';
+import { Mat3 } from '../math/mat3';
 
 export class BoxGeometry {
 
@@ -16,6 +17,13 @@ export class BoxGeometry {
     translate(amountToTranslate: Vec3): void {
         const newPosition = this.getPosition().add(amountToTranslate);
         this.setPosition(newPosition);
+    }
+
+    getTranslationMatrix(): Mat3 {
+        const position = this.getPosition();
+        let translationMatrix = new Mat3();
+        translationMatrix.set(1, 0, position.x, 0, 1, position.y, 0, 0, 1);
+        return translationMatrix;
     }
 
     private setPosition(newPosition: Vec3): void {

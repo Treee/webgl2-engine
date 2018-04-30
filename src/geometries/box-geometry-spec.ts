@@ -54,6 +54,16 @@ describe('Box Geometry', () => {
         });
     });
 
+    describe('GetTranslationMatrix', () => {
+        it('returns a matrix with the position as the last row (ignoring z for now)', () => {
+            const newPosition = new Vec3(2, 3, 4);
+            const expectedTranslation = [1, 0, 0, 0, 1, 0, 2, 3, 1]
+            testBoxGeometry.translate(newPosition);
+            const actualTranslation = testBoxGeometry.getTranslationMatrix();
+            expect(actualTranslation.toArray()).toEqual(expectedTranslation);
+        });
+    });
+
     describe('GetPosition', () => {
         it('exists on the geometry', () => {
             expect(testBoxGeometry.getPosition).toBeDefined();
