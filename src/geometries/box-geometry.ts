@@ -64,12 +64,10 @@ export class BoxGeometry {
     getRotationMatrix(): Mat3 {
         const rotation = this.getRotation();
         let rotationMatrix = new Mat3();
+        // [y, -x, 0,
+        //  x, y, 0,
+        //  0, 0, 1]
         rotationMatrix.set(rotation.y, rotation.x, 0, -rotation.x, rotation.y, 0, 0, 0, 1);
-        // tempRotation.set(
-        //     y, -x, 0,
-        //     x, y, 0,
-        //     0, 0, 1
-        // );
         return rotationMatrix;
     }
 
