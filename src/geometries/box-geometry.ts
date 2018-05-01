@@ -1,4 +1,5 @@
 import { Vec3 } from '../math/vec3';
+import { Vec4 } from '../math/vec4';
 import { Mat3 } from '../math/mat3';
 
 export class BoxGeometry {
@@ -7,7 +8,10 @@ export class BoxGeometry {
     private scale: Vec3;
     private rotation: Vec3;
 
-    constructor(position?: Vec3, scale?: Vec3, rotationAngle?: number) {
+    private color: Vec4;
+
+    constructor(position?: Vec3, scale?: Vec3, rotationAngle?: number, color?: Vec4) {
+        this.color = color ? color : new Vec4();
         this.position = position ? position : new Vec3();
         this.scale = scale ? scale : new Vec3(1, 1, 1);
         this.rotation = new Vec3();
@@ -79,6 +83,12 @@ export class BoxGeometry {
         return this.rotation.clone();
     }
 
+    setColor(newColor: Vec4): void {
+        this.color = newColor;
+    }
 
+    getColor(): Vec4 {
+        return this.color.clone();
+    }
 
 }

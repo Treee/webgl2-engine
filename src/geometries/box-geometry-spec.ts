@@ -1,5 +1,6 @@
 import { BoxGeometry } from "./box-geometry";
 import { Vec3 } from "../math/vec3";
+import { Vec4 } from "../math/vec4";
 
 describe('Box Geometry', () => {
     let testBoxGeometry: BoxGeometry;
@@ -11,6 +12,7 @@ describe('Box Geometry', () => {
         expect(testBoxGeometry.getScale()).toEqual(new Vec3(1, 1, 1));
         // rotation is at 90 degrees by default
         expect(testBoxGeometry.getRotation()).toEqual(new Vec3(0, 1, 0));
+        expect(testBoxGeometry.getColor()).toEqual(new Vec4());
     });
 
     describe('Construction', () => {
@@ -204,6 +206,44 @@ describe('Box Geometry', () => {
                 rotationMatrixArray[4] = 0;
             }
             expect(rotationMatrixArray).toEqual(expectedRotationMatrix);
+        });
+    });
+
+    describe('GetColor', () => {
+        it('returns the default color (black) vector of the geometry', () => {
+            const expectedColorVector = new Vec4();
+            const actualColorVector = testBoxGeometry.getColor();
+            expect(actualColorVector).toEqual(expectedColorVector);
+        });
+
+        it('returns the current color vector of the geometry', () => {
+            const expectedColorVector = new Vec4(1, 1, 1, 1);
+            testBoxGeometry = new BoxGeometry(undefined, undefined, undefined, expectedColorVector);
+            const actualColorVector = testBoxGeometry.getColor();
+            expect(actualColorVector).toEqual(expectedColorVector);
+        });
+
+        it('returns a copy of the vector, not a reference', () => {
+            const expectedColorVector = new Vec4(1, 1, 1, 1);
+            testBoxGeometry = new BoxGeometry(undefined, undefined, undefined, expectedColorVector);
+            const actualColorVector = testBoxGeometry.getColor();
+            expect(actualColorVector).not.toBe(expectedColorVector);
+        });
+    });
+
+    describe('SetColor', () => {
+        it('it sets the color of the geometry', () => {
+            const expectedColorVector = new Vec4(1, 0, 1, 1);
+            testBoxGeometry.setColor(expectedColorVector);
+            const actualColorVector = testBoxGeometry.getColor();
+            expect(actualColorVector).toEqual(expectedColorVector);
+        });
+
+        it('it sets another color of the geometry', () => {
+            const expectedColorVector = new Vec4(1, 1, 0, 1);
+            testBoxGeometry.setColor(expectedColorVector);
+            const actualColorVector = testBoxGeometry.getColor();
+            expect(actualColorVector).toEqual(expectedColorVector);
         });
     });
 
