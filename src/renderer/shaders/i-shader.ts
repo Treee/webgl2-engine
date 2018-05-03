@@ -1,3 +1,3 @@
 export interface IShader {
-    getBasicShader(gl: WebGLRenderingContext): WebGLShader;
+    getBasicShader(gl: WebGLRenderingContext): WebGLShader | null;
 }

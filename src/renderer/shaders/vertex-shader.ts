@@ -7,12 +7,12 @@ export class VertexShader implements IShader {
 
     }
 
-    getBasic2dShader(gl: WebGLRenderingContext): WebGLShader {
+    getBasic2dShader(gl: WebGLRenderingContext): WebGLShader | null {
         // console.log('vertex shader', this.getBasicShaderCode());
         return this.shaderService.compileShader(gl, this.getBasic2dShaderCode(), gl.VERTEX_SHADER);
     }
 
-    getBasicShader(gl: WebGLRenderingContext): WebGLShader {
+    getBasicShader(gl: WebGLRenderingContext): WebGLShader | null {
         // console.log('vertex shader', this.getBasicShaderCode());
         return this.shaderService.compileShader(gl, this.getBasicShaderCode(), gl.VERTEX_SHADER);
     }
