@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/three": "^0.91.10",
+    "@types/webgl2": "0.0.4",
     "three": "^0.92.0"
   }
 }
