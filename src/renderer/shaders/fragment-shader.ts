@@ -1,17 +1,20 @@
-import { IShader } from './i-shader';
-import { ShaderProgramService } from './shader-program';
+export class FragmentShader {
+    constructor() { }
 
-export class FragmentShader implements IShader {
-    constructor(private shaderService: ShaderProgramService) {
-
+    getfragmentShaderCode(fragmentShaderType: string): string {
+        let fragmentShaderCode = '';
+        switch (fragmentShaderType) {
+            case '2d':
+                //fragmentShaderCode = this.getBasic2dShaderCode();
+                break;
+            default:
+                fragmentShaderCode = this.getDefaultFragmentShader();
+                break;
+        }
+        return fragmentShaderCode;
     }
 
-    getBasicShader(gl: WebGLRenderingContext): WebGLShader | null {
-        // console.log('fragmet shader', this.getBasicShaderCode());
-        return this.shaderService.compileShader(gl, this.getBasicShaderCode(), gl.FRAGMENT_SHADER);
-    }
-
-    getBasicShaderCode(): string {
+    private getDefaultFragmentShader() {
         return `#version 300 es
 
         precision mediump float;
@@ -24,5 +27,4 @@ export class FragmentShader implements IShader {
           outColor = u_color;
         }`;
     }
-
 }

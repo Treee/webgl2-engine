@@ -1,20 +1,28 @@
-import { IShader } from './i-shader';
-import { ShaderProgramService } from './shader-program';
+export class VertexShader {
 
-export class VertexShader implements IShader {
+    constructor() { }
 
-    constructor(private shaderService: ShaderProgramService) {
+    // getBasic2dShader(gl: WebGLRenderingContext): WebGLShader | null {
+    //     // console.log('vertex shader', this.getBasicShaderCode());
+    //     return this.shaderService.compileShader(gl, this.getBasic2dShaderCode(), gl.VERTEX_SHADER);
+    // }
 
-    }
+    // getBasicShader(gl: WebGLRenderingContext): WebGLShader | null {
+    //     // console.log('vertex shader', this.getBasicShaderCode());
+    //     return this.shaderService.compileShader(gl, this.getBasicShaderCode(), gl.VERTEX_SHADER);
+    // }
 
-    getBasic2dShader(gl: WebGLRenderingContext): WebGLShader | null {
-        // console.log('vertex shader', this.getBasicShaderCode());
-        return this.shaderService.compileShader(gl, this.getBasic2dShaderCode(), gl.VERTEX_SHADER);
-    }
-
-    getBasicShader(gl: WebGLRenderingContext): WebGLShader | null {
-        // console.log('vertex shader', this.getBasicShaderCode());
-        return this.shaderService.compileShader(gl, this.getBasicShaderCode(), gl.VERTEX_SHADER);
+    getVertexShaderCode(vertexShaderType: string): string {
+        let vertexShaderCode = '';
+        switch (vertexShaderType) {
+            case '2d':
+                vertexShaderCode = this.getBasic2dShaderCode();
+                break;
+            default:
+                vertexShaderCode = this.getDefaultVertexShader();
+                break;
+        }
+        return vertexShaderCode;
     }
 
     private getBasic2dShaderCode(): string {
@@ -29,7 +37,7 @@ export class VertexShader implements IShader {
         `;
     }
 
-    private getBasicShaderCode(): string {
+    private getDefaultVertexShader() {
         return `#version 300 es
 
         in vec4 a_position;
