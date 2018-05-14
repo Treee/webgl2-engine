@@ -1,6 +1,7 @@
 import { BoxGeometry } from "./box-geometry";
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
+import { Mat3 } from "../math/mat3";
 
 describe('Box Geometry', () => {
     let testBoxGeometry: BoxGeometry;
@@ -13,23 +14,6 @@ describe('Box Geometry', () => {
         // rotation is at 90 degrees by default
         expect(testBoxGeometry.getRotation()).toEqual(new Vec3(0, 1, 0));
         expect(testBoxGeometry.getColor()).toEqual(new Vec4());
-    });
-
-    describe('Construction', () => {
-        it('a position can be passed in', () => {
-            expect(testBoxGeometry.getPosition()).toEqual(new Vec3());
-            const newPosition = new Vec3(1, 1, 1);
-            testBoxGeometry = new BoxGeometry(newPosition);
-            expect(testBoxGeometry.getPosition()).toEqual(newPosition);
-        });
-
-        it('a scale can be passed in', () => {
-            expect(testBoxGeometry.getScale()).toEqual(new Vec3(1, 1, 1));
-            const newPosition = new Vec3(1, 1, 1);
-            const newScale = new Vec3(9, 8, 7);
-            testBoxGeometry = new BoxGeometry(newPosition, newScale);
-            expect(testBoxGeometry.getScale()).toEqual(newScale);
-        });
     });
 
     describe('Translate', () => {
@@ -129,9 +113,9 @@ describe('Box Geometry', () => {
     });
 
     describe('GetScaleMatrix', () => {
-        it('returns a matrix with the scale at position (x)a11, (y)a22, (z)a33 ignored for now', () => {
+        it('returns a matrix with the scale at position (x)a11, (y)a22, (z)a33w', () => {
             const newScale = new Vec3(4, 2, 3);
-            const expectedScaleMatrix = [newScale.x, 0, 0, 0, newScale.y, 0, 0, 0, 1];
+            const expectedScaleMatrix = [newScale.x, 0, 0, 0, newScale.y, 0, 0, 0, newScale.z];
             testBoxGeometry.scaleGeometry(new Vec3(3, 1, 2));
             const actualScaleMatrix = testBoxGeometry.getScaleMatrix();
             expect(actualScaleMatrix.toArray()).toEqual(expectedScaleMatrix);
@@ -231,19 +215,41 @@ describe('Box Geometry', () => {
         });
     });
 
-    describe('SetColor', () => {
-        it('it sets the color of the geometry', () => {
-            const expectedColorVector = new Vec4(1, 0, 1, 1);
-            testBoxGeometry.setColor(expectedColorVector);
-            const actualColorVector = testBoxGeometry.getColor();
-            expect(actualColorVector).toEqual(expectedColorVector);
+    describe('GetTransform', () => {
+        it('returns a full transformation of the geometry. translate only', () => {
+            const moveAmount = new Vec3(1, 1, 1);
+            const expectedTransform = new Mat3();
+            expectedTransform.set(1, 0, moveAmount.x, 0, 1, moveAmount.y, 0, 0, moveAmount.z);
+            testBoxGeometry.translate(moveAmount);
+            const actualTransform = testBoxGeometry.getTransform();
+            expect(actualTransform).toEqual(expectedTransform);
         });
 
-        it('it sets another color of the geometry', () => {
-            const expectedColorVector = new Vec4(1, 1, 0, 1);
-            testBoxGeometry.setColor(expectedColorVector);
-            const actualColorVector = testBoxGeometry.getColor();
-            expect(actualColorVector).toEqual(expectedColorVector);
+        xit('returns a full transformation of the geometry. scale only', () => {
+            const scaleAmount = new Vec3(1, 1, 1);
+            // current scale is 1 so scaling 1 by 1 = 2
+            const expectedScale = new Vec3(2, 2, 2);
+            const expectedTransform = new Mat3();
+            expectedTransform.set(expectedScale.x, 0, 0, 0, expectedScale.y, 0, 0, 0, expectedScale.z);
+            testBoxGeometry.scaleGeometry(scaleAmount);
+            const actualTransform = testBoxGeometry.getTransform();
+            expect(actualTransform).toEqual(expectedTransform);
+        });
+
+        xit('returns a full transformation of the geometry. rotate only', () => {
+            const rotateAmount = 90;
+            const expectedTransform = new Mat3();
+            expectedTransform.set(0, 1, 0, -1, 0, 0, 0, 0, 1);
+            testBoxGeometry.rotate(rotateAmount);
+            const actualTransform = testBoxGeometry.getTransform();
+            // handle very small numbers in tests. its basically 0
+            if (actualTransform.elements[0] < 0.00001) {
+                actualTransform.elements[0] = 0
+            }
+            if (actualTransform.elements[4] < 0.00001) {
+                actualTransform.elements[4] = 0
+            }
+            expect(actualTransform).toEqual(expectedTransform);
         });
     });
 
