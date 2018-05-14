@@ -10,21 +10,20 @@ export class BoxGeometry {
 
     private color: Vec4;
 
-    private transform: Mat3;
-
     constructor(position?: Vec3, scale?: Vec3, rotationAngle?: number, color?: Vec4) {
         this.color = color ? color : new Vec4();
         this.position = position ? position : new Vec3();
         this.scale = scale ? scale : new Vec3(1, 1, 1);
         this.rotation = new Vec3();
         this.rotate(rotationAngle ? rotationAngle : 0);
-        this.transform = new Mat3();
     }
 
     getTransform(): Mat3 {
-        return this.getTranslationMatrix();
-        // return this.getScaleMatrix();
-        // return this.getRotationMatrix();
+        let temp = new Mat3();
+        temp = temp.multiplyMatrices(temp, this.getRotationMatrix());
+        temp = temp.multiplyMatrices(temp, this.getScaleMatrix());
+        temp = temp.multiplyMatrices(temp, this.getTranslationMatrix());
+        return temp;
     }
 
     translate(amountToTranslate: Vec3): void {

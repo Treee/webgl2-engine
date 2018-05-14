@@ -2,6 +2,7 @@ import { BoxGeometry } from "./box-geometry";
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
 import { Mat3 } from "../math/mat3";
+import { TetrahedronBufferGeometry } from "three";
 
 describe('Box Geometry', () => {
     let testBoxGeometry: BoxGeometry;
@@ -216,39 +217,21 @@ describe('Box Geometry', () => {
     });
 
     describe('GetTransform', () => {
-        it('returns a full transformation of the geometry. translate only', () => {
+        it('returns a full transformation of the geometry. translate and scale only', () => {
             const moveAmount = new Vec3(1, 1, 1);
-            const expectedTransform = new Mat3();
-            expectedTransform.set(1, 0, moveAmount.x, 0, 1, moveAmount.y, 0, 0, moveAmount.z);
-            testBoxGeometry.translate(moveAmount);
-            const actualTransform = testBoxGeometry.getTransform();
-            expect(actualTransform).toEqual(expectedTransform);
-        });
-
-        xit('returns a full transformation of the geometry. scale only', () => {
             const scaleAmount = new Vec3(1, 1, 1);
-            // current scale is 1 so scaling 1 by 1 = 2
-            const expectedScale = new Vec3(2, 2, 2);
-            const expectedTransform = new Mat3();
-            expectedTransform.set(expectedScale.x, 0, 0, 0, expectedScale.y, 0, 0, 0, expectedScale.z);
-            testBoxGeometry.scaleGeometry(scaleAmount);
-            const actualTransform = testBoxGeometry.getTransform();
-            expect(actualTransform).toEqual(expectedTransform);
-        });
-
-        xit('returns a full transformation of the geometry. rotate only', () => {
             const rotateAmount = 90;
+            const rotateInRadian = rotateAmount * (Math.PI / 180);
+            // i picked 45 degrees because the value is same for x and y only the sign is different
+            const expectedRotationY = Math.sin(rotateInRadian) * 2;
+            const expectedRotationX = Math.cos(rotateInRadian) * 2;
             const expectedTransform = new Mat3();
-            expectedTransform.set(0, 1, 0, -1, 0, 0, 0, 0, 1);
+            expectedTransform.set(expectedRotationX, expectedRotationY, 2, -expectedRotationY, expectedRotationX, -1.9999999999999998, 0, 0, 2);
+
+            testBoxGeometry.translate(moveAmount);
+            testBoxGeometry.scaleGeometry(scaleAmount);
             testBoxGeometry.rotate(rotateAmount);
             const actualTransform = testBoxGeometry.getTransform();
-            // handle very small numbers in tests. its basically 0
-            if (actualTransform.elements[0] < 0.00001) {
-                actualTransform.elements[0] = 0
-            }
-            if (actualTransform.elements[4] < 0.00001) {
-                actualTransform.elements[4] = 0
-            }
             expect(actualTransform).toEqual(expectedTransform);
         });
     });

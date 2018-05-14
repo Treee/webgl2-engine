@@ -37,6 +37,18 @@ describe('Mat3', () => {
             expect(actual).toEqual(expected);
         });
 
+        it('prints this known matrix', () => {
+            const expected = `[1, 2, 3\n4, 5, 6\n7, 8, 9]`;
+            testMatrix = new Mat3();
+            testMatrix.set(
+                1, 2, 3,
+                4, 5, 6,
+                7, 8, 9
+            );
+            const actual = testMatrix.prettyPrint();
+            expect(actual).toEqual(expected);
+        });
+
         it('prints a random matrix correctly', () => {
             const a00 = Math.random();
             const a01 = Math.random();
