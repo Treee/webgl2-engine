@@ -1,24 +1,15 @@
+import { VertexShaderType } from './shader-types'
 export class VertexShader {
 
     constructor() { }
 
-    // getBasic2dShader(gl: WebGLRenderingContext): WebGLShader | null {
-    //     // console.log('vertex shader', this.getBasicShaderCode());
-    //     return this.shaderService.compileShader(gl, this.getBasic2dShaderCode(), gl.VERTEX_SHADER);
-    // }
-
-    // getBasicShader(gl: WebGLRenderingContext): WebGLShader | null {
-    //     // console.log('vertex shader', this.getBasicShaderCode());
-    //     return this.shaderService.compileShader(gl, this.getBasicShaderCode(), gl.VERTEX_SHADER);
-    // }
-
-    getVertexShaderCode(vertexShaderType: string): string {
+    getVertexShaderCode(vertexShaderType: VertexShaderType): string {
         let vertexShaderCode = '';
         switch (vertexShaderType) {
-            case '2d':
+            case VertexShaderType.TWO_D:
                 vertexShaderCode = this.getBasic2dShaderCode();
                 break;
-            default:
+            case VertexShaderType.DEBUG:
                 vertexShaderCode = this.getDefaultVertexShader();
                 break;
         }

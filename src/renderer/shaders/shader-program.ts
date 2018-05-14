@@ -1,24 +1,25 @@
 import { VertexShader } from './vertex-shader';
 import { FragmentShader } from './fragment-shader';
+import { VertexShaderType, FragmentShaderType } from './shader-types';
 
 export class ShaderProgram {
 
     constructor() { }
 
     getBasic2dProgram(gl: WebGL2RenderingContext): WebGLProgram {
-        return this.createShaderProgram(gl, '2d', '2d');
+        return this.createShaderProgram(gl, VertexShaderType.TWO_D, FragmentShaderType.PASS_THROUGH);
     }
 
-    private createShaderProgram(gl: WebGL2RenderingContext, vertexShaderType: string, fragmentShaderType: string): WebGLProgram {
+    private createShaderProgram(gl: WebGL2RenderingContext, vertexShaderType: VertexShaderType, fragmentShaderType: FragmentShaderType): WebGLProgram {
         return this.createProgram(gl, this.createVertexShader(gl, vertexShaderType), this.createFragmentShader(gl, fragmentShaderType));
     };
 
-    private createVertexShader(gl: WebGLRenderingContext, vertexShaderType: string): WebGLShader {
+    private createVertexShader(gl: WebGLRenderingContext, vertexShaderType: VertexShaderType): WebGLShader {
         const vertexShader = new VertexShader();
         return this.compileShader(gl, vertexShader.getVertexShaderCode(vertexShaderType), gl.VERTEX_SHADER);
     }
 
-    private createFragmentShader(gl: WebGLRenderingContext, fragmentShaderType: string): WebGLShader {
+    private createFragmentShader(gl: WebGLRenderingContext, fragmentShaderType: FragmentShaderType): WebGLShader {
         const fragmentShader = new FragmentShader();
         return this.compileShader(gl, fragmentShader.getfragmentShaderCode(fragmentShaderType), gl.FRAGMENT_SHADER);
     }

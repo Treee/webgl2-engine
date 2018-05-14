@@ -1,14 +1,16 @@
+import { FragmentShaderType } from './shader-types'
+
 export class FragmentShader {
     constructor() { }
 
-    getfragmentShaderCode(fragmentShaderType: string): string {
+    getfragmentShaderCode(fragmentShaderType: FragmentShaderType): string {
         let fragmentShaderCode = '';
         switch (fragmentShaderType) {
-            case '2d':
-                //fragmentShaderCode = this.getBasic2dShaderCode();
-                break;
-            default:
+            case FragmentShaderType.PASS_THROUGH:
                 fragmentShaderCode = this.getDefaultFragmentShader();
+                break;
+            case FragmentShaderType.DEBUG:
+                //fragmentShaderCode = this.getBasic2dShaderCode();
                 break;
         }
         return fragmentShaderCode;
