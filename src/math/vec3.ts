@@ -13,6 +13,7 @@ export class Vec3 extends Vector3 {
     }
 
     prettyPrint(): string {
-        return `[${this.x}, ${this.y}, ${this.z}]`;
+        const v = this.clone();
+        return `[${v.x}, ${v.y}, ${v.z}]`;
     }
 }

@@ -27,4 +27,36 @@ describe('Mat3', () => {
             expect(testMatrix.toArray()).toEqual(expectedMatrix);
         });
     });
+
+    describe('Pretty Print', () => {
+        it('prints the identity matrix correctly', () => {
+            const expected = `[1, 0, 0\n0, 1, 0\n0, 0, 1]`;
+            testMatrix = new Mat3();
+            const actual = testMatrix.prettyPrint();
+
+            expect(actual).toEqual(expected);
+        });
+
+        it('prints a random matrix correctly', () => {
+            const a00 = Math.random();
+            const a01 = Math.random();
+            const a02 = Math.random();
+            const a10 = Math.random();
+            const a11 = Math.random();
+            const a12 = Math.random();
+            const a20 = Math.random();
+            const a21 = Math.random();
+            const a22 = Math.random();
+            const expected = `[${a00}, ${a01}, ${a02}\n${a10}, ${a11}, ${a12}\n${a20}, ${a21}, ${a22}]`;
+            testMatrix = new Mat3();
+            testMatrix = testMatrix.set(
+                a00, a01, a02,
+                a10, a11, a12,
+                a20, a21, a22
+            );
+            const actual = testMatrix.prettyPrint();
+            expect(actual).toEqual(expected);
+        });
+
+    });
 });
