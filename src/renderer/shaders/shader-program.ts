@@ -6,7 +6,7 @@ export class ShaderProgram {
 
     constructor() { }
 
-    getBasic2dProgram(gl: WebGL2RenderingContext): WebGLProgram {
+    public getBasic2dProgram(gl: WebGL2RenderingContext): WebGLProgram {
         return this.createShaderProgram(gl, VertexShaderType.TWO_D, FragmentShaderType.PASS_THROUGH);
     }
 
