@@ -130,4 +130,27 @@ describe('Vec3', () => {
         });
     });
 
+    describe('PrettyPrint', () => {
+        it('prints a vector3 correctly', () => {
+            const expected = '[1, 2, 3]';
+            testVector = new Vec3(1, 2, 3);
+
+            const actual = testVector.prettyPrint();
+
+            expect(actual).toEqual(expected);
+        });
+
+        it('prints a random vector3 correctly', () => {
+            const x = Math.random();
+            const y = Math.random();
+            const z = Math.random();
+            const expected = `[${x}, ${y}, ${z}]`;
+            testVector = new Vec3(x, y, z);
+
+            const actual = testVector.prettyPrint();
+
+            expect(actual).toEqual(expected);
+        });
+
+    });
 });

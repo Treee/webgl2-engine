@@ -24,9 +24,6 @@ export class ShaderProgram {
         return this.compileShader(gl, fragmentShader.getfragmentShaderCode(fragmentShaderType), gl.FRAGMENT_SHADER);
     }
 
-    /**
-    * Creates a program from 2 shaders.
-    */
     private createProgram(gl: WebGLRenderingContext, vertexShader: WebGLShader, fragmentShader: WebGLShader): WebGLProgram {
         // create a program.
         const program = gl.createProgram();
@@ -50,14 +47,6 @@ export class ShaderProgram {
         return program;
     }
 
-    /**
-     * Creates and compiles a shader.
-     *
-     * @param {!WebGLRenderingContext} gl The WebGL Context.
-     * @param {string} shaderSource The GLSL source code for the shader.
-     * @param {number} shaderType The type of shader, VERTEX_SHADER or FRAGMENT_SHADER.
-     * @return {!WebGLShader} The shader.
-    */
     private compileShader(gl: WebGLRenderingContext, shaderSource: string, shaderType: number): WebGLShader {
         // Create the shader object
         const shader = gl.createShader(shaderType);
