@@ -4,19 +4,13 @@ import { Mat3 } from '../math/mat3';
 
 export class BoxGeometry {
 
-    private position: Vec3;
-    private scale: Vec3;
-    private rotation: Vec3;
+    private position: Vec3 = new Vec3();
+    private scale: Vec3 = new Vec3(1, 1, 1);
+    private rotation: Vec3 = new Vec3(0, 1, 0);
 
-    private color: Vec4;
+    private color: Vec4 = new Vec4();
 
-    constructor(position?: Vec3, scale?: Vec3, rotationAngle?: number, color?: Vec4) {
-        this.color = color ? color : new Vec4();
-        this.position = position ? position : new Vec3();
-        this.scale = scale ? scale : new Vec3(1, 1, 1);
-        this.rotation = new Vec3();
-        this.rotate(rotationAngle ? rotationAngle : 0);
-    }
+    constructor() { }
 
     getTransform(): Mat3 {
         let temp = new Mat3();
@@ -46,11 +40,6 @@ export class BoxGeometry {
         return this.position.clone();
     }
 
-    scaleGeometry(amountToScale: Vec3): void {
-        const newScale = this.getScale().add(amountToScale);
-        this.setScale(newScale);
-    }
-
     getScaleMatrix(): Mat3 {
         const scale = this.getScale();
         let scaleMatrix = new Mat3();
@@ -58,7 +47,7 @@ export class BoxGeometry {
         return scaleMatrix;
     }
 
-    private setScale(newScale: Vec3): void {
+    setScale(newScale: Vec3): void {
         this.scale = newScale;
     }
 
@@ -91,7 +80,7 @@ export class BoxGeometry {
         return this.rotation.clone();
     }
 
-    private setColor(newColor: Vec4): void {
+    setColor(newColor: Vec4): void {
         this.color = newColor;
     }
 

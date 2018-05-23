@@ -32,7 +32,8 @@ describe('Box Geometry', () => {
 
         it('adds another supplied vector to the geometries position', () => {
             const newPosition = new Vec3(4, 1, 2);
-            testBoxGeometry = new BoxGeometry(newPosition);
+            testBoxGeometry = new BoxGeometry();
+            testBoxGeometry.translate(newPosition);
             const amountToMove = new Vec3(-1, 4, -3);
             const expectedPosition = new Vec3(3, 5, -1);
             testBoxGeometry.translate(amountToMove);
@@ -63,7 +64,8 @@ describe('Box Geometry', () => {
 
         it('returns a copy of the actual position not a reference', () => {
             const newPosition = new Vec3(1, 2, 3);
-            testBoxGeometry = new BoxGeometry(newPosition);
+            testBoxGeometry = new BoxGeometry();
+            testBoxGeometry.translate(newPosition);
             const actualPosition = testBoxGeometry.getPosition();
             expect(actualPosition).toEqual(newPosition);
             expect(actualPosition).not.toBe(newPosition);
@@ -83,33 +85,11 @@ describe('Box Geometry', () => {
 
         it('returns a copy of the actual scale not a reference', () => {
             const newScale = new Vec3(1, 2, 3);
-            testBoxGeometry = new BoxGeometry(undefined, newScale);
+            testBoxGeometry = new BoxGeometry();
+            testBoxGeometry.setScale(newScale);
             const actualScale = testBoxGeometry.getScale();
             expect(actualScale).toEqual(newScale);
             expect(actualScale).not.toBe(newScale);
-        });
-    });
-
-    describe('ScaleGeometry', () => {
-        it('exists on the geometry', () => {
-            expect(testBoxGeometry.scaleGeometry).toBeDefined();
-        });
-
-        it('scales the geometry by a given amount', () => {
-            const expectedScale = new Vec3(2, 3, 4);
-            const scaleBy = new Vec3(1, 2, 3);
-            testBoxGeometry.scaleGeometry(scaleBy);
-            const actualScale = testBoxGeometry.getScale();
-            expect(actualScale).toEqual(expectedScale);
-        });
-
-        it('scales the geometry by a different given amount', () => {
-            testBoxGeometry = new BoxGeometry(new Vec3(0, 0, 0), new Vec3(2, 2, 2));
-            const expectedScale = new Vec3(3, 4, 5);
-            const scaleBy = new Vec3(1, 2, 3);
-            testBoxGeometry.scaleGeometry(scaleBy);
-            const actualScale = testBoxGeometry.getScale();
-            expect(actualScale).toEqual(expectedScale);
         });
     });
 
@@ -117,7 +97,7 @@ describe('Box Geometry', () => {
         it('returns a matrix with the scale at position (x)a11, (y)a22, (z)a33w', () => {
             const newScale = new Vec3(4, 2, 3);
             const expectedScaleMatrix = [newScale.x, 0, 0, 0, newScale.y, 0, 0, 0, newScale.z];
-            testBoxGeometry.scaleGeometry(new Vec3(3, 1, 2));
+            testBoxGeometry.setScale(newScale);
             const actualScaleMatrix = testBoxGeometry.getScaleMatrix();
             expect(actualScaleMatrix.toArray()).toEqual(expectedScaleMatrix);
         });
@@ -136,7 +116,8 @@ describe('Box Geometry', () => {
 
         it('returns a copy of the rotation vector not a reference', () => {
             const expectedRotation = new Vec3(1, 0, 0);
-            testBoxGeometry = new BoxGeometry(new Vec3(), new Vec3(), 90);
+            testBoxGeometry = new BoxGeometry();
+            testBoxGeometry.rotate(90);
             const actualRotation = testBoxGeometry.getRotation();
             // cos90 degrees is only approx 0
             // check if the value is below the margin of error (10 zeros out)
@@ -203,14 +184,16 @@ describe('Box Geometry', () => {
 
         it('returns the current color vector of the geometry', () => {
             const expectedColorVector = new Vec4(1, 1, 1, 1);
-            testBoxGeometry = new BoxGeometry(undefined, undefined, undefined, expectedColorVector);
+            testBoxGeometry = new BoxGeometry();
+            testBoxGeometry.setColor(expectedColorVector);
             const actualColorVector = testBoxGeometry.getColor();
             expect(actualColorVector).toEqual(expectedColorVector);
         });
 
         it('returns a copy of the vector, not a reference', () => {
             const expectedColorVector = new Vec4(1, 1, 1, 1);
-            testBoxGeometry = new BoxGeometry(undefined, undefined, undefined, expectedColorVector);
+            testBoxGeometry = new BoxGeometry();
+            testBoxGeometry.setColor(expectedColorVector);
             const actualColorVector = testBoxGeometry.getColor();
             expect(actualColorVector).not.toBe(expectedColorVector);
         });
@@ -223,13 +206,13 @@ describe('Box Geometry', () => {
             const rotateAmount = 90;
             const rotateInRadian = rotateAmount * (Math.PI / 180);
             // i picked 45 degrees because the value is same for x and y only the sign is different
-            const expectedRotationY = Math.sin(rotateInRadian) * 2;
-            const expectedRotationX = Math.cos(rotateInRadian) * 2;
+            const expectedRotationY = Math.sin(rotateInRadian);
+            const expectedRotationX = Math.cos(rotateInRadian);
             const expectedTransform = new Mat3();
-            expectedTransform.set(expectedRotationX, expectedRotationY, 2, -expectedRotationY, expectedRotationX, -1.9999999999999998, 0, 0, 2);
+            expectedTransform.set(expectedRotationX, expectedRotationY, 1, -expectedRotationY, expectedRotationX, -0.9999999999999999, 0, 0, 1);
 
             testBoxGeometry.translate(moveAmount);
-            testBoxGeometry.scaleGeometry(scaleAmount);
+            testBoxGeometry.setScale(scaleAmount);
             testBoxGeometry.rotate(rotateAmount);
             const actualTransform = testBoxGeometry.getTransform();
             expect(actualTransform).toEqual(expectedTransform);
