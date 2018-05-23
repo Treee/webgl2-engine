@@ -89,7 +89,7 @@ export class BoxGeometry {
     }
 
     drawObject(gl: WebGL2RenderingContext, transformLocation: any, colorLocation: any) {
-
+        throw new Error('Implement Draw Object Function!!');
     }
 
 }
