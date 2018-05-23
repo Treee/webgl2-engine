@@ -1,8 +1,7 @@
-import { BoxGeometry } from "./box-geometry";
-import { Vec3 } from "../math/vec3";
-import { Vec4 } from "../math/vec4";
-import { Mat3 } from "../math/mat3";
-import { TetrahedronBufferGeometry } from "three";
+import { BoxGeometry } from './box-geometry';
+import { Vec3 } from '../math/vec3';
+import { Vec4 } from '../math/vec4';
+import { Mat3 } from '../math/mat3';
 
 describe('Box Geometry', () => {
     let testBoxGeometry: BoxGeometry;

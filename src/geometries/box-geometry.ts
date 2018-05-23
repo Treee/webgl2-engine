@@ -88,4 +88,8 @@ export class BoxGeometry {
         return this.color.clone();
     }
 
+    drawObject(gl: WebGL2RenderingContext, transformLocation: any, colorLocation: any) {
+
+    }
+
 }
