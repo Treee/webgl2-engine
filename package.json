@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "This package contains the code to utilize webgl2's graphics capabilities.",
   "main": "index.js",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "ts-node node_modules/jasmine/bin/jasmine jasmine src/**/*.ts",
     "build-dev": "ts-node node_modules/typescript/bin/tsc -p tsconfig.json"
