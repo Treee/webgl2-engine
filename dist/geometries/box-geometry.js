@@ -77,8 +77,16 @@ class BoxGeometry {
     getColor() {
         return this.color.clone();
     }
-    drawObject(gl, transformLocation, colorLocation) {
-        throw new Error('Implement Draw Object Function!!');
+    drawObject(gl, transformUniformLocation, colorUniformLocation) {
+        gl.bindVertexArray(this.vao);
+        // vertex uniforms
+        const matrix = this.getTransform();
+        gl.uniformMatrix3fv(transformUniformLocation, false, matrix.transpose().toArray());
+        // fragment uniforms
+        gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
+        let offset = 0;
+        const count = 6;
+        gl.drawArrays(gl.TRIANGLES, offset, count);
     }
     createVertexArrayObject(gl, shaderProgram) {
         // set up attribute and uniforms (vertex shader)

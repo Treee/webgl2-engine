@@ -25,7 +25,7 @@ export declare class BoxGeometry {
     getRotation(): Vec3;
     setColor(newColor: Vec4): void;
     getColor(): Vec4;
-    drawObject(gl: WebGL2RenderingContext, transformLocation: any, colorLocation: any): void;
+    drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any): void;
     createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram): void;
     private createBindAndBufferData(gl, bufferType, bufferData, bufferUsage);
     private createRectangle(position, width, height);
