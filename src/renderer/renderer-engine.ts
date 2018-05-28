@@ -65,16 +65,19 @@ export class RendererEngine {
     private initializeCanvasGL(htmlCanvasElement: HTMLCanvasElement, width: number, height: number): void {
         // get the canvas from the html
         this.canvas = htmlCanvasElement;
+        if (!this.canvas) {
+            throw new Error('The Canvas is not defined.');
+        }
 
         // get the webgl 2 context
-        this.gl = htmlCanvasElement.getContext('webgl2') as any;
+        this.gl = this.canvas.getContext('webgl2') as any;
         if (!this.gl) {
-            throw new Error('GL Context not initialized');
+            throw new Error('GL Context not initialized.');
         }
 
         // set the width and height of the canvas
-        htmlCanvasElement.width = width;
-        htmlCanvasElement.height = height;
+        this.canvas.width = width;
+        this.canvas.height = height;
 
         // note the -2 for the height. this flips the axis so 0 is at the top
         this.projectionMatrix.set(
