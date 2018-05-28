@@ -9,6 +9,11 @@ class BoxGeometry {
         this.scale = new vec3_1.Vec3(1, 1, 1);
         this.rotation = new vec3_1.Vec3(0, 1, 0);
         this.color = new vec4_1.Vec4();
+        this.vertices = [];
+        this.createRectangle(new vec3_1.Vec3(), 25, 25);
+    }
+    setVertices(newVertices) {
+        this.vertices = newVertices;
     }
     getTransform() {
         let temp = new mat3_1.Mat3();
@@ -74,6 +79,60 @@ class BoxGeometry {
     }
     drawObject(gl, transformLocation, colorLocation) {
         throw new Error('Implement Draw Object Function!!');
+    }
+    createVertexArrayObject(gl, shaderProgram) {
+        // set up attribute and uniforms (vertex shader)
+        const positionAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_position');
+        // make a vertex array (this is so we layer data in a single array)
+        const vertexArray = gl.createVertexArray();
+        if (!vertexArray) {
+            throw new Error('Vertex Attrib Array not created correctly.');
+        }
+        this.vao = vertexArray;
+        // bind to the vertex array we will buffer data to
+        gl.bindVertexArray(this.vao);
+        // enable an attribute that was created above (in this case, possition attrib)
+        gl.enableVertexAttribArray(positionAttributeLocation);
+        this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
+        const size = 2; // 2 components per iteration
+        const type = gl.FLOAT; // the data is 32bit floats
+        const normalize = false; // don't normalize the data
+        const stride = 0; // 0 = move forward size * sizeof(type) each iteration to get the next position
+        let offset = 0; // start at the beginning of the buffer
+        // define how the gpu will interpret the array
+        gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
+        gl.bindVertexArray(null);
+    }
+    // create a buffer, bing opengl to that buffer, send data to the buffer in one fell swoop
+    createBindAndBufferData(gl, bufferType, bufferData, bufferUsage) {
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(bufferType, buffer);
+        gl.bufferData(bufferType, new Float32Array(bufferData), bufferUsage);
+    }
+    createRectangle(position, width, height) {
+        // let tempCenter = new Vec3(-(width) / 2, -(height) / 2, 1);
+        // position.add(tempCenter.clone());
+        this.translate(position);
+        const x1 = 0;
+        const x2 = x1 + width;
+        const y1 = 0;
+        const y2 = y1 + height;
+        this.vertices = [
+            x1, y1,
+            x2, y1,
+            x1, y2,
+            x1, y2,
+            x2, y1,
+            x2, y2
+        ];
+        // this.setCenter(-(width) / 2, -(height) / 2, 1);
+        // this.setCenter(tempCenter.x, tempCenter.y, tempCenter.z);
+    }
+    createRandomRectangle(position, maxWidth, maxHeight) {
+        this.createRectangle(position, this.randomInt(maxWidth), this.randomInt(maxHeight));
+    }
+    randomInt(range) {
+        return Math.floor(Math.random() * range);
     }
 }
 exports.BoxGeometry = BoxGeometry;
