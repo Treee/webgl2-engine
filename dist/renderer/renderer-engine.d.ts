@@ -9,7 +9,7 @@ export declare class RendererEngine {
     projectionMatrix: Mat3;
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
-    drawFrame(dt: Number, shaderProgram: WebGLProgram, renderableObjects: BoxGeometry[]): void;
+    drawFrame(dt: Number, renderableObjects: BoxGeometry[]): void;
     getCanvasDimensions(): Vec3;
     private initializeShaderPrograms(gl);
     private initializeCanvasGL(htmlCanvasElement, width, height);

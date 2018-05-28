@@ -11,16 +11,16 @@ class RendererEngine {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
         this.initializeShaderPrograms(this.gl);
     }
-    drawFrame(dt, shaderProgram, renderableObjects) {
+    drawFrame(dt, renderableObjects) {
         if (!this.gl) {
             throw new Error('Cannot Draw Frame, GL is undefined');
         }
         // Tell it to use our program (pair of shaders)
-        this.gl.useProgram(shaderProgram);
+        this.gl.useProgram(this.basicShader);
         // set up attribute and uniforms (vertex shader)
-        const transformUniformLocation = this.gl.getUniformLocation(shaderProgram, 'u_transform');
+        const transformUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_transform');
         // set up attribute and uniforms (fragment shader)
-        const colorUniformLocation = this.gl.getUniformLocation(shaderProgram, 'u_color');
+        const colorUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_color');
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -49,14 +49,17 @@ class RendererEngine {
     initializeCanvasGL(htmlCanvasElement, width, height) {
         // get the canvas from the html
         this.canvas = htmlCanvasElement;
+        if (!this.canvas) {
+            throw new Error('The Canvas is not defined.');
+        }
         // get the webgl 2 context
-        this.gl = htmlCanvasElement.getContext('webgl2');
+        this.gl = this.canvas.getContext('webgl2');
         if (!this.gl) {
-            throw new Error('GL Context not initialized');
+            throw new Error('GL Context not initialized.');
         }
         // set the width and height of the canvas
-        htmlCanvasElement.width = width;
-        htmlCanvasElement.height = height;
+        this.canvas.width = width;
+        this.canvas.height = height;
         // note the -2 for the height. this flips the axis so 0 is at the top
         this.projectionMatrix.set(2 / width, 0, 0, 0, -2 / height, 0, -1, 1, 1);
         // set the viewport for the renderer
