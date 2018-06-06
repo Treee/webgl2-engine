@@ -21,11 +21,12 @@ export class BoxGeometry {
         this.vertices = newVertices;
     }
 
-    getTransform(): Mat3 {
+    getTransform(projectionMatrix: Mat3): Mat3 {
         let temp = new Mat3();
         temp = temp.multiplyMatrices(temp, this.getRotationMatrix());
         temp = temp.multiplyMatrices(temp, this.getScaleMatrix());
         temp = temp.multiplyMatrices(temp, this.getTranslationMatrix());
+        temp = temp.multiplyMatrices(temp, projectionMatrix);
         return temp;
     }
 
@@ -97,10 +98,10 @@ export class BoxGeometry {
         return this.color.clone();
     }
 
-    drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any) {
+    drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
         gl.bindVertexArray(this.vao);
         // vertex uniforms
-        const matrix = this.getTransform();
+        const matrix = this.getTransform(projectionMatrix);
         gl.uniformMatrix3fv(transformUniformLocation, false, matrix.transpose().toArray());
         // fragment uniforms
         gl.uniform4fv(colorUniformLocation, this.getColor().toArray());

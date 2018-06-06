@@ -31,7 +31,7 @@ class RendererEngine {
             if (!this.gl) {
                 throw new Error('Cannot Draw Renderable, GL is undefined');
             }
-            renderable.drawObject(this.gl, transformUniformLocation, colorUniformLocation);
+            renderable.drawObject(this.gl, transformUniformLocation, colorUniformLocation, this.projectionMatrix);
         });
     }
     getCanvasDimensions() {

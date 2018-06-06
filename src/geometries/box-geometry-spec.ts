@@ -213,7 +213,7 @@ describe('Box Geometry', () => {
             testBoxGeometry.translate(moveAmount);
             testBoxGeometry.setScale(scaleAmount);
             testBoxGeometry.rotate(rotateAmount);
-            const actualTransform = testBoxGeometry.getTransform();
+            const actualTransform = testBoxGeometry.getTransform(new Mat3());
             expect(actualTransform).toEqual(expectedTransform);
         });
     });

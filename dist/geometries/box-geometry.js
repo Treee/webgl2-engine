@@ -15,11 +15,12 @@ class BoxGeometry {
     setVertices(newVertices) {
         this.vertices = newVertices;
     }
-    getTransform() {
+    getTransform(projectionMatrix) {
         let temp = new mat3_1.Mat3();
         temp = temp.multiplyMatrices(temp, this.getRotationMatrix());
         temp = temp.multiplyMatrices(temp, this.getScaleMatrix());
         temp = temp.multiplyMatrices(temp, this.getTranslationMatrix());
+        temp = temp.multiplyMatrices(temp, projectionMatrix);
         return temp;
     }
     translate(amountToTranslate) {
@@ -77,10 +78,10 @@ class BoxGeometry {
     getColor() {
         return this.color.clone();
     }
-    drawObject(gl, transformUniformLocation, colorUniformLocation) {
+    drawObject(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         gl.bindVertexArray(this.vao);
         // vertex uniforms
-        const matrix = this.getTransform();
+        const matrix = this.getTransform(projectionMatrix);
         gl.uniformMatrix3fv(transformUniformLocation, false, matrix.transpose().toArray());
         // fragment uniforms
         gl.uniform4fv(colorUniformLocation, this.getColor().toArray());

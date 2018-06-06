@@ -11,7 +11,7 @@ export declare class BoxGeometry {
     private vertices;
     constructor();
     setVertices(newVertices: number[]): void;
-    getTransform(): Mat3;
+    getTransform(projectionMatrix: Mat3): Mat3;
     translate(amountToTranslate: Vec3): void;
     getTranslationMatrix(): Mat3;
     private setPosition(newPosition);
@@ -25,7 +25,7 @@ export declare class BoxGeometry {
     getRotation(): Vec3;
     setColor(newColor: Vec4): void;
     getColor(): Vec4;
-    drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any): void;
+    drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3): void;
     createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram): void;
     private createBindAndBufferData(gl, bufferType, bufferData, bufferUsage);
     private createRectangle(position, width, height);
