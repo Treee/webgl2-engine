@@ -12,9 +12,8 @@ export declare class BoxGeometry {
     constructor();
     setVertices(newVertices: number[]): void;
     getTransform(projectionMatrix: Mat3): Mat3;
-    translate(amountToTranslate: Vec3): void;
+    translate(newPosition: Vec3): void;
     getTranslationMatrix(): Mat3;
-    private setPosition(newPosition);
     getPosition(): Vec3;
     getScaleMatrix(): Mat3;
     setScale(newScale: Vec3): void;

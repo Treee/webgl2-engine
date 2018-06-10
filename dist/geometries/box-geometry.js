@@ -23,18 +23,14 @@ class BoxGeometry {
         temp = temp.multiplyMatrices(temp, projectionMatrix);
         return temp;
     }
-    translate(amountToTranslate) {
-        const newPosition = this.getPosition().add(amountToTranslate);
-        this.setPosition(newPosition);
+    translate(newPosition) {
+        this.position = newPosition;
     }
     getTranslationMatrix() {
         const position = this.getPosition();
         let translationMatrix = new mat3_1.Mat3();
         translationMatrix.set(1, 0, 0, 0, 1, 0, position.x, position.y, 1);
         return translationMatrix;
-    }
-    setPosition(newPosition) {
-        this.position = newPosition;
     }
     getPosition() {
         return this.position.clone();
