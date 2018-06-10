@@ -21,6 +21,6 @@ export class Mat3 extends Matrix3 {
 
     prettyPrint(): string {
         const t = this.clone().transpose().toArray();
-        return `[${t[0]}, ${t[1]}, ${t[2]}\n${t[3]}, ${t[4]}, ${t[5]}\n${t[6]}, ${t[7]}, ${t[8]}]`;
+        return `\n[${t[0]}, ${t[1]}, ${t[2]}\n${t[3]}, ${t[4]}, ${t[5]}\n${t[6]}, ${t[7]}, ${t[8]}]`;
     }
 }
