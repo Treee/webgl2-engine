@@ -44,7 +44,7 @@ describe('Box Geometry', () => {
     describe('GetTranslationMatrix', () => {
         it('returns a matrix with the position as the last row (ignoring z for now)', () => {
             const newPosition = new Vec3(2, 3, 4);
-            const expectedTranslation = [1, 0, 0, 0, 1, 0, 2, 3, 1]
+            const expectedTranslation = [1, 0, newPosition.x, 0, 1, newPosition.y, 0, 0, 1]
             testBoxGeometry.translate(newPosition);
             const actualTranslation = testBoxGeometry.getTranslationMatrix();
             expect(actualTranslation.toArray()).toEqual(expectedTranslation);
@@ -204,17 +204,14 @@ describe('Box Geometry', () => {
             const scaleAmount = new Vec3(1, 1, 1);
             const rotateAmount = 90;
             const rotateInRadian = rotateAmount * (Math.PI / 180);
-            // i picked 45 degrees because the value is same for x and y only the sign is different
-            const expectedRotationY = Math.sin(rotateInRadian);
-            const expectedRotationX = Math.cos(rotateInRadian);
-            const expectedTransform = new Mat3();
-            expectedTransform.set(expectedRotationX, expectedRotationY, 1, -expectedRotationY, expectedRotationX, -0.9999999999999999, 0, 0, 1);
-
+            const expectedRotationX = Math.sin(rotateInRadian);
+            const expectedRotationY = Math.cos(rotateInRadian);
+            const expectedTransform = [expectedRotationY, -expectedRotationX, moveAmount.x, expectedRotationX, expectedRotationY, moveAmount.y, 0, 0, 1];
             testBoxGeometry.translate(moveAmount);
             testBoxGeometry.setScale(scaleAmount);
             testBoxGeometry.rotate(rotateAmount);
             const actualTransform = testBoxGeometry.getTransform(new Mat3());
-            expect(actualTransform).toEqual(expectedTransform);
+            expect(actualTransform.toArray()).toEqual(expectedTransform);
         });
     });
 

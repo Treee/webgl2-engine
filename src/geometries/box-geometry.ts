@@ -4,7 +4,7 @@ import { Mat3 } from '../math/mat3';
 
 export class BoxGeometry {
 
-    private position: Vec3 = new Vec3();
+    private position: Vec3 = new Vec3(0, 0, 0);
     private scale: Vec3 = new Vec3(1, 1, 1);
     private rotation: Vec3 = new Vec3(0, 1, 0);
 
@@ -38,7 +38,7 @@ export class BoxGeometry {
     getTranslationMatrix(): Mat3 {
         const position = this.getPosition();
         let translationMatrix = new Mat3();
-        translationMatrix.set(1, 0, position.x, 0, 1, position.y, 0, 0, 1);
+        translationMatrix.set(1, 0, 0, 0, 1, 0, position.x, position.y, 1);
         return translationMatrix;
     }
 

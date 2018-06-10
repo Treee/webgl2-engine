@@ -5,7 +5,7 @@ const vec4_1 = require("../math/vec4");
 const mat3_1 = require("../math/mat3");
 class BoxGeometry {
     constructor() {
-        this.position = new vec3_1.Vec3();
+        this.position = new vec3_1.Vec3(0, 0, 0);
         this.scale = new vec3_1.Vec3(1, 1, 1);
         this.rotation = new vec3_1.Vec3(0, 1, 0);
         this.color = new vec4_1.Vec4();
@@ -30,7 +30,7 @@ class BoxGeometry {
     getTranslationMatrix() {
         const position = this.getPosition();
         let translationMatrix = new mat3_1.Mat3();
-        translationMatrix.set(1, 0, position.x, 0, 1, position.y, 0, 0, 1);
+        translationMatrix.set(1, 0, 0, 0, 1, 0, position.x, position.y, 1);
         return translationMatrix;
     }
     setPosition(newPosition) {
