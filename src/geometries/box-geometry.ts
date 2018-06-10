@@ -30,9 +30,8 @@ export class BoxGeometry {
         return temp;
     }
 
-    translate(amountToTranslate: Vec3): void {
-        const newPosition = this.getPosition().add(amountToTranslate);
-        this.setPosition(newPosition);
+    translate(newPosition: Vec3): void {
+        this.position = newPosition;
     }
 
     getTranslationMatrix(): Mat3 {
@@ -40,10 +39,6 @@ export class BoxGeometry {
         let translationMatrix = new Mat3();
         translationMatrix.set(1, 0, 0, 0, 1, 0, position.x, position.y, 1);
         return translationMatrix;
-    }
-
-    private setPosition(newPosition: Vec3): void {
-        this.position = newPosition;
     }
 
     getPosition(): Vec3 {

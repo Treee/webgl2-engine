@@ -21,23 +21,23 @@ describe('Box Geometry', () => {
             expect(testBoxGeometry.translate).toBeDefined();
         });
 
-        it('adds the supplied vector to the geometries position', () => {
+        it('sets the position of the geometry to a new position', () => {
             const expectedPosition = new Vec3(1, 2, 3);
-            const amountToMove = new Vec3(1, 2, 3);
-            testBoxGeometry.translate(amountToMove);
+            testBoxGeometry.translate(expectedPosition);
             const actualPosition = testBoxGeometry.getPosition();
             expect(actualPosition).toEqual(expectedPosition);
         });
 
-        it('adds another supplied vector to the geometries position', () => {
-            const newPosition = new Vec3(4, 1, 2);
+        it('sets the position to a new position when the position is already set', () => {
+            const initialPosition = new Vec3(4, 1, 2);
             testBoxGeometry = new BoxGeometry();
-            testBoxGeometry.translate(newPosition);
-            const amountToMove = new Vec3(-1, 4, -3);
+            testBoxGeometry.translate(initialPosition);
+            let actualPosition = testBoxGeometry.getPosition();
+            expect(actualPosition).toEqual(initialPosition, 'Failed initial position test');
             const expectedPosition = new Vec3(3, 5, -1);
-            testBoxGeometry.translate(amountToMove);
-            const actualPosition = testBoxGeometry.getPosition();
-            expect(actualPosition).toEqual(expectedPosition);
+            testBoxGeometry.translate(expectedPosition);
+            actualPosition = testBoxGeometry.getPosition();
+            expect(actualPosition).toEqual(expectedPosition, 'Failed expected position test');
         });
     });
 
