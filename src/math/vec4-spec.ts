@@ -132,4 +132,10 @@ describe('Vec4', () => {
         });
     });
 
+    describe('CLone', () => {
+        it('exists on the object', () => {
+            expect(testVector.clone).toBeDefined();
+        });
+    });
+
 });

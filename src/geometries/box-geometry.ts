@@ -102,13 +102,14 @@ export class BoxGeometry {
         gl.bindVertexArray(this.vao);
         // vertex uniforms
         const matrix = this.getTransform(projectionMatrix);
-        gl.uniformMatrix3fv(transformUniformLocation, false, matrix.transpose().toArray());
+        gl.uniformMatrix3fv(transformUniformLocation, false, matrix.toArray());
         // fragment uniforms
         gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
 
         let offset = 0;
         const count = 6;
         gl.drawArrays(gl.TRIANGLES, offset, count);
+        // gl.bindVertexArray(null);
     }
 
     createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
