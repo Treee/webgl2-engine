@@ -38,7 +38,7 @@ describe('Mat3', () => {
         });
 
         it('prints this known matrix', () => {
-            const expected = `\n[1, 2, 3\n4, 5, 6\n7, 8, 9]`;
+            const expected = `\n[1, 4, 7\n2, 5, 8\n3, 6, 9]`;
             testMatrix = new Mat3();
             testMatrix.set(
                 1, 2, 3,
@@ -59,7 +59,7 @@ describe('Mat3', () => {
             const a20 = Math.random();
             const a21 = Math.random();
             const a22 = Math.random();
-            const expected = `\n[${a00}, ${a01}, ${a02}\n${a10}, ${a11}, ${a12}\n${a20}, ${a21}, ${a22}]`;
+            const expected = `\n[${a00}, ${a10}, ${a20}\n${a01}, ${a11}, ${a21}\n${a02}, ${a12}, ${a22}]`;
             testMatrix = new Mat3();
             testMatrix = testMatrix.set(
                 a00, a01, a02,

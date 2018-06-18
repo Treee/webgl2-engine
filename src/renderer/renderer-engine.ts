@@ -80,6 +80,9 @@ export class RendererEngine {
         this.canvas.height = height;
 
         // note the -2 for the height. this flips the axis so 0 is at the top
+        // width    0     0
+        //   0   -height  0
+        //  -1      1     1
         this.projectionMatrix.set(
             2 / width, 0, 0,
             0, -2 / height, 0,

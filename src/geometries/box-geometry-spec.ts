@@ -154,13 +154,13 @@ describe('Box Geometry', () => {
 
     describe('GetRotationMatrix', () => {
         it('returns a matrix with the rotation matrix within', () => {
-            const expectedRotationMatrix = [1, -0, 0, 0, 1, 0, 0, 0, 1];
+            const expectedRotationMatrix = [1, 0, 0, -0, 1, 0, 0, 0, 1];
             const actualRotationMatrix = testBoxGeometry.getRotationMatrix();
             expect(actualRotationMatrix.toArray()).toEqual(expectedRotationMatrix);
         });
 
         it('returns a matrix with the 90 degree rotation matrix within', () => {
-            const expectedRotationMatrix = [0, -1, 0, 1, 0, 0, 0, 0, 1];
+            const expectedRotationMatrix = [0, 1, 0, -1, 0, 0, 0, 0, 1];
             testBoxGeometry.rotate(90);
             const actualRotationMatrix = testBoxGeometry.getRotationMatrix();
             let rotationMatrixArray = actualRotationMatrix.toArray();
@@ -206,7 +206,7 @@ describe('Box Geometry', () => {
             const rotateInRadian = rotateAmount * (Math.PI / 180);
             const expectedRotationX = Math.sin(rotateInRadian);
             const expectedRotationY = Math.cos(rotateInRadian);
-            const expectedTransform = [expectedRotationY, -expectedRotationX, moveAmount.x, expectedRotationX, expectedRotationY, moveAmount.y, 0, 0, 1];
+            const expectedTransform = [expectedRotationY, expectedRotationX, moveAmount.x, -expectedRotationX, expectedRotationY, moveAmount.y, 0, 0, 1];
             testBoxGeometry.translate(moveAmount);
             testBoxGeometry.setScale(scaleAmount);
             testBoxGeometry.rotate(rotateAmount);

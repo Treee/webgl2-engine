@@ -59,7 +59,7 @@ class BoxGeometry {
         // [y, -x, 0,
         //  x, y, 0,
         //  0, 0, 1]
-        rotationMatrix.set(rotation.y, rotation.x, 0, -rotation.x, rotation.y, 0, 0, 0, 1);
+        rotationMatrix.set(rotation.y, -rotation.x, 0, rotation.x, rotation.y, 0, 0, 0, 1);
         return rotationMatrix;
     }
     setRotation(newRotation) {
@@ -77,7 +77,7 @@ class BoxGeometry {
     drawObject(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         gl.bindVertexArray(this.vao);
         // vertex uniforms
-        const matrix = this.getTransform(projectionMatrix);
+        const matrix = this.getTransform(projectionMatrix).transpose();
         gl.uniformMatrix3fv(transformUniformLocation, false, matrix.toArray());
         // fragment uniforms
         gl.uniform4fv(colorUniformLocation, this.getColor().toArray());

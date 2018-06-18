@@ -18,7 +18,7 @@ class Mat3 extends three_1.Matrix3 {
         return this;
     }
     prettyPrint() {
-        const t = this.clone().transpose().toArray();
+        const t = this.clone().toArray();
         return `\n[${t[0]}, ${t[1]}, ${t[2]}\n${t[3]}, ${t[4]}, ${t[5]}\n${t[6]}, ${t[7]}, ${t[8]}]`;
     }
 }
