@@ -1,5 +1,6 @@
 // Geometries
 export { BoxGeometry } from './dist/geometries/box-geometry';
+export { Point2D } from './dist/geometries/point-2d';
 
 // Math
 export { Vec3 } from './dist/math/vec3';
