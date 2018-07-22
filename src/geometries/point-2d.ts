@@ -100,7 +100,7 @@ export class Point2D {
 
         this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
 
-        const size = 2;             // 2 components per iteration
+        const size = 3;             // 2 components per iteration
         const type = gl.FLOAT; // the data is 32bit floats
         const normalize = false;    // don't normalize the data
         const stride = 0;           // 0 = move forward size * sizeof(type) each iteration to get the next position
