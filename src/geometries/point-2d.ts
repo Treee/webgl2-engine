@@ -13,7 +13,7 @@ export class Point2D {
     private vertices: number[] = [];
 
     constructor(x: number, y: number) {
-        this.setVertices([0, 0]);
+        this.setVertices([0, 0, 1]);
         this.translate(new Vec3(x, y, 1));
     }
 
