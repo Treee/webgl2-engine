@@ -1,27 +1,46 @@
+export class GridPersistanceTemplate {
+  rows: number = 0;
+  columns: number = 0;
+  layout: string = '';
+  constructor(rows: number, columns: number, layout: string) {
+    this.rows = rows;
+    this.columns = columns;
+    this.layout = layout;
+  }
+
+  getRawLayout(): string {
+    return this.layout.replace(/\r?\n/g, '');
+  }
+}
+
 export class GridArray {
 
   rows: number;
   columns: number;
   grid: any[];
-  constructor(rows = 10, columns = 10) {
+  startingNode: number;
+  finishingNode: number;
+
+  constructor(rows: number = 10, columns: number = 10, startingNode: number = 0, finishingNode: number = (rows * columns)) {
     this.rows = rows;
     this.columns = columns;
     this.grid = [];
+    this.startingNode = startingNode;
+    this.finishingNode = finishingNode;
   }
 
-  initializeGrid(predefinedLayout?: string): void {
+  initializeGrid(predefinedLayout?: GridPersistanceTemplate): void {
     const gridSize = this.rows * this.columns;
 
-    let gridToLoad = predefinedLayout ? predefinedLayout.replace(/\r?\n/g, '') : '';
-    if (gridToLoad !== '') {
-      console.assert(gridToLoad.length === gridSize, 'Attempting to upload a grid that does not have the same number of grid cells as the grid');
+    if (predefinedLayout) {
+      console.assert(predefinedLayout.getRawLayout().length === gridSize, `Attempting to upload a grid: ${predefinedLayout.layout} with ${predefinedLayout.getRawLayout().length} cells. Expecting ${gridSize}.`);
     }
     for (let index = 0; index < gridSize; index++) {
-      if (gridToLoad) {
+      if (predefinedLayout) {
         // console.log(`grid cell ${index}: ${gridToLoad[index]}`);
-        if (gridToLoad[index] === 'x') {
+        if (predefinedLayout.getRawLayout()[index] === 'x') {
           this.grid.push(`blocked ${index}`);
-        } else if (gridToLoad[index] === '-') {
+        } else if (predefinedLayout.getRawLayout()[index] === '-') {
           this.grid.push(`filled ${index}`);
         }
       } else {
@@ -40,11 +59,9 @@ export class GridArray {
     return this.grid[index];
   }
 
-  loadGridFromJson(storedDataString: string): GridArray {
+  initializeGridFromJson(storedDataString: string): void {
     const storedData = JSON.parse(storedDataString);
     const newGrid = new GridArray(storedData.rows, storedData.columns);
-    newGrid.initializeGrid(storedData.layout);
-
-    return newGrid;
+    this.initializeGrid(storedData.layout);
   }
 }

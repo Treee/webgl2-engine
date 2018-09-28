@@ -1,4 +1,4 @@
-import { GridArray } from './grid-array';
+import { GridArray, GridPersistanceTemplate } from './grid-array';
 
 describe('Grid Array', () => {
   let testGridArray: GridArray;
@@ -27,6 +27,16 @@ describe('Grid Array', () => {
       });
       expect(testGridArray.grid.length).toEqual(testGridArray.rows * testGridArray.columns);
     });
+
+    it('has a start and finish node', () => {
+      expect(testGridArray.startingNode).toEqual(0);
+      expect(testGridArray.finishingNode).toEqual(100);
+    });
+
+    it('start and finish nodes are distinct', () => {
+      expect(testGridArray.startingNode).not.toEqual(testGridArray.finishingNode);
+    });
+
   });
 
   describe('getNodeByRowColumn', () => {
@@ -52,25 +62,37 @@ describe('Grid Array', () => {
     });
   });
 
-  describe('loadGridFromJson', () => {
+  describe('initializeGrid', () => {
     it('creates a new grid array from a json string', () => {
       // use a special 3x3 box for this so the math is easy
       testGridArray = new GridArray(3, 3);
-      const gridToLoad = {
-        rows: 3,
-        columns: 3,
-        layout: 'x--\n-x-\n--x'
-      };
-      const newGrid = testGridArray.loadGridFromJson(JSON.stringify(gridToLoad));
-      expect(newGrid.grid[0]).toEqual('blocked 0');
-      expect(newGrid.grid[1]).toEqual('filled 1');
-      expect(newGrid.grid[2]).toEqual('filled 2');
-      expect(newGrid.grid[3]).toEqual('filled 3');
-      expect(newGrid.grid[4]).toEqual('blocked 4');
-      expect(newGrid.grid[5]).toEqual('filled 5');
-      expect(newGrid.grid[6]).toEqual('filled 6');
-      expect(newGrid.grid[7]).toEqual('filled 7');
-      expect(newGrid.grid[8]).toEqual('blocked 8');
+      const gridToLoad = new GridPersistanceTemplate(3, 3, 'x--\n-x-\n--x');
+      testGridArray.initializeGrid(gridToLoad);
+      expect(testGridArray.grid[0]).toEqual('blocked 0');
+      expect(testGridArray.grid[1]).toEqual('filled 1');
+      expect(testGridArray.grid[2]).toEqual('filled 2');
+      expect(testGridArray.grid[3]).toEqual('filled 3');
+      expect(testGridArray.grid[4]).toEqual('blocked 4');
+      expect(testGridArray.grid[5]).toEqual('filled 5');
+      expect(testGridArray.grid[6]).toEqual('filled 6');
+      expect(testGridArray.grid[7]).toEqual('filled 7');
+      expect(testGridArray.grid[8]).toEqual('blocked 8');
+    });
+
+    it('creates a different new grid array from a json string', () => {
+      // use a special 3x3 box for this so the math is easy
+      testGridArray = new GridArray(3, 3);
+      const gridToLoad = new GridPersistanceTemplate(3, 3, 'xx-\n-xx\n-xx');
+      testGridArray.initializeGrid(gridToLoad);
+      expect(testGridArray.grid[0]).toEqual('blocked 0');
+      expect(testGridArray.grid[1]).toEqual('blocked 1');
+      expect(testGridArray.grid[2]).toEqual('filled 2');
+      expect(testGridArray.grid[3]).toEqual('filled 3');
+      expect(testGridArray.grid[4]).toEqual('blocked 4');
+      expect(testGridArray.grid[5]).toEqual('blocked 5');
+      expect(testGridArray.grid[6]).toEqual('filled 6');
+      expect(testGridArray.grid[7]).toEqual('blocked 7');
+      expect(testGridArray.grid[8]).toEqual('blocked 8');
     });
   });
 
