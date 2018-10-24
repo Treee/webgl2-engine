@@ -96,4 +96,27 @@ describe('Grid Array', () => {
     });
   });
 
+  describe('findPath', () => {
+    /*
+    s-----x-xx
+    xxxx-x---x
+    ---x-x-x-x
+    -x---x-x-x
+    -xxxxx-x-x
+    -x-----x-x
+    ---xxxxx-x
+    x-xxx----x
+    ------xxxx
+    x-xxx----f
+    */
+    const testLayout = 's-----x-xx\nxxxx-x---x\n---x-x-x-x\n-x---x-x-x\n-xxxxx-x-x\n-x-----x-x\n---xxxxx-x\nx-xxx----x\n------xxxx\nx-xxx----f';
+    it('finds the shortest path through the grid array', () => {
+      testGridArray = new GridArray(10, 10);
+      const gridToLoad = new GridPersistanceTemplate(10, 10, testLayout);
+      testGridArray.initializeGrid(gridToLoad);
+
+
+    });
+  });
+
 });

@@ -40,6 +40,10 @@ export class GridArray {
         // console.log(`grid cell ${index}: ${gridToLoad[index]}`);
         if (predefinedLayout.getRawLayout()[index] === 'x') {
           this.grid.push(`blocked ${index}`);
+        } else if (predefinedLayout.getRawLayout()[index] === 's') {
+          this.grid.push(`start ${index}`);
+        } else if (predefinedLayout.getRawLayout()[index] === 'f') {
+          this.grid.push(`finish ${index}`);
         } else if (predefinedLayout.getRawLayout()[index] === '-') {
           this.grid.push(`filled ${index}`);
         }
