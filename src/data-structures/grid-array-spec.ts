@@ -115,7 +115,6 @@ describe('Grid Array', () => {
       const gridToLoad = new GridPersistanceTemplate(10, 10, testLayout);
       testGridArray.initializeGrid(gridToLoad);
 
-
     });
   });
 
