@@ -46,7 +46,7 @@ export class Grid2D {
     this.finishingPoint = new Grid2DCell();
   }
 
-  initializeGrid(rows: number, cols: number) {
+  public initializeGrid(rows: number, cols: number) {
     const totalCells = rows * cols;
     for (let cellNumber = 0; cellNumber < totalCells; cellNumber++) {
       let newCell = new Grid2DCell(cellNumber);
@@ -57,6 +57,10 @@ export class Grid2D {
     this.startingPoint.setCellType('start');
     this.finishingPoint = this.grid[totalCells - 1];
     this.finishingPoint.setCellType('finish');
+  }
+
+  public loadGrid(newGrid: string) {
+
   }
 
 }

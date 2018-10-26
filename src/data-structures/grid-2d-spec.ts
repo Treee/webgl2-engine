@@ -6,7 +6,7 @@ describe('Grid2D', () => {
   let gridRows: number = 5;
   let gridCols: number = 5;
 
-  let sampleMaze = 'sooxo\noxoxo\nooooo\nxoxxx\noooof';
+  let sampleGrid = 'sooxo\noxoxo\nooooo\nxoxxx\noooof';
   // sooxo
   // oxoxo 
   // ooooo 
@@ -36,7 +36,35 @@ describe('Grid2D', () => {
     });
   });
 
-  describe('loadMaze', () => {
+  describe('loadGrid', () => {
+    it('loads a maze from a string', () => {
+      testGrid.loadGrid(sampleGrid);
+      expect(testGrid.grid[0].cellType).toEqual('start');
+      expect(testGrid.grid[1].cellType).toEqual('open');
+      expect(testGrid.grid[2].cellType).toEqual('open');
+      expect(testGrid.grid[3].cellType).toEqual('blocked');
+      expect(testGrid.grid[4].cellType).toEqual('open');
+      expect(testGrid.grid[5].cellType).toEqual('open');
+      expect(testGrid.grid[6].cellType).toEqual('blocked');
+      expect(testGrid.grid[7].cellType).toEqual('open');
+      expect(testGrid.grid[8].cellType).toEqual('blocked');
+      expect(testGrid.grid[9].cellType).toEqual('open');
+      expect(testGrid.grid[10].cellType).toEqual('open');
+      expect(testGrid.grid[11].cellType).toEqual('open');
+      expect(testGrid.grid[12].cellType).toEqual('open');
+      expect(testGrid.grid[13].cellType).toEqual('open');
+      expect(testGrid.grid[14].cellType).toEqual('open');
+      expect(testGrid.grid[15].cellType).toEqual('blocked');
+      expect(testGrid.grid[16].cellType).toEqual('open');
+      expect(testGrid.grid[17].cellType).toEqual('blocked');
+      expect(testGrid.grid[18].cellType).toEqual('blocked');
+      expect(testGrid.grid[19].cellType).toEqual('blocked');
+      expect(testGrid.grid[20].cellType).toEqual('open');
+      expect(testGrid.grid[21].cellType).toEqual('open');
+      expect(testGrid.grid[22].cellType).toEqual('open');
+      expect(testGrid.grid[23].cellType).toEqual('open');
+      expect(testGrid.grid[24].cellType).toEqual('finish');
+    });
 
   });
 });
