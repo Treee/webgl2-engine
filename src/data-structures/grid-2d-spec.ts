@@ -1,6 +1,6 @@
 import { Grid2D, Grid2DCell } from "./grid-2d";
 
-fdescribe('Grid2D', () => {
+describe('Grid2D', () => {
   let testGrid: Grid2D;
 
   let gridRows: number = 5;
@@ -109,9 +109,39 @@ fdescribe('Grid2D', () => {
     });
   });
 
-  describe('connect grid cells', () => {
-    it('', () => {
-
+  describe('connectGridCells', () => {
+    it('connects adjacent grid cells in the order North, West, East, South', () => {
+      testGrid.connectGridCells();
+      // row one
+      expect(testGrid.grid[0].connectedCells).toEqual([testGrid.grid[1], testGrid.grid[5]]);
+      expect(testGrid.grid[1].connectedCells).toEqual([testGrid.grid[0], testGrid.grid[2], testGrid.grid[6]]);
+      expect(testGrid.grid[2].connectedCells).toEqual([testGrid.grid[1], testGrid.grid[3], testGrid.grid[7]]);
+      expect(testGrid.grid[3].connectedCells).toEqual([testGrid.grid[2], testGrid.grid[4], testGrid.grid[8]]);
+      expect(testGrid.grid[4].connectedCells).toEqual([testGrid.grid[3], testGrid.grid[9]]);
+      // row two
+      expect(testGrid.grid[5].connectedCells).toEqual([testGrid.grid[0], testGrid.grid[6], testGrid.grid[10]]);
+      expect(testGrid.grid[6].connectedCells).toEqual([testGrid.grid[1], testGrid.grid[5], testGrid.grid[7], testGrid.grid[11]]);
+      expect(testGrid.grid[7].connectedCells).toEqual([testGrid.grid[2], testGrid.grid[6], testGrid.grid[8], testGrid.grid[12]]);
+      expect(testGrid.grid[8].connectedCells).toEqual([testGrid.grid[3], testGrid.grid[7], testGrid.grid[9], testGrid.grid[13]]);
+      expect(testGrid.grid[9].connectedCells).toEqual([testGrid.grid[4], testGrid.grid[8], testGrid.grid[14]]);
+      // row three
+      expect(testGrid.grid[10].connectedCells).toEqual([testGrid.grid[5], testGrid.grid[11], testGrid.grid[15]]);
+      expect(testGrid.grid[11].connectedCells).toEqual([testGrid.grid[6], testGrid.grid[10], testGrid.grid[12], testGrid.grid[16]]);
+      expect(testGrid.grid[12].connectedCells).toEqual([testGrid.grid[7], testGrid.grid[11], testGrid.grid[13], testGrid.grid[17]]);
+      expect(testGrid.grid[13].connectedCells).toEqual([testGrid.grid[8], testGrid.grid[12], testGrid.grid[14], testGrid.grid[18]]);
+      expect(testGrid.grid[14].connectedCells).toEqual([testGrid.grid[9], testGrid.grid[13], testGrid.grid[19]]);
+      // // row four
+      expect(testGrid.grid[15].connectedCells).toEqual([testGrid.grid[10], testGrid.grid[16], testGrid.grid[20]]);
+      expect(testGrid.grid[16].connectedCells).toEqual([testGrid.grid[11], testGrid.grid[15], testGrid.grid[17], testGrid.grid[21]]);
+      expect(testGrid.grid[17].connectedCells).toEqual([testGrid.grid[12], testGrid.grid[16], testGrid.grid[18], testGrid.grid[22]]);
+      expect(testGrid.grid[18].connectedCells).toEqual([testGrid.grid[13], testGrid.grid[17], testGrid.grid[19], testGrid.grid[23]]);
+      expect(testGrid.grid[19].connectedCells).toEqual([testGrid.grid[14], testGrid.grid[18], testGrid.grid[24]]);
+      // // row five
+      expect(testGrid.grid[20].connectedCells).toEqual([testGrid.grid[15], testGrid.grid[21]]);
+      expect(testGrid.grid[21].connectedCells).toEqual([testGrid.grid[16], testGrid.grid[20], testGrid.grid[22]]);
+      expect(testGrid.grid[22].connectedCells).toEqual([testGrid.grid[17], testGrid.grid[21], testGrid.grid[23]]);
+      expect(testGrid.grid[23].connectedCells).toEqual([testGrid.grid[18], testGrid.grid[22], testGrid.grid[24]]);
+      expect(testGrid.grid[24].connectedCells).toEqual([testGrid.grid[19], testGrid.grid[23]]);
     });
   });
 });
