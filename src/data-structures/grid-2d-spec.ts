@@ -45,33 +45,74 @@ fdescribe('Grid2D', () => {
   describe('loadGrid', () => {
     it('loads a maze from a string', () => {
       testGrid.loadGrid(sampleGrid);
-      // expect(testGrid.grid[0].cellType).toEqual('start');
-      // expect(testGrid.grid[1].cellType).toEqual('open');
-      // expect(testGrid.grid[2].cellType).toEqual('open');
-      // expect(testGrid.grid[3].cellType).toEqual('blocked');
-      // expect(testGrid.grid[4].cellType).toEqual('open');
-      // expect(testGrid.grid[5].cellType).toEqual('open');
-      // expect(testGrid.grid[6].cellType).toEqual('blocked');
-      // expect(testGrid.grid[7].cellType).toEqual('open');
-      // expect(testGrid.grid[8].cellType).toEqual('blocked');
-      // expect(testGrid.grid[9].cellType).toEqual('open');
-      // expect(testGrid.grid[10].cellType).toEqual('open');
-      // expect(testGrid.grid[11].cellType).toEqual('open');
-      // expect(testGrid.grid[12].cellType).toEqual('open');
-      // expect(testGrid.grid[13].cellType).toEqual('open');
-      // expect(testGrid.grid[14].cellType).toEqual('open');
-      // expect(testGrid.grid[15].cellType).toEqual('blocked');
-      // expect(testGrid.grid[16].cellType).toEqual('open');
-      // expect(testGrid.grid[17].cellType).toEqual('blocked');
-      // expect(testGrid.grid[18].cellType).toEqual('blocked');
-      // expect(testGrid.grid[19].cellType).toEqual('blocked');
-      // expect(testGrid.grid[20].cellType).toEqual('open');
-      // expect(testGrid.grid[21].cellType).toEqual('open');
-      // expect(testGrid.grid[22].cellType).toEqual('open');
-      // expect(testGrid.grid[23].cellType).toEqual('open');
-      // expect(testGrid.grid[24].cellType).toEqual('finish');
+      expect(testGrid.grid[0].cellType).toEqual('start', 'Index 0');
+      expect(testGrid.grid[1].cellType).toEqual('open', 'Index 1');
+      expect(testGrid.grid[2].cellType).toEqual('open', 'Index 2');
+      expect(testGrid.grid[3].cellType).toEqual('blocked', 'Index 3');
+      expect(testGrid.grid[4].cellType).toEqual('open', 'Index 4');
+      expect(testGrid.grid[5].cellType).toEqual('open', 'Index 5');
+      expect(testGrid.grid[6].cellType).toEqual('blocked', 'Index 6');
+      expect(testGrid.grid[7].cellType).toEqual('open', 'Index 7');
+      expect(testGrid.grid[8].cellType).toEqual('blocked', 'Index 8');
+      expect(testGrid.grid[9].cellType).toEqual('open', 'Index 9');
+      expect(testGrid.grid[10].cellType).toEqual('open', 'Index 10');
+      expect(testGrid.grid[11].cellType).toEqual('open', 'Index 11');
+      expect(testGrid.grid[12].cellType).toEqual('open', 'Index 12');
+      expect(testGrid.grid[13].cellType).toEqual('open', 'Index 13');
+      expect(testGrid.grid[14].cellType).toEqual('open', 'Index 14');
+      expect(testGrid.grid[15].cellType).toEqual('blocked', 'Index 15');
+      expect(testGrid.grid[16].cellType).toEqual('open', 'Index 16');
+      expect(testGrid.grid[17].cellType).toEqual('blocked', 'Index 17');
+      expect(testGrid.grid[18].cellType).toEqual('blocked', 'Index 18');
+      expect(testGrid.grid[19].cellType).toEqual('blocked', 'Index 19');
+      expect(testGrid.grid[20].cellType).toEqual('open', 'Index 20');
+      expect(testGrid.grid[21].cellType).toEqual('open', 'Index 21');
+      expect(testGrid.grid[22].cellType).toEqual('open', 'Index 22');
+      expect(testGrid.grid[23].cellType).toEqual('open', 'Index 23');
+      expect(testGrid.grid[24].cellType).toEqual('finish', 'Index 24');
     });
 
+    it('loads a more complex maze from a string', () => {
+      // oooxx
+      // oxooo
+      // oosxo
+      // oxxoo
+      // ooofx
+      let sampleGrid = 'oooxx\noxooo\noosxo\noxxoo\nooofx';
+
+      testGrid.loadGrid(sampleGrid);
+      expect(testGrid.grid[0].cellType).toEqual('open', 'Index 0');
+      expect(testGrid.grid[1].cellType).toEqual('open', 'Index 1');
+      expect(testGrid.grid[2].cellType).toEqual('open', 'Index 2');
+      expect(testGrid.grid[3].cellType).toEqual('blocked', 'Index 3');
+      expect(testGrid.grid[4].cellType).toEqual('blocked', 'Index 4');
+      expect(testGrid.grid[5].cellType).toEqual('open', 'Index 5');
+      expect(testGrid.grid[6].cellType).toEqual('blocked', 'Index 6');
+      expect(testGrid.grid[7].cellType).toEqual('open', 'Index 7');
+      expect(testGrid.grid[8].cellType).toEqual('open', 'Index 8');
+      expect(testGrid.grid[9].cellType).toEqual('open', 'Index 9');
+      expect(testGrid.grid[10].cellType).toEqual('open', 'Index 10');
+      expect(testGrid.grid[11].cellType).toEqual('open', 'Index 11');
+      expect(testGrid.grid[12].cellType).toEqual('start', 'Index 12');
+      expect(testGrid.grid[13].cellType).toEqual('blocked', 'Index 13');
+      expect(testGrid.grid[14].cellType).toEqual('open', 'Index 14');
+      expect(testGrid.grid[15].cellType).toEqual('open', 'Index 15');
+      expect(testGrid.grid[16].cellType).toEqual('blocked', 'Index 16');
+      expect(testGrid.grid[17].cellType).toEqual('blocked', 'Index 17');
+      expect(testGrid.grid[18].cellType).toEqual('open', 'Index 18');
+      expect(testGrid.grid[19].cellType).toEqual('open', 'Index 19');
+      expect(testGrid.grid[20].cellType).toEqual('open', 'Index 20');
+      expect(testGrid.grid[21].cellType).toEqual('open', 'Index 21');
+      expect(testGrid.grid[22].cellType).toEqual('open', 'Index 22');
+      expect(testGrid.grid[23].cellType).toEqual('finish', 'Index 23');
+      expect(testGrid.grid[24].cellType).toEqual('blocked', 'Index 24');
+    });
+  });
+
+  describe('connect grid cells', () => {
+    it('', () => {
+
+    });
   });
 });
 

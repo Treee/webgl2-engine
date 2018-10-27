@@ -68,7 +68,28 @@ export class Grid2D {
 
   public loadGrid(newGrid: string) {
     this.initializeGrid(this.gridRows, this.gridCols);
-    console.log(newGrid.split('\n'));
+    newGrid.replace(/\r?\n/g, '').split('').forEach((cell, cellIndex) => {
+      this.grid[cellIndex].setCellType(this.mapCellType(cell));
+    });
+  }
+
+  mapCellType(cellType: string): string {
+    let cellTypeMapping = '';
+    switch (cellType) {
+      case 's':
+        cellTypeMapping = 'start';
+        break;
+      case 'f':
+        cellTypeMapping = 'finish';
+        break;
+      case 'o':
+        cellTypeMapping = 'open';
+        break;
+      case 'x':
+        cellTypeMapping = 'blocked';
+        break;
+    }
+    return cellTypeMapping;
   }
 
 }
