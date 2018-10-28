@@ -158,6 +158,10 @@ export class Grid2D {
         if (closedSet.indexOf(connectedCell) > 0) {
           return;
         }
+        // remove any neighbors that are blocked
+        if (connectedCell.cellType === 'blocked') {
+          return;
+        }
         // The distance from start to a neighbor
         let tentative_gScore = gScore.get(current) + connectedCell.getMovementWeight();
 
@@ -186,15 +190,25 @@ export class Grid2D {
   }
 
   reconstructPath(cameFrom: Map<any, any>, current: Grid2DCell) {
-    // let total_path = [current];
-    // while current in cameFrom.Keys:
-    //   current:= cameFrom[current]
-    // total_path.append(current)
-    // return total_path
+    let total_path = [current];
+    while (cameFrom.has(current)) {
+      current = cameFrom.get(current);
+      total_path.push(current);
+    }
+    return total_path;
   }
 
+  // this is the birds eye view of distance to a target
   heuristicCostEstimate(from: Grid2DCell, to: Grid2DCell) {
-
+    const fromRow = from.gridIndex % this.gridRows;
+    const fromCol = from.gridIndex % this.gridCols;
+    const toRow = to.gridIndex % this.gridRows;
+    const toCol = to.gridIndex % this.gridCols;
+    const computedRow = Math.abs(toRow - fromRow);
+    const computedCol = Math.abs(toCol - fromCol);
+    // use pythagorean theorem to compute straight distance
+    const distanceTo = Math.sqrt((computedRow * computedRow) + (computedCol * computedCol));
+    return distanceTo;
   }
 
   indexWithinLimits(index: number): boolean {
