@@ -214,4 +214,36 @@ describe('Grid2DCell', () => {
       expect(testGridCell.cellType).toEqual('open');
     });
   });
+
+  describe('getMovementWeight', () => {
+
+    it('returns a large value for blocked cells', () => {
+      const expectedWeight = 50;
+      testGridCell = new Grid2DCell(5, 'blocked');
+      const actualWeight = testGridCell.getMovementWeight();
+      expect(actualWeight).toEqual(expectedWeight);
+    });
+
+    it('returns 0 for starting cells', () => {
+      const expectedWeight = 0;
+      testGridCell = new Grid2DCell(5, 'start');
+      const actualWeight = testGridCell.getMovementWeight();
+      expect(actualWeight).toEqual(expectedWeight);
+    });
+
+    it('returns 0 for finishing cells', () => {
+      const expectedWeight = 0;
+      testGridCell = new Grid2DCell(5, 'finish');
+      const actualWeight = testGridCell.getMovementWeight();
+      expect(actualWeight).toEqual(expectedWeight);
+    });
+
+    it('returns 1 for standard movement cells', () => {
+      const expectedWeight = 1;
+      testGridCell = new Grid2DCell(5, 'open');
+      const actualWeight = testGridCell.getMovementWeight();
+      expect(actualWeight).toEqual(expectedWeight);
+    });
+
+  });
 });
