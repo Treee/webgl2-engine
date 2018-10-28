@@ -142,14 +142,19 @@ export class Grid2D {
     let current: Grid2DCell;
     // while there are nodes to be looked at
     while (openSet.length > 0) {
+      // console.log('``````````````````````Looooooooop begin ```````````````````````');
+      // console.log(`open set is still populated`, openSet);
       // best cell in the open set to move too
       current = this.getBestCellOption(openSet);
       if (current === finishingCell) {
+        console.log('finished');
         return this.reconstructPath(cameFrom, current);
+        // break;
       }
 
-      let currentIndex = openSet.indexOf(current, 0);
-      openSet.slice(currentIndex, 1);
+      let currentIndex = openSet.indexOf(current);
+      openSet.splice(currentIndex, 1);
+
       closedSet.push(current);
 
       // for each neighbor
@@ -177,8 +182,8 @@ export class Grid2D {
         cameFrom.set(connectedCell, current);
         gScore.set(connectedCell, tentative_gScore);
         fScore.set(connectedCell, gScore.get(connectedCell) + this.heuristicCostEstimate(connectedCell, finishingCell));
-
       });
+      // console.log('``````````````````````Looooooooop iteration end ```````````````````````');
     }
   }
 
@@ -189,23 +194,30 @@ export class Grid2D {
     return openCells[0];
   }
 
-  reconstructPath(cameFrom: Map<any, any>, current: Grid2DCell) {
+  reconstructPath(cameFrom: Map<Grid2DCell, any>, current: Grid2DCell) {
     let total_path = [current];
     while (cameFrom.has(current)) {
       current = cameFrom.get(current);
       total_path.push(current);
+      if (current.cellType === 'start') {
+        break;
+      }
     }
     return total_path;
   }
 
   // this is the birds eye view of distance to a target
-  heuristicCostEstimate(from: Grid2DCell, to: Grid2DCell) {
-    const fromRow = from.gridIndex % this.gridRows;
-    const fromCol = from.gridIndex % this.gridCols;
-    const toRow = to.gridIndex % this.gridRows;
-    const toCol = to.gridIndex % this.gridCols;
-    const computedRow = Math.abs(toRow - fromRow);
-    const computedCol = Math.abs(toCol - fromCol);
+  heuristicCostEstimate(from: Grid2DCell, to: Grid2DCell): number {
+    const fromRow = Math.trunc(from.gridIndex / this.gridRows);
+    const fromCol = Math.trunc(from.gridIndex % this.gridCols);
+    const toRow = Math.trunc(to.gridIndex / this.gridRows);
+    const toCol = Math.trunc(to.gridIndex % this.gridCols);
+    // console.log(`from rows: ${fromRow}, from cols: ${fromCol}`);
+    // console.log(`to rows: ${toRow}, yo cols: ${toCol}`);
+    // add 1 since indicies are 0 based and pythag requires n > 0
+    const computedRow = Math.abs(fromRow - toRow) + 1;
+    const computedCol = Math.abs(fromCol - toCol) + 1;
+    // console.log(`comp rows: ${computedRow}, comp cols: ${computedCol}`);
     // use pythagorean theorem to compute straight distance
     const distanceTo = Math.sqrt((computedRow * computedRow) + (computedCol * computedCol));
     return distanceTo;

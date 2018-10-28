@@ -144,6 +144,55 @@ describe('Grid2D', () => {
       expect(testGrid.grid[24].connectedCells).toEqual([testGrid.grid[19], testGrid.grid[23]]);
     });
   });
+
+  fdescribe('Pathfinding', () => {
+    it('knows the best option to take out of a list', () => {
+      const cell0 = new Grid2DCell(0, 'blocked');
+      const cell1 = new Grid2DCell(1, 'blocked');
+      const cell2 = new Grid2DCell(2, 'blocked');
+      const expectedBestOption = new Grid2DCell(3, 'open');
+      const cell4 = new Grid2DCell(4, 'blocked');
+      const cell5 = new Grid2DCell(5, 'blocked');
+      const cell6 = new Grid2DCell(6, 'blocked');
+      const openCells = [cell0, cell1, cell2, expectedBestOption, cell4, cell5, cell6]
+      const actualBestOption = testGrid.getBestCellOption(openCells);
+      expect(actualBestOption).toEqual(expectedBestOption);
+    });
+
+    it('shows the heuristic cost estimate (straight path to target)', () => {
+      let expectedEstimate = 5;
+      let actualEstimate = testGrid.heuristicCostEstimate(testGrid.grid[1], testGrid.grid[14]);
+      expect(actualEstimate).toEqual(expectedEstimate);
+    });
+
+    it('shows the heuristic cost estimate for an upside down path', () => {
+      let expectedEstimate = 5;
+      let actualEstimate = testGrid.heuristicCostEstimate(testGrid.grid[21], testGrid.grid[14]);
+      expect(actualEstimate).toEqual(expectedEstimate);
+
+    });
+    it('shows the heuristic cost estimate for an equilateral path', () => {
+      let expectedEstimate = 4.242640687119285;
+      let actualEstimate = testGrid.heuristicCostEstimate(testGrid.grid[10], testGrid.grid[22]);
+      expect(actualEstimate).toEqual(expectedEstimate);
+    });
+
+    it('finds a path between two cells', () => {
+      testGrid.loadGrid(sampleGrid);
+      testGrid.connectGridCells();
+      const expectedPath: Grid2DCell[] = [testGrid.grid[24], testGrid.grid[23], testGrid.grid[22], testGrid.grid[21], testGrid.grid[16], testGrid.grid[11], testGrid.grid[10], testGrid.grid[5], testGrid.grid[0]];
+      const actualPath = testGrid.aStar(testGrid.startingPoint, testGrid.finishingPoint);
+      expect(actualPath).toEqual(expectedPath);
+    });
+
+    it('finds a path between two other cells', () => {
+      testGrid.loadGrid(sampleGrid);
+      testGrid.connectGridCells();
+      const expectedPath: Grid2DCell[] = [testGrid.grid[21], testGrid.grid[16], testGrid.grid[11], testGrid.grid[10], testGrid.grid[5], testGrid.grid[0]];
+      const actualPath = testGrid.aStar(testGrid.startingPoint, testGrid.grid[21]);
+      expect(actualPath).toEqual(expectedPath);
+    });
+  });
 });
 
 describe('Grid2DCell', () => {
@@ -247,7 +296,4 @@ describe('Grid2DCell', () => {
 
   });
 
-  describe('', () => {
-
-  });
 });
