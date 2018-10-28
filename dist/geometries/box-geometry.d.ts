@@ -20,14 +20,14 @@ export declare class BoxGeometry {
     getScale(): Vec3;
     rotate(angleInDegrees: number): void;
     getRotationMatrix(): Mat3;
-    private setRotation(newRotation);
+    private setRotation;
     getRotation(): Vec3;
     setColor(newColor: Vec4): void;
     getColor(): Vec4;
     drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3): void;
     createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram): void;
-    private createBindAndBufferData(gl, bufferType, bufferData, bufferUsage);
-    private createRectangle(position, width, height);
-    private createRandomRectangle(position, maxWidth, maxHeight);
+    private createBindAndBufferData;
+    private createRectangle;
+    private createRandomRectangle;
     randomInt(range: number): number;
 }

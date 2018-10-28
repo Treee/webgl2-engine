@@ -11,6 +11,6 @@ export declare class RendererEngine {
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
     drawFrame(dt: Number, renderableObjects: BoxGeometry[]): void;
     getCanvasDimensions(): Vec3;
-    private initializeShaderPrograms(gl);
-    private initializeCanvasGL(htmlCanvasElement, width, height);
+    private initializeShaderPrograms;
+    private initializeCanvasGL;
 }

@@ -2,9 +2,9 @@
 export declare class ShaderProgram {
     constructor();
     getBasic2dProgram(gl: WebGL2RenderingContext): WebGLProgram;
-    private createShaderProgram(gl, vertexShaderType, fragmentShaderType);
-    private createVertexShader(gl, vertexShaderType);
-    private createFragmentShader(gl, fragmentShaderType);
-    private createProgram(gl, vertexShader, fragmentShader);
-    private compileShader(gl, shaderSource, shaderType);
+    private createShaderProgram;
+    private createVertexShader;
+    private createFragmentShader;
+    private createProgram;
+    private compileShader;
 }

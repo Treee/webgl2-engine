@@ -145,7 +145,7 @@ describe('Grid2D', () => {
     });
   });
 
-  fdescribe('Pathfinding', () => {
+  describe('Pathfinding', () => {
     it('knows the best option to take out of a list', () => {
       const cell0 = new Grid2DCell(0, 'blocked');
       const cell1 = new Grid2DCell(1, 'blocked');
