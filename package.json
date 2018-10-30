@@ -8,10 +8,13 @@
   ],
   "scripts": {
     "test": "ts-node node_modules/jasmine/bin/jasmine jasmine src/**/*.ts",
-    "build": "ts-node node_modules/typescript/bin/tsc -p tsconfig.json",
     "preversion": "npm test",
     "version": "npm run build && git add -A dist",
-    "postversion": "git push"
+    "postversion": "git push",
+    "build": "ts-node node_modules/typescript/bin/tsc -p tsconfig.json",
+    "precommit": "npm version patch",
+    "build-prod-minor": "npm version minor",
+    "build-prod-major": "npm version major"
   },
   "repository": {
     "type": "git",

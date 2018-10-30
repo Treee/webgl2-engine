@@ -1,5 +1,18 @@
 # webgl2-engine
 
+## Package.json Scripts
+test - Runs all jasmine tests.
+preversion - Hook to run command before npm version is increased. In this case, the tests are run and a failure will halt further script execution.
+version - Hook after version is incremented. We build the project and add the dist folder to git.
+postversion - Hook after version script is finished executing. We push the changes to our repository.
+build - Builds the project.
+
+The below scripts require a clean git working directory
+precommit - Increments the patch version. Used during development.
+build-prod-minor - Increments the minor version. Used for minor production deploys. No breaking changes.
+build-prod-major - Increments the major version. Used for major production deploys. May contain breaking changes.
+
+
 row major
      m.set( 11, 12, 13,
             21, 22, 23,
