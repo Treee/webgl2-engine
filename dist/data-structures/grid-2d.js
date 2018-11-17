@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Grid2DCell {
-    constructor(index = -1, cellType = 'blocked') {
+    constructor(index = -1, cellType = 'open') {
         this.cellType = cellType;
         this.gridIndex = index;
         this.connectedCells = [];
