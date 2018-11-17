@@ -204,7 +204,7 @@ describe('Grid2DCell', () => {
 
   describe('initilization', () => {
     it('starts as an impasasble block', () => {
-      expect(testGridCell.cellType).toEqual('blocked');
+      expect(testGridCell.cellType).toEqual('open');
     });
   });
 

@@ -5,7 +5,7 @@ export class Grid2DCell {
 
   connectedCells: Grid2DCell[];
 
-  constructor(index: number = -1, cellType: string = 'blocked') {
+  constructor(index: number = -1, cellType: string = 'open') {
     this.cellType = cellType;
     this.gridIndex = index;
     this.connectedCells = [];
