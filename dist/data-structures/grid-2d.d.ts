@@ -1,13 +1,4 @@
-export declare class Grid2DCell {
-    cellType: string;
-    gridIndex: number;
-    connectedCells: Grid2DCell[];
-    constructor(index?: number, cellType?: string);
-    setCellType(type: string): void;
-    connectCells(cells: Grid2DCell[]): void;
-    getMovementWeight(): number;
-    connectionExists(cellIndex: number): boolean;
-}
+import { Grid2DCell } from './grid-2d-cell';
 export declare class Grid2D {
     grid: Grid2DCell[];
     startingPoint: Grid2DCell;

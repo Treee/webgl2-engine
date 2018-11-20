@@ -1,55 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Grid2DCell {
-    constructor(index = -1, cellType = 'open') {
-        this.cellType = cellType;
-        this.gridIndex = index;
-        this.connectedCells = [];
-    }
-    // cell types blocked, start, finish, open
-    setCellType(type) {
-        this.cellType = type;
-    }
-    connectCells(cells) {
-        cells.forEach(cell => {
-            if (!this.connectionExists(cell.gridIndex)) {
-                this.connectedCells.push(cell);
-            }
-            if (!cell.connectionExists(this.gridIndex)) {
-                cell.connectedCells.push(this);
-            }
-        });
-    }
-    getMovementWeight() {
-        let weight = 100;
-        switch (this.cellType) {
-            case 'blocked':
-                weight = 50;
-                break;
-            case 'start':
-                weight = 0;
-                break;
-            case 'finish':
-                weight = 0;
-                break;
-            case 'open':
-                weight = 1;
-                break;
-        }
-        return weight;
-    }
-    connectionExists(cellIndex) {
-        return this.connectedCells.filter((cell) => {
-            return cell.gridIndex === cellIndex;
-        }).length > 0;
-    }
-}
-exports.Grid2DCell = Grid2DCell;
+const grid_2d_cell_1 = require("./grid-2d-cell");
 class Grid2D {
     constructor() {
         this.grid = [];
-        this.startingPoint = new Grid2DCell();
-        this.finishingPoint = new Grid2DCell();
+        this.startingPoint = new grid_2d_cell_1.Grid2DCell();
+        this.finishingPoint = new grid_2d_cell_1.Grid2DCell();
         this.gridRows = 0;
         this.gridCols = 0;
         this.totalCells = 0;
@@ -59,13 +15,13 @@ class Grid2D {
             throw new Error(`Row (${rows}) and Column (${cols}) values must be greater than 0.`);
         }
         this.grid = [];
-        this.startingPoint = new Grid2DCell();
-        this.finishingPoint = new Grid2DCell();
+        this.startingPoint = new grid_2d_cell_1.Grid2DCell();
+        this.finishingPoint = new grid_2d_cell_1.Grid2DCell();
         this.gridRows = rows;
         this.gridCols = cols;
         this.totalCells = rows * cols;
         for (let cellNumber = 0; cellNumber < this.totalCells; cellNumber++) {
-            let newCell = new Grid2DCell(cellNumber);
+            let newCell = new grid_2d_cell_1.Grid2DCell(cellNumber);
             this.grid.push(newCell);
         }
         this.startingPoint = this.grid[0];
