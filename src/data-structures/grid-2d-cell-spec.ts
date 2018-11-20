@@ -72,7 +72,7 @@ describe('Grid2DCell', () => {
   describe('getMovementWeight', () => {
 
     it('returns a large value for blocked cells', () => {
-      const expectedWeight = 50;
+      const expectedWeight = 100;
       testGridCell = new Grid2DCell(5, 'blocked');
       const actualWeight = testGridCell.getMovementWeight();
       expect(actualWeight).toEqual(expectedWeight);

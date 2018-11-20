@@ -1,3 +1,5 @@
+import { CoreMod } from '../core/core';
+
 export class Grid2DCell {
 
   cellType: string;
@@ -27,20 +29,12 @@ export class Grid2DCell {
   }
 
   public getMovementWeight(): number {
-    let weight = 100;
-    switch (this.cellType) {
-      case 'blocked':
-        weight = 50;
-        break;
-      case 'start':
-        weight = 0;
-        break;
-      case 'finish':
-        weight = 0;
-        break;
-      case 'open':
-        weight = 1;
-        break;
+    let weight = 10000000; // a very large number since there is no movement weight associated with this block
+    const foundCell = CoreMod["data-structures"]["grid-2d-cells"].find((cell: any) => {
+      return cell.type === this.cellType;
+    });
+    if (foundCell) {
+      weight = foundCell["movement-weight"];
     }
     return weight;
   }
