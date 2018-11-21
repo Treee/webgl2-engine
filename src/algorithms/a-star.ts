@@ -33,9 +33,9 @@ export class AStar {
       current = this.getBestCellOption(openSet);
       if (current === destinationCell) {
         console.log('finished');
-        // if (isDebugMode) {
-        //   return this.everythingAStar();
-        // }
+        if (isDebugMode) {
+          return this.everythingAStar(this.reconstructPath(cameFrom, current), gScore, fScore);
+        }
         return this.reconstructPath(cameFrom, current);
         // break;
       }
@@ -99,7 +99,7 @@ export class AStar {
     return distanceTo;
   }
 
-  reconstructPath(cameFrom: Map<Grid2DCell, any>, current: Grid2DCell) {
+  reconstructPath(cameFrom: Map<Grid2DCell, any>, current: Grid2DCell): Grid2DCell[] {
     let total_path = [current];
     while (cameFrom.has(current)) {
       current = cameFrom.get(current);
@@ -109,6 +109,14 @@ export class AStar {
       }
     }
     return total_path;
+  }
+
+  everythingAStar(reconstructedPath: Grid2DCell[], gScore: Map<any, any>, fScore: Map<any, any>) {
+    return {
+      path: reconstructedPath,
+      gScore: gScore,
+      fScore: fScore
+    };
   }
 
 }
