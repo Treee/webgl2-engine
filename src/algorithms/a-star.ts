@@ -5,7 +5,7 @@ export class AStar {
 
   }
 
-  aStar(startingCell: Grid2DCell, destinationCell: Grid2DCell, totalRows: number, totalCols: number) {
+  findPath(startingCell: Grid2DCell, destinationCell: Grid2DCell, totalRows: number, totalCols: number, isDebugMode?: boolean) {
     // The set of nodes already evaluated
     let closedSet: Grid2DCell[] = [];
     // The set of currently discovered nodes that are not evaluated yet.
@@ -33,6 +33,9 @@ export class AStar {
       current = this.getBestCellOption(openSet);
       if (current === destinationCell) {
         console.log('finished');
+        // if (isDebugMode) {
+        //   return this.everythingAStar();
+        // }
         return this.reconstructPath(cameFrom, current);
         // break;
       }
