@@ -1,5 +1,4 @@
 import { Grid2D } from "./grid-2d";
-import { Grid2DCell } from "./grid-2d-cell";
 
 describe('Grid2D', () => {
   let testGrid: Grid2D;
@@ -22,18 +21,6 @@ describe('Grid2D', () => {
   describe('initialization', () => {
     it('has a size rows * cols', () => {
       expect(testGrid.grid.length).toEqual(gridRows * gridCols);
-    });
-
-    it('has at least one starting point', () => {
-      let expectedStartingPoint = new Grid2DCell(0, 'start');
-      expect(testGrid.startingPoint).toEqual(expectedStartingPoint);
-      expect(testGrid.startingPoint.gridIndex).toEqual(0);
-    });
-
-    it('has at least one finishing point', () => {
-      let expectedFinishingPoint = new Grid2DCell(24, 'finish');
-      expect(testGrid.finishingPoint).toEqual(expectedFinishingPoint);
-      expect(testGrid.finishingPoint.gridIndex).toEqual(24);
     });
 
     it('cannot accept rows or column values less than 1', () => {

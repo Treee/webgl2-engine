@@ -4,8 +4,8 @@ import { CoreMod } from '../core/core';
 export class Grid2D {
 
   grid: Grid2DCell[] = [];
-  startingPoint: Grid2DCell = new Grid2DCell();
-  finishingPoint: Grid2DCell = new Grid2DCell();
+  // startingPoint: Grid2DCell = new Grid2DCell();
+  // finishingPoint: Grid2DCell = new Grid2DCell();
 
   gridRows: number = 0;
   gridCols: number = 0;
@@ -14,13 +14,18 @@ export class Grid2D {
   constructor() {
   }
 
+  public loadGrid(newGrid: string) {
+    this.initializeGrid(this.gridRows, this.gridCols);
+    newGrid.replace(/\r?\n/g, '').split('').forEach((cell, cellIndex) => {
+      this.grid[cellIndex].setCellType(this.mapCellType(cell));
+    });
+  }
+
   public initializeGrid(rows: number, cols: number) {
     if (rows < 1 || cols < 1) {
       throw new Error(`Row (${rows}) and Column (${cols}) values must be greater than 0.`);
     }
     this.grid = [];
-    this.startingPoint = new Grid2DCell();
-    this.finishingPoint = new Grid2DCell();
     this.gridRows = rows;
     this.gridCols = cols;
     this.totalCells = rows * cols;
@@ -28,17 +33,6 @@ export class Grid2D {
       let newCell = new Grid2DCell(cellNumber);
       this.grid.push(newCell);
     }
-    this.startingPoint = this.grid[0];
-    this.startingPoint.setCellType('start');
-    this.finishingPoint = this.grid[this.totalCells - 1];
-    this.finishingPoint.setCellType('finish');
-  }
-
-  public loadGrid(newGrid: string) {
-    this.initializeGrid(this.gridRows, this.gridCols);
-    newGrid.replace(/\r?\n/g, '').split('').forEach((cell, cellIndex) => {
-      this.grid[cellIndex].setCellType(this.mapCellType(cell));
-    });
   }
 
   public connectGridCells() {
