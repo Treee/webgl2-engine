@@ -4,9 +4,6 @@ import { CoreMod } from '../core/core';
 export class Grid2D {
 
   grid: Grid2DCell[] = [];
-  // startingPoint: Grid2DCell = new Grid2DCell();
-  // finishingPoint: Grid2DCell = new Grid2DCell();
-
   gridRows: number = 0;
   gridCols: number = 0;
   totalCells: number = 0;
