@@ -7,11 +7,11 @@ describe('Grid2D', () => {
   let gridRows: number = 5;
   let gridCols: number = 5;
 
-  let sampleGrid = 'sooxo\noxoxo\nooooo\nxoxxx\noooof';
-  // sooxo
-  // oxoxo 
+  let sampleGrid = 'soobo\nobobo\nooooo\nbobbb\noooof';
+  // soobo
+  // obobo 
   // ooooo 
-  // xoxxx 
+  // bobbb 
   // oooof
 
   beforeEach(() => {
@@ -74,12 +74,12 @@ describe('Grid2D', () => {
     });
 
     it('loads a more complex maze from a string', () => {
-      // oooxx
-      // oxooo
-      // oosxo
-      // oxxoo
-      // ooofx
-      let sampleGrid = 'oooxx\noxooo\noosxo\noxxoo\nooofx';
+      // ooobb
+      // obooo
+      // oosbo
+      // obboo
+      // ooofb
+      let sampleGrid = 'ooobb\nobooo\noosbo\nobboo\nooofb';
 
       testGrid.loadGrid(sampleGrid);
       expect(testGrid.grid[0].cellType).toEqual('open', 'Index 0');

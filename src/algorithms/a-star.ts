@@ -5,7 +5,7 @@ export class AStar {
 
   }
 
-  aStar(startingCell: Grid2DCell, finishingCell: Grid2DCell, totalRows: number, totalCols: number) {
+  aStar(startingCell: Grid2DCell, destinationCell: Grid2DCell, totalRows: number, totalCols: number) {
     // The set of nodes already evaluated
     let closedSet: Grid2DCell[] = [];
     // The set of currently discovered nodes that are not evaluated yet.
@@ -23,7 +23,7 @@ export class AStar {
     // by passing by that node. That value is partly known, partly heuristic.
     let fScore = new Map();
     // For the first node, that value is completely heuristic.
-    fScore.set(startingCell, this.heuristicCostEstimate(startingCell, finishingCell, totalRows, totalCols));
+    fScore.set(startingCell, this.heuristicCostEstimate(startingCell, destinationCell, totalRows, totalCols));
     let current: Grid2DCell;
     // while there are nodes to be looked at
     while (openSet.length > 0) {
@@ -31,7 +31,7 @@ export class AStar {
       // console.log(`open set is still populated`, openSet);
       // best cell in the open set to move too
       current = this.getBestCellOption(openSet);
-      if (current === finishingCell) {
+      if (current === destinationCell) {
         console.log('finished');
         return this.reconstructPath(cameFrom, current);
         // break;
@@ -66,7 +66,7 @@ export class AStar {
         // This path is the best until now. Record it!
         cameFrom.set(connectedCell, current);
         gScore.set(connectedCell, tentative_gScore);
-        fScore.set(connectedCell, gScore.get(connectedCell) + this.heuristicCostEstimate(connectedCell, finishingCell, totalRows, totalCols));
+        fScore.set(connectedCell, gScore.get(connectedCell) + this.heuristicCostEstimate(connectedCell, destinationCell, totalRows, totalCols));
       });
       // console.log('``````````````````````Looooooooop iteration end ```````````````````````');
     }
