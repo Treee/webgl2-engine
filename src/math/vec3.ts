@@ -8,6 +8,14 @@ export class Vec3 extends Vector3 {
         return this.toVec3(super.add(vector));
     }
 
+    sub(vector: Vec3): Vec3 {
+        return this.toVec3(super.sub(vector));
+    }
+
+    multiplyScalar(scalar: number): Vec3 {
+        return this.toVec3(super.multiplyScalar(scalar));
+    }
+
     toVec3(vector: Vector3): Vec3 {
         return new Vec3(vector.x, vector.y, vector.z);
     }

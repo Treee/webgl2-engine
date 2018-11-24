@@ -34,6 +34,13 @@ export class BoxGeometry {
         this.position = newPosition;
     }
 
+    lerp(pointA: Vec3, pointB: Vec3, dt: number): Vec3 {
+        // imprecise method pointA + dt * (pointB - pointA)
+        // return pointA.add(pointB.sub(pointA).multiplyScalar(dt));
+        // precise method (1 - dt) * pointA + dt * pointB
+        return pointA.multiplyScalar(1 - dt).add(pointB.multiplyScalar(dt));
+    }
+
     getTranslationMatrix(): Mat3 {
         const position = this.getPosition();
         let translationMatrix = new Mat3();

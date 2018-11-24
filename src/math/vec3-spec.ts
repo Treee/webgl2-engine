@@ -130,6 +130,30 @@ describe('Vec3', () => {
         });
     });
 
+    describe('Subtract', () => {
+        it('exists on the object', () => {
+            expect(testVector.sub).toBeDefined();
+        });
+
+        it('subtracts two vectors together', () => {
+            expect(testVector).toEqual(new Vec3());
+            const anotherVector = new Vec3(1, -1, 3);
+            const actualVector = testVector.sub(anotherVector);
+            const expectedVector = new Vec3(-1, 1, -3);
+            expect(actualVector).toEqual(expectedVector);
+        });
+
+        it('subtracts two other vectors together', () => {
+            expect(testVector).toEqual(new Vec3());
+            testVector = new Vec3(1, -5, 3);
+            const anotherVector = new Vec3(1, -1, 3);
+            const actualVector = testVector.sub(anotherVector);
+            const expectedVector = new Vec3(0, -4, -0);
+            expect(actualVector).toEqual(expectedVector);
+        });
+
+    });
+
     describe('PrettyPrint', () => {
         it('prints a vector3 correctly', () => {
             const expected = '[1, 2, 3]';

@@ -215,4 +215,12 @@ describe('Box Geometry', () => {
         });
     });
 
+    describe('LERP (Linear Interpolate)', () => {
+        it('interpolates between two values', () => {
+            const expectedDestination = new Vec3(0.5, 0.5, 0.5);
+            const actualDestination = testBoxGeometry.lerp(new Vec3(), new Vec3(1, 1, 1), 0.5);
+            expect(actualDestination).toEqual(expectedDestination);
+        });
+    });
+
 });
