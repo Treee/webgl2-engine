@@ -8,6 +8,12 @@ class Vec3 extends three_1.Vector3 {
     add(vector) {
         return this.toVec3(super.add(vector));
     }
+    sub(vector) {
+        return this.toVec3(super.sub(vector));
+    }
+    multiplyScalar(scalar) {
+        return this.toVec3(super.multiplyScalar(scalar));
+    }
     toVec3(vector) {
         return new Vec3(vector.x, vector.y, vector.z);
     }

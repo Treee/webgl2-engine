@@ -13,6 +13,7 @@ export declare class BoxGeometry {
     setVertices(newVertices: number[]): void;
     getTransform(projectionMatrix: Mat3): Mat3;
     translate(newPosition: Vec3): void;
+    lerp(pointA: Vec3, pointB: Vec3, dt: number): Vec3;
     getTranslationMatrix(): Mat3;
     getPosition(): Vec3;
     getScaleMatrix(): Mat3;

@@ -26,6 +26,12 @@ class BoxGeometry {
     translate(newPosition) {
         this.position = newPosition;
     }
+    lerp(pointA, pointB, dt) {
+        // imprecise method pointA + dt * (pointB - pointA)
+        // return pointA.add(pointB.sub(pointA).multiplyScalar(dt));
+        // precise method (1 - dt) * pointA + dt * pointB
+        return pointA.multiplyScalar(1 - dt).add(pointB.multiplyScalar(dt));
+    }
     getTranslationMatrix() {
         const position = this.getPosition();
         let translationMatrix = new mat3_1.Mat3();
