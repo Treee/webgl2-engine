@@ -31,10 +31,10 @@ class AStar {
             current = this.getBestCellOption(openSet);
             if (current === destinationCell) {
                 console.log('finished');
-                if (isDebugMode) {
-                    return this.everythingAStar(this.reconstructPath(cameFrom, current), gScore, fScore);
-                }
-                return this.reconstructPath(cameFrom, current);
+                // if (isDebugMode) {
+                //   return this.everythingAStar(this.reconstructPath(cameFrom, current), gScore, fScore);
+                // }
+                return this.reconstructPath(cameFrom, current, startingCell.gridIndex);
                 // break;
             }
             let currentIndex = openSet.indexOf(current);
@@ -89,12 +89,13 @@ class AStar {
         const distanceTo = Math.sqrt((computedRow * computedRow) + (computedCol * computedCol));
         return distanceTo;
     }
-    reconstructPath(cameFrom, current) {
+    reconstructPath(cameFrom, current, startIndex) {
+        // console.log('camefrom', cameFrom);
         let total_path = [current];
         while (cameFrom.has(current)) {
             current = cameFrom.get(current);
             total_path.push(current);
-            if (current.cellType === 'start') {
+            if (current.gridIndex === startIndex) {
                 break;
             }
         }
