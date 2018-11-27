@@ -9,25 +9,31 @@ describe('A Star', () => {
   let gridRows: number = 5;
   let gridCols: number = 5;
 
-  let sampleGrid = 'sooxo\noxoxo\nooooo\nxoxxx\noooof';
-  // sooxo
+  let sampleGrid = 'oooxo\noxoxo\nooooo\nxoxxx\nooooo';
+  // oooxo
   // oxoxo 
   // ooooo 
   // xoxxx 
-  // oooof
+  // ooooo
 
   beforeEach(() => {
     testAStar = new AStar();
     testGrid = new Grid2D();
     testGrid.initializeGrid(gridRows, gridCols);
   });
-  
+
   describe('findPath', () => {
     it('finds a path between two cells', () => {
       testGrid.loadGrid(sampleGrid);
       testGrid.connectGridCells();
       const expectedPath: Grid2DCell[] = [testGrid.grid[24], testGrid.grid[23], testGrid.grid[22], testGrid.grid[21], testGrid.grid[16], testGrid.grid[11], testGrid.grid[10], testGrid.grid[5], testGrid.grid[0]];
       const actualPath = testAStar.findPath(testGrid.grid[0], testGrid.grid[(gridRows * gridCols) - 1], gridRows, gridCols);
+
+      console.log('expected1', expectedPath[9]);
+      if (actualPath) {
+        console.log('actual', actualPath[9]);
+      }
+
       expect(actualPath).toEqual(expectedPath);
     });
 
@@ -39,7 +45,7 @@ describe('A Star', () => {
       expect(actualPath).toEqual(expectedPath);
     });
   });
-  
+
   describe('getBestCellOption', () => {
     it('knows the best option to take out of a list', () => {
       const cell0 = new Grid2DCell(0, 'blocked');

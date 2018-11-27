@@ -6,12 +6,12 @@ describe('Grid2D', () => {
   let gridRows: number = 5;
   let gridCols: number = 5;
 
-  let sampleGrid = 'soobo\nobobo\nooooo\nbobbb\noooof';
-  // soobo
+  let sampleGrid = 'ooobo\nobobo\nooooo\nbobbb\nooooo';
+  // ooobo
   // obobo 
   // ooooo 
   // bobbb 
-  // oooof
+  // ooooo
 
   beforeEach(() => {
     testGrid = new Grid2D();
@@ -33,7 +33,7 @@ describe('Grid2D', () => {
   describe('loadGrid', () => {
     it('loads a maze from a string', () => {
       testGrid.loadGrid(sampleGrid);
-      expect(testGrid.grid[0].cellType).toEqual('start', 'Index 0');
+      expect(testGrid.grid[0].cellType).toEqual('open', 'Index 0');
       expect(testGrid.grid[1].cellType).toEqual('open', 'Index 1');
       expect(testGrid.grid[2].cellType).toEqual('open', 'Index 2');
       expect(testGrid.grid[3].cellType).toEqual('blocked', 'Index 3');
@@ -57,16 +57,16 @@ describe('Grid2D', () => {
       expect(testGrid.grid[21].cellType).toEqual('open', 'Index 21');
       expect(testGrid.grid[22].cellType).toEqual('open', 'Index 22');
       expect(testGrid.grid[23].cellType).toEqual('open', 'Index 23');
-      expect(testGrid.grid[24].cellType).toEqual('finish', 'Index 24');
+      expect(testGrid.grid[24].cellType).toEqual('open', 'Index 24');
     });
 
     it('loads a more complex maze from a string', () => {
       // ooobb
       // obooo
-      // oosbo
+      // ooobo
       // obboo
-      // ooofb
-      let sampleGrid = 'ooobb\nobooo\noosbo\nobboo\nooofb';
+      // oooob
+      let sampleGrid = 'ooobb\nobooo\nooobo\nobboo\noooob';
 
       testGrid.loadGrid(sampleGrid);
       expect(testGrid.grid[0].cellType).toEqual('open', 'Index 0');
@@ -81,7 +81,7 @@ describe('Grid2D', () => {
       expect(testGrid.grid[9].cellType).toEqual('open', 'Index 9');
       expect(testGrid.grid[10].cellType).toEqual('open', 'Index 10');
       expect(testGrid.grid[11].cellType).toEqual('open', 'Index 11');
-      expect(testGrid.grid[12].cellType).toEqual('start', 'Index 12');
+      expect(testGrid.grid[12].cellType).toEqual('open', 'Index 12'); // start
       expect(testGrid.grid[13].cellType).toEqual('blocked', 'Index 13');
       expect(testGrid.grid[14].cellType).toEqual('open', 'Index 14');
       expect(testGrid.grid[15].cellType).toEqual('open', 'Index 15');
@@ -92,7 +92,7 @@ describe('Grid2D', () => {
       expect(testGrid.grid[20].cellType).toEqual('open', 'Index 20');
       expect(testGrid.grid[21].cellType).toEqual('open', 'Index 21');
       expect(testGrid.grid[22].cellType).toEqual('open', 'Index 22');
-      expect(testGrid.grid[23].cellType).toEqual('finish', 'Index 23');
+      expect(testGrid.grid[23].cellType).toEqual('open', 'Index 23');
       expect(testGrid.grid[24].cellType).toEqual('blocked', 'Index 24');
     });
   });
