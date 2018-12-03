@@ -46,7 +46,7 @@ export class Grid2DCell {
     if (!foundCell) {
       throw new Error('Unable to serialize the cell');
     }
-    console.log(`found ${foundCell.type} with map ${foundCell.typeMap}`);
+    // console.log(`found ${foundCell.type} with map ${foundCell.typeMap}`);
     return foundCell.typeMap;
   }
 
