@@ -8,6 +8,11 @@ export declare class Grid2D {
     loadGrid(newGrid: string): void;
     initializeGrid(rows: number, cols: number): void;
     connectGridCells(): void;
+    serializeGrid(): {
+        gridString: string;
+        gridRows: number;
+        gridCols: number;
+    };
     indexWithinLimits(index: number): boolean;
     mapCellType(cellMapping: string): string;
 }

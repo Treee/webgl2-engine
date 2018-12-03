@@ -31,6 +31,16 @@ class Grid2DCell {
         }
         return weight;
     }
+    serializeCell() {
+        const foundCell = core_1.CoreMod["data-structures"]["grid-2d-cells"].find((cell) => {
+            return cell.type === this.cellType;
+        });
+        if (!foundCell) {
+            throw new Error('Unable to serialize the cell');
+        }
+        console.log(`found ${foundCell.type} with map ${foundCell.typeMap}`);
+        return foundCell.typeMap;
+    }
     connectionExists(cellIndex) {
         return this.connectedCells.filter((cell) => {
             return cell.gridIndex === cellIndex;

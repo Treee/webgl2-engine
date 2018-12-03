@@ -6,5 +6,6 @@ export declare class Grid2DCell {
     setCellType(type: string): void;
     connectCells(cells: Grid2DCell[]): void;
     getMovementWeight(): number;
+    serializeCell(): string;
     connectionExists(cellIndex: number): boolean;
 }
