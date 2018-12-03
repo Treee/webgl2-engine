@@ -132,4 +132,17 @@ describe('Grid2D', () => {
       expect(testGrid.grid[24].connectedCells).toEqual([testGrid.grid[19], testGrid.grid[23]]);
     });
   });
+
+  describe('serializeGrid', () => {
+    it('serializes the grid array, number of rows and cols', () => {
+      const expectedGridString = sampleGrid;
+      const expectedGridRows = gridRows;
+      const expectedGridCols = gridCols;
+      testGrid.loadGrid(sampleGrid);
+      const actualSerializedGrid = testGrid.serializeGrid();
+      expect(actualSerializedGrid.gridString).toEqual(expectedGridString);
+      expect(actualSerializedGrid.gridRows).toEqual(expectedGridRows);
+      expect(actualSerializedGrid.gridCols).toEqual(expectedGridCols);
+    });
+  });
 });

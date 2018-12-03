@@ -59,6 +59,22 @@ export class Grid2D {
     }
   }
 
+  serializeGrid() {
+    let mapString = '';
+    this.grid.forEach((cell, index) => {
+      mapString = mapString.concat(cell.serializeCell());
+      if (index % this.gridCols === (this.gridCols - 1) && index < this.totalCells - 1) {
+        mapString = mapString.concat('\n');
+      }
+    });
+
+    return {
+      gridString: mapString,
+      gridRows: this.gridRows,
+      gridCols: this.gridCols
+    }
+  }
+
   indexWithinLimits(index: number): boolean {
     return (index > -1 && index < this.totalCells)
   }
