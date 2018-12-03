@@ -9,11 +9,11 @@ describe('A Star', () => {
   let gridRows: number = 5;
   let gridCols: number = 5;
 
-  let sampleGrid = 'oooxo\noxoxo\nooooo\nxoxxx\nooooo';
-  // oooxo
-  // oxoxo 
+  let sampleGrid = 'ooobo\nobobo\nooooo\nbobbb\nooooo';
+  // ooobo
+  // obobo 
   // ooooo 
-  // xoxxx 
+  // bobbb 
   // ooooo
 
   beforeEach(() => {
