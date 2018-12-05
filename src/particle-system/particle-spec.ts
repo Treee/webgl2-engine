@@ -1,15 +1,17 @@
 import { Particle } from './particle';
 import { Vec3 } from '../math/vec3';
+import { Vec4 } from '../math/vec4';
 
-describe('Particle System', () => {
+describe('Particle', () => {
   let testParticle: Particle;
-  let testParticlePosition = new Vec3(3, 2, 1);
-  let testParticleDecay = 3;
-  let testParticleVelocity = new Vec3(0, 0, 0);
+  const testParticlePosition = new Vec3();
+  const testParticleDecay = 3;
+  const testParticleVelocity = new Vec3();
+  const testParticleColor = new Vec4();
   const defaultDt = 1 / 1000;
 
   beforeEach(() => {
-    testParticle = new Particle();
+    testParticle = new Particle(testParticlePosition.clone(), testParticleVelocity.clone(), testParticleColor.clone(), testParticleDecay);
   });
 
   describe('Initialization', () => {
@@ -32,7 +34,7 @@ describe('Particle System', () => {
 
     it('can be given a custom decay', () => {
       const expectedParticleDecay = 20;
-      testParticle = new Particle(testParticlePosition, testParticleVelocity, expectedParticleDecay);
+      testParticle = new Particle(testParticlePosition, testParticleVelocity, testParticleColor, expectedParticleDecay);
       expect(testParticle.decay).toEqual(expectedParticleDecay);
     });
 
@@ -42,8 +44,18 @@ describe('Particle System', () => {
 
     it('can be given a custom velocity', () => {
       const expectedParticleVelocity = new Vec3(0, 12, 0);
-      testParticle = new Particle(testParticlePosition, expectedParticleVelocity, testParticleDecay);
+      testParticle = new Particle(testParticlePosition, expectedParticleVelocity, testParticleColor, testParticleDecay);
       expect(testParticle.velocity).toEqual(expectedParticleVelocity);
+    });
+
+    it('has a color of  0', () => {
+      expect(testParticle.color).toEqual(new Vec4());
+    });
+
+    it('can be given a custom color', () => {
+      const expectedColor = new Vec4(0, 1, 0, 1);
+      testParticle = new Particle(testParticlePosition, testParticleVelocity, expectedColor, testParticleDecay);
+      expect(testParticle.color).toEqual(expectedColor);
     });
   });
 
@@ -102,6 +114,7 @@ describe('Particle System', () => {
     it('re enables a particle with the default values', () => {
       testParticle.update(100);
       testParticle.reinitializeParticle();
+      expect(testParticle.color).toEqual(new Vec4());
       expect(testParticle.position).toEqual(new Vec3());
       expect(testParticle.velocity).toEqual(testParticleVelocity);
       expect(testParticle.isActive).toBe(true);
