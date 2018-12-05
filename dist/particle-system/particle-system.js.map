@@ -1,0 +1,1 @@
+{"version":3,"file":"particle-system.js","sourceRoot":"","sources":["../../src/particle-system/particle-system.ts"],"names":[],"mappings":";;AAAA,yCAAsC;AAEtC;IAIE,YAAY,iBAAyB;QAFrC,cAAS,GAAe,EAAE,CAAC;QAGzB,IAAI,CAAC,SAAS,GAAG,KAAK,CAAC,iBAAiB,CAAC,CAAC,IAAI,CAAC,IAAI,mBAAQ,EAAE,CAAC,CAAC;IACjE,CAAC;CAEF;AARD,wCAQC"}
