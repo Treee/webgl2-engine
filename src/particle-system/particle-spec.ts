@@ -7,7 +7,6 @@ describe('Particle System', () => {
   let testParticleDecay = 3;
   let testParticleVelocity = new Vec3(0, 0, 0);
   const defaultDt = 1 / 1000;
-  const aLargeNumber = 99999999;
 
   beforeEach(() => {
     testParticle = new Particle();
@@ -96,6 +95,17 @@ describe('Particle System', () => {
       testParticle.decay = -1;
       testParticle.disableParticleCheck();
       expect(testParticle.isActive).toEqual(false);
+    });
+  });
+
+  describe('reinitializeParticle', () => {
+    it('re enables a particle with the default values', () => {
+      testParticle.update(100);
+      testParticle.reinitializeParticle();
+      expect(testParticle.position).toEqual(new Vec3());
+      expect(testParticle.velocity).toEqual(testParticleVelocity);
+      expect(testParticle.isActive).toBe(true);
+      expect(testParticle.decay).toBe(testParticleDecay);
     });
   });
 
