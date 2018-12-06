@@ -15,5 +15,4 @@ describe('Particle System', () => {
       expect(actualParticles).toEqual(expectedParticles);
     });
   });
-
 });
