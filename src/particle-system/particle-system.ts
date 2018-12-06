@@ -7,19 +7,21 @@ export class ParticleSystem {
 
   particles: Particle[] = [];
 
-  constructor(numberOfParticles: number) {
-    this.initializeParticles(numberOfParticles);
+  constructor(numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
+    this.initializeParticles(numberOfParticles, gl, shaderProgram);
   }
 
   // initializes particles that disperse in a spherical pattern
-  initializeParticles(numberOfParticles: number) {
+  initializeParticles(numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
     let x, y;
     let z = 0;
     for (let i = 0; i < numberOfParticles; i++) {
       x = -1 + 2 * this.randomInt(1000);
       y = -1 + 2 * this.randomInt(1000);
       z = -1 + 2 * this.randomInt(1000);
-      this.particles.push(new Particle(new Vec3(x, y, 0), new Vec3(Math.cos(x), Math.sin(y), x), new Vec4(x, y, z, 1), this.randomInt(5)));
+      const particle = new Particle(new Vec3(x, y, 0), new Vec3(Math.cos(x), Math.sin(y), x), new Vec4(x, y, z, 1), this.randomInt(5));
+      particle.createVertexArrayObject(gl, shaderProgram);
+      this.particles.push(particle);
     }
   }
 
