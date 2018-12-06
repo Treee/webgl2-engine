@@ -1,1 +1,1 @@
-{"version":3,"file":"vec4.js","sourceRoot":"","sources":["../../src/math/vec4.ts"],"names":[],"mappings":";;AAAA,iCAAgC;AAChC,UAAkB,SAAQ,eAAO;IAC7B,YAAY,CAAU,EAAE,CAAU,EAAE,CAAU,EAAE,CAAU;QACtD,KAAK,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACtB,CAAC;CAKJ;AARD,oBAQC"}
+{"version":3,"file":"vec4.js","sourceRoot":"","sources":["../../src/math/vec4.ts"],"names":[],"mappings":";;AAAA,iCAAgC;AAChC,MAAa,IAAK,SAAQ,eAAO;IAC7B,YAAY,CAAU,EAAE,CAAU,EAAE,CAAU,EAAE,CAAU;QACtD,KAAK,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACtB,CAAC;CAKJ;AARD,oBAQC"}

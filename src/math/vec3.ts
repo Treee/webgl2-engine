@@ -4,16 +4,20 @@ export class Vec3 extends Vector3 {
         super(x, y, z);
     }
 
-    add(vector: Vec3): Vec3 {
+    addVec3(vector: Vec3): Vec3 {
         return this.toVec3(super.add(vector));
     }
 
-    sub(vector: Vec3): Vec3 {
+    subtract(vector: Vec3): Vec3 {
         return this.toVec3(super.sub(vector));
     }
 
-    multiplyScalar(scalar: number): Vec3 {
+    multiplyVec3ByScalar(scalar: number): Vec3 {
         return this.toVec3(super.multiplyScalar(scalar));
+    }
+
+    cloneVec3() {
+        return this.toVec3(super.clone());
     }
 
     toVec3(vector: Vector3): Vec3 {

@@ -53,7 +53,7 @@ export class Particle {
   }
 
   getScale(): Vec3 {
-    return this.scale.clone();
+    return this.scale.cloneVec3();
   }
 
   getScaleMatrix(): Mat3 {
@@ -64,7 +64,7 @@ export class Particle {
   }
 
   getPosition(): Vec3 {
-    return this.position.clone();
+    return this.position.cloneVec3();
   }
 
   getColor(): Vec4 {

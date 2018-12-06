@@ -49,7 +49,7 @@ export class BoxGeometry {
     }
 
     getPosition(): Vec3 {
-        return this.position.clone();
+        return this.position.cloneVec3();
     }
 
     getScaleMatrix(): Mat3 {
@@ -64,7 +64,7 @@ export class BoxGeometry {
     }
 
     getScale(): Vec3 {
-        return this.scale.clone();
+        return this.scale.cloneVec3();
     }
 
     // rotates clockwise starting from (0, 1, 0)
@@ -89,7 +89,7 @@ export class BoxGeometry {
     }
 
     getRotation(): Vec3 {
-        return this.rotation.clone();
+        return this.rotation.cloneVec3();
     }
 
     setColor(newColor: Vec4): void {
