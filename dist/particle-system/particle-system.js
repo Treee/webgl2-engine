@@ -13,9 +13,9 @@ class ParticleSystem {
         let x, y;
         let z = 0;
         for (let i = 0; i < numberOfParticles; i++) {
-            x = -1 + 2 * this.randomInt(1000);
-            y = -1 + 2 * this.randomInt(1000);
-            z = -1 + 2 * this.randomInt(1000);
+            x = -1 + 2 * +(Math.random().toFixed(2));
+            y = -1 + 2 * +(Math.random().toFixed(2));
+            z = -1 + 2 * +(Math.random().toFixed(2));
             const particle = new particle_1.Particle(new vec3_1.Vec3(x, y, 0), new vec3_1.Vec3(Math.cos(x), Math.sin(y), x), new vec4_1.Vec4(x, y, z, 1), this.randomInt(5));
             particle.createVertexArrayObject(gl, shaderProgram);
             this.particles.push(particle);
