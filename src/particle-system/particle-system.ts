@@ -19,10 +19,16 @@ export class ParticleSystem {
       x = -1 + 2 * +(Math.random().toFixed(2));
       y = -1 + 2 * +(Math.random().toFixed(2));
       z = -1 + 2 * +(Math.random().toFixed(2));
-      const particle = new Particle(new Vec3(x, y, 0), new Vec3(Math.cos(x), Math.sin(y), x), new Vec4(x, y, z, 1), this.randomInt(5));
+      const particle = new Particle(new Vec3(x, y, 0), new Vec3(Math.cos(x), Math.sin(y), x), new Vec4(x, y, z, 1), 3);
       particle.createVertexArrayObject(gl, shaderProgram);
       this.particles.push(particle);
     }
+  }
+
+  updateParticles(dt: number) {
+    this.particles.forEach((particle) => {
+      particle.update(dt);
+    });
   }
 
   draw(dt: number, gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
