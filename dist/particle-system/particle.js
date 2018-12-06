@@ -42,7 +42,7 @@ class Particle {
         this.position = newPosition;
     }
     getScale() {
-        return this.scale.clone();
+        return this.scale.cloneVec3();
     }
     getScaleMatrix() {
         const scale = this.getScale();
@@ -51,7 +51,7 @@ class Particle {
         return scaleMatrix;
     }
     getPosition() {
-        return this.position.clone();
+        return this.position.cloneVec3();
     }
     getColor() {
         return this.color.clone();

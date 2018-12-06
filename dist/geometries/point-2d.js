@@ -32,7 +32,7 @@ class Point2D {
         return translationMatrix;
     }
     getPosition() {
-        return this.position.clone();
+        return this.position.cloneVec3();
     }
     getScaleMatrix() {
         const scale = this.getScale();
@@ -44,7 +44,7 @@ class Point2D {
         this.scale = newScale;
     }
     getScale() {
-        return this.scale.clone();
+        return this.scale.cloneVec3();
     }
     setColor(newColor) {
         this.color = newColor;

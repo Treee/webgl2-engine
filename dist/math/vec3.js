@@ -5,14 +5,17 @@ class Vec3 extends three_1.Vector3 {
     constructor(x, y, z) {
         super(x, y, z);
     }
-    add(vector) {
+    addVec3(vector) {
         return this.toVec3(super.add(vector));
     }
-    sub(vector) {
+    subtract(vector) {
         return this.toVec3(super.sub(vector));
     }
-    multiplyScalar(scalar) {
+    multiplyVec3ByScalar(scalar) {
         return this.toVec3(super.multiplyScalar(scalar));
+    }
+    cloneVec3() {
+        return this.toVec3(super.clone());
     }
     toVec3(vector) {
         return new Vec3(vector.x, vector.y, vector.z);

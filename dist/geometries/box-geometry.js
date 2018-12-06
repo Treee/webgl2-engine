@@ -39,7 +39,7 @@ class BoxGeometry {
         return translationMatrix;
     }
     getPosition() {
-        return this.position.clone();
+        return this.position.cloneVec3();
     }
     getScaleMatrix() {
         const scale = this.getScale();
@@ -51,7 +51,7 @@ class BoxGeometry {
         this.scale = newScale;
     }
     getScale() {
-        return this.scale.clone();
+        return this.scale.cloneVec3();
     }
     // rotates clockwise starting from (0, 1, 0)
     rotate(angleInDegrees) {
@@ -72,7 +72,7 @@ class BoxGeometry {
         this.rotation = newRotation;
     }
     getRotation() {
-        return this.rotation.clone();
+        return this.rotation.cloneVec3();
     }
     setColor(newColor) {
         this.color = newColor;
