@@ -19,7 +19,7 @@ export { Mat3 } from './dist/math/mat3';
 
 // Particle System
 export { ParticleSystem } from './dist/particle-system/particle-system';
-export { Particle } from './dist/particle/particle';
+export { Particle } from './dist/particle-system/particle';
 
 // Shaders
 export { ShaderProgram } from './dist/renderer/shaders/shader-program';
