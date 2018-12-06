@@ -52,7 +52,7 @@ class Point2D {
     getColor() {
         return this.color.clone();
     }
-    drawObject(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
+    draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         gl.bindVertexArray(this.vao);
         // vertex uniforms
         const matrix = this.getTransform(projectionMatrix).transpose();
