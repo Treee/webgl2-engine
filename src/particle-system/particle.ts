@@ -9,21 +9,15 @@ export class Particle {
 
   private scale: Vec3 = new Vec3(1, 1, 1);
 
-  color: Vec4;
-  position: Vec3;
-  velocity: Vec3;
-  isActive: boolean;
-  decay: number;
+  color: Vec4 = new Vec4();
+  position: Vec3 = new Vec3();
+  velocity: Vec3 = new Vec3();
+  isActive: boolean = false;
+  decay: number = 3;
 
 
   constructor(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3) {
-    this.position = position;
-    this.decay = decay;
-    this.velocity = velocity;
-    this.color = color;
-    this.isActive = true;
-    this.setVertices([position.x, position.y]);
-    this.translate(new Vec3(position.x, position.y, 1));
+    this.reinitializeParticle(position, velocity, color, decay);
   }
 
   reinitializeParticle(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3) {
@@ -32,7 +26,6 @@ export class Particle {
     this.velocity = velocity;
     this.color = color;
     this.isActive = true;
-    this.setVertices([0, 0]);
     this.setVertices([position.x, position.y]);
     this.translate(new Vec3(position.x, position.y, 1));
   }

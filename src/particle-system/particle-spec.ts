@@ -4,19 +4,22 @@ import { Vec4 } from '../math/vec4';
 
 describe('Particle', () => {
   let testParticle: Particle;
-  const testParticlePosition = new Vec3();
-  const testParticleDecay = 3;
-  const testParticleVelocity = new Vec3();
-  const testParticleColor = new Vec4();
-  const defaultDt = 1 / 1000;
+  let testParticlePosition = new Vec3();
+  let testParticleDecay = 3;
+  let testParticleVelocity = new Vec3();
+  let testParticleColor = new Vec4();
+  let defaultDt = 1 / 1000;
 
   beforeEach(() => {
-    testParticle = new Particle(testParticlePosition.clone(), testParticleVelocity.clone(), testParticleColor.clone(), testParticleDecay);
+    testParticlePosition = new Vec3(0, 0, 1);
+    testParticleVelocity = new Vec3();
+    testParticleColor = new Vec4();
+    testParticle = new Particle(testParticlePosition, testParticleVelocity, testParticleColor, testParticleDecay);
   });
 
   describe('Initialization', () => {
-    it('starts with a default position of 0,0,0', () => {
-      expect(testParticle.position).toEqual(new Vec3(0, 0, 0));
+    it('starts with a default position of 0,0,1', () => {
+      expect(testParticle.position).toEqual(new Vec3(0, 0, 1));
     });
 
     it('can be given a starting position', () => {
@@ -63,21 +66,21 @@ describe('Particle', () => {
     it('applies the velocity to the particle', () => {
       testParticle.velocity = new Vec3(1, 1, 0);
       testParticle.update(defaultDt);
-      expect(testParticle.position).toEqual(new Vec3(1, 1, 0));
+      expect(testParticle.position).toEqual(new Vec3(1, 1, 1));
       testParticle.update(defaultDt);
-      expect(testParticle.position).toEqual(new Vec3(2, 2, 0));
+      expect(testParticle.position).toEqual(new Vec3(2, 2, 1));
       testParticle.update(defaultDt);
-      expect(testParticle.position).toEqual(new Vec3(3, 3, 0));
+      expect(testParticle.position).toEqual(new Vec3(3, 3, 1));
     });
 
     it('applies a different velocity to the particle', () => {
       testParticle.velocity = new Vec3(-1, 2, 0);
       testParticle.update(defaultDt);
-      expect(testParticle.position).toEqual(new Vec3(-1, 2, 0));
+      expect(testParticle.position).toEqual(new Vec3(-1, 2, 1));
       testParticle.update(defaultDt);
-      expect(testParticle.position).toEqual(new Vec3(-2, 4, 0));
+      expect(testParticle.position).toEqual(new Vec3(-2, 4, 1));
       testParticle.update(defaultDt);
-      expect(testParticle.position).toEqual(new Vec3(-3, 6, 0));
+      expect(testParticle.position).toEqual(new Vec3(-3, 6, 1));
     });
 
     it('applies the decay to the particle', () => {
@@ -115,7 +118,7 @@ describe('Particle', () => {
       testParticle.update(100);
       testParticle.reinitializeParticle();
       expect(testParticle.color).toEqual(new Vec4());
-      expect(testParticle.position).toEqual(new Vec3());
+      expect(testParticle.position).toEqual(testParticlePosition);
       expect(testParticle.velocity).toEqual(testParticleVelocity);
       expect(testParticle.isActive).toBe(true);
       expect(testParticle.decay).toBe(testParticleDecay);
