@@ -1,10 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const particle_1 = require("./particle");
+const vec3_1 = require("../math/vec3");
+const vec4_1 = require("../math/vec4");
 class ParticleSystem {
     constructor(numberOfParticles) {
         this.particles = [];
-        this.particles = Array(numberOfParticles).fill(new particle_1.Particle());
+        this.initializeParticles(numberOfParticles);
+    }
+    // initializes particles that disperse in a spherical pattern
+    initializeParticles(numberOfParticles) {
+        let x, y;
+        let z = 0;
+        for (let i = 0; i < numberOfParticles; i++) {
+            x = -1 + 2 * this.randomInt(1000);
+            y = -1 + 2 * this.randomInt(1000);
+            z = -1 + 2 * this.randomInt(1000);
+            this.particles.push(new particle_1.Particle(new vec3_1.Vec3(x, y, 0), new vec3_1.Vec3(Math.cos(x), Math.sin(y), x), new vec4_1.Vec4(x, y, z, 1), this.randomInt(5)));
+        }
+    }
+    draw(dt, gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
+        this.particles.forEach((particle) => {
+            particle.update(dt);
+            particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+        });
+    }
+    randomInt(range) {
+        return Math.floor(Math.random() * range);
     }
 }
 exports.ParticleSystem = ParticleSystem;
