@@ -67,7 +67,7 @@ export class Point2D {
         return this.color.clone();
     }
 
-    drawObject(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
+    draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
         gl.bindVertexArray(this.vao);
         // vertex uniforms
         const matrix = this.getTransform(projectionMatrix).transpose();
