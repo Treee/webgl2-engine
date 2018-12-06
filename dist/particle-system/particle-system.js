@@ -4,19 +4,21 @@ const particle_1 = require("./particle");
 const vec3_1 = require("../math/vec3");
 const vec4_1 = require("../math/vec4");
 class ParticleSystem {
-    constructor(numberOfParticles) {
+    constructor(numberOfParticles, gl, shaderProgram) {
         this.particles = [];
-        this.initializeParticles(numberOfParticles);
+        this.initializeParticles(numberOfParticles, gl, shaderProgram);
     }
     // initializes particles that disperse in a spherical pattern
-    initializeParticles(numberOfParticles) {
+    initializeParticles(numberOfParticles, gl, shaderProgram) {
         let x, y;
         let z = 0;
         for (let i = 0; i < numberOfParticles; i++) {
             x = -1 + 2 * this.randomInt(1000);
             y = -1 + 2 * this.randomInt(1000);
             z = -1 + 2 * this.randomInt(1000);
-            this.particles.push(new particle_1.Particle(new vec3_1.Vec3(x, y, 0), new vec3_1.Vec3(Math.cos(x), Math.sin(y), x), new vec4_1.Vec4(x, y, z, 1), this.randomInt(5)));
+            const particle = new particle_1.Particle(new vec3_1.Vec3(x, y, 0), new vec3_1.Vec3(Math.cos(x), Math.sin(y), x), new vec4_1.Vec4(x, y, z, 1), this.randomInt(5));
+            particle.createVertexArrayObject(gl, shaderProgram);
+            this.particles.push(particle);
         }
     }
     draw(dt, gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
