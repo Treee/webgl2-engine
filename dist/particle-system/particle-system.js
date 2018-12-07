@@ -34,7 +34,9 @@ class ParticleSystem {
     draw(dt, gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         this.particles.forEach((particle) => {
             particle.update(dt);
-            particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+            if (particle.isActive) {
+                particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+            }
         });
     }
     randomInt(range) {
