@@ -33,7 +33,10 @@ export class Particle {
   update(dt: number) {
     if (this.isActive) {
       this.decay -= dt;
-      this.position.add(this.velocity);
+      const newPosition = this.position.clone().add(this.velocity);
+      const newVec = new Vec3(newPosition.x, newPosition.y, newPosition.z);
+      // this.position.add(this.velocity);
+      this.translate(newVec);
       this.disableParticleCheck();
     }
   }

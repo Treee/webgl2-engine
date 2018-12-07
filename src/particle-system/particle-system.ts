@@ -30,18 +30,15 @@ export class ParticleSystem {
     }
   }
 
-  updateParticles(dt: number) {
+  update(dt: number) {
     this.particles.forEach((particle) => {
       particle.update(dt);
     });
   }
 
-  draw(dt: number, gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
     this.particles.forEach((particle) => {
-      particle.update(dt);
-      if (particle.isActive) {
-        particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
-      }
+      particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
     });
   }
   randomInt(range: number): number {
