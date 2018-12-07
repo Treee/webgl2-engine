@@ -39,7 +39,9 @@ export class ParticleSystem {
   draw(dt: number, gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
     this.particles.forEach((particle) => {
       particle.update(dt);
-      particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+      if (particle.isActive) {
+        particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+      }
     });
   }
   randomInt(range: number): number {
