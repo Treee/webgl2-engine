@@ -26,17 +26,14 @@ class ParticleSystem {
             this.particles.push(particle);
         }
     }
-    updateParticles(dt) {
+    update(dt) {
         this.particles.forEach((particle) => {
             particle.update(dt);
         });
     }
-    draw(dt, gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
+    draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         this.particles.forEach((particle) => {
-            particle.update(dt);
-            if (particle.isActive) {
-                particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
-            }
+            particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
         });
     }
     randomInt(range) {
