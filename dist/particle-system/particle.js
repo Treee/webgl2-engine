@@ -20,7 +20,7 @@ class Particle {
         this.velocity = velocity;
         this.color = color;
         this.isActive = true;
-        this.setVertices([position.x, position.y]);
+        this.setVertices([0, 0]);
         this.translate(new vec3_1.Vec3(position.x, position.y, 1));
     }
     update(dt) {
