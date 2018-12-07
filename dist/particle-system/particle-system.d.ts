@@ -1,10 +1,11 @@
 /// <reference types="webgl2" />
 import { Particle } from "./particle";
 import { Mat3 } from '../math/mat3';
+import { Vec3 } from "../math/vec3";
 export declare class ParticleSystem {
     particles: Particle[];
-    constructor(numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram);
-    initializeParticles(numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram): void;
+    constructor(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram);
+    initializeParticles(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram): void;
     updateParticles(dt: number): void;
     draw(dt: number, gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3): void;
     randomInt(range: number): number;
