@@ -28,7 +28,7 @@ export class ParticleSystem {
       step += step;
       const color = new Vec4(x, y, z, 1);
       const decay = 3;
-      const particle = new Particle(position, velocity, color, decay);
+      const particle = new Particle(position, velocity, color, decay, gl, shaderProgram);
       particle.createVertexArrayObject(gl, shaderProgram);
       this.particles.push(particle);
     }
