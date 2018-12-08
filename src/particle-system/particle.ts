@@ -1,5 +1,6 @@
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
+import { Mat3 } from "../math/mat3";
 import { Renderable } from '../geometries/renderable';
 
 export class Particle extends Renderable {
@@ -23,6 +24,12 @@ export class Particle extends Renderable {
     this.setVertices([0, 0]);
     this.translate(position);
     this.setColor(color);
+  }
+
+  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
+    if (this.isActive) {
+      super.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+    }
   }
 
   update(dt: number) {
