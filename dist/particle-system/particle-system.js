@@ -12,15 +12,19 @@ class ParticleSystem {
     initializeParticles(position, numberOfParticles, gl, shaderProgram) {
         let x, y;
         let z = 0;
-        let step = Math.PI;
+        let step = Math.PI / 7;
+        const twoPi = Math.PI * Math.PI;
         for (let i = 0; i < numberOfParticles; i++) {
+            if (step > twoPi) {
+                step = (step - twoPi);
+            }
             x = -1 + 2 * +(Math.random().toFixed(2));
             y = -1 + 2 * +(Math.random().toFixed(2));
             z = -1 + 2 * +(Math.random().toFixed(2));
-            const velocity = new vec3_1.Vec3(Math.cos(x * step), Math.sin(y * step), x);
+            const velocity = new vec3_1.Vec3(x * Math.cos(step), y * Math.sin(step), x);
             step += step;
             const color = new vec4_1.Vec4(x, y, z, 1);
-            const decay = this.randomInt(7);
+            const decay = 3;
             const particle = new particle_1.Particle(position, velocity, color, decay);
             particle.createVertexArrayObject(gl, shaderProgram);
             this.particles.push(particle);
@@ -33,7 +37,9 @@ class ParticleSystem {
     }
     draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         this.particles.forEach((particle) => {
-            particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+            if (particle.isActive) {
+                particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+            }
         });
     }
     randomInt(range) {
