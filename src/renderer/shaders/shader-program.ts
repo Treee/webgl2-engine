@@ -10,6 +10,10 @@ export class ShaderProgram {
         return this.createShaderProgram(gl, VertexShaderType.TWO_D, FragmentShaderType.PASS_THROUGH);
     }
 
+    public getBasicParticleProgram(gl: WebGL2RenderingContext): WebGLProgram {
+        return this.createShaderProgram(gl, VertexShaderType.PARTICLE, FragmentShaderType.PASS_THROUGH);
+    }
+
     private createShaderProgram(gl: WebGL2RenderingContext, vertexShaderType: VertexShaderType, fragmentShaderType: FragmentShaderType): WebGLProgram {
         return this.createProgram(gl, this.createVertexShader(gl, vertexShaderType), this.createFragmentShader(gl, fragmentShaderType));
     };

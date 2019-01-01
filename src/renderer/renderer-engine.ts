@@ -10,6 +10,7 @@ export class RendererEngine {
     gl!: WebGL2RenderingContext;
 
     basicShader!: WebGLProgram;
+    basicParticleShader!: WebGLProgram;
 
     projectionMatrix: Mat3 = new Mat3();
 
@@ -60,6 +61,7 @@ export class RendererEngine {
         // create the default shader program for a 2d program
         const shaderProgram = new ShaderProgram();
         this.basicShader = shaderProgram.getBasic2dProgram(gl);
+        this.basicParticleShader = shaderProgram.getBasicParticleProgram(gl);
     }
 
     private initializeCanvasGL(htmlCanvasElement: HTMLCanvasElement, width: number, height: number): void {

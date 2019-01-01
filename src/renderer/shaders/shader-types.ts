@@ -1,6 +1,7 @@
 export enum VertexShaderType {
     TWO_D,
     THREE_D,
+    PARTICLE,
     DEBUG
 }
 
