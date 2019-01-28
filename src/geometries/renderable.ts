@@ -119,8 +119,7 @@ export abstract class Renderable {
   createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
     // set up attribute and uniforms (vertex shader)
     const positionAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_position');
-    // set up attribute and uniforms (fragment shader)
-    const colorAttributeLocation = gl.getAttribLocation(shaderProgram, 'u_color');
+    const colorAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_color');
 
     // make a vertex array (this is so we layer data in a single array)
     const vertexArray = gl.createVertexArray();
