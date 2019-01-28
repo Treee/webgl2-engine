@@ -132,20 +132,21 @@ export abstract class Renderable {
     gl.bindVertexArray(this.vao);
 
     this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
-    // enable an attribute that was created above (in this case, possition attrib)
-    gl.enableVertexAttribArray(positionAttributeLocation);
     // define how the gpu will interpret the array
     // gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
     gl.vertexAttribPointer(positionAttributeLocation, this.geometryData.size, this.geometryData.dataType, this.geometryData.isNormalized, this.geometryData.stride, this.geometryData.offset);
+    // enable an attribute that was created above (in this case, possition attrib)
+    gl.enableVertexAttribArray(positionAttributeLocation);
 
     this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.color.toArray(), gl.STATIC_DRAW);
-    gl.enableVertexAttribArray(colorAttributeLocation);
     gl.vertexAttribPointer(colorAttributeLocation, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(colorAttributeLocation);
+
     gl.bindVertexArray(null);
   }
 
   // create a buffer, bing opengl to that buffer, send data to the buffer in one fell swoop
-  private createBindAndBufferData(gl: any, bufferType: GLenum, bufferData: any, bufferUsage: GLenum) {
+  private createBindAndBufferData(gl: WebGL2RenderingContext, bufferType: GLenum, bufferData: any, bufferUsage: GLenum) {
     const buffer = gl.createBuffer();
     gl.bindBuffer(bufferType, buffer);
     gl.bufferData(bufferType, new Float32Array(bufferData), bufferUsage);
