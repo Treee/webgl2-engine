@@ -4,7 +4,8 @@ var VertexShaderType;
 (function (VertexShaderType) {
     VertexShaderType[VertexShaderType["TWO_D"] = 0] = "TWO_D";
     VertexShaderType[VertexShaderType["THREE_D"] = 1] = "THREE_D";
-    VertexShaderType[VertexShaderType["DEBUG"] = 2] = "DEBUG";
+    VertexShaderType[VertexShaderType["PARTICLE"] = 2] = "PARTICLE";
+    VertexShaderType[VertexShaderType["DEBUG"] = 3] = "DEBUG";
 })(VertexShaderType = exports.VertexShaderType || (exports.VertexShaderType = {}));
 var FragmentShaderType;
 (function (FragmentShaderType) {

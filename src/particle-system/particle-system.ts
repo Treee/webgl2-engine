@@ -43,7 +43,7 @@ export class ParticleSystem {
   draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
     this.particles.forEach((particle) => {
       if (particle.isActive) {
-        particle.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+        particle.draw(gl, transformUniformLocation, projectionMatrix);
       }
     });
   }

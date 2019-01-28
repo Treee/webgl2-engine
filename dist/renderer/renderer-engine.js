@@ -19,8 +19,8 @@ class RendererEngine {
         this.gl.useProgram(this.basicShader);
         // set up attribute and uniforms (vertex shader)
         const transformUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_transform');
-        // set up attribute and uniforms (fragment shader)
-        const colorUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_color');
+        // // set up attribute and uniforms (fragment shader)
+        // const colorUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_color');
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -31,7 +31,7 @@ class RendererEngine {
             if (!this.gl) {
                 throw new Error('Cannot Draw Renderable, GL is undefined');
             }
-            renderable.draw(this.gl, transformUniformLocation, colorUniformLocation, this.projectionMatrix);
+            renderable.draw(this.gl, transformUniformLocation, this.projectionMatrix);
         });
     }
     getCanvasDimensions() {
@@ -45,6 +45,7 @@ class RendererEngine {
         // create the default shader program for a 2d program
         const shaderProgram = new shader_program_1.ShaderProgram();
         this.basicShader = shaderProgram.getBasic2dProgram(gl);
+        this.basicParticleShader = shaderProgram.getBasicParticleProgram(gl);
     }
     initializeCanvasGL(htmlCanvasElement, width, height) {
         // get the canvas from the html

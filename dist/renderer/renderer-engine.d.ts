@@ -6,6 +6,7 @@ export declare class RendererEngine {
     canvas: HTMLCanvasElement;
     gl: WebGL2RenderingContext;
     basicShader: WebGLProgram;
+    basicParticleShader: WebGLProgram;
     projectionMatrix: Mat3;
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;

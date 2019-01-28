@@ -8,6 +8,9 @@ class ShaderProgram {
     getBasic2dProgram(gl) {
         return this.createShaderProgram(gl, shader_types_1.VertexShaderType.TWO_D, shader_types_1.FragmentShaderType.PASS_THROUGH);
     }
+    getBasicParticleProgram(gl) {
+        return this.createShaderProgram(gl, shader_types_1.VertexShaderType.PARTICLE, shader_types_1.FragmentShaderType.PASS_THROUGH);
+    }
     createShaderProgram(gl, vertexShaderType, fragmentShaderType) {
         return this.createProgram(gl, this.createVertexShader(gl, vertexShaderType), this.createFragmentShader(gl, fragmentShaderType));
     }
