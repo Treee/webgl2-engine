@@ -26,9 +26,9 @@ export class Particle extends Renderable {
     this.setColor(color);
   }
 
-  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, projectionMatrix: Mat3) {
     if (this.isActive) {
-      super.draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix);
+      super.draw(gl, transformUniformLocation, projectionMatrix);
     }
   }
 
