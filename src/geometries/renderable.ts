@@ -102,13 +102,14 @@ export abstract class Renderable {
     return this.color.clone();
   }
 
-  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, projectionMatrix: Mat3) {
+
     gl.bindVertexArray(this.vao);
     // vertex uniforms
     const matrix = this.getTransform(projectionMatrix).transpose();
     gl.uniformMatrix3fv(transformUniformLocation, false, matrix.toArray());
     // fragment uniforms
-    gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
+    // gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
 
     gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
     // gl.drawArrays(gl.TRIANGLES, offset, count);
@@ -118,6 +119,8 @@ export abstract class Renderable {
   createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
     // set up attribute and uniforms (vertex shader)
     const positionAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_position');
+    // set up attribute and uniforms (fragment shader)
+    const colorAttributeLocation = gl.getAttribLocation(shaderProgram, 'u_color');
 
     // make a vertex array (this is so we layer data in a single array)
     const vertexArray = gl.createVertexArray();
@@ -128,15 +131,18 @@ export abstract class Renderable {
 
     // bind to the vertex array we will buffer data to
     gl.bindVertexArray(this.vao);
-
     // enable an attribute that was created above (in this case, possition attrib)
     gl.enableVertexAttribArray(positionAttributeLocation);
-
     this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
-
     // define how the gpu will interpret the array
     gl.vertexAttribPointer(positionAttributeLocation, this.geometryData.size, this.geometryData.dataType, this.geometryData.isNormalized, this.geometryData.stride, this.geometryData.offset);
     // gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
+    gl.bindVertexArray(null);
+
+    gl.bindVertexArray(this.vao);
+    gl.enableVertexAttribArray(colorAttributeLocation);
+    this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.color.toArray(), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(colorAttributeLocation, this.color.toArray().length, gl.FLOAT, false, 0, 0);
     gl.bindVertexArray(null);
   }
 

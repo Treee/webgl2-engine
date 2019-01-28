@@ -18,10 +18,9 @@ export class FragmentShader {
 
     private getDefaultFragmentShader() {
         return `#version 300 es
+        in vec4 u_color;
 
         precision mediump float;
-
-        uniform vec4 u_color;
 
         out vec4 outColor;
 
