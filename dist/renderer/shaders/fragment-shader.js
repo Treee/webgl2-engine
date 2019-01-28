@@ -24,7 +24,7 @@ class FragmentShader {
         out vec4 outColor;
 
         void main() {
-          outColor = u_color;
+          outColor = v_color;
         }`;
     }
 }
