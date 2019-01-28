@@ -30,7 +30,7 @@ class VertexShader {
         void main() {
           gl_Position = vec4((u_transform * vec3(a_position, 1)).xy, 0, 1);
           gl_PointSize = 2.0;
-          v_color = a_color
+          v_color = a_color;
         }
         `;
     }
@@ -46,7 +46,7 @@ class VertexShader {
         void main() {
           gl_Position = vec4((u_transform * vec3(a_position, 1)).xy, 0, 1);
           gl_PointSize = 2.0;
-          v_color = a_color
+          v_color = a_color;
         }
         `;
     }
@@ -61,7 +61,7 @@ class VertexShader {
         void main() {
           gl_Position = a_position;
           gl_PointSize = 2.0;
-          v_color = a_color
+          v_color = a_color;
         }
         `;
     }
