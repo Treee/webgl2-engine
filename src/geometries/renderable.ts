@@ -103,17 +103,18 @@ export abstract class Renderable {
   }
 
   draw(gl: WebGL2RenderingContext, transformUniformLocation: any, projectionMatrix: Mat3) {
+    if (!!this.vao) {
+      gl.bindVertexArray(this.vao);
+      // vertex uniforms
+      const matrix = this.getTransform(projectionMatrix).transpose();
+      gl.uniformMatrix3fv(transformUniformLocation, false, matrix.toArray());
+      // fragment uniforms
+      // gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
 
-    gl.bindVertexArray(this.vao);
-    // vertex uniforms
-    const matrix = this.getTransform(projectionMatrix).transpose();
-    gl.uniformMatrix3fv(transformUniformLocation, false, matrix.toArray());
-    // fragment uniforms
-    // gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
-
-    gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
-    // gl.drawArrays(gl.TRIANGLES, offset, count);
-    // gl.bindVertexArray(null);
+      gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
+      // gl.drawArrays(gl.TRIANGLES, offset, count);
+      // gl.bindVertexArray(null);
+    }
   }
 
   createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
