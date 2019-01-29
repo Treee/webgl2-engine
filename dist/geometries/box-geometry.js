@@ -4,10 +4,10 @@ const vec3_1 = require("../math/vec3");
 const renderable_1 = require("./renderable");
 const vec4_1 = require("../math/vec4");
 class BoxGeometry extends renderable_1.Renderable {
-    constructor(gl, shaderProgram) {
-        super();
+    constructor(gl, programInfo) {
+        super(programInfo);
         this.createRectangle(gl, new vec3_1.Vec3(), 25, 25, new vec4_1.Vec4(1, 0, 0, 1));
-        this.createVertexArrayObject(gl, shaderProgram);
+        this.createVertexArrayObject(gl, programInfo.program);
     }
     createRectangle(gl, position, width, height, color) {
         // let tempCenter = new Vec3(-(width) / 2, -(height) / 2, 1);

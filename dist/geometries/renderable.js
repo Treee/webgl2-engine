@@ -5,13 +5,14 @@ const vec4_1 = require("../math/vec4");
 const mat3_1 = require("../math/mat3");
 const geometry_data_1 = require("./geometry-data");
 class Renderable {
-    constructor() {
+    constructor(programInfo) {
         this.position = new vec3_1.Vec3(0, 0, 0);
         this.scale = new vec3_1.Vec3(1, 1, 1);
         this.rotation = new vec3_1.Vec3(0, 1, 0);
         this.color = new vec4_1.Vec4();
         this.geometryData = new geometry_data_1.GeometryData();
         this.vertices = [];
+        this.programInfo = programInfo;
     }
     lerp(pointA, pointB, dt) {
         // imprecise method pointA + dt * (pointB - pointA)
@@ -81,18 +82,17 @@ class Renderable {
     getColor() {
         return this.color.clone();
     }
-    draw(gl, shaderVariables, projectionMatrix) {
-        if (!!this.vao) {
-            gl.bindVertexArray(this.vao);
-            // vertex uniforms
-            const matrix = this.getTransform(projectionMatrix).transpose();
-            gl.uniformMatrix3fv(shaderVariables.u_transform, false, matrix.toArray());
-            // fragment uniforms
-            gl.uniform4fv(shaderVariables.u_color, this.getColor().toArray());
-            gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
-            // gl.drawArrays(gl.TRIANGLES, offset, count);
-            // gl.bindVertexArray(null);
-        }
+    draw(gl, projectionMatrix) {
+        gl.useProgram(this.programInfo.program);
+        gl.bindVertexArray(this.vao);
+        // vertex uniforms
+        const matrix = this.getTransform(projectionMatrix).transpose();
+        gl.uniformMatrix3fv(this.programInfo.getUniform('u_transform'), false, matrix.toArray());
+        // fragment uniforms
+        gl.uniform4fv(this.programInfo.getUniform('u_color'), this.getColor().toArray());
+        gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
+        // gl.drawArrays(gl.TRIANGLES, offset, count);
+        // gl.bindVertexArray(null);
     }
     createVertexArrayObject(gl, shaderProgram) {
         // make a vertex array (this is so we layer data in a single array)

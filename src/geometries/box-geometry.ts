@@ -1,13 +1,14 @@
 import { Vec3 } from '../math/vec3';
 import { Renderable } from './renderable';
 import { Vec4 } from '../math/vec4';
+import { ProgramInfo } from '../renderer/shaders/program-info';
 
 export class BoxGeometry extends Renderable {
 
-    constructor(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
-        super();
+    constructor(gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+        super(programInfo);
         this.createRectangle(gl, new Vec3(), 25, 25, new Vec4(1, 0, 0, 1));
-        this.createVertexArrayObject(gl, shaderProgram);
+        this.createVertexArrayObject(gl, programInfo.program);
     }
 
     private createRectangle(gl: WebGL2RenderingContext, position: Vec3, width: number, height: number, color: Vec4) {

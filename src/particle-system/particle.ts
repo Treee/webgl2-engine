@@ -2,7 +2,7 @@ import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
 import { Mat3 } from "../math/mat3";
 import { Renderable } from '../geometries/renderable';
-import { BasicShaderVariables } from "../renderer/shaders/shader-bound-variables";
+import { ProgramInfo } from "../renderer/shaders/program-info";
 
 export class Particle extends Renderable {
 
@@ -11,11 +11,11 @@ export class Particle extends Renderable {
   decay: number = 3;
 
 
-  constructor(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
-    super();
+  constructor(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+    super(programInfo);
     this.reinitializeParticle(position, velocity, color, decay);
     this.geometryData.setData(gl.FLOAT, gl.POINTS, false, 2, 0, 0, 1);
-    this.createVertexArrayObject(gl, shaderProgram);
+    this.createVertexArrayObject(gl, programInfo.program);
   }
 
   reinitializeParticle(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3) {
@@ -27,9 +27,9 @@ export class Particle extends Renderable {
     this.setColor(color);
   }
 
-  draw(gl: WebGL2RenderingContext, shaderVariables: BasicShaderVariables, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, projectionMatrix: Mat3) {
     if (this.isActive) {
-      super.draw(gl, shaderVariables, projectionMatrix);
+      super.draw(gl, projectionMatrix);
     }
   }
 

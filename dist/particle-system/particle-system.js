@@ -4,12 +4,12 @@ const particle_1 = require("./particle");
 const vec3_1 = require("../math/vec3");
 const vec4_1 = require("../math/vec4");
 class ParticleSystem {
-    constructor(position, numberOfParticles, gl, shaderProgram) {
+    constructor(position, numberOfParticles, gl, programInfo) {
         this.particles = [];
-        this.initializeParticles(position, numberOfParticles, gl, shaderProgram);
+        this.initializeParticles(position, numberOfParticles, gl, programInfo);
     }
     // initializes particles that disperse in a spherical pattern
-    initializeParticles(position, numberOfParticles, gl, shaderProgram) {
+    initializeParticles(position, numberOfParticles, gl, programInfo) {
         let x, y;
         let z = 0;
         let step = Math.PI / 7;
@@ -25,8 +25,8 @@ class ParticleSystem {
             step += step;
             const color = new vec4_1.Vec4(x, y, z, 1);
             const decay = 3;
-            const particle = new particle_1.Particle(position, velocity, color, decay, gl, shaderProgram);
-            particle.createVertexArrayObject(gl, shaderProgram);
+            const particle = new particle_1.Particle(position, velocity, color, decay, gl, programInfo);
+            particle.createVertexArrayObject(gl, programInfo.program);
             this.particles.push(particle);
         }
     }
@@ -35,10 +35,10 @@ class ParticleSystem {
             particle.update(dt);
         });
     }
-    draw(gl, shaderVariables, projectionMatrix) {
+    draw(gl, projectionMatrix) {
         this.particles.forEach((particle) => {
             if (particle.isActive) {
-                particle.draw(gl, shaderVariables, projectionMatrix);
+                particle.draw(gl, projectionMatrix);
             }
         });
     }

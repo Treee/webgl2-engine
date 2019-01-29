@@ -1,6 +1,5 @@
 import { Vec3 } from '../math/vec3';
 import { Mat3 } from '../math/mat3';
-import { ShaderProgram } from '../renderer/shaders/shader-program';
 import { BoxGeometry } from '../geometries/box-geometry';
 import { ShaderManager } from './shaders/shader-manager';
 
@@ -9,9 +8,6 @@ export class RendererEngine {
     canvas!: HTMLCanvasElement;
 
     gl!: WebGL2RenderingContext;
-
-    // basicShader!: WebGLProgram;
-    // basicParticleShader!: WebGLProgram;
 
     shaderManager!: ShaderManager;
 
@@ -31,7 +27,7 @@ export class RendererEngine {
             throw new Error('Cannot Draw Frame, GL is undefined');
         }
         // Tell it to use our program (pair of shaders)
-        this.gl.useProgram(this.shaderManager.basicShader);
+        // this.gl.useProgram(this.shaderManager.getShader('basic-shader'));
 
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
@@ -45,7 +41,7 @@ export class RendererEngine {
             if (!this.gl) {
                 throw new Error('Cannot Draw Renderable, GL is undefined');
             }
-            renderable.draw(this.gl, this.shaderManager.shaderVariables, this.projectionMatrix);
+            renderable.draw(this.gl, this.projectionMatrix);
         });
     }
 

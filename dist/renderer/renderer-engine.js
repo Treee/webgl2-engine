@@ -17,7 +17,7 @@ class RendererEngine {
             throw new Error('Cannot Draw Frame, GL is undefined');
         }
         // Tell it to use our program (pair of shaders)
-        this.gl.useProgram(this.shaderManager.basicShader);
+        // this.gl.useProgram(this.shaderManager.getShader('basic-shader'));
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -28,7 +28,7 @@ class RendererEngine {
             if (!this.gl) {
                 throw new Error('Cannot Draw Renderable, GL is undefined');
             }
-            renderable.draw(this.gl, this.shaderManager.shaderVariables, this.projectionMatrix);
+            renderable.draw(this.gl, this.projectionMatrix);
         });
     }
     getCanvasDimensions() {

@@ -2,7 +2,7 @@ import { Vec3 } from '../math/vec3';
 import { Vec4 } from '../math/vec4';
 import { Mat3 } from '../math/mat3';
 import { GeometryData } from './geometry-data';
-import { BasicShaderVariables } from '../renderer/shaders/shader-bound-variables';
+import { ProgramInfo } from '../renderer/shaders/program-info';
 
 export abstract class Renderable {
 
@@ -13,11 +13,13 @@ export abstract class Renderable {
   protected color: Vec4 = new Vec4();
 
   public geometryData: GeometryData = new GeometryData();
+  public programInfo: ProgramInfo;
 
   protected vao!: WebGLVertexArrayObject;
   protected vertices: number[] = [];
 
-  constructor() {
+  constructor(programInfo: ProgramInfo) {
+    this.programInfo = programInfo;
   }
 
   public lerp(pointA: Vec3, pointB: Vec3, dt: number): Vec3 {
@@ -103,19 +105,18 @@ export abstract class Renderable {
     return this.color.clone();
   }
 
-  draw(gl: WebGL2RenderingContext, shaderVariables: BasicShaderVariables, projectionMatrix: Mat3) {
-    if (!!this.vao) {
-      gl.bindVertexArray(this.vao);
-      // vertex uniforms
-      const matrix = this.getTransform(projectionMatrix).transpose();
-      gl.uniformMatrix3fv(shaderVariables.u_transform, false, matrix.toArray());
-      // fragment uniforms
-      gl.uniform4fv(shaderVariables.u_color, this.getColor().toArray());
+  draw(gl: WebGL2RenderingContext, projectionMatrix: Mat3) {
+    gl.useProgram(this.programInfo.program);
+    gl.bindVertexArray(this.vao);
+    // vertex uniforms
+    const matrix = this.getTransform(projectionMatrix).transpose();
+    gl.uniformMatrix3fv(this.programInfo.getUniform('u_transform'), false, matrix.toArray());
+    // fragment uniforms
+    gl.uniform4fv(this.programInfo.getUniform('u_color'), this.getColor().toArray());
 
-      gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
-      // gl.drawArrays(gl.TRIANGLES, offset, count);
-      // gl.bindVertexArray(null);
-    }
+    gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
+    // gl.drawArrays(gl.TRIANGLES, offset, count);
+    // gl.bindVertexArray(null);
   }
 
   createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {

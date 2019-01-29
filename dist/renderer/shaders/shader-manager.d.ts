@@ -1,9 +1,8 @@
 /// <reference types="webgl2" />
-import { BasicShaderVariables } from './shader-bound-variables';
+import { ProgramInfo } from './program-info';
 export declare class ShaderManager {
-    shaderVariables: BasicShaderVariables;
-    basicShader: WebGLProgram;
-    basicParticleShader: WebGLProgram;
+    programs: Map<string, ProgramInfo>;
     constructor();
     initializeShaderPrograms(gl: WebGL2RenderingContext): void;
+    getShader(shaderKey: string): WebGLProgram;
 }

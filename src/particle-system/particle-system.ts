@@ -2,18 +2,18 @@ import { Particle } from "./particle";
 import { Mat3 } from '../math/mat3';
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
-import { BasicShaderVariables } from "../renderer/shaders/shader-bound-variables";
+import { ProgramInfo } from "../renderer/shaders/program-info";
 
 export class ParticleSystem {
 
   particles: Particle[] = [];
 
-  constructor(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
-    this.initializeParticles(position, numberOfParticles, gl, shaderProgram);
+  constructor(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+    this.initializeParticles(position, numberOfParticles, gl, programInfo);
   }
 
   // initializes particles that disperse in a spherical pattern
-  initializeParticles(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
+  initializeParticles(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
     let x, y;
     let z = 0;
     let step = Math.PI / 7;
@@ -29,8 +29,8 @@ export class ParticleSystem {
       step += step;
       const color = new Vec4(x, y, z, 1);
       const decay = 3;
-      const particle = new Particle(position, velocity, color, decay, gl, shaderProgram);
-      particle.createVertexArrayObject(gl, shaderProgram);
+      const particle = new Particle(position, velocity, color, decay, gl, programInfo);
+      particle.createVertexArrayObject(gl, programInfo.program);
       this.particles.push(particle);
     }
   }
@@ -41,10 +41,10 @@ export class ParticleSystem {
     });
   }
 
-  draw(gl: WebGL2RenderingContext, shaderVariables: BasicShaderVariables, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, projectionMatrix: Mat3) {
     this.particles.forEach((particle) => {
       if (particle.isActive) {
-        particle.draw(gl, shaderVariables, projectionMatrix);
+        particle.draw(gl, projectionMatrix);
       }
     });
   }

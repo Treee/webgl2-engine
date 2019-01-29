@@ -1,3 +1,13 @@
+Work on a refactor so drawable objects have the following information
+  {
+      programInfo: programInfo,
+      bufferInfo: sphereBufferInfo,
+      vertexArray: sphereVAO,
+      uniforms: sphereUniforms,
+    },
+
+
+
 # webgl2-engine
 
 ## Build

@@ -4,14 +4,14 @@ const vec3_1 = require("../math/vec3");
 const vec4_1 = require("../math/vec4");
 const renderable_1 = require("../geometries/renderable");
 class Particle extends renderable_1.Renderable {
-    constructor(position = new vec3_1.Vec3(), velocity = new vec3_1.Vec3(), color = new vec4_1.Vec4(), decay = 3, gl, shaderProgram) {
-        super();
+    constructor(position = new vec3_1.Vec3(), velocity = new vec3_1.Vec3(), color = new vec4_1.Vec4(), decay = 3, gl, programInfo) {
+        super(programInfo);
         this.velocity = new vec3_1.Vec3();
         this.isActive = false;
         this.decay = 3;
         this.reinitializeParticle(position, velocity, color, decay);
         this.geometryData.setData(gl.FLOAT, gl.POINTS, false, 2, 0, 0, 1);
-        this.createVertexArrayObject(gl, shaderProgram);
+        this.createVertexArrayObject(gl, programInfo.program);
     }
     reinitializeParticle(position = new vec3_1.Vec3(), velocity = new vec3_1.Vec3(), color = new vec4_1.Vec4(), decay = 3) {
         this.decay = decay;
@@ -21,9 +21,9 @@ class Particle extends renderable_1.Renderable {
         this.translate(position);
         this.setColor(color);
     }
-    draw(gl, shaderVariables, projectionMatrix) {
+    draw(gl, projectionMatrix) {
         if (this.isActive) {
-            super.draw(gl, shaderVariables, projectionMatrix);
+            super.draw(gl, projectionMatrix);
         }
     }
     update(dt) {
