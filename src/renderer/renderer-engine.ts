@@ -33,12 +33,6 @@ export class RendererEngine {
         // Tell it to use our program (pair of shaders)
         this.gl.useProgram(this.shaderManager.basicShader);
 
-
-        // set up attribute and uniforms (vertex shader)        
-        // const transformUniformLocation = this.shaderManager.shaderVariables.u_transform;
-        // // // set up attribute and uniforms (fragment shader)
-        // const colorUniformLocation = this.shaderManager.shaderVariables.u_color;
-
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);

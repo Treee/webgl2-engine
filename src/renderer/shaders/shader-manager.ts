@@ -2,7 +2,6 @@ import { ShaderProgram } from './shader-program';
 import { BasicShaderVariables } from './shader-bound-variables';
 export class ShaderManager {
 
-  // shaderProgram: ShaderProgram | undefined;
   shaderVariables: BasicShaderVariables;
 
   basicShader!: WebGLProgram;
