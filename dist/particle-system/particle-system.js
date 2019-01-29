@@ -38,7 +38,7 @@ class ParticleSystem {
     draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
         this.particles.forEach((particle) => {
             if (particle.isActive) {
-                particle.draw(gl, transformUniformLocation, projectionMatrix);
+                particle.draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix);
             }
         });
     }
