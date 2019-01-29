@@ -35,10 +35,10 @@ class ParticleSystem {
             particle.update(dt);
         });
     }
-    draw(gl, transformUniformLocation, colorUniformLocation, projectionMatrix) {
+    draw(gl, shaderVariables, projectionMatrix) {
         this.particles.forEach((particle) => {
             if (particle.isActive) {
-                particle.draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix);
+                particle.draw(gl, shaderVariables, projectionMatrix);
             }
         });
     }

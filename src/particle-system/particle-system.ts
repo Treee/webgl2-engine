@@ -2,6 +2,7 @@ import { Particle } from "./particle";
 import { Mat3 } from '../math/mat3';
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
+import { BasicShaderVariables } from "../renderer/shaders/shader-bound-variables";
 
 export class ParticleSystem {
 
@@ -40,10 +41,10 @@ export class ParticleSystem {
     });
   }
 
-  draw(gl: WebGL2RenderingContext, transformUniformLocation: any, colorUniformLocation: any, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, shaderVariables: BasicShaderVariables, projectionMatrix: Mat3) {
     this.particles.forEach((particle) => {
       if (particle.isActive) {
-        particle.draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix);
+        particle.draw(gl, shaderVariables, projectionMatrix);
       }
     });
   }

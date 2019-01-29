@@ -2,6 +2,7 @@ import { Vec3 } from '../math/vec3';
 import { Mat3 } from '../math/mat3';
 import { ShaderProgram } from '../renderer/shaders/shader-program';
 import { BoxGeometry } from '../geometries/box-geometry';
+import { ShaderManager } from './shaders/shader-manager';
 
 export class RendererEngine {
 
@@ -9,16 +10,20 @@ export class RendererEngine {
 
     gl!: WebGL2RenderingContext;
 
-    basicShader!: WebGLProgram;
-    basicParticleShader!: WebGLProgram;
+    // basicShader!: WebGLProgram;
+    // basicParticleShader!: WebGLProgram;
+
+    shaderManager!: ShaderManager;
 
     projectionMatrix: Mat3 = new Mat3();
 
-    constructor() { }
+    constructor() {
+        this.shaderManager = new ShaderManager();
+    }
 
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
-        this.initializeShaderPrograms(this.gl);
+        this.shaderManager.initializeShaderPrograms(this.gl);
     }
 
     drawFrame(dt: Number, renderableObjects: BoxGeometry[]) {
@@ -26,12 +31,13 @@ export class RendererEngine {
             throw new Error('Cannot Draw Frame, GL is undefined');
         }
         // Tell it to use our program (pair of shaders)
-        this.gl.useProgram(this.basicShader);
+        this.gl.useProgram(this.shaderManager.basicShader);
 
-        // set up attribute and uniforms (vertex shader)
-        const transformUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_transform');
-        // // set up attribute and uniforms (fragment shader)
-        const colorUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_color');
+
+        // set up attribute and uniforms (vertex shader)        
+        // const transformUniformLocation = this.shaderManager.shaderVariables.u_transform;
+        // // // set up attribute and uniforms (fragment shader)
+        // const colorUniformLocation = this.shaderManager.shaderVariables.u_color;
 
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
@@ -45,7 +51,7 @@ export class RendererEngine {
             if (!this.gl) {
                 throw new Error('Cannot Draw Renderable, GL is undefined');
             }
-            renderable.draw(this.gl, colorUniformLocation, transformUniformLocation, this.projectionMatrix);
+            renderable.draw(this.gl, this.shaderManager.shaderVariables, this.projectionMatrix);
         });
     }
 
@@ -57,12 +63,12 @@ export class RendererEngine {
         return canvasDimensions;
     }
 
-    private initializeShaderPrograms(gl: WebGL2RenderingContext) {
-        // create the default shader program for a 2d program
-        const shaderProgram = new ShaderProgram();
-        this.basicShader = shaderProgram.getBasic2dProgram(gl);
-        this.basicParticleShader = shaderProgram.getBasicParticleProgram(gl);
-    }
+    // private initializeShaderPrograms(gl: WebGL2RenderingContext) {
+    //     // create the default shader program for a 2d program
+    //     const shaderProgram = new ShaderProgram();
+    //     this.basicShader = shaderProgram.getBasic2dProgram(gl);
+    //     this.basicParticleShader = shaderProgram.getBasicParticleProgram(gl);
+    // }
 
     private initializeCanvasGL(htmlCanvasElement: HTMLCanvasElement, width: number, height: number): void {
         // get the canvas from the html

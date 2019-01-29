@@ -21,9 +21,9 @@ class Particle extends renderable_1.Renderable {
         this.translate(position);
         this.setColor(color);
     }
-    draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix) {
+    draw(gl, shaderVariables, projectionMatrix) {
         if (this.isActive) {
-            super.draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix);
+            super.draw(gl, shaderVariables, projectionMatrix);
         }
     }
     update(dt) {

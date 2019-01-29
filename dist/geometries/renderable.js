@@ -81,14 +81,14 @@ class Renderable {
     getColor() {
         return this.color.clone();
     }
-    draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix) {
+    draw(gl, shaderVariables, projectionMatrix) {
         if (!!this.vao) {
             gl.bindVertexArray(this.vao);
             // vertex uniforms
             const matrix = this.getTransform(projectionMatrix).transpose();
-            gl.uniformMatrix3fv(transformUniformLocation, false, matrix.toArray());
+            gl.uniformMatrix3fv(shaderVariables.u_transform, false, matrix.toArray());
             // fragment uniforms
-            gl.uniform4fv(colorUniformLocation, this.getColor().toArray());
+            gl.uniform4fv(shaderVariables.u_color, this.getColor().toArray());
             gl.drawArrays(this.geometryData.drawMode, this.geometryData.offset, this.geometryData.count);
             // gl.drawArrays(gl.TRIANGLES, offset, count);
             // gl.bindVertexArray(null);

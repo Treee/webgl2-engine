@@ -2,6 +2,7 @@ import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
 import { Mat3 } from "../math/mat3";
 import { Renderable } from '../geometries/renderable';
+import { BasicShaderVariables } from "../renderer/shaders/shader-bound-variables";
 
 export class Particle extends Renderable {
 
@@ -26,9 +27,9 @@ export class Particle extends Renderable {
     this.setColor(color);
   }
 
-  draw(gl: WebGL2RenderingContext, colorUniformLocation: any, transformUniformLocation: any, projectionMatrix: Mat3) {
+  draw(gl: WebGL2RenderingContext, shaderVariables: BasicShaderVariables, projectionMatrix: Mat3) {
     if (this.isActive) {
-      super.draw(gl, colorUniformLocation, transformUniformLocation, projectionMatrix);
+      super.draw(gl, shaderVariables, projectionMatrix);
     }
   }
 

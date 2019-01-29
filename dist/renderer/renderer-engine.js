@@ -2,25 +2,26 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const vec3_1 = require("../math/vec3");
 const mat3_1 = require("../math/mat3");
-const shader_program_1 = require("../renderer/shaders/shader-program");
+const shader_manager_1 = require("./shaders/shader-manager");
 class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
+        this.shaderManager = new shader_manager_1.ShaderManager();
     }
     initializeRenderer(htmlCanvasElement, width, height) {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
-        this.initializeShaderPrograms(this.gl);
+        this.shaderManager.initializeShaderPrograms(this.gl);
     }
     drawFrame(dt, renderableObjects) {
         if (!this.gl) {
             throw new Error('Cannot Draw Frame, GL is undefined');
         }
         // Tell it to use our program (pair of shaders)
-        this.gl.useProgram(this.basicShader);
-        // set up attribute and uniforms (vertex shader)
-        const transformUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_transform');
-        // // set up attribute and uniforms (fragment shader)
-        const colorUniformLocation = this.gl.getUniformLocation(this.basicShader, 'u_color');
+        this.gl.useProgram(this.shaderManager.basicShader);
+        // set up attribute and uniforms (vertex shader)        
+        // const transformUniformLocation = this.shaderManager.shaderVariables.u_transform;
+        // // // set up attribute and uniforms (fragment shader)
+        // const colorUniformLocation = this.shaderManager.shaderVariables.u_color;
         // Clear the canvas
         this.gl.clearColor(0, 0, 0, 0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -31,7 +32,7 @@ class RendererEngine {
             if (!this.gl) {
                 throw new Error('Cannot Draw Renderable, GL is undefined');
             }
-            renderable.draw(this.gl, colorUniformLocation, transformUniformLocation, this.projectionMatrix);
+            renderable.draw(this.gl, this.shaderManager.shaderVariables, this.projectionMatrix);
         });
     }
     getCanvasDimensions() {
@@ -41,12 +42,12 @@ class RendererEngine {
         }
         return canvasDimensions;
     }
-    initializeShaderPrograms(gl) {
-        // create the default shader program for a 2d program
-        const shaderProgram = new shader_program_1.ShaderProgram();
-        this.basicShader = shaderProgram.getBasic2dProgram(gl);
-        this.basicParticleShader = shaderProgram.getBasicParticleProgram(gl);
-    }
+    // private initializeShaderPrograms(gl: WebGL2RenderingContext) {
+    //     // create the default shader program for a 2d program
+    //     const shaderProgram = new ShaderProgram();
+    //     this.basicShader = shaderProgram.getBasic2dProgram(gl);
+    //     this.basicParticleShader = shaderProgram.getBasicParticleProgram(gl);
+    // }
     initializeCanvasGL(htmlCanvasElement, width, height) {
         // get the canvas from the html
         this.canvas = htmlCanvasElement;
