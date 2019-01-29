@@ -117,10 +117,6 @@ export abstract class Renderable {
   }
 
   createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram) {
-    // set up attribute and uniforms (vertex shader)
-    const positionAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_position');
-    const colorAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_color');
-
     // make a vertex array (this is so we layer data in a single array)
     const vertexArray = gl.createVertexArray();
     if (!vertexArray) {
@@ -131,18 +127,21 @@ export abstract class Renderable {
     // bind to the vertex array we will buffer data to
     gl.bindVertexArray(this.vao);
 
+    // set up attribute and uniforms (vertex shader)
+    const positionAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_position');
+    // enable an attribute that was created above (in this case, possition attrib)
+    gl.enableVertexAttribArray(positionAttributeLocation);
     this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
     // define how the gpu will interpret the array
     // gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
     gl.vertexAttribPointer(positionAttributeLocation, this.geometryData.size, this.geometryData.dataType, this.geometryData.isNormalized, this.geometryData.stride, this.geometryData.offset);
-    // enable an attribute that was created above (in this case, possition attrib)
-    gl.enableVertexAttribArray(positionAttributeLocation);
 
+    const colorAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_color');
+    gl.enableVertexAttribArray(colorAttributeLocation);
     this.createBindAndBufferData(gl, gl.ARRAY_BUFFER, this.color.toArray(), gl.STATIC_DRAW);
     gl.vertexAttribPointer(colorAttributeLocation, 4, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(colorAttributeLocation);
 
-    gl.bindVertexArray(null);
+    // gl.bindVertexArray(null);
   }
 
   // create a buffer, bing opengl to that buffer, send data to the buffer in one fell swoop
