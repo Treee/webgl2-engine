@@ -27,7 +27,7 @@ export declare abstract class Renderable {
     private setRotation;
     setColor(newColor: Vec4): void;
     getColor(): Vec4;
-    draw(gl: WebGL2RenderingContext, transformUniformLocation: any, projectionMatrix: Mat3): void;
+    draw(gl: WebGL2RenderingContext, colorUniformLocation: any, transformUniformLocation: any, projectionMatrix: Mat3): void;
     createVertexArrayObject(gl: WebGL2RenderingContext, shaderProgram: WebGLProgram): void;
     private createBindAndBufferData;
 }
