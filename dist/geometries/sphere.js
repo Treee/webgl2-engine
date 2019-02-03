@@ -8,6 +8,7 @@ class Sphere extends renderable_object_1.RenderableObject {
         this.alias = 'sphere';
         let sphereBufferInfo = twgl_js_1.primitives.createSphereBufferInfo(gl, 10, 12, 6);
         this.bufferInfo = sphereBufferInfo;
+        this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, sphereBufferInfo);
         this.uniforms = uniforms;
         this.position = [0, 0, 0];

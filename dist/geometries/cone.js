@@ -8,6 +8,7 @@ class Cone extends renderable_object_1.RenderableObject {
         this.alias = 'cone';
         let coneBufferInfo = twgl_js_1.primitives.createTruncatedConeBufferInfo(gl, 10, 0, 20, 12, 1, true, false);
         this.bufferInfo = coneBufferInfo;
+        this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, coneBufferInfo);
         this.uniforms = uniforms;
         this.position = [40, 0, 0];
