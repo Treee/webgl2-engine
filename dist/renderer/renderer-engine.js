@@ -6,6 +6,7 @@ const shader_manager_1 = require("./shaders/shader-manager");
 const twgl = require("twgl.js");
 const cube_1 = require("../geometries/cube");
 const cone_1 = require("../geometries/cone");
+const sphere_1 = require("../geometries/sphere");
 class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
@@ -13,7 +14,6 @@ class RendererEngine {
         this.cubeUniforms = {};
         this.sphereUniforms = {};
         this.coneUniforms = {};
-        this.sphereTranslation = [0, 0, 0];
         this.vs = `#version 300 es
 
         in vec4 a_position;
@@ -69,7 +69,7 @@ class RendererEngine {
         };
         let myCube = new cube_1.Cube(this.gl, programInfo, this.cubeUniforms);
         let myCone = new cone_1.Cone(this.gl, programInfo, this.coneUniforms);
-        let mySphere = new cube_1.Cube(this.gl, programInfo, this.sphereUniforms);
+        let mySphere = new sphere_1.Sphere(this.gl, programInfo, this.sphereUniforms);
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);

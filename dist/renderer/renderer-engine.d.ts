@@ -13,7 +13,6 @@ export declare class RendererEngine {
     cubeUniforms: any;
     sphereUniforms: any;
     coneUniforms: any;
-    sphereTranslation: number[];
     vs: string;
     fs: string;
     drawableObjects: RenderableObject[];
