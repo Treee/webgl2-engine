@@ -7,6 +7,10 @@ class Cube extends renderable_object_1.RenderableObject {
         super();
         this.alias = 'cube';
         let cubeBufferInfo = twgl_js_1.primitives.createCubeBufferInfo(gl, 20);
+        let attr = {
+            color: [1, 0, 0, 1]
+        };
+        cubeBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, attr, cubeBufferInfo);
         this.bufferInfo = cubeBufferInfo;
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, cubeBufferInfo);
