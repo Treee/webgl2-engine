@@ -2,7 +2,7 @@ import { Vec3 } from '../math/vec3';
 import { Vec4 } from '../math/vec4';
 import { Mat3 } from '../math/mat3';
 import { GeometryData } from './geometry-data';
-import { ProgramInfo } from '../renderer/shaders/program-info';
+import { ProgramInfoTree } from '../renderer/shaders/program-info';
 
 export abstract class Renderable {
 
@@ -13,12 +13,12 @@ export abstract class Renderable {
   protected color: Vec4 = new Vec4();
 
   public geometryData: GeometryData = new GeometryData();
-  public programInfo: ProgramInfo;
+  public programInfo: ProgramInfoTree;
 
   protected vao!: WebGLVertexArrayObject;
   protected vertices: number[] = [];
 
-  constructor(programInfo: ProgramInfo) {
+  constructor(programInfo: ProgramInfoTree) {
     this.programInfo = programInfo;
   }
 

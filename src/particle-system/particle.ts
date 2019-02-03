@@ -2,7 +2,7 @@ import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
 import { Mat3 } from "../math/mat3";
 import { Renderable } from '../geometries/renderable';
-import { ProgramInfo } from "../renderer/shaders/program-info";
+import { ProgramInfoTree } from "../renderer/shaders/program-info";
 
 export class Particle extends Renderable {
 
@@ -11,7 +11,7 @@ export class Particle extends Renderable {
   decay: number = 3;
 
 
-  constructor(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+  constructor(position: Vec3 = new Vec3(), velocity: Vec3 = new Vec3(), color: Vec4 = new Vec4(), decay: number = 3, gl: WebGL2RenderingContext, programInfo: ProgramInfoTree) {
     super(programInfo);
     this.reinitializeParticle(position, velocity, color, decay);
     this.geometryData.setData(gl.FLOAT, gl.POINTS, false, 2, 0, 0, 1);

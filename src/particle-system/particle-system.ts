@@ -2,18 +2,18 @@ import { Particle } from "./particle";
 import { Mat3 } from '../math/mat3';
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
-import { ProgramInfo } from "../renderer/shaders/program-info";
+import { ProgramInfoTree } from "../renderer/shaders/program-info";
 
 export class ParticleSystem {
 
   particles: Particle[] = [];
 
-  constructor(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+  constructor(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, programInfo: ProgramInfoTree) {
     this.initializeParticles(position, numberOfParticles, gl, programInfo);
   }
 
   // initializes particles that disperse in a spherical pattern
-  initializeParticles(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+  initializeParticles(position: Vec3, numberOfParticles: number, gl: WebGL2RenderingContext, programInfo: ProgramInfoTree) {
     let x, y;
     let z = 0;
     let step = Math.PI / 7;

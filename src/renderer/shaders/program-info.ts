@@ -1,4 +1,4 @@
-export class ProgramInfo {
+export class ProgramInfoTree {
   program!: WebGLProgram;
   uniforms!: Map<string, WebGLUniformLocation | null>;
   attributes!: Map<string, WebGLUniformLocation | null>;

@@ -1,10 +1,10 @@
 import { Vec3 } from '../math/vec3';
 import { Renderable } from './renderable';
-import { ProgramInfo } from '../renderer/shaders/program-info';
+import { ProgramInfoTree } from '../renderer/shaders/program-info';
 
 export class Point2D extends Renderable {
 
-    constructor(x: number, y: number, gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+    constructor(x: number, y: number, gl: WebGL2RenderingContext, programInfo: ProgramInfoTree) {
         super(programInfo);
         this.setVertices([0, 0]);
         this.translate(new Vec3(x, y, 1));

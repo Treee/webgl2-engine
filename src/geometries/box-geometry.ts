@@ -1,11 +1,11 @@
 import { Vec3 } from '../math/vec3';
 import { Renderable } from './renderable';
 import { Vec4 } from '../math/vec4';
-import { ProgramInfo } from '../renderer/shaders/program-info';
+import { ProgramInfoTree } from '../renderer/shaders/program-info';
 
 export class BoxGeometry extends Renderable {
 
-    constructor(gl: WebGL2RenderingContext, programInfo: ProgramInfo) {
+    constructor(gl: WebGL2RenderingContext, programInfo: ProgramInfoTree) {
         super(programInfo);
         this.createRectangle(gl, new Vec3(), 25, 25, new Vec4(1, 0, 0, 1));
         this.createVertexArrayObject(gl, programInfo.program);

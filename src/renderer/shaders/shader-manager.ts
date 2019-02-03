@@ -1,23 +1,23 @@
 import { ShaderProgram } from './shader-program';
-import { ProgramInfo } from './program-info';
+import { ProgramInfoTree } from './program-info';
 export class ShaderManager {
 
-  programs: Map<string, ProgramInfo>;
+  programs: Map<string, ProgramInfoTree>;
 
   constructor() {
-    this.programs = new Map<string, ProgramInfo>();
+    this.programs = new Map<string, ProgramInfoTree>();
   }
 
   public initializeShaderPrograms(gl: WebGL2RenderingContext) {
     // create the default shader program for a 2d program
     const shaderProgram = new ShaderProgram();
-    const basicProgramInfo = new ProgramInfo();
+    const basicProgramInfo = new ProgramInfoTree();
     basicProgramInfo.program = shaderProgram.getBasic2dProgram(gl);
     basicProgramInfo.setUniforms(gl, ['u_transform', 'u_color']);
     this.programs.set('basic-shader', basicProgramInfo);
 
 
-    const basicParticleProgramInfo = new ProgramInfo();
+    const basicParticleProgramInfo = new ProgramInfoTree();
     basicParticleProgramInfo.program = shaderProgram.getBasicParticleProgram(gl);
     basicParticleProgramInfo.setUniforms(gl, ['u_transform', 'u_color']);
     this.programs.set('basic-particle-shader', basicParticleProgramInfo);
