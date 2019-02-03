@@ -161,14 +161,14 @@ export class RendererEngine {
 
     drawScene(gl: WebGL2RenderingContext, dt: any) {
         dt = dt * 0.0005;
-        twgl.resizeCanvasToDisplaySize(this.gl.canvas);
+        twgl.resizeCanvasToDisplaySize(gl.canvas);
 
-        this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-        this.gl.enable(this.gl.CULL_FACE);
-        this.gl.enable(this.gl.DEPTH_TEST);
+        gl.enable(gl.CULL_FACE);
+        gl.enable(gl.DEPTH_TEST);
 
-        let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
+        let aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
         let projectionMatrix = twgl.m4.perspective(this.fieldOfViewRadians, aspect, 1, 2000);
 
         let cameraPosition = [0, 0, 100];
