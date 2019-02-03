@@ -150,7 +150,7 @@ class RendererEngine {
                 obj.rotationX = -dt;
                 obj.rotationY = dt;
             }
-            this.computeMatrix(viewProjectionMatrix, obj.position, obj.rotationX, obj.rotationY);
+            obj.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix, obj.position, obj.rotationX, obj.rotationY);
             let programInfo = obj.programInfo;
             gl.useProgram(programInfo.program);
             gl.bindVertexArray(obj.vertexArray);
