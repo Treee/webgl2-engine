@@ -9,11 +9,11 @@ class ShaderManager {
     initializeShaderPrograms(gl) {
         // create the default shader program for a 2d program
         const shaderProgram = new shader_program_1.ShaderProgram();
-        const basicProgramInfo = new program_info_1.ProgramInfo();
+        const basicProgramInfo = new program_info_1.ProgramInfoTree();
         basicProgramInfo.program = shaderProgram.getBasic2dProgram(gl);
         basicProgramInfo.setUniforms(gl, ['u_transform', 'u_color']);
         this.programs.set('basic-shader', basicProgramInfo);
-        const basicParticleProgramInfo = new program_info_1.ProgramInfo();
+        const basicParticleProgramInfo = new program_info_1.ProgramInfoTree();
         basicParticleProgramInfo.program = shaderProgram.getBasicParticleProgram(gl);
         basicParticleProgramInfo.setUniforms(gl, ['u_transform', 'u_color']);
         this.programs.set('basic-particle-shader', basicParticleProgramInfo);

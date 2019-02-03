@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class ProgramInfo {
+class ProgramInfoTree {
     constructor() {
         this.uniforms = new Map();
         this.attributes = new Map();
@@ -21,5 +21,5 @@ class ProgramInfo {
         return uniform;
     }
 }
-exports.ProgramInfo = ProgramInfo;
+exports.ProgramInfoTree = ProgramInfoTree;
 //# sourceMappingURL=program-info.js.map

@@ -1,5 +1,5 @@
 /// <reference types="webgl2" />
-export declare class ProgramInfo {
+export declare class ProgramInfoTree {
     program: WebGLProgram;
     uniforms: Map<string, WebGLUniformLocation | null>;
     attributes: Map<string, WebGLUniformLocation | null>;
