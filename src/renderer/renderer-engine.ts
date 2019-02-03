@@ -7,6 +7,7 @@ import { RenderableObject } from '../geometries/renderable-object';
 import * as twgl from 'twgl.js';
 import { Cube } from '../geometries/cube';
 import { Cone } from '../geometries/cone';
+import { Sphere } from '../geometries/sphere';
 
 export class RendererEngine {
 
@@ -23,8 +24,6 @@ export class RendererEngine {
     cubeUniforms: any = {};
     sphereUniforms: any = {};
     coneUniforms: any = {};
-
-    sphereTranslation = [0, 0, 0];
 
     vs = `#version 300 es
 
@@ -91,7 +90,7 @@ export class RendererEngine {
 
         let myCube = new Cube(this.gl, programInfo, this.cubeUniforms);
         let myCone = new Cone(this.gl, programInfo, this.coneUniforms);
-        let mySphere = new Cube(this.gl, programInfo, this.sphereUniforms);
+        let mySphere = new Sphere(this.gl, programInfo, this.sphereUniforms);
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);
