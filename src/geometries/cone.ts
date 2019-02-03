@@ -7,7 +7,7 @@ export class Cone extends RenderableObject {
     this.alias = 'cone';
     let coneBufferInfo = primitives.createTruncatedConeBufferInfo(gl, 10, 0, 20, 12, 1, true, false);
     let attr = {
-      a_color: [1, 0, 0, 1]
+      color: [0, 0, 1, 1]
     }
     coneBufferInfo = createBufferInfoFromArrays(gl, attr, coneBufferInfo);
 
