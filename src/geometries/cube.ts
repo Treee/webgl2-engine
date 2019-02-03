@@ -7,6 +7,7 @@ export class Cube extends RenderableObject {
     this.alias = 'cube';
     let cubeBufferInfo = primitives.createCubeBufferInfo(gl, 20);
     this.bufferInfo = cubeBufferInfo;
+    this.programInfo = progInfo;
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, cubeBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = uniforms;
     this.position = [-40, 0, 0];

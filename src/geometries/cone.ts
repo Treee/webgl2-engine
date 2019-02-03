@@ -7,6 +7,7 @@ export class Cone extends RenderableObject {
     this.alias = 'cone';
     let coneBufferInfo = primitives.createTruncatedConeBufferInfo(gl, 10, 0, 20, 12, 1, true, false);
     this.bufferInfo = coneBufferInfo;
+    this.programInfo = progInfo;
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, coneBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = uniforms;
     this.position = [40, 0, 0];
