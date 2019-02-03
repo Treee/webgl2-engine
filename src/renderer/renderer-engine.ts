@@ -193,7 +193,7 @@ export class RendererEngine {
                 obj.rotationX = -dt;
                 obj.rotationY = dt;
             }
-            this.computeMatrix(viewProjectionMatrix,
+            obj.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix,
                 obj.position,
                 obj.rotationX,
                 obj.rotationY);
