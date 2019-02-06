@@ -22,7 +22,14 @@ export class Camera {
     return m4.multiply(projectionMatrix, this.getViewMatrix());
   }
 
-  moveCamera(amountToMove: v3.Vec3) {
+  private moveCamera(amountToMove: v3.Vec3) {
     this.position = v3.add(this.position, amountToMove);
   }
+
+  moveForward() { this.moveCamera([0, 0, -1]); }
+  moveBackward() { this.moveCamera([0, 0, 1]); }
+  moveLeft() { this.moveCamera([-1, 0, 0]); }
+  moveRight() { this.moveCamera([1, 0, 0]); }
+  moveUp() { this.moveCamera([0, 1, 0]); }
+  moveDown() { this.moveCamera([0, -1, 0]); }
 }
