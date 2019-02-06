@@ -18,6 +18,9 @@ class Camera {
     getViewProjectionMatrix(projectionMatrix) {
         return twgl_js_1.m4.multiply(projectionMatrix, this.getViewMatrix());
     }
+    moveCamera(amountToMove) {
+        this.position = twgl_js_1.v3.add(this.position, amountToMove);
+    }
 }
 exports.Camera = Camera;
 //# sourceMappingURL=camera.js.map
