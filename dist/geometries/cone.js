@@ -7,10 +7,6 @@ class Cone extends renderable_object_1.RenderableObject {
         super();
         this.alias = 'cone';
         let coneBufferInfo = twgl_js_1.primitives.createTruncatedConeBufferInfo(gl, 10, 0, 20, 12, 1, true, false);
-        let attr = {
-            color: [0, 0, 1, 1]
-        };
-        coneBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, attr, coneBufferInfo);
         this.bufferInfo = coneBufferInfo;
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, coneBufferInfo);

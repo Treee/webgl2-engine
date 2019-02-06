@@ -7,10 +7,10 @@ class Sphere extends renderable_object_1.RenderableObject {
         super();
         this.alias = 'sphere';
         let sphereBufferInfo = twgl_js_1.primitives.createSphereBufferInfo(gl, 10, 12, 6);
-        let attr = {
-            color: [0, 1, 0, 1]
-        };
-        sphereBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, attr, sphereBufferInfo);
+        // let attr = {
+        //   color: [0, 1, 0, 1]
+        // }
+        // sphereBufferInfo = createBufferInfoFromArrays(gl, attr, sphereBufferInfo);
         this.bufferInfo = sphereBufferInfo;
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, sphereBufferInfo);
