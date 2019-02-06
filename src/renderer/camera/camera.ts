@@ -21,4 +21,8 @@ export class Camera {
   getViewProjectionMatrix(projectionMatrix: m4.Mat4): m4.Mat4 {
     return m4.multiply(projectionMatrix, this.getViewMatrix());
   }
+
+  moveCamera(amountToMove: v3.Vec3) {
+    this.position = v3.add(this.position, amountToMove);
+  }
 }
