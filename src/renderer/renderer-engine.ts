@@ -188,6 +188,28 @@ export class RendererEngine {
         });
     }
 
+    applyUserInput(activeKeysMap: any) {
+        if (activeKeysMap['w']) {
+            // move forward
+            this.debugCamera.moveForward();
+        } if (activeKeysMap['s']) {
+            // movve backward
+            this.debugCamera.moveBackward();
+        } if (activeKeysMap['a']) {
+            // strafe left
+            this.debugCamera.moveLeft();
+        } if (activeKeysMap['d']) {
+            // strafe right
+            this.debugCamera.moveRight();
+        } if (activeKeysMap['r']) {
+            // rise
+            this.debugCamera.moveUp();
+        } if (activeKeysMap['f']) {
+            // fall
+            this.debugCamera.moveDown();
+        }
+    }
+
     drawObjects(gl: WebGL2RenderingContext, objectsToDraw: RenderableObject[]) {
         objectsToDraw.forEach(obj => {
             let programInfo = obj.programInfo;
