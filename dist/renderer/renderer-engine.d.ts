@@ -4,10 +4,12 @@ import { Mat3 } from '../math/mat3';
 import { BoxGeometry } from '../geometries/box-geometry';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from '../geometries/renderable-object';
+import { Camera } from './camera/camera';
 export declare class RendererEngine {
     canvas: HTMLCanvasElement;
     gl: WebGL2RenderingContext;
     shaderManager: ShaderManager;
+    debugCamera: Camera;
     projectionMatrix: Mat3;
     fieldOfViewRadians: number;
     cubeUniforms: any;

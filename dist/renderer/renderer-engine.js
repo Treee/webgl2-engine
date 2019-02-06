@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vec3_1 = require("../math/vec3");
 const mat3_1 = require("../math/mat3");
 const shader_manager_1 = require("./shaders/shader-manager");
+const camera_1 = require("./camera/camera");
 const twgl = require("twgl.js");
 const cube_1 = require("../geometries/cube");
 const cone_1 = require("../geometries/cone");
@@ -48,6 +49,7 @@ class RendererEngine {
     `;
         this.drawableObjects = [];
         this.shaderManager = new shader_manager_1.ShaderManager();
+        this.debugCamera = new camera_1.Camera([0, 0, 100]);
     }
     initializeRenderer(htmlCanvasElement, width, height) {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
@@ -132,12 +134,7 @@ class RendererEngine {
         gl.enable(gl.DEPTH_TEST);
         let aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
         let projectionMatrix = twgl.m4.perspective(this.fieldOfViewRadians, aspect, 1, 2000);
-        let cameraPosition = [0, 0, 100];
-        let target = [0, 0, 0];
-        let up = [0, 1, 0];
-        let cameraMatrix = twgl.m4.lookAt(cameraPosition, target, up);
-        let viewMatrix = twgl.m4.inverse(cameraMatrix);
-        let viewProjectionMatrix = twgl.m4.multiply(projectionMatrix, viewMatrix);
+        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix(projectionMatrix);
         this.drawableObjects.forEach(obj => {
             obj.rotate(dt);
             obj.move(dt, viewProjectionMatrix);
