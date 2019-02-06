@@ -27,11 +27,12 @@ export abstract class RenderableObject {
   rotate(dt: number) { }
 
   move(dt: number, viewProjectionMatrix: any) {
+    this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
   }
 
-  computeMatrix(viewProjectionMatrix: any, translation: any, xRotation: number, yRotation: number): m4.Mat4 {
-    var matrix = m4.translate(viewProjectionMatrix, translation);
-    matrix = m4.rotateX(matrix, xRotation);
-    return m4.rotateY(matrix, yRotation);
+  computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4 {
+    var matrix = m4.translate(viewProjectionMatrix, this.position);
+    matrix = m4.rotateX(matrix, this.rotationX);
+    return m4.rotateY(matrix, this.rotationY);
   }
 }

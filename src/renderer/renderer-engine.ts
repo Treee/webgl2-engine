@@ -182,10 +182,7 @@ export class RendererEngine {
 
         this.drawableObjects.forEach(obj => {
             obj.rotate(dt);
-            obj.uniforms.u_matrix = obj.computeMatrix(viewProjectionMatrix,
-                obj.position,
-                obj.rotationX,
-                obj.rotationY);
+            obj.move(dt, viewProjectionMatrix);
 
             let programInfo = obj.programInfo;
             gl.useProgram(programInfo.program);
