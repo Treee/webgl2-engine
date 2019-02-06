@@ -1,5 +1,5 @@
 /// <reference types="webgl2" />
-import { ProgramInfo, BufferInfo } from "twgl.js";
+import { ProgramInfo, BufferInfo, m4 } from "twgl.js";
 export declare abstract class RenderableObject {
     programInfo: ProgramInfo;
     bufferInfo: BufferInfo;
@@ -9,5 +9,13 @@ export declare abstract class RenderableObject {
     position: number[];
     rotationX: number;
     rotationY: number;
+    rotationZ: number;
+    scaleValue: number;
+    modelMatrix: m4.Mat4;
     constructor();
+    translate(dt: number): void;
+    scale(dt: number): void;
+    rotate(dt: number): void;
+    move(dt: number, viewProjectionMatrix: any): void;
+    computeMatrix(viewProjectionMatrix: any, translation: any, xRotation: number, yRotation: number): m4.Mat4;
 }

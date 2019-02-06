@@ -24,5 +24,4 @@ export declare class RendererEngine {
     drawScene(gl: WebGL2RenderingContext, dt: any): void;
     drawObjects(gl: WebGL2RenderingContext, objectsToDraw: RenderableObject[]): void;
     degreesToRadian(degrees: number): number;
-    computeMatrix(viewProjectionMatrix: any, translation: any, xRotation: number, yRotation: number): number[] | Float32Array;
 }

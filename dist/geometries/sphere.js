@@ -17,6 +17,10 @@ class Sphere extends renderable_object_1.RenderableObject {
         this.uniforms = uniforms;
         this.position = [0, 0, 0];
     }
+    rotate(dt) {
+        this.rotationX = dt;
+        this.rotationY = dt;
+    }
 }
 exports.Sphere = Sphere;
 //# sourceMappingURL=sphere.js.map

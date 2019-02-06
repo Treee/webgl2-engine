@@ -125,7 +125,6 @@ class RendererEngine {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
     drawScene(gl, dt) {
-        dt = dt * 0.0005;
         twgl.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
         gl.enable(gl.CULL_FACE);
@@ -139,19 +138,8 @@ class RendererEngine {
         let viewMatrix = twgl.m4.inverse(cameraMatrix);
         let viewProjectionMatrix = twgl.m4.multiply(projectionMatrix, viewMatrix);
         this.drawableObjects.forEach(obj => {
-            if (obj.alias === 'sphere') {
-                obj.rotationX = dt;
-                obj.rotationY = dt;
-            }
-            if (obj.alias === 'cone') {
-                obj.rotationX = dt;
-                obj.rotationY = -dt;
-            }
-            if (obj.alias === 'cube') {
-                obj.rotationX = -dt;
-                obj.rotationY = dt;
-            }
-            obj.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix, obj.position, obj.rotationX, obj.rotationY);
+            obj.rotate(dt);
+            obj.uniforms.u_matrix = obj.computeMatrix(viewProjectionMatrix, obj.position, obj.rotationX, obj.rotationY);
             let programInfo = obj.programInfo;
             gl.useProgram(programInfo.program);
             gl.bindVertexArray(obj.vertexArray);
@@ -170,11 +158,6 @@ class RendererEngine {
     }
     degreesToRadian(degrees) {
         return degrees * Math.PI / 180;
-    }
-    computeMatrix(viewProjectionMatrix, translation, xRotation, yRotation) {
-        var matrix = twgl.m4.translate(viewProjectionMatrix, translation);
-        matrix = twgl.m4.rotateX(matrix, xRotation);
-        return twgl.m4.rotateY(matrix, yRotation);
     }
 }
 exports.RendererEngine = RendererEngine;

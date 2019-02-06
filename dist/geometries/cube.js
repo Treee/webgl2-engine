@@ -13,6 +13,10 @@ class Cube extends renderable_object_1.RenderableObject {
         this.uniforms = uniforms;
         this.position = [-40, 0, 0];
     }
+    rotate(dt) {
+        this.rotationX = -dt;
+        this.rotationY = dt;
+    }
 }
 exports.Cube = Cube;
 //# sourceMappingURL=cube.js.map
