@@ -3,6 +3,7 @@ import { Mat3 } from '../math/mat3';
 import { BoxGeometry } from '../geometries/box-geometry';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from '../geometries/renderable-object';
+import { Camera } from './camera/camera';
 
 import * as twgl from 'twgl.js';
 import { Cube } from '../geometries/cube';
@@ -16,6 +17,7 @@ export class RendererEngine {
     gl!: WebGL2RenderingContext;
 
     shaderManager!: ShaderManager;
+    debugCamera!: Camera;
 
     projectionMatrix: Mat3 = new Mat3();
 
@@ -63,6 +65,7 @@ export class RendererEngine {
 
     constructor() {
         this.shaderManager = new ShaderManager();
+        this.debugCamera = new Camera([0, 0, 100]);
     }
 
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
@@ -171,14 +174,7 @@ export class RendererEngine {
         let aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
         let projectionMatrix = twgl.m4.perspective(this.fieldOfViewRadians, aspect, 1, 2000);
 
-        let cameraPosition = [0, 0, 100];
-        let target = [0, 0, 0];
-        let up = [0, 1, 0];
-        let cameraMatrix = twgl.m4.lookAt(cameraPosition, target, up);
-
-        let viewMatrix = twgl.m4.inverse(cameraMatrix);
-
-        let viewProjectionMatrix = twgl.m4.multiply(projectionMatrix, viewMatrix);
+        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix(projectionMatrix);
 
         this.drawableObjects.forEach(obj => {
             obj.rotate(dt);
