@@ -160,6 +160,7 @@ export class RendererEngine {
     }
 
     drawScene(gl: WebGL2RenderingContext, dt: any) {
+        dt = dt * 0.001; // take the current dt and make it even smaller
         twgl.resizeCanvasToDisplaySize(gl.canvas);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
