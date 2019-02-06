@@ -21,6 +21,12 @@ class Camera {
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.position, amountToMove);
     }
+    moveForward() { this.moveCamera([0, 0, -1]); }
+    moveBackward() { this.moveCamera([0, 0, 1]); }
+    moveLeft() { this.moveCamera([-1, 0, 0]); }
+    moveRight() { this.moveCamera([1, 0, 0]); }
+    moveUp() { this.moveCamera([0, 1, 0]); }
+    moveDown() { this.moveCamera([0, -1, 0]); }
 }
 exports.Camera = Camera;
 //# sourceMappingURL=camera.js.map
