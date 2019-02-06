@@ -125,6 +125,7 @@ class RendererEngine {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
     drawScene(gl, dt) {
+        dt = dt * 0.001; // take the current dt and make it even smaller
         twgl.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
         gl.enable(gl.CULL_FACE);
@@ -139,7 +140,7 @@ class RendererEngine {
         let viewProjectionMatrix = twgl.m4.multiply(projectionMatrix, viewMatrix);
         this.drawableObjects.forEach(obj => {
             obj.rotate(dt);
-            obj.uniforms.u_matrix = obj.computeMatrix(viewProjectionMatrix, obj.position, obj.rotationX, obj.rotationY);
+            obj.move(dt, viewProjectionMatrix);
             let programInfo = obj.programInfo;
             gl.useProgram(programInfo.program);
             gl.bindVertexArray(obj.vertexArray);

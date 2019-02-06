@@ -15,11 +15,12 @@ class RenderableObject {
     scale(dt) { }
     rotate(dt) { }
     move(dt, viewProjectionMatrix) {
+        this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
     }
-    computeMatrix(viewProjectionMatrix, translation, xRotation, yRotation) {
-        var matrix = twgl_js_1.m4.translate(viewProjectionMatrix, translation);
-        matrix = twgl_js_1.m4.rotateX(matrix, xRotation);
-        return twgl_js_1.m4.rotateY(matrix, yRotation);
+    computeMatrix(viewProjectionMatrix) {
+        var matrix = twgl_js_1.m4.translate(viewProjectionMatrix, this.position);
+        matrix = twgl_js_1.m4.rotateX(matrix, this.rotationX);
+        return twgl_js_1.m4.rotateY(matrix, this.rotationY);
     }
 }
 exports.RenderableObject = RenderableObject;

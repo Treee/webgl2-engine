@@ -17,5 +17,5 @@ export declare abstract class RenderableObject {
     scale(dt: number): void;
     rotate(dt: number): void;
     move(dt: number, viewProjectionMatrix: any): void;
-    computeMatrix(viewProjectionMatrix: any, translation: any, xRotation: number, yRotation: number): m4.Mat4;
+    computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4;
 }

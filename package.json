@@ -1,6 +1,6 @@
 {
   "name": "tree-xyz-webgl2-engine",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "description": "This package contains the code to utilize webgl2's graphics capabilities.",
   "main": "index.js",
   "files": [
