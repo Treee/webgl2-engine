@@ -24,6 +24,7 @@ export declare class RendererEngine {
     getCanvasDimensions(): Vec3;
     private initializeCanvasGL;
     drawScene(gl: WebGL2RenderingContext, dt: any): void;
+    applyUserInput(activeKeysMap: any): void;
     drawObjects(gl: WebGL2RenderingContext, objectsToDraw: RenderableObject[]): void;
     degreesToRadian(degrees: number): number;
 }
