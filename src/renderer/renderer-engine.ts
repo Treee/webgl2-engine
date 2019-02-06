@@ -160,7 +160,6 @@ export class RendererEngine {
     }
 
     drawScene(gl: WebGL2RenderingContext, dt: any) {
-        dt = dt * 0.0005;
         twgl.resizeCanvasToDisplaySize(gl.canvas);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
@@ -181,19 +180,8 @@ export class RendererEngine {
         let viewProjectionMatrix = twgl.m4.multiply(projectionMatrix, viewMatrix);
 
         this.drawableObjects.forEach(obj => {
-            if (obj.alias === 'sphere') {
-                obj.rotationX = dt;
-                obj.rotationY = dt;
-            }
-            if (obj.alias === 'cone') {
-                obj.rotationX = dt;
-                obj.rotationY = -dt;
-            }
-            if (obj.alias === 'cube') {
-                obj.rotationX = -dt;
-                obj.rotationY = dt;
-            }
-            obj.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix,
+            obj.rotate(dt);
+            obj.uniforms.u_matrix = obj.computeMatrix(viewProjectionMatrix,
                 obj.position,
                 obj.rotationX,
                 obj.rotationY);
@@ -218,12 +206,6 @@ export class RendererEngine {
 
     degreesToRadian(degrees: number) {
         return degrees * Math.PI / 180;
-    }
-
-    computeMatrix(viewProjectionMatrix: any, translation: any, xRotation: number, yRotation: number) {
-        var matrix = twgl.m4.translate(viewProjectionMatrix, translation);
-        matrix = twgl.m4.rotateX(matrix, xRotation);
-        return twgl.m4.rotateY(matrix, yRotation);
     }
 
 }

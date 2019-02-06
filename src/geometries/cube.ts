@@ -13,4 +13,9 @@ export class Cube extends RenderableObject {
     this.uniforms = uniforms;
     this.position = [-40, 0, 0];
   }
+
+  rotate(dt: number) {
+    this.rotationX = -dt;
+    this.rotationY = dt;
+  }
 }
