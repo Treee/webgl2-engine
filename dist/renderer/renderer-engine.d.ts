@@ -12,9 +12,6 @@ export declare class RendererEngine {
     debugCamera: Camera;
     projectionMatrix: Mat3;
     fieldOfViewRadians: number;
-    cubeUniforms: any;
-    sphereUniforms: any;
-    coneUniforms: any;
     vs: string;
     fs: string;
     drawableObjects: RenderableObject[];

@@ -5,6 +5,10 @@ const twgl_js_1 = require("twgl.js");
 class Sphere extends renderable_object_1.RenderableObject {
     constructor(gl, progInfo, uniforms) {
         super();
+        this.defaultUniforms = {
+            u_colorMult: [0.5, 1, 0.5, 1],
+            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+        };
         this.alias = 'sphere';
         let sphereBufferInfo = twgl_js_1.primitives.createSphereBufferInfo(gl, 10, 12, 6);
         // let attr = {
@@ -14,7 +18,7 @@ class Sphere extends renderable_object_1.RenderableObject {
         this.bufferInfo = sphereBufferInfo;
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, sphereBufferInfo);
-        this.uniforms = uniforms;
+        this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
         this.position = [0, 0, 0];
     }
     rotate(dt) {

@@ -12,9 +12,6 @@ class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
         this.fieldOfViewRadians = 0;
-        this.cubeUniforms = {};
-        this.sphereUniforms = {};
-        this.coneUniforms = {};
         this.vs = `#version 300 es
 
         in vec4 a_position;
@@ -57,22 +54,9 @@ class RendererEngine {
         twgl.setAttributePrefix("a_");
         // create program info
         let programInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
-        //set uniforms
-        this.cubeUniforms = {
-            u_colorMult: [1, 0.5, 0.5, 1],
-            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-        };
-        this.coneUniforms = {
-            u_colorMult: [0.5, 0.5, 1, 1],
-            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        };
-        this.sphereUniforms = {
-            u_colorMult: [0.5, 1, 0.5, 1],
-            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        };
-        let myCube = new cube_1.Cube(this.gl, programInfo, this.cubeUniforms);
-        let myCone = new cone_1.Cone(this.gl, programInfo, this.coneUniforms);
-        let mySphere = new sphere_1.Sphere(this.gl, programInfo, this.sphereUniforms);
+        let myCube = new cube_1.Cube(this.gl, programInfo, {});
+        let myCone = new cone_1.Cone(this.gl, programInfo, {});
+        let mySphere = new sphere_1.Sphere(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);
