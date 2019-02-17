@@ -23,10 +23,6 @@ export class RendererEngine {
 
     fieldOfViewRadians: number = 0;
 
-    cubeUniforms: any = {};
-    sphereUniforms: any = {};
-    coneUniforms: any = {};
-
     vs = `#version 300 es
 
         in vec4 a_position;
@@ -76,25 +72,9 @@ export class RendererEngine {
         // create program info
         let programInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
 
-        //set uniforms
-        this.cubeUniforms = {
-            u_colorMult: [1, 0.5, 0.5, 1],
-            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-        };
-
-        this.coneUniforms = {
-            u_colorMult: [0.5, 0.5, 1, 1],
-            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        };
-
-        this.sphereUniforms = {
-            u_colorMult: [0.5, 1, 0.5, 1],
-            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        };
-
-        let myCube = new Cube(this.gl, programInfo, this.cubeUniforms);
-        let myCone = new Cone(this.gl, programInfo, this.coneUniforms);
-        let mySphere = new Sphere(this.gl, programInfo, this.sphereUniforms);
+        let myCube = new Cube(this.gl, programInfo, {});
+        let myCone = new Cone(this.gl, programInfo, {});
+        let mySphere = new Sphere(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);
