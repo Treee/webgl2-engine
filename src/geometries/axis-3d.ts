@@ -1,5 +1,5 @@
 import { RenderableObject } from "./renderable-object";
-import { ProgramInfo, createVAOFromBufferInfo, createBufferInfoFromArrays } from "twgl.js";
+import { ProgramInfo, createVAOFromBufferInfo, createBufferInfoFromArrays, setUniforms, drawBufferInfo } from "twgl.js";
 
 export class Axis3D extends RenderableObject {
 
@@ -25,5 +25,13 @@ export class Axis3D extends RenderableObject {
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, axisBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
     this.position = [0, 0, 0];
+  }
+
+  draw(gl: WebGL2RenderingContext) {
+    let programInfo = this.programInfo;
+    gl.useProgram(programInfo.program);
+    gl.bindVertexArray(this.vertexArray);
+    setUniforms(programInfo, this.uniforms);
+    drawBufferInfo(gl, this.bufferInfo, gl.LINES);
   }
 }
