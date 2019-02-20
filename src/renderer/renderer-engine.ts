@@ -9,6 +9,7 @@ import * as twgl from 'twgl.js';
 import { Cube } from '../geometries/cube';
 import { Cone } from '../geometries/cone';
 import { Sphere } from '../geometries/sphere';
+import { Axis3D } from '../geometries/axis-3d';
 
 export class RendererEngine {
 
@@ -75,9 +76,11 @@ export class RendererEngine {
         let myCube = new Cube(this.gl, programInfo, {});
         let myCone = new Cone(this.gl, programInfo, {});
         let mySphere = new Sphere(this.gl, programInfo, {});
+        let myAxis = new Axis3D(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);
+        this.drawableObjects.push(myAxis);
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
 
