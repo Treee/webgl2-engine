@@ -23,6 +23,7 @@ export class Camera {
   }
 
   private moveCamera(amountToMove: v3.Vec3) {
+    this.target = v3.add(this.target, amountToMove);
     this.position = v3.add(this.position, amountToMove);
   }
 
