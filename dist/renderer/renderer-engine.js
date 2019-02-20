@@ -125,11 +125,7 @@ class RendererEngine {
         this.drawableObjects.forEach(obj => {
             obj.rotate(dt);
             obj.move(dt, viewProjectionMatrix);
-            let programInfo = obj.programInfo;
-            gl.useProgram(programInfo.program);
-            gl.bindVertexArray(obj.vertexArray);
-            twgl.setUniforms(programInfo, obj.uniforms);
-            twgl.drawBufferInfo(gl, obj.bufferInfo);
+            obj.draw(gl);
         });
     }
     applyUserInput(activeKeysMap) {

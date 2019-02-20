@@ -18,4 +18,6 @@ export declare abstract class RenderableObject {
     rotate(dt: number): void;
     move(dt: number, viewProjectionMatrix: any): void;
     computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4;
+    update(dt: number): void;
+    draw(gl: WebGL2RenderingContext): void;
 }

@@ -22,6 +22,14 @@ class RenderableObject {
         matrix = twgl_js_1.m4.rotateX(matrix, this.rotationX);
         return twgl_js_1.m4.rotateY(matrix, this.rotationY);
     }
+    update(dt) { }
+    draw(gl) {
+        let programInfo = this.programInfo;
+        gl.useProgram(programInfo.program);
+        gl.bindVertexArray(this.vertexArray);
+        twgl_js_1.setUniforms(programInfo, this.uniforms);
+        twgl_js_1.drawBufferInfo(gl, this.bufferInfo);
+    }
 }
 exports.RenderableObject = RenderableObject;
 //# sourceMappingURL=renderable-object.js.map
