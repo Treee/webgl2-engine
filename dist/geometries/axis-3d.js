@@ -22,6 +22,13 @@ class Axis3D extends renderable_object_1.RenderableObject {
         this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
         this.position = [0, 0, 0];
     }
+    draw(gl) {
+        let programInfo = this.programInfo;
+        gl.useProgram(programInfo.program);
+        gl.bindVertexArray(this.vertexArray);
+        twgl_js_1.setUniforms(programInfo, this.uniforms);
+        twgl_js_1.drawBufferInfo(gl, this.bufferInfo, gl.LINES);
+    }
 }
 exports.Axis3D = Axis3D;
 //# sourceMappingURL=axis-3d.js.map

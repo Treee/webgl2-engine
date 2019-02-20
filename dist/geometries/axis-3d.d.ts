@@ -7,4 +7,5 @@ export declare class Axis3D extends RenderableObject {
         u_matrix: number[];
     };
     constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any);
+    draw(gl: WebGL2RenderingContext): void;
 }
