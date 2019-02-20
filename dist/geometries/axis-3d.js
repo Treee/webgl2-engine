@@ -12,7 +12,8 @@ class Axis3D extends renderable_object_1.RenderableObject {
         this.alias = 'axis-3d';
         let arrays = {
             position: [0, 0, 0, 100, 0, 0],
-            color: [0, 0, 0, 1, 1, 0, 0, 1]
+            color: [0, 0, 0, 1, 1, 0, 0, 1],
+            indices: [0, 1]
         };
         let axisBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, arrays);
         this.bufferInfo = axisBufferInfo;
