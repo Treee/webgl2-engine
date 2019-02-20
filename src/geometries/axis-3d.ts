@@ -13,9 +13,9 @@ export class Axis3D extends RenderableObject {
     this.alias = 'axis-3d';
 
     let arrays = {
-      position: [0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 100, 0],
-      color: [0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
-      indices: [0, 1, 2, 3]
+      position: [-100, 0, 0, 100, 0, 0, 0, -100, 0, 0, 100, 0, 0, 0, -100, 0, 0, 100],
+      color: [0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],
+      indices: [0, 1, 2, 3, 4, 5]
     }
 
     let axisBufferInfo = createBufferInfoFromArrays(gl, arrays);
