@@ -1,4 +1,4 @@
-import { ProgramInfo, BufferInfo, m4 } from "twgl.js";
+import { ProgramInfo, BufferInfo, m4, setUniforms, drawBufferInfo } from "twgl.js";
 
 export abstract class RenderableObject {
   programInfo!: ProgramInfo;
@@ -34,5 +34,15 @@ export abstract class RenderableObject {
     var matrix = m4.translate(viewProjectionMatrix, this.position);
     matrix = m4.rotateX(matrix, this.rotationX);
     return m4.rotateY(matrix, this.rotationY);
+  }
+
+  update(dt: number) { }
+
+  draw(gl: WebGL2RenderingContext) {
+    let programInfo = this.programInfo;
+    gl.useProgram(programInfo.program);
+    gl.bindVertexArray(this.vertexArray);
+    setUniforms(programInfo, this.uniforms);
+    drawBufferInfo(gl, this.bufferInfo);
   }
 }
