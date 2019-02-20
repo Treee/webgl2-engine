@@ -3,6 +3,10 @@ import { ProgramInfo, createVAOFromBufferInfo, createBufferInfoFromArrays, setUn
 
 export class Axis3D extends RenderableObject {
 
+  xAxisRange: number = 100;
+  yAxisRange: number = 100;
+  zAxisRange: number = 100;
+
   defaultUniforms = {
     u_colorMult: [1, 0.5, 0.5, 1],
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
@@ -13,7 +17,7 @@ export class Axis3D extends RenderableObject {
     this.alias = 'axis-3d';
 
     let arrays = {
-      position: [-100, 0, 0, 100, 0, 0, 0, -100, 0, 0, 100, 0, 0, 0, -100, 0, 0, 100],
+      position: [-this.xAxisRange, 0, 0, this.xAxisRange, 0, 0, 0, -this.yAxisRange, 0, 0, this.yAxisRange, 0, 0, 0, -this.zAxisRange, 0, 0, this.zAxisRange],
       color: [0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],
       indices: [0, 1, 2, 3, 4, 5]
     }
