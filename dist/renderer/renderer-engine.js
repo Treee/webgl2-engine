@@ -8,6 +8,7 @@ const twgl = require("twgl.js");
 const cube_1 = require("../geometries/cube");
 const cone_1 = require("../geometries/cone");
 const sphere_1 = require("../geometries/sphere");
+const axis_3d_1 = require("../geometries/axis-3d");
 class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
@@ -57,9 +58,11 @@ class RendererEngine {
         let myCube = new cube_1.Cube(this.gl, programInfo, {});
         let myCone = new cone_1.Cone(this.gl, programInfo, {});
         let mySphere = new sphere_1.Sphere(this.gl, programInfo, {});
+        let myAxis = new axis_3d_1.Axis3D(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);
+        this.drawableObjects.push(myAxis);
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
     drawFrame(dt, renderableObjects) {
