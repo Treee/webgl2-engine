@@ -19,6 +19,7 @@ class Camera {
         return twgl_js_1.m4.multiply(projectionMatrix, this.getViewMatrix());
     }
     moveCamera(amountToMove) {
+        this.target = twgl_js_1.v3.add(this.target, amountToMove);
         this.position = twgl_js_1.v3.add(this.position, amountToMove);
     }
     moveForward() { this.moveCamera([0, 0, -1]); }
