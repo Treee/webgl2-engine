@@ -1,4 +1,4 @@
-import { ProgramInfo, BufferInfo, m4, setUniforms, drawBufferInfo } from "twgl.js";
+import { ProgramInfo, BufferInfo, m4, setUniforms, drawBufferInfo, v3 } from "twgl.js";
 
 export abstract class RenderableObject {
   programInfo!: ProgramInfo;
@@ -8,7 +8,7 @@ export abstract class RenderableObject {
 
   alias: string = 'default';
 
-  position: number[] = [0, 0, 0];
+  position: v3.Vec3 = [0, 0, 0];
 
   rotationX: number = 0;
   rotationY: number = 0;
@@ -22,7 +22,10 @@ export abstract class RenderableObject {
 
   }
 
-  translate(dt: number) { }
+  translate(dt: number, translateAmount: v3.Vec3) {
+    let newPosition = v3.add(this.position, translateAmount);
+    this.position = newPosition;
+  }
   scale(dt: number) { }
   rotate(dt: number) { }
 
