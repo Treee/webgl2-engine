@@ -11,7 +11,10 @@ class RenderableObject {
         this.scaleValue = 1;
         this.modelMatrix = twgl_js_1.m4.identity();
     }
-    translate(dt) { }
+    translate(dt, translateAmount) {
+        let newPosition = twgl_js_1.v3.add(this.position, translateAmount);
+        this.position = newPosition;
+    }
     scale(dt) { }
     rotate(dt) { }
     move(dt, viewProjectionMatrix) {

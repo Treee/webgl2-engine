@@ -1,19 +1,19 @@
 /// <reference types="webgl2" />
-import { ProgramInfo, BufferInfo, m4 } from "twgl.js";
+import { ProgramInfo, BufferInfo, m4, v3 } from "twgl.js";
 export declare abstract class RenderableObject {
     programInfo: ProgramInfo;
     bufferInfo: BufferInfo;
     vertexArray: WebGLVertexArrayObject;
     uniforms: any;
     alias: string;
-    position: number[];
+    position: v3.Vec3;
     rotationX: number;
     rotationY: number;
     rotationZ: number;
     scaleValue: number;
     modelMatrix: m4.Mat4;
     constructor();
-    translate(dt: number): void;
+    translate(dt: number, translateAmount: v3.Vec3): void;
     scale(dt: number): void;
     rotate(dt: number): void;
     move(dt: number, viewProjectionMatrix: any): void;
