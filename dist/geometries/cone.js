@@ -15,7 +15,6 @@ class Cone extends renderable_object_1.RenderableObject {
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, coneBufferInfo);
         this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
-        this.position = [40, 0, 0];
     }
     rotate(dt) {
         this.rotationX = dt;

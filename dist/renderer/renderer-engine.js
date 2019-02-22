@@ -56,12 +56,14 @@ class RendererEngine {
         // create program info
         let programInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
         let myCube = new cube_1.Cube(this.gl, programInfo, {});
+        myCube.translate(0, [-40, 0, 0]);
         let myCube1 = new cube_1.Cube(this.gl, programInfo, {});
         let myCube2 = new cube_1.Cube(this.gl, programInfo, {});
         let myCube3 = new cube_1.Cube(this.gl, programInfo, {});
         let myCube4 = new cube_1.Cube(this.gl, programInfo, {});
         let myCube5 = new cube_1.Cube(this.gl, programInfo, {});
         let myCone = new cone_1.Cone(this.gl, programInfo, {});
+        myCone.translate(0, [0, 0, 40]);
         let mySphere = new sphere_1.Sphere(this.gl, programInfo, {});
         let myAxis = new axis_3d_1.Axis3D(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);

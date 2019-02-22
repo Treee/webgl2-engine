@@ -19,7 +19,6 @@ class Sphere extends renderable_object_1.RenderableObject {
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, sphereBufferInfo);
         this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
-        this.position = [0, 0, 0];
     }
     rotate(dt) {
         this.rotationX = dt;
