@@ -17,7 +17,6 @@ export class Cone extends RenderableObject {
     this.programInfo = progInfo;
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, coneBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
-    this.position = [40, 0, 0];
   }
 
   rotate(dt: number) {

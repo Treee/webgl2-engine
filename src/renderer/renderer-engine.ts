@@ -74,12 +74,14 @@ export class RendererEngine {
         let programInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
 
         let myCube = new Cube(this.gl, programInfo, {});
+        myCube.translate(0, [-40, 0, 0]);
         let myCube1 = new Cube(this.gl, programInfo, {});
         let myCube2 = new Cube(this.gl, programInfo, {});
         let myCube3 = new Cube(this.gl, programInfo, {});
         let myCube4 = new Cube(this.gl, programInfo, {});
         let myCube5 = new Cube(this.gl, programInfo, {});
         let myCone = new Cone(this.gl, programInfo, {});
+        myCone.translate(0, [0, 0, 40]);
         let mySphere = new Sphere(this.gl, programInfo, {});
         let myAxis = new Axis3D(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
