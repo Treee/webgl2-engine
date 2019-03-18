@@ -12,6 +12,7 @@ export class Camera {
 
   constructor(startPosition: v3.Vec3) {
     this.position = startPosition;
+    this.target = v3.subtract(startPosition, [0, 0, 1]);
     this.cameraMatrix = m4.lookAt(this.position, this.target, this.up);;
   }
 
