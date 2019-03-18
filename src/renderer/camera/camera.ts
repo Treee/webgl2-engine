@@ -4,7 +4,7 @@ export class Camera {
 
   private cameraMatrix: m4.Mat4 = m4.identity();
 
-  private position: v3.Vec3 = [0, 0, 100];
+  private position: v3.Vec3 = [0, 0, 1];
   private target: v3.Vec3 = [0, 0, 0];
   private up: v3.Vec3 = [0, 1, 0];
 
@@ -37,11 +37,21 @@ export class Camera {
   moveDown() { this.moveCamera([0, -1, 0]); }
 
   turnLeft() {
-    this.yRotation += Math.PI / 18;
+    let twoPi = Math.PI * 2;
+    let remainder = this.yRotation - twoPi;
+    this.yRotation += twoPi / 18;
+    if (remainder > 0) {
+      this.yRotation = remainder;
+    }
     this.target = v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
   }
   turnRight() {
-    this.yRotation -= Math.PI / 18;
+    let twoPi = Math.PI * 2;
+    let remainder = twoPi - this.yRotation;
+    this.yRotation -= twoPi / 18;
+    if (remainder < 0) {
+      this.yRotation = remainder;
+    }
     this.target = v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
   }
 }
