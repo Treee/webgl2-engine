@@ -8,7 +8,7 @@ export class Cube extends RenderableObject {
   zAxisRange: number = 1;
 
   defaultUniforms = {
-    u_colorMult: [1, 0.5, 0.5, 1],
+    u_colorMult: [1, 1, 1, 1],
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   };
 
