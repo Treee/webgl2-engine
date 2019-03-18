@@ -7,7 +7,7 @@ export class Plane extends RenderableObject {
   zAxisRange: number = 1;
 
   defaultUniforms = {
-    u_colorMult: [0.5, 0.5, 1, 1],
+    u_colorMult: [1, 1, 1, 1],
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
   };
 
@@ -28,7 +28,7 @@ export class Plane extends RenderableObject {
         0, 0, 1, 1, // front left corner
         0, 0, 1, 1  // front right corner
       ],
-      indices: [0, 1, 2, 1, 2, 3]
+      indices: [0, 2, 1, 1, 2, 3] // counter clock-wise is front face
     }
 
     let planeBufferInfo = createBufferInfoFromArrays(gl, arrays);
