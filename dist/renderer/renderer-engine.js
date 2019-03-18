@@ -69,7 +69,7 @@ class RendererEngine {
         let myPlane = new plane_1.Plane(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
-        this.drawableObjects.push(mySphere);
+        //this.drawableObjects.push(mySphere);
         this.drawableObjects.push(myAxis);
         this.drawableObjects.push(myCube1);
         this.drawableObjects.push(myCube2);
