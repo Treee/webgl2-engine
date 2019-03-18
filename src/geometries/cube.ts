@@ -34,12 +34,12 @@ export class Cube extends RenderableObject {
         1, 0, 0, 1, // back left corner
         0, 1, 0, 1, // back right corner
         0, 0, 1, 1, // front left corner
-        1, 1, 1, 1,  // front right corner
+        0.5, 0.5, 0.5, 1,  // front right corner
         // bot
         1, 0, 0, 1, // back left corner
         0, 1, 0, 1, // back right corner
         0, 0, 1, 1, // front left corner
-        1, 1, 1, 1  // front right corner
+        0.5, 0.5, 0.5, 1  // front right corner
       ],
       indices: [
         0, 2, 1, 1, 2, 3, // top face
