@@ -173,6 +173,14 @@ class RendererEngine {
             // fall
             this.debugCamera.moveDown();
         }
+        if (activeKeysMap['q']) {
+            // turn left
+            this.debugCamera.turnLeft();
+        }
+        if (activeKeysMap['e']) {
+            // turn right
+            this.debugCamera.turnRight();
+        }
     }
     drawObjects(gl, objectsToDraw) {
         objectsToDraw.forEach(obj => {

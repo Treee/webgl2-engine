@@ -14,4 +14,6 @@ export declare class Camera {
     moveRight(): void;
     moveUp(): void;
     moveDown(): void;
+    turnLeft(): void;
+    turnRight(): void;
 }
