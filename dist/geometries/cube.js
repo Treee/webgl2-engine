@@ -9,7 +9,7 @@ class Cube extends renderable_object_1.RenderableObject {
         this.yAxisRange = 1;
         this.zAxisRange = 1;
         this.defaultUniforms = {
-            u_colorMult: [1, 0.5, 0.5, 1],
+            u_colorMult: [1, 1, 1, 1],
             u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
         this.alias = 'cube';
@@ -41,10 +41,10 @@ class Cube extends renderable_object_1.RenderableObject {
             indices: [
                 0, 2, 1, 1, 2, 3,
                 3, 2, 7, 7, 2, 6,
-                6, 4, 2, 2, 4, 0,
+                6, 2, 4, 4, 2, 0,
                 0, 1, 4, 4, 1, 5,
-                5, 3, 1, 1, 7, 3,
-                4, 6, 5, 5, 6, 7 // bot face
+                5, 1, 3, 3, 7, 5,
+                5, 7, 4, 4, 7, 6 // bot face
             ] // counter clock-wise is front face
         };
         let cubeBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, arrays);
