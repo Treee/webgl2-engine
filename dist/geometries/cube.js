@@ -31,12 +31,12 @@ class Cube extends renderable_object_1.RenderableObject {
                 1, 0, 0, 1,
                 0, 1, 0, 1,
                 0, 0, 1, 1,
-                1, 1, 1, 1,
+                0.5, 0.5, 0.5, 1,
                 // bot
                 1, 0, 0, 1,
                 0, 1, 0, 1,
                 0, 0, 1, 1,
-                1, 1, 1, 1 // front right corner
+                0.5, 0.5, 0.5, 1 // front right corner
             ],
             indices: [
                 0, 2, 1, 1, 2, 3,
