@@ -8,7 +8,7 @@ class Plane extends renderable_object_1.RenderableObject {
         this.xAxisRange = 1;
         this.zAxisRange = 1;
         this.defaultUniforms = {
-            u_colorMult: [0.5, 0.5, 1, 1],
+            u_colorMult: [1, 1, 1, 1],
             u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
         };
         this.alias = 'plane';
@@ -25,7 +25,7 @@ class Plane extends renderable_object_1.RenderableObject {
                 0, 0, 1, 1,
                 0, 0, 1, 1 // front right corner
             ],
-            indices: [0, 1, 2, 1, 2, 3]
+            indices: [0, 2, 1, 1, 2, 3] // counter clock-wise is front face
         };
         let planeBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, arrays);
         this.bufferInfo = planeBufferInfo;
