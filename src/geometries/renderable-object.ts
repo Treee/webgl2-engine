@@ -14,7 +14,7 @@ export abstract class RenderableObject {
   rotationY: number = 0;
   rotationZ: number = 0;
 
-  scaleValue: number = 1;
+  scaleValue: v3.Vec3 = [1, 1, 1];
 
   modelMatrix: m4.Mat4 = m4.identity();
 
@@ -26,7 +26,12 @@ export abstract class RenderableObject {
     let newPosition = v3.add(this.position, translateAmount);
     this.position = newPosition;
   }
-  scale(dt: number) { }
+
+  scale(dt: number, scaleAmount: v3.Vec3) {
+    let newScale = v3.add(this.scaleValue, scaleAmount);
+    this.scaleValue = newScale;
+  }
+
   rotate(dt: number) { }
 
   move(dt: number, viewProjectionMatrix: any) {
@@ -35,8 +40,11 @@ export abstract class RenderableObject {
 
   computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4 {
     var matrix = m4.translate(viewProjectionMatrix, this.position);
+    matrix = m4.scale(matrix, this.scaleValue);
     matrix = m4.rotateX(matrix, this.rotationX);
-    return m4.rotateY(matrix, this.rotationY);
+    matrix = m4.rotateY(matrix, this.rotationY);
+    matrix = m4.rotateZ(matrix, this.rotationZ);
+    return matrix
   }
 
   update(dt: number) { }

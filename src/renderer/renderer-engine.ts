@@ -10,6 +10,7 @@ import { Cube } from '../geometries/cube';
 import { Cone } from '../geometries/cone';
 import { Sphere } from '../geometries/sphere';
 import { Axis3D } from '../geometries/axis-3d';
+import { Plane } from '../geometries/plane';
 
 export class RendererEngine {
 
@@ -84,6 +85,7 @@ export class RendererEngine {
         myCone.translate(0, [40, 0, 0]);
         let mySphere = new Sphere(this.gl, programInfo, {});
         let myAxis = new Axis3D(this.gl, programInfo, {});
+        let myPlane = new Plane(this.gl, programInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
         this.drawableObjects.push(mySphere);
@@ -93,11 +95,13 @@ export class RendererEngine {
         this.drawableObjects.push(myCube3);
         this.drawableObjects.push(myCube4);
         this.drawableObjects.push(myCube5);
+        this.drawableObjects.push(myPlane);
         myCube1.translate(0, [-40, 25, 0]);
         myCube2.translate(0, [-20, 25, 0]);
         myCube3.translate(0, [0, 25, 0]);
         myCube4.translate(0, [20, 25, 0]);
         myCube5.translate(0, [40, 25, 0]);
+        myPlane.scale(0, [100, 0, 100]);
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
 
