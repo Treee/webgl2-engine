@@ -9,6 +9,7 @@ class Camera {
         this.up = [0, 1, 0];
         this.yRotation = 0;
         this.position = startPosition;
+        this.target = twgl_js_1.v3.subtract(startPosition, [0, 0, 1]);
         this.cameraMatrix = twgl_js_1.m4.lookAt(this.position, this.target, this.up);
         ;
     }
