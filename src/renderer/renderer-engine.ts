@@ -81,7 +81,7 @@ export class RendererEngine {
         let myCube4 = new Cube(this.gl, programInfo, {});
         let myCube5 = new Cube(this.gl, programInfo, {});
         let myCone = new Cone(this.gl, programInfo, {});
-        myCone.translate(0, [40, 0, 0]);
+        // myCone.translate(0, [40, 0, 0]);
         let mySphere = new Sphere(this.gl, programInfo, {});
         let myAxis = new Axis3D(this.gl, programInfo, {});
         let myPlane = new Plane(this.gl, programInfo, {});
