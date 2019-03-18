@@ -8,6 +8,8 @@ export class Camera {
   private target: v3.Vec3 = [0, 0, 0];
   private up: v3.Vec3 = [0, 1, 0];
 
+  private yRotation: number = 0;
+
   constructor(startPosition: v3.Vec3) {
     this.position = startPosition;
     this.cameraMatrix = m4.lookAt(this.position, this.target, this.up);;
@@ -35,11 +37,11 @@ export class Camera {
   moveDown() { this.moveCamera([0, -1, 0]); }
 
   turnLeft() {
-    let step = Math.PI * 18;
-    this.target = v3.add(this.target, [Math.cos(step), 0, Math.sin(step)]);
+    this.yRotation += Math.PI / 18;
+    this.target = v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
   }
   turnRight() {
-    let step = Math.PI * 18;
-    this.target = v3.add(this.target, [Math.cos(-step), 0, Math.sin(-step)]);
+    this.yRotation -= Math.PI / 18;
+    this.target = v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
   }
 }
