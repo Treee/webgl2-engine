@@ -4,7 +4,7 @@ const twgl_js_1 = require("twgl.js");
 class Camera {
     constructor(startPosition) {
         this.cameraMatrix = twgl_js_1.m4.identity();
-        this.position = [0, 0, 100];
+        this.position = [0, 0, 1];
         this.target = [0, 0, 0];
         this.up = [0, 1, 0];
         this.yRotation = 0;
@@ -30,11 +30,21 @@ class Camera {
     moveUp() { this.moveCamera([0, 1, 0]); }
     moveDown() { this.moveCamera([0, -1, 0]); }
     turnLeft() {
-        this.yRotation += Math.PI / 18;
+        let twoPi = Math.PI * 2;
+        let remainder = this.yRotation - twoPi;
+        this.yRotation += twoPi / 18;
+        if (remainder > 0) {
+            this.yRotation = remainder;
+        }
         this.target = twgl_js_1.v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
     }
     turnRight() {
-        this.yRotation -= Math.PI / 18;
+        let twoPi = Math.PI * 2;
+        let remainder = twoPi - this.yRotation;
+        this.yRotation -= twoPi / 18;
+        if (remainder < 0) {
+            this.yRotation = remainder;
+        }
         this.target = twgl_js_1.v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
     }
 }
