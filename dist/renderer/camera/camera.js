@@ -7,6 +7,7 @@ class Camera {
         this.position = [0, 0, 100];
         this.target = [0, 0, 0];
         this.up = [0, 1, 0];
+        this.yRotation = 0;
         this.position = startPosition;
         this.cameraMatrix = twgl_js_1.m4.lookAt(this.position, this.target, this.up);
         ;
@@ -29,12 +30,12 @@ class Camera {
     moveUp() { this.moveCamera([0, 1, 0]); }
     moveDown() { this.moveCamera([0, -1, 0]); }
     turnLeft() {
-        let step = Math.PI * 18;
-        this.target = twgl_js_1.v3.add(this.target, [Math.cos(step), 0, Math.sin(step)]);
+        this.yRotation += Math.PI / 18;
+        this.target = twgl_js_1.v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
     }
     turnRight() {
-        let step = Math.PI * 18;
-        this.target = twgl_js_1.v3.add(this.target, [Math.cos(-step), 0, Math.sin(-step)]);
+        this.yRotation -= Math.PI / 18;
+        this.target = twgl_js_1.v3.add(this.target, [Math.cos(this.yRotation), 0, Math.sin(this.yRotation)]);
     }
 }
 exports.Camera = Camera;
