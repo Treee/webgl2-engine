@@ -206,6 +206,12 @@ export class RendererEngine {
         } if (activeKeysMap['f']) {
             // fall
             this.debugCamera.moveDown();
+        } if (activeKeysMap['q']) {
+            // turn left
+            this.debugCamera.turnLeft();
+        } if (activeKeysMap['e']) {
+            // turn right
+            this.debugCamera.turnRight();
         }
     }
 

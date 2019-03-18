@@ -33,4 +33,13 @@ export class Camera {
   moveRight() { this.moveCamera([1, 0, 0]); }
   moveUp() { this.moveCamera([0, 1, 0]); }
   moveDown() { this.moveCamera([0, -1, 0]); }
+
+  turnLeft() {
+    let step = Math.PI * 18;
+    this.target = v3.add(this.target, [Math.cos(step), 0, Math.sin(step)]);
+  }
+  turnRight() {
+    let step = Math.PI * 18;
+    this.target = v3.add(this.target, [Math.cos(-step), 0, Math.sin(-step)]);
+  }
 }
