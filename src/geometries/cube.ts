@@ -44,10 +44,10 @@ export class Cube extends RenderableObject {
       indices: [
         0, 2, 1, 1, 2, 3, // top face
         3, 2, 7, 7, 2, 6, // front face
-        6, 4, 2, 2, 4, 0, // left face
+        6, 2, 4, 4, 2, 0, // left face
         0, 1, 4, 4, 1, 5, // rear face
-        5, 3, 1, 1, 7, 3, // right face
-        4, 6, 5, 5, 6, 7// bot face
+        5, 1, 3, 3, 7, 5, // right face
+        5, 7, 4, 4, 7, 6// bot face
       ] // counter clock-wise is front face
     }
 
