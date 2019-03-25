@@ -26,7 +26,9 @@ export class Camera {
   constructor(startPosition: v3.Vec3) {
     this.position = startPosition;
     this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
+    this.yAngle = this.pi / 2;
     this.yaw();
+    this.pitch();
   }
 
   getModelMatrix(): Matrix4 {
