@@ -3,7 +3,6 @@ import { Matrix4 } from "three";
 export declare class Camera {
     private cameraMatrix;
     private position;
-    private target;
     private up;
     private translateStepSize;
     private xAngle;
@@ -14,6 +13,7 @@ export declare class Camera {
     private angleStepSize;
     private pi;
     private twoPi;
+    private pureZ;
     constructor(startPosition: v3.Vec3);
     getModelMatrix(): Matrix4;
     getForward(): v3.Vec3;

@@ -6,17 +6,17 @@ class Camera {
     constructor(startPosition) {
         this.cameraMatrix = twgl_js_1.m4.identity();
         this.position = [0, 0, 1];
-        this.target = [0, 0, 0];
         this.up = [0, 1, 0];
         this.translateStepSize = 1.0;
-        this.xAngle = 1.0;
-        this.yAngle = 1.0;
+        this.xAngle = 0;
+        this.yAngle = 0;
         this.xRotation = new three_1.Quaternion();
         this.yRotation = new three_1.Quaternion();
         this.targetOrientation = new three_1.Quaternion();
         this.angleStepSize = 0.05;
         this.pi = Math.PI;
         this.twoPi = this.pi * 2;
+        this.pureZ = new three_1.Quaternion(0, 0, -1, 0);
         this.position = startPosition;
         this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
         this.yaw();
@@ -34,10 +34,9 @@ class Camera {
     }
     // this forward is a pure normal forward not translated to position.
     getForward() {
-        const pureZ = new three_1.Quaternion(0, 0, -1, 0);
         const qw = new three_1.Quaternion().copy(this.targetOrientation);
         const conj = new three_1.Quaternion().copy(qw).conjugate();
-        const normalZ = conj.multiply(pureZ).multiply(qw);
+        const normalZ = conj.multiply(this.pureZ).multiply(qw);
         return [normalZ.x, normalZ.y, normalZ.z];
     }
     getPosition() {
@@ -55,8 +54,8 @@ class Camera {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
         console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${twgl_js_1.v3.add(this.getPosition(), this.getForward())}`);
     }
-    moveForward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, -1], this.translateStepSize)); }
-    moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, 1], this.translateStepSize)); }
+    moveForward() { this.moveCamera(twgl_js_1.v3.mulScalar(this.getForward(), this.translateStepSize)); }
+    moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar(this.getForward(), -this.translateStepSize)); }
     moveLeft() { this.moveCamera(twgl_js_1.v3.mulScalar([-1, 0, 0], this.translateStepSize)); }
     moveRight() { this.moveCamera(twgl_js_1.v3.mulScalar([1, 0, 0], this.translateStepSize)); }
     moveUp() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 1, 0], this.translateStepSize)); }
@@ -92,7 +91,7 @@ class Camera {
         }
         //yaw the given angle over the y unit vector
         // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
-        this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), this.xAngle);
+        this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(1, 0, 0), this.xAngle);
         this.applyRotation();
     }
     applyRotation() {
