@@ -31,6 +31,7 @@ class Camera {
         const cameraModelMatrix = translation.multiply(rotation);
         return cameraModelMatrix;
     }
+    // this forward is a pure normal forward not translated to position.
     getForward() {
         const pureZ = new three_1.Quaternion(0, 0, -1, 0);
         const qw = new three_1.Quaternion().copy(this.targetOrientation);
@@ -61,9 +62,11 @@ class Camera {
     moveDown() { this.moveCamera(twgl_js_1.v3.mulScalar([0, -1, 0], this.translateStepSize)); }
     turnLeft() {
         this.xAngle += -this.angleStepSize;
+        this.yaw();
     }
     turnRight() {
         this.xAngle += this.angleStepSize;
+        this.yaw();
     }
     yaw() {
         //while the Angle is greater than 2pi (a full revolution, 360degrees)
@@ -75,7 +78,7 @@ class Camera {
         }
         //yaw the given angle over the y unit vector
         // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
-        this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), (this.xAngle * (180 / this.pi)));
+        this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), this.xAngle);
     }
     rotateForward() {
     }
