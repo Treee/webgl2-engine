@@ -77,10 +77,12 @@ export class Camera {
 
   turnLeft() {
     this.xAngle += -this.angleStepSize;
+    this.yaw();
   }
 
   turnRight() {
     this.xAngle += this.angleStepSize;
+    this.yaw();
   }
 
   yaw() {
@@ -93,7 +95,7 @@ export class Camera {
     }
     //yaw the given angle over the y unit vector
     // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
-    this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), (this.xAngle));
+    this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
   }
 
   rotateForward() {
