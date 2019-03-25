@@ -25,8 +25,8 @@ export class Camera {
 
   constructor(startPosition: v3.Vec3) {
     this.position = startPosition;
-    this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
-    this.yAngle = this.pi / 2;
+    this.xAngle = this.pi; // rotate 90 degrees so we are looking down the -z axis
+    this.yAngle = -this.pi;
     this.yaw();
     this.pitch();
   }
@@ -118,6 +118,7 @@ export class Camera {
 
   applyRotation() {
     this.targetOrientation = new Quaternion().multiply(this.xRotation).multiply(this.yRotation);
+    console.log(`X: ${this.xAngle * (180 / this.pi)} Y: ${this.yAngle * (180 / this.pi)}`);
   }
 
   rotateForward() {
