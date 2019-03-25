@@ -15,16 +15,16 @@ export class Camera {
 
   private xRotation: Quaternion = new Quaternion();
 
-  private targetOrientation: Quaternion = new Quaternion(0, 0, -1, 0);
+  private targetOrientation: Quaternion = new Quaternion();
 
-  private angleStepSize: number = 0.01;
+  private angleStepSize: number = 0.05;
   private pi: number = Math.PI;
   private twoPi = this.pi * 2;
 
   constructor(startPosition: v3.Vec3) {
     this.position = startPosition;
-    this.target = v3.subtract(startPosition, [0, 0, 1]);
-    this.cameraMatrix = m4.lookAt(this.position, this.target, this.up);
+    this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
+    this.yaw();
   }
 
   getModelMatrix(): Matrix4 {
