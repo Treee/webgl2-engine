@@ -39,6 +39,7 @@ export class Camera {
     return cameraModelMatrix;
   }
 
+  // this forward is a pure normal forward not translated to position.
   getForward(): v3.Vec3 {
     const pureZ = new Quaternion(0, 0, -1, 0);
     const qw = new Quaternion().copy(this.targetOrientation);
@@ -92,7 +93,7 @@ export class Camera {
     }
     //yaw the given angle over the y unit vector
     // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
-    this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), (this.xAngle * (180 / this.pi)));
+    this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), (this.xAngle));
   }
 
   rotateForward() {
