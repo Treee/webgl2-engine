@@ -12,6 +12,7 @@ class Camera {
         this.xAngle = 1.0;
         this.yAngle = 1.0;
         this.xRotation = new three_1.Quaternion();
+        this.yRotation = new three_1.Quaternion();
         this.targetOrientation = new three_1.Quaternion();
         this.angleStepSize = 0.05;
         this.pi = Math.PI;
@@ -52,7 +53,7 @@ class Camera {
     }
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
-        // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
+        console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${twgl_js_1.v3.add(this.getPosition(), this.getForward())}`);
     }
     moveForward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, -1], this.translateStepSize)); }
     moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, 1], this.translateStepSize)); }
@@ -61,14 +62,27 @@ class Camera {
     moveUp() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 1, 0], this.translateStepSize)); }
     moveDown() { this.moveCamera(twgl_js_1.v3.mulScalar([0, -1, 0], this.translateStepSize)); }
     turnLeft() {
-        this.xAngle += -this.angleStepSize;
+        this.yAngle += -this.angleStepSize;
         this.yaw();
     }
     turnRight() {
-        this.xAngle += this.angleStepSize;
+        this.yAngle += this.angleStepSize;
         this.yaw();
     }
     yaw() {
+        //while the Angle is greater than 2pi (a full revolution, 360degrees)
+        while (this.yAngle > this.twoPi) { //subtract 2pi from the angle to "wrap" it back to 0ish
+            this.yAngle = this.yAngle - this.twoPi;
+        } //this is the same but for the reverse direction
+        while (this.yAngle < -this.twoPi) {
+            this.yAngle = this.yAngle + this.twoPi;
+        }
+        //yaw the given angle over the y unit vector
+        // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.yAngle);
+        this.yRotation = this.yRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), this.yAngle);
+        this.applyRotation();
+    }
+    pitch() {
         //while the Angle is greater than 2pi (a full revolution, 360degrees)
         while (this.xAngle > this.twoPi) { //subtract 2pi from the angle to "wrap" it back to 0ish
             this.xAngle = this.xAngle - this.twoPi;
@@ -82,11 +96,15 @@ class Camera {
         this.applyRotation();
     }
     applyRotation() {
-        this.targetOrientation = new three_1.Quaternion().multiply(this.xRotation);
+        this.targetOrientation = new three_1.Quaternion().multiply(this.xRotation).multiply(this.yRotation);
     }
     rotateForward() {
+        this.xAngle -= this.angleStepSize;
+        this.pitch();
     }
     rotateBackward() {
+        this.xAngle += this.angleStepSize;
+        this.pitch();
     }
 }
 exports.Camera = Camera;

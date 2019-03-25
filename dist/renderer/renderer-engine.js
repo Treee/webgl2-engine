@@ -181,6 +181,14 @@ class RendererEngine {
             // turn right
             this.debugCamera.turnRight();
         }
+        if (activeKeysMap['z']) {
+            // turn left
+            this.debugCamera.rotateForward();
+        }
+        if (activeKeysMap['x']) {
+            // turn right
+            this.debugCamera.rotateBackward();
+        }
     }
     drawObjects(gl, objectsToDraw) {
         objectsToDraw.forEach(obj => {

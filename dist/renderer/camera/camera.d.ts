@@ -9,6 +9,7 @@ export declare class Camera {
     private xAngle;
     private yAngle;
     private xRotation;
+    private yRotation;
     private targetOrientation;
     private angleStepSize;
     private pi;
@@ -29,6 +30,7 @@ export declare class Camera {
     turnLeft(): void;
     turnRight(): void;
     yaw(): void;
+    pitch(): void;
     applyRotation(): void;
     rotateForward(): void;
     rotateBackward(): void;
