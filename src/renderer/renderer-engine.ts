@@ -62,7 +62,7 @@ export class RendererEngine {
 
     constructor() {
         this.shaderManager = new ShaderManager();
-        this.debugCamera = new Camera([0, 0, 100]);
+        this.debugCamera = new Camera([0, 0, 0]);
     }
 
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
@@ -95,11 +95,11 @@ export class RendererEngine {
         this.drawableObjects.push(myCube4);
         this.drawableObjects.push(myCube5);
         this.drawableObjects.push(myPlane);
-        myCube1.translate(0, [-40, 25, 0]);
-        myCube2.translate(0, [-20, 25, 0]);
-        myCube3.translate(0, [0, 25, 0]);
-        myCube4.translate(0, [20, 25, 0]);
-        myCube5.translate(0, [40, 25, 0]);
+        myCube1.translate(0, [-0, 0, -20]);
+        myCube2.translate(0, [-20, 0, 0]);
+        myCube3.translate(0, [0, 0, 20]);
+        myCube4.translate(0, [20, 0, 0]);
+        myCube5.translate(0, [40, 0, 0]);
         myPlane.scale(0, [100, 0, 100]);
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
@@ -208,10 +208,8 @@ export class RendererEngine {
             this.debugCamera.moveDown();
         } if (activeKeysMap['q']) {
             // turn left
-            this.debugCamera.turnLeft();
         } if (activeKeysMap['e']) {
             // turn right
-            this.debugCamera.turnRight();
         }
     }
 
