@@ -40,7 +40,7 @@ export class Camera {
   }
 
   getForward(): v3.Vec3 {
-    const pureZ = new Quaternion(0, 0, 0, 1);
+    const pureZ = new Quaternion(0, 0, -1, 0);
     const qw = new Quaternion().copy(this.targetOrientation);
     const conj = new Quaternion().copy(qw).conjugate();
     const normalZ = conj.multiply(pureZ).multiply(qw);
@@ -52,10 +52,7 @@ export class Camera {
   }
 
   getViewMatrix(): m4.Mat4 {
-    // this.cameraMatrix = m4.lookAt(this.getPosition(), this.target, this.up);
-
-    const translatedForward = v3.add(this.getPosition(), this.getForward());
-
+    const translatedForward = v3.add(this.getPosition(), this.getForward())
     this.cameraMatrix = m4.lookAt(this.getPosition(), translatedForward, this.up);
     return m4.inverse(this.cameraMatrix);
   }
@@ -66,19 +63,16 @@ export class Camera {
 
   private moveCamera(amountToMove: v3.Vec3) {
     this.position = v3.add(this.getPosition(), amountToMove);
+    console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
   }
 
-  moveForward() {
-    this.moveCamera(v3.add(this.getForward(), v3.mulScalar([0, 0, -1], this.translateStepSize)));
-  }
-  moveBackward() {
-    this.moveCamera(v3.add(this.getForward(), v3.mulScalar([0, 0, 1], this.translateStepSize)));
-  }
+  moveForward() { this.moveCamera(v3.mulScalar([0, 0, -1], this.translateStepSize)); }
+  moveBackward() { this.moveCamera(v3.mulScalar([0, 0, 1], this.translateStepSize)); }
 
-  moveLeft() { this.moveCamera([-1, 0, 0]); }
-  moveRight() { this.moveCamera([1, 0, 0]); }
-  moveUp() { this.moveCamera([0, 1, 0]); }
-  moveDown() { this.moveCamera([0, -1, 0]); }
+  moveLeft() { this.moveCamera(v3.mulScalar([-1, 0, 0], this.translateStepSize)); }
+  moveRight() { this.moveCamera(v3.mulScalar([1, 0, 0], this.translateStepSize)); }
+  moveUp() { this.moveCamera(v3.mulScalar([0, 1, 0], this.translateStepSize)); }
+  moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
 
   turnLeft() {
     this.xAngle += -this.angleStepSize;
