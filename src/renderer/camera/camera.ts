@@ -21,6 +21,8 @@ export class Camera {
   private pi: number = Math.PI;
   private twoPi = this.pi * 2;
 
+  private pureZ: Quaternion = new Quaternion(0, 0, -1, 0);
+
   constructor(startPosition: v3.Vec3) {
     this.position = startPosition;
     this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
@@ -41,10 +43,9 @@ export class Camera {
 
   // this forward is a pure normal forward not translated to position.
   getForward(): v3.Vec3 {
-    const pureZ = new Quaternion(0, 0, -1, 0);
     const qw = new Quaternion().copy(this.targetOrientation);
     const conj = new Quaternion().copy(qw).conjugate();
-    const normalZ = conj.multiply(pureZ).multiply(qw);
+    const normalZ = conj.multiply(this.pureZ).multiply(qw);
     return [normalZ.x, normalZ.y, normalZ.z];
   }
 
