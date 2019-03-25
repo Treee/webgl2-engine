@@ -32,7 +32,7 @@ class Camera {
         return cameraModelMatrix;
     }
     getForward() {
-        const pureZ = new three_1.Quaternion(0, 0, 0, 1);
+        const pureZ = new three_1.Quaternion(0, 0, -1, 0);
         const qw = new three_1.Quaternion().copy(this.targetOrientation);
         const conj = new three_1.Quaternion().copy(qw).conjugate();
         const normalZ = conj.multiply(pureZ).multiply(qw);
@@ -42,7 +42,6 @@ class Camera {
         return this.position;
     }
     getViewMatrix() {
-        // this.cameraMatrix = m4.lookAt(this.getPosition(), this.target, this.up);
         const translatedForward = twgl_js_1.v3.add(this.getPosition(), this.getForward());
         this.cameraMatrix = twgl_js_1.m4.lookAt(this.getPosition(), translatedForward, this.up);
         return twgl_js_1.m4.inverse(this.cameraMatrix);
@@ -52,17 +51,14 @@ class Camera {
     }
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
+        console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${twgl_js_1.v3.add(this.getPosition(), this.getForward())}`);
     }
-    moveForward() {
-        this.moveCamera(twgl_js_1.v3.add(this.getForward(), twgl_js_1.v3.mulScalar([0, 0, -1], this.translateStepSize)));
-    }
-    moveBackward() {
-        this.moveCamera(twgl_js_1.v3.add(this.getForward(), twgl_js_1.v3.mulScalar([0, 0, 1], this.translateStepSize)));
-    }
-    moveLeft() { this.moveCamera([-1, 0, 0]); }
-    moveRight() { this.moveCamera([1, 0, 0]); }
-    moveUp() { this.moveCamera([0, 1, 0]); }
-    moveDown() { this.moveCamera([0, -1, 0]); }
+    moveForward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, -1], this.translateStepSize)); }
+    moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, 1], this.translateStepSize)); }
+    moveLeft() { this.moveCamera(twgl_js_1.v3.mulScalar([-1, 0, 0], this.translateStepSize)); }
+    moveRight() { this.moveCamera(twgl_js_1.v3.mulScalar([1, 0, 0], this.translateStepSize)); }
+    moveUp() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 1, 0], this.translateStepSize)); }
+    moveDown() { this.moveCamera(twgl_js_1.v3.mulScalar([0, -1, 0], this.translateStepSize)); }
     turnLeft() {
         this.xAngle += -this.angleStepSize;
     }
