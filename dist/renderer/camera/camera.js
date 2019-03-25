@@ -19,7 +19,9 @@ class Camera {
         this.pureZ = new three_1.Quaternion(0, 0, -1, 0);
         this.position = startPosition;
         this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
+        this.yAngle = this.pi / 2;
         this.yaw();
+        this.pitch();
     }
     getModelMatrix() {
         // let rotation = new Matrix4().makeRotationFromQuaternion(this.targetOrientation);
