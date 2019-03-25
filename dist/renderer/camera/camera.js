@@ -52,8 +52,12 @@ class Camera {
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
     }
-    moveForward() { this.moveCamera(this.getForward()); }
-    moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar(this.getForward(), -1)); }
+    moveForward() {
+        this.moveCamera(twgl_js_1.v3.add(this.getForward(), twgl_js_1.v3.mulScalar([0, 0, -1], this.translateStepSize)));
+    }
+    moveBackward() {
+        this.moveCamera(twgl_js_1.v3.add(this.getForward(), twgl_js_1.v3.mulScalar([0, 0, 1], this.translateStepSize)));
+    }
     moveLeft() { this.moveCamera([-1, 0, 0]); }
     moveRight() { this.moveCamera([1, 0, 0]); }
     moveUp() { this.moveCamera([0, 1, 0]); }
