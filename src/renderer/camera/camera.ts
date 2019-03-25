@@ -15,9 +15,9 @@ export class Camera {
 
   private xRotation: Quaternion = new Quaternion();
 
-  private targetOrientation: Quaternion = new Quaternion();
+  private targetOrientation: Quaternion = new Quaternion(0, 0, -1, 0);
 
-  private angleStepSize: number = 0.001;
+  private angleStepSize: number = 0.01;
   private pi: number = Math.PI;
   private twoPi = this.pi * 2;
 
@@ -64,7 +64,7 @@ export class Camera {
 
   private moveCamera(amountToMove: v3.Vec3) {
     this.position = v3.add(this.getPosition(), amountToMove);
-    console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
+    // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
   }
 
   moveForward() { this.moveCamera(v3.mulScalar([0, 0, -1], this.translateStepSize)); }
@@ -96,6 +96,11 @@ export class Camera {
     //yaw the given angle over the y unit vector
     // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
     this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
+    this.applyRotation();
+  }
+
+  applyRotation() {
+    this.targetOrientation = new Quaternion().multiply(this.xRotation);
   }
 
   rotateForward() {
