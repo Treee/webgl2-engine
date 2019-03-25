@@ -175,9 +175,13 @@ class RendererEngine {
         }
         if (activeKeysMap['q']) {
             // turn left
+            this.debugCamera.turnLeft();
+            this.debugCamera.yaw();
         }
         if (activeKeysMap['e']) {
             // turn right
+            this.debugCamera.turnRight();
+            this.debugCamera.yaw();
         }
     }
     drawObjects(gl, objectsToDraw) {
