@@ -14,6 +14,7 @@ export class Camera {
   private yAngle: number = 1.0;
 
   private xRotation: Quaternion = new Quaternion();
+  private yRotation: Quaternion = new Quaternion();
 
   private targetOrientation: Quaternion = new Quaternion();
 
@@ -64,7 +65,7 @@ export class Camera {
 
   private moveCamera(amountToMove: v3.Vec3) {
     this.position = v3.add(this.getPosition(), amountToMove);
-    // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
+    console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
   }
 
   moveForward() { this.moveCamera(v3.mulScalar([0, 0, -1], this.translateStepSize)); }
@@ -76,16 +77,30 @@ export class Camera {
   moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
 
   turnLeft() {
-    this.xAngle += -this.angleStepSize;
+    this.yAngle += -this.angleStepSize;
     this.yaw();
   }
 
   turnRight() {
-    this.xAngle += this.angleStepSize;
+    this.yAngle += this.angleStepSize;
     this.yaw();
   }
 
   yaw() {
+    //while the Angle is greater than 2pi (a full revolution, 360degrees)
+    while (this.yAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
+      this.yAngle = this.yAngle - this.twoPi;
+    }//this is the same but for the reverse direction
+    while (this.yAngle < -this.twoPi) {
+      this.yAngle = this.yAngle + this.twoPi;
+    }
+    //yaw the given angle over the y unit vector
+    // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.yAngle);
+    this.yRotation = this.yRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.yAngle);
+    this.applyRotation();
+  }
+
+  pitch() {
     //while the Angle is greater than 2pi (a full revolution, 360degrees)
     while (this.xAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
       this.xAngle = this.xAngle - this.twoPi;
@@ -100,15 +115,17 @@ export class Camera {
   }
 
   applyRotation() {
-    this.targetOrientation = new Quaternion().multiply(this.xRotation);
+    this.targetOrientation = new Quaternion().multiply(this.xRotation).multiply(this.yRotation);
   }
 
   rotateForward() {
-
+    this.xAngle -= this.angleStepSize;
+    this.pitch();
   }
 
   rotateBackward() {
-
+    this.xAngle += this.angleStepSize;
+    this.pitch();
   }
 
 }

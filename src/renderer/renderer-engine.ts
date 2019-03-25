@@ -212,6 +212,12 @@ export class RendererEngine {
         } if (activeKeysMap['e']) {
             // turn right
             this.debugCamera.turnRight();
+        } if (activeKeysMap['z']) {
+            // turn left
+            this.debugCamera.rotateForward();
+        } if (activeKeysMap['x']) {
+            // turn right
+            this.debugCamera.rotateBackward();
         }
     }
 
