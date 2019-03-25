@@ -6,12 +6,11 @@ export class Camera {
   private cameraMatrix: m4.Mat4 = m4.identity();
 
   private position: v3.Vec3 = [0, 0, 1];
-  private target: v3.Vec3 = [0, 0, 0];
   private up: v3.Vec3 = [0, 1, 0];
   private translateStepSize: number = 1.0;
 
-  private xAngle: number = 1.0;
-  private yAngle: number = 1.0;
+  private xAngle: number = 0;
+  private yAngle: number = 0;
 
   private xRotation: Quaternion = new Quaternion();
   private yRotation: Quaternion = new Quaternion();
