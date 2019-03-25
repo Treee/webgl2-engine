@@ -71,7 +71,8 @@ class Camera {
             this.xAngle = this.xAngle + this.twoPi;
         }
         //yaw the given angle over the y unit vector
-        this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), this.xAngle);
+        // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
+        this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), (this.xAngle * (180 / this.pi)));
     }
     rotateForward() {
     }
