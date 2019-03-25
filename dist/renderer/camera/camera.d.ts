@@ -16,6 +16,7 @@ export declare class Camera {
     constructor(startPosition: v3.Vec3);
     getModelMatrix(): Matrix4;
     getForward(): v3.Vec3;
+    getPosition(): v3.Vec3;
     getViewMatrix(): m4.Mat4;
     getViewProjectionMatrix(projectionMatrix: m4.Mat4): m4.Mat4;
     private moveCamera;

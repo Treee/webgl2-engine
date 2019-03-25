@@ -38,20 +38,22 @@ class Camera {
         const normalZ = conj.multiply(pureZ).multiply(qw);
         return [normalZ.x, normalZ.y, normalZ.z];
     }
+    getPosition() {
+        return this.position;
+    }
     getViewMatrix() {
-        // this.cameraMatrix = m4.lookAt(this.position, this.target, this.up);
-        this.cameraMatrix = twgl_js_1.m4.lookAt(this.position, this.getForward(), this.up);
+        // this.cameraMatrix = m4.lookAt(this.getPosition(), this.target, this.up);
+        this.cameraMatrix = twgl_js_1.m4.lookAt(this.getPosition(), this.getForward(), this.up);
         return twgl_js_1.m4.inverse(this.cameraMatrix);
     }
     getViewProjectionMatrix(projectionMatrix) {
         return twgl_js_1.m4.multiply(projectionMatrix, this.getViewMatrix());
     }
     moveCamera(amountToMove) {
-        this.target = twgl_js_1.v3.add(this.target, amountToMove);
-        this.position = twgl_js_1.v3.add(this.position, amountToMove);
+        this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
     }
-    moveForward() { this.moveCamera([0, 0, -1]); }
-    moveBackward() { this.moveCamera([0, 0, 1]); }
+    moveForward() { this.moveCamera(this.getForward()); }
+    moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar(this.getForward(), -1)); }
     moveLeft() { this.moveCamera([-1, 0, 0]); }
     moveRight() { this.moveCamera([1, 0, 0]); }
     moveUp() { this.moveCamera([0, 1, 0]); }
