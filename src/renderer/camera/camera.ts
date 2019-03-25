@@ -47,9 +47,13 @@ export class Camera {
     return [normalZ.x, normalZ.y, normalZ.z];
   }
 
+  getPosition(): v3.Vec3 {
+    return this.position;
+  }
+
   getViewMatrix(): m4.Mat4 {
-    // this.cameraMatrix = m4.lookAt(this.position, this.target, this.up);
-    this.cameraMatrix = m4.lookAt(this.position, this.getForward(), this.up);
+    // this.cameraMatrix = m4.lookAt(this.getPosition(), this.target, this.up);
+    this.cameraMatrix = m4.lookAt(this.getPosition(), this.getForward(), this.up);
     return m4.inverse(this.cameraMatrix);
   }
 
@@ -58,12 +62,12 @@ export class Camera {
   }
 
   private moveCamera(amountToMove: v3.Vec3) {
-    this.target = v3.add(this.target, amountToMove);
-    this.position = v3.add(this.position, amountToMove);
+    this.position = v3.add(this.getPosition(), amountToMove);
   }
 
-  moveForward() { this.moveCamera([0, 0, -1]); }
-  moveBackward() { this.moveCamera([0, 0, 1]); }
+  moveForward() { this.moveCamera(this.getForward()); }
+  moveBackward() { this.moveCamera(v3.mulScalar(this.getForward(), -1)); }
+
   moveLeft() { this.moveCamera([-1, 0, 0]); }
   moveRight() { this.moveCamera([1, 0, 0]); }
   moveUp() { this.moveCamera([0, 1, 0]); }
