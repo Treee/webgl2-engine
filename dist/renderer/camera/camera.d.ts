@@ -1,11 +1,21 @@
 import { m4, v3 } from "twgl.js";
+import { Matrix4 } from "three";
 export declare class Camera {
     private cameraMatrix;
     private position;
     private target;
     private up;
-    private yRotation;
+    private translateStepSize;
+    private xAngle;
+    private yAngle;
+    private xRotation;
+    private targetOrientation;
+    private angleStepSize;
+    private pi;
+    private twoPi;
     constructor(startPosition: v3.Vec3);
+    getModelMatrix(): Matrix4;
+    getForward(): v3.Vec3;
     getViewMatrix(): m4.Mat4;
     getViewProjectionMatrix(projectionMatrix: m4.Mat4): m4.Mat4;
     private moveCamera;
@@ -17,4 +27,7 @@ export declare class Camera {
     moveDown(): void;
     turnLeft(): void;
     turnRight(): void;
+    yaw(): void;
+    rotateForward(): void;
+    rotateBackward(): void;
 }
