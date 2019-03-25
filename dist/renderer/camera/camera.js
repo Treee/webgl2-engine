@@ -12,13 +12,13 @@ class Camera {
         this.xAngle = 1.0;
         this.yAngle = 1.0;
         this.xRotation = new three_1.Quaternion();
-        this.targetOrientation = new three_1.Quaternion(0, 0, -1, 0);
-        this.angleStepSize = 0.01;
+        this.targetOrientation = new three_1.Quaternion();
+        this.angleStepSize = 0.05;
         this.pi = Math.PI;
         this.twoPi = this.pi * 2;
         this.position = startPosition;
-        this.target = twgl_js_1.v3.subtract(startPosition, [0, 0, 1]);
-        this.cameraMatrix = twgl_js_1.m4.lookAt(this.position, this.target, this.up);
+        this.xAngle = this.pi / 2; // rotate 90 degrees so we are looking down the -z axis
+        this.yaw();
     }
     getModelMatrix() {
         // let rotation = new Matrix4().makeRotationFromQuaternion(this.targetOrientation);
