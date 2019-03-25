@@ -43,7 +43,8 @@ class Camera {
     }
     getViewMatrix() {
         // this.cameraMatrix = m4.lookAt(this.getPosition(), this.target, this.up);
-        this.cameraMatrix = twgl_js_1.m4.lookAt(this.getPosition(), this.getForward(), this.up);
+        const translatedForward = twgl_js_1.v3.add(this.getPosition(), this.getForward());
+        this.cameraMatrix = twgl_js_1.m4.lookAt(this.getPosition(), translatedForward, this.up);
         return twgl_js_1.m4.inverse(this.cameraMatrix);
     }
     getViewProjectionMatrix(projectionMatrix) {
