@@ -12,8 +12,8 @@ class Camera {
         this.xAngle = 1.0;
         this.yAngle = 1.0;
         this.xRotation = new three_1.Quaternion();
-        this.targetOrientation = new three_1.Quaternion();
-        this.angleStepSize = 0.001;
+        this.targetOrientation = new three_1.Quaternion(0, 0, -1, 0);
+        this.angleStepSize = 0.01;
         this.pi = Math.PI;
         this.twoPi = this.pi * 2;
         this.position = startPosition;
@@ -52,7 +52,7 @@ class Camera {
     }
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
-        console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${twgl_js_1.v3.add(this.getPosition(), this.getForward())}`);
+        // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
     }
     moveForward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, -1], this.translateStepSize)); }
     moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 0, 1], this.translateStepSize)); }
@@ -79,6 +79,10 @@ class Camera {
         //yaw the given angle over the y unit vector
         // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
         this.xRotation = this.xRotation.setFromAxisAngle(new three_1.Vector3(0, 1, 0), this.xAngle);
+        this.applyRotation();
+    }
+    applyRotation() {
+        this.targetOrientation = new three_1.Quaternion().multiply(this.xRotation);
     }
     rotateForward() {
     }

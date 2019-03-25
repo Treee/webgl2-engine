@@ -29,6 +29,7 @@ export declare class Camera {
     turnLeft(): void;
     turnRight(): void;
     yaw(): void;
+    applyRotation(): void;
     rotateForward(): void;
     rotateBackward(): void;
 }
