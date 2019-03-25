@@ -53,7 +53,10 @@ export class Camera {
 
   getViewMatrix(): m4.Mat4 {
     // this.cameraMatrix = m4.lookAt(this.getPosition(), this.target, this.up);
-    this.cameraMatrix = m4.lookAt(this.getPosition(), this.getForward(), this.up);
+
+    const translatedForward = v3.add(this.getPosition(), this.getForward());
+
+    this.cameraMatrix = m4.lookAt(this.getPosition(), translatedForward, this.up);
     return m4.inverse(this.cameraMatrix);
   }
 
