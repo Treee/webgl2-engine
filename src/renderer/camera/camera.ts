@@ -67,8 +67,8 @@ export class Camera {
     console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
   }
 
-  moveForward() { this.moveCamera(v3.mulScalar([0, 0, -1], this.translateStepSize)); }
-  moveBackward() { this.moveCamera(v3.mulScalar([0, 0, 1], this.translateStepSize)); }
+  moveForward() { this.moveCamera(v3.mulScalar(this.getForward(), this.translateStepSize)); }
+  moveBackward() { this.moveCamera(v3.mulScalar(this.getForward(), -this.translateStepSize)); }
 
   moveLeft() { this.moveCamera(v3.mulScalar([-1, 0, 0], this.translateStepSize)); }
   moveRight() { this.moveCamera(v3.mulScalar([1, 0, 0], this.translateStepSize)); }
