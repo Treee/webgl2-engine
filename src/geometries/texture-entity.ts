@@ -35,7 +35,7 @@ export class TextureEntity extends RenderableObject {
     let planeBufferInfo = createBufferInfoFromArrays(gl, arrays);
 
     this.defaultUniforms.u_texture = createTexture(gl, {
-      test1: { src: 'texture-test.jpg', mag: gl.NEAREST }
+      test1: { src: '../assets/images/texture-test.jpg', mag: gl.NEAREST }
     } as TextureOptions);
 
     this.bufferInfo = planeBufferInfo;
