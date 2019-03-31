@@ -30,7 +30,7 @@ class TextureEntity extends renderable_object_1.RenderableObject {
         };
         let planeBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, arrays);
         this.defaultUniforms.u_texture = twgl_js_1.createTexture(gl, {
-            test1: { src: 'texture-test.jpg', mag: gl.NEAREST }
+            test1: { src: '../assets/images/texture-test.jpg', mag: gl.NEAREST }
         });
         this.bufferInfo = planeBufferInfo;
         this.programInfo = progInfo;
