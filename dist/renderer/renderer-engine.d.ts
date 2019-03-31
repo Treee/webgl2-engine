@@ -14,6 +14,8 @@ export declare class RendererEngine {
     fieldOfViewRadians: number;
     vs: string;
     fs: string;
+    textureVS: string;
+    textureFS: string;
     drawableObjects: RenderableObject[];
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
