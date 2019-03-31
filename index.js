@@ -27,3 +27,6 @@ export { NewParticleSystem, NewParticle } from './dist/particle-system/new-parti
 export { ShaderProgram } from './dist/renderer/shaders/shader-program';
 
 export { RendererEngine } from './dist/renderer/renderer-engine';
+
+// Assets
+export * from './dist/assets';
