@@ -11,6 +11,7 @@ import { Cone } from '../geometries/cone';
 import { Sphere } from '../geometries/sphere';
 import { Axis3D } from '../geometries/axis-3d';
 import { Plane } from '../geometries/plane';
+import { TextureEntity } from '../geometries/texture-entity';
 
 export class RendererEngine {
 
@@ -58,6 +59,57 @@ export class RendererEngine {
         }
     `;
 
+    textureVS = `#version 300 es
+        // an attribute is an input (in) to a vertex shader.
+        // It will receive data from a buffer
+        in vec2 a_position;
+        in vec2 a_texCoord;
+
+        // Used to pass in the resolution of the canvas
+        uniform vec2 u_resolution;
+
+        // Used to pass the texture coordinates to the fragment shader
+        out vec2 v_texCoord;
+
+        // all shaders have a main function
+        void main() {
+
+        // convert the position from pixels to 0.0 to 1.0
+        vec2 zeroToOne = a_position / u_resolution;
+
+        // convert from 0->1 to 0->2
+        vec2 zeroToTwo = zeroToOne * 2.0;
+
+        // convert from 0->2 to -1->+1 (clipspace)
+        vec2 clipSpace = zeroToTwo - 1.0;
+
+        gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+
+        // pass the texCoord to the fragment shader
+        // The GPU will interpolate this value between points.
+        v_texCoord = a_texCoord;
+        }
+    `;
+
+    textureFS = `#version 300 es
+        // fragment shaders don't have a default precision so we need
+        // to pick one. mediump is a good default. It means "medium precision"
+        precision mediump float;
+
+        // our texture
+        uniform sampler2D u_image;
+
+        // the texCoords passed in from the vertex shader.
+        in vec2 v_texCoord;
+
+        // we need to declare an output for the fragment shader
+        out vec4 outColor;
+
+        void main() {
+        outColor = texture(u_image, v_texCoord);
+        }
+    `;
+
     drawableObjects: RenderableObject[] = [];
 
     constructor() {
@@ -72,6 +124,7 @@ export class RendererEngine {
         twgl.setAttributePrefix("a_");
         // create program info
         let programInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
+        let textureImageProgramInfo = twgl.createProgramInfo(this.gl, [this.textureVS, this.textureFS]);
 
         let myCube = new Cube(this.gl, programInfo, {});
         myCube.translate(0, [-40, 0, 0]);
@@ -81,6 +134,8 @@ export class RendererEngine {
         let myCube4 = new Cube(this.gl, programInfo, {});
         let myCube5 = new Cube(this.gl, programInfo, {});
         let myCone = new Cone(this.gl, programInfo, {});
+
+        let myTexture = new TextureEntity(this.gl, textureImageProgramInfo, {});
         // myCone.translate(0, [40, 0, 0]);
         let mySphere = new Sphere(this.gl, programInfo, {});
         let myAxis = new Axis3D(this.gl, programInfo, {});
@@ -95,12 +150,17 @@ export class RendererEngine {
         this.drawableObjects.push(myCube4);
         this.drawableObjects.push(myCube5);
         this.drawableObjects.push(myPlane);
+
+        this.drawableObjects.push(myTexture);
+
         myCube1.translate(0, [-0, 0, -20]);
         myCube2.translate(0, [-20, 0, 0]);
         myCube3.translate(0, [0, 0, 20]);
         myCube4.translate(0, [20, 0, 0]);
         myCube5.translate(0, [40, 0, 0]);
         myPlane.scale(0, [100, 0, 100]);
+
+        myTexture.translate(0, [0, 5, 0]);
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
 
