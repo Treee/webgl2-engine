@@ -54,7 +54,7 @@ class Camera {
     }
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
-        console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${twgl_js_1.v3.add(this.getPosition(), this.getForward())}`);
+        // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
     }
     moveForward() { this.moveCamera(twgl_js_1.v3.mulScalar(this.getForward(), this.translateStepSize)); }
     moveBackward() { this.moveCamera(twgl_js_1.v3.mulScalar(this.getForward(), -this.translateStepSize)); }
