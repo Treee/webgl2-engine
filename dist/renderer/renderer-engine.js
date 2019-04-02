@@ -10,7 +10,6 @@ const cone_1 = require("../geometries/cone");
 const sphere_1 = require("../geometries/sphere");
 const axis_3d_1 = require("../geometries/axis-3d");
 const plane_1 = require("../geometries/plane");
-const texture_entity_1 = require("../geometries/texture-entity");
 class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
@@ -104,24 +103,23 @@ class RendererEngine {
         this.fieldOfViewRadians = this.degreesToRadian(60);
         twgl.setAttributePrefix("a_");
         // create program info
-        let programInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
-        let textureImageProgramInfo = twgl.createProgramInfo(this.gl, [this.textureVS, this.textureFS]);
-        let myCube = new cube_1.Cube(this.gl, programInfo, {});
+        this.defaultProgramInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
+        this.textureImageProgramInfo = twgl.createProgramInfo(this.gl, [this.textureVS, this.textureFS]);
+        let myCube = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
         myCube.translate(0, [-40, 0, 0]);
-        let myCube1 = new cube_1.Cube(this.gl, programInfo, {});
-        let myCube2 = new cube_1.Cube(this.gl, programInfo, {});
-        let myCube3 = new cube_1.Cube(this.gl, programInfo, {});
-        let myCube4 = new cube_1.Cube(this.gl, programInfo, {});
-        let myCube5 = new cube_1.Cube(this.gl, programInfo, {});
-        let myCone = new cone_1.Cone(this.gl, programInfo, {});
-        let myTexture = new texture_entity_1.TextureEntity(this.gl, textureImageProgramInfo, {});
-        // myCone.translate(0, [40, 0, 0]);
-        let mySphere = new sphere_1.Sphere(this.gl, programInfo, {});
-        let myAxis = new axis_3d_1.Axis3D(this.gl, programInfo, {});
-        let myPlane = new plane_1.Plane(this.gl, programInfo, {});
+        let myCube1 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+        let myCube2 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+        let myCube3 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+        let myCube4 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+        let myCube5 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+        let myCone = new cone_1.Cone(this.gl, this.defaultProgramInfo, {});
+        myCone.translate(0, [40, 0, 0]);
+        let mySphere = new sphere_1.Sphere(this.gl, this.defaultProgramInfo, {});
+        let myAxis = new axis_3d_1.Axis3D(this.gl, this.defaultProgramInfo, {});
+        let myPlane = new plane_1.Plane(this.gl, this.defaultProgramInfo, {});
         this.drawableObjects.push(myCube);
         this.drawableObjects.push(myCone);
-        //this.drawableObjects.push(mySphere);
+        this.drawableObjects.push(mySphere);
         this.drawableObjects.push(myAxis);
         this.drawableObjects.push(myCube1);
         this.drawableObjects.push(myCube2);
@@ -129,14 +127,12 @@ class RendererEngine {
         this.drawableObjects.push(myCube4);
         this.drawableObjects.push(myCube5);
         this.drawableObjects.push(myPlane);
-        this.drawableObjects.push(myTexture);
         myCube1.translate(0, [-0, 0, -20]);
         myCube2.translate(0, [-20, 0, 0]);
         myCube3.translate(0, [0, 0, 20]);
         myCube4.translate(0, [20, 0, 0]);
         myCube5.translate(0, [40, 0, 0]);
         myPlane.scale(0, [100, 0, 100]);
-        myTexture.translate(0, [0, 5, 0]);
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
     drawFrame(dt, renderableObjects) {

@@ -5,6 +5,7 @@ import { BoxGeometry } from '../geometries/box-geometry';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from '../geometries/renderable-object';
 import { Camera } from './camera/camera';
+import * as twgl from 'twgl.js';
 export declare class RendererEngine {
     canvas: HTMLCanvasElement;
     gl: WebGL2RenderingContext;
@@ -17,6 +18,8 @@ export declare class RendererEngine {
     textureVS: string;
     textureFS: string;
     drawableObjects: RenderableObject[];
+    defaultProgramInfo: twgl.ProgramInfo;
+    textureImageProgramInfo: twgl.ProgramInfo;
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
     drawFrame(dt: Number, renderableObjects: BoxGeometry[]): void;
