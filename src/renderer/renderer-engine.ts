@@ -265,7 +265,7 @@ export class RendererEngine {
         } if (activeKeysMap['f']) {
             // fall
             this.debugCamera.moveDown();
-        } if (mouseInputs.leftMouseClicked) {
+        } if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
             this.debugCamera.pitch(mouseInputs.y);
             this.debugCamera.yaw(mouseInputs.x);
         }
