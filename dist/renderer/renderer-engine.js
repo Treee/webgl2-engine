@@ -198,7 +198,7 @@ class RendererEngine {
             obj.draw(gl);
         });
     }
-    applyUserInput(activeKeysMap) {
+    applyUserInput(activeKeysMap, mouseInputs) {
         if (activeKeysMap['w']) {
             // move forward
             this.debugCamera.moveForward();
@@ -223,21 +223,9 @@ class RendererEngine {
             // fall
             this.debugCamera.moveDown();
         }
-        if (activeKeysMap['q']) {
-            // turn left
-            this.debugCamera.turnLeft();
-        }
-        if (activeKeysMap['e']) {
-            // turn right
-            this.debugCamera.turnRight();
-        }
-        if (activeKeysMap['z']) {
-            // turn left
-            this.debugCamera.rotateForward();
-        }
-        if (activeKeysMap['x']) {
-            // turn right
-            this.debugCamera.rotateBackward();
+        if (mouseInputs.leftMouseClicked) {
+            this.debugCamera.pitch(mouseInputs.y);
+            this.debugCamera.yaw(mouseInputs.x);
         }
     }
     drawObjects(gl, objectsToDraw) {

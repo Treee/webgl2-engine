@@ -27,11 +27,7 @@ export declare class Camera {
     moveRight(): void;
     moveUp(): void;
     moveDown(): void;
-    turnLeft(): void;
-    turnRight(): void;
-    yaw(): void;
-    pitch(): void;
+    yaw(amount: number): void;
+    pitch(amount: number): void;
     applyRotation(): void;
-    rotateForward(): void;
-    rotateBackward(): void;
 }
