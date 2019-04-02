@@ -27,8 +27,8 @@ export class Camera {
     this.position = startPosition;
     this.xAngle = this.pi; // rotate 90 degrees so we are looking down the -z axis
     this.yAngle = -this.pi;
-    this.yaw();
-    this.pitch();
+    this.yaw(0);
+    this.pitch(0);
   }
 
   getModelMatrix(): Matrix4 {
@@ -78,17 +78,8 @@ export class Camera {
   moveUp() { this.moveCamera(v3.mulScalar([0, 1, 0], this.translateStepSize)); }
   moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
 
-  turnLeft() {
-    this.yAngle += -this.angleStepSize;
-    this.yaw();
-  }
-
-  turnRight() {
-    this.yAngle += this.angleStepSize;
-    this.yaw();
-  }
-
-  yaw() {
+  yaw(amount: number) {
+    this.yAngle += amount * -this.angleStepSize;
     //while the Angle is greater than 2pi (a full revolution, 360degrees)
     while (this.yAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
       this.yAngle = this.yAngle - this.twoPi;
@@ -102,7 +93,8 @@ export class Camera {
     this.applyRotation();
   }
 
-  pitch() {
+  pitch(amount: number) {
+    this.xAngle += amount * -this.angleStepSize;
     //while the Angle is greater than 2pi (a full revolution, 360degrees)
     while (this.xAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
       this.xAngle = this.xAngle - this.twoPi;
@@ -119,16 +111,6 @@ export class Camera {
   applyRotation() {
     this.targetOrientation = new Quaternion().multiply(this.xRotation).multiply(this.yRotation);
     console.log(`X: ${this.xAngle * (180 / this.pi)} Y: ${this.yAngle * (180 / this.pi)}`);
-  }
-
-  rotateForward() {
-    this.xAngle -= this.angleStepSize;
-    this.pitch();
-  }
-
-  rotateBackward() {
-    this.xAngle += this.angleStepSize;
-    this.pitch();
   }
 
 }

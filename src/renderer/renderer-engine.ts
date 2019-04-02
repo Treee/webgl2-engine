@@ -246,7 +246,7 @@ export class RendererEngine {
         });
     }
 
-    applyUserInput(activeKeysMap: any) {
+    applyUserInput(activeKeysMap: any, mouseInputs: any) {
         if (activeKeysMap['w']) {
             // move forward
             this.debugCamera.moveForward();
@@ -265,18 +265,9 @@ export class RendererEngine {
         } if (activeKeysMap['f']) {
             // fall
             this.debugCamera.moveDown();
-        } if (activeKeysMap['q']) {
-            // turn left
-            this.debugCamera.turnLeft();
-        } if (activeKeysMap['e']) {
-            // turn right
-            this.debugCamera.turnRight();
-        } if (activeKeysMap['z']) {
-            // turn left
-            this.debugCamera.rotateForward();
-        } if (activeKeysMap['x']) {
-            // turn right
-            this.debugCamera.rotateBackward();
+        } if (mouseInputs.leftMouseClicked) {
+            this.debugCamera.pitch(mouseInputs.y);
+            this.debugCamera.yaw(mouseInputs.x);
         }
     }
 
