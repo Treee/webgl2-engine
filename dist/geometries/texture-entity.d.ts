@@ -7,8 +7,9 @@ export declare class TextureEntity extends RenderableObject {
     defaultUniforms: {
         u_colorMult: number[];
         u_matrix: number[];
-        u_texture: {};
     };
+    texture: {};
     constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any);
+    draw(gl: WebGL2RenderingContext): void;
     rotate(dt: number): void;
 }
