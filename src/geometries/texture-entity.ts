@@ -6,8 +6,14 @@ export class TextureEntity extends RenderableObject {
   xAxisRange: number = 1;
   zAxisRange: number = 1;
 
+  defaultUniforms = {
+    u_colorMult: [1, 1, 1, 1],
+    u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  };
+
   constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, image: ImageData) {
     super();
+    this.alias = 'texture-entity';
     this.setStuff(gl, progInfo.program, image);
   }
 
