@@ -151,6 +151,13 @@ export class TextureEntity extends RenderableObject {
     ]), gl.STATIC_DRAW);
   }
 
+  draw(gl: WebGL2RenderingContext) {
+    // Draw the rectangle.
+    let primitiveType = gl.TRIANGLES;
+    let offset = 0;
+    let count = 6;
+    gl.drawArrays(primitiveType, offset, count);
+  }
 
   rotate(dt: number) {
     this.rotationX = dt;

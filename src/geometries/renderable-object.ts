@@ -35,7 +35,9 @@ export abstract class RenderableObject {
   rotate(dt: number) { }
 
   move(dt: number, viewProjectionMatrix: any) {
-    this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
+    if (this.uniforms) {
+      this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
+    }
   }
 
   computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4 {
