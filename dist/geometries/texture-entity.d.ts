@@ -8,6 +8,6 @@ export declare class TextureEntity extends RenderableObject {
         u_colorMult: number[];
         u_matrix: number[];
     };
-    constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: ImageData);
+    constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any);
     rotate(dt: number): void;
 }
