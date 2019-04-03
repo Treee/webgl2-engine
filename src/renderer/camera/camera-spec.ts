@@ -26,8 +26,20 @@ describe('Camera', () => {
             testCamera.moveRight();
             expect(testCamera.getPosition()[0]).toBe(1);
             expect(testCamera.getPosition()[1]).toBe(0);
-            expect(testCamera.getPosition()[2]).toEqual(0);
+            expect(testCamera.getPosition()[2]).toBeLessThan(0.000000000000001);
         });
+
+        it('can move up one unit', () => {
+            expect(testCamera.getPosition()).toEqual([0, 0, 0]);
+            testCamera.moveUp();
+            expect(testCamera.getPosition()[0]).toBe(0);
+            expect(testCamera.getPosition()[1]).toBe(1);
+            expect(testCamera.getPosition()[2]).toBe(0);
+        });
+    });
+
+    describe('rotation', () => {
+
     });
 
 });

@@ -93,8 +93,8 @@ export class Camera {
   moveForward() { this.moveCamera(v3.mulScalar(this.getForward(), this.translateStepSize)); }
   moveBackward() { this.moveCamera(v3.mulScalar(this.getForward(), -this.translateStepSize)); }
 
-  moveLeft() { this.moveCamera(v3.mulScalar([-1, 0, 0], this.translateStepSize)); }
-  moveRight() { this.moveCamera(v3.mulScalar([1, 0, 0], this.translateStepSize)); }
+  moveLeft() { this.moveCamera(v3.mulScalar(this.getRight(), this.translateStepSize)); }
+  moveRight() { this.moveCamera(v3.mulScalar(this.getRight(), -this.translateStepSize)); }
   moveUp() { this.moveCamera(v3.mulScalar([0, 1, 0], this.translateStepSize)); }
   moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
 
