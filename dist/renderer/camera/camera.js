@@ -13,7 +13,7 @@ class Camera {
         this.xRotation = new three_1.Quaternion();
         this.yRotation = new three_1.Quaternion();
         this.targetOrientation = new three_1.Quaternion();
-        this.angleStepSize = 0.05;
+        this.angleStepSize = 0.005;
         this.pi = Math.PI;
         this.twoPi = this.pi * 2;
         this.pureZ = new three_1.Quaternion(0, 0, -1, 0);
