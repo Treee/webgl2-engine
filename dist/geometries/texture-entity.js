@@ -115,6 +115,13 @@ class TextureEntity extends renderable_object_1.RenderableObject {
             x2, y2,
         ]), gl.STATIC_DRAW);
     }
+    draw(gl) {
+        // Draw the rectangle.
+        let primitiveType = gl.TRIANGLES;
+        let offset = 0;
+        let count = 6;
+        gl.drawArrays(primitiveType, offset, count);
+    }
     rotate(dt) {
         this.rotationX = dt;
         this.rotationY = -dt;

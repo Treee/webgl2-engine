@@ -11,5 +11,6 @@ export declare class TextureEntity extends RenderableObject {
     constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, image: ImageData);
     setStuff(gl: WebGL2RenderingContext, program: WebGLProgram, image: ImageData): void;
     setRectangle(gl: WebGL2RenderingContext, x: number, y: number, width: number, height: number): void;
+    draw(gl: WebGL2RenderingContext): void;
     rotate(dt: number): void;
 }

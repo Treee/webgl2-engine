@@ -21,7 +21,9 @@ class RenderableObject {
     }
     rotate(dt) { }
     move(dt, viewProjectionMatrix) {
-        this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
+        if (this.uniforms) {
+            this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
+        }
     }
     computeMatrix(viewProjectionMatrix) {
         var matrix = twgl_js_1.m4.translate(viewProjectionMatrix, this.position);
