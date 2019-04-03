@@ -47,52 +47,41 @@ class RendererEngine {
         }
     `;
         this.textureVS = `#version 300 es
-        // an attribute is an input (in) to a vertex shader.
-        // It will receive data from a buffer
-        in vec2 a_position;
-        in vec2 a_texCoord;
 
-        // Used to pass in the resolution of the canvas
-        uniform vec2 u_resolution;
+    in vec4 a_position;
+    in vec4 a_color;
+    in vec2 a_texCoord;
 
-        // Used to pass the texture coordinates to the fragment shader
-        out vec2 v_texCoord;
+    uniform mat4 u_matrix;
+    uniform vec2 u_resolution;
 
-        // all shaders have a main function
-        void main() {
-            // convert the position from pixels to 0.0 to 1.0
-            vec2 zeroToOne = a_position / u_resolution;
+    out vec4 v_color;
+    out vec2 v_texCoord;
 
-            // convert from 0->1 to 0->2
-            vec2 zeroToTwo = zeroToOne * 2.0;
-
-            // convert from 0->2 to -1->+1 (clipspace)
-            vec2 clipSpace = zeroToTwo - 1.0;
-
-            gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-            // pass the texCoord to the fragment shader
-            // The GPU will interpolate this value between points.
-            v_texCoord = a_texCoord;
-        }
-    `;
+    void main() {
+        // Multiply the position by the matrix.
+        gl_Position = u_matrix * a_position;
+    
+        // pass the texCoord to the fragment shader
+        // The GPU will interpolate this value between points.
+        v_texCoord = a_texCoord;
+    }
+`;
         this.textureFS = `#version 300 es
-        // fragment shaders don't have a default precision so we need
-        // to pick one. mediump is a good default. It means "medium precision"
-        precision mediump float;
+    precision mediump float;
 
-        // our texture
-        uniform sampler2D u_image;
+    // Passed in from the vertex shader.
+    in vec4 v_color;
+    in vec2 v_texCoord;
 
-        // the texCoords passed in from the vertex shader.
-        in vec2 v_texCoord;
+    uniform vec4 u_colorMult;
+    uniform sampler2D u_image;
 
-        // we need to declare an output for the fragment shader
-        out vec4 outColor;
+    out vec4 outColor;
 
-        void main() {
-            outColor = texture(u_image, v_texCoord);
-        }
+    void main() {
+        outColor = texture(u_image, v_texCoord);
+    }
     `;
         this.drawableObjects = [];
         this.shaderManager = new shader_manager_1.ShaderManager();
@@ -114,14 +103,16 @@ class RendererEngine {
         this.addDrawableObject('cone', [0, -10, 0]);
         this.addDrawableObject('sphere', [0, 0, -50]);
         this.addDrawableObject('axis', [0, 0, 0]);
-        this.addDrawableObject('plane', [0, 0, 0]);
+        this.addDrawableObject('plane', [0, -5, 0]);
+        this.addDrawableObject('texture', [0, 0, 0], './assets/images/test-aoe2-screenshot.png');
         this.shaderManager.initializeShaderPrograms(this.gl);
     }
-    addDrawableObject(type, position) {
+    addDrawableObject(type, position, imageSource = './assets/images/test-texture1.png') {
         switch (type) {
             case 'texture':
-                let tex = new texture_entity_1.TextureEntity(this.gl, this.defaultProgramInfo, {});
+                let tex = new texture_entity_1.TextureEntity(this.gl, this.defaultProgramInfo, {}, imageSource);
                 tex.translate(0, position);
+                tex.scale(0, [100, 0, 100]);
                 this.drawableObjects.push(tex);
                 return;
             case 'cube':

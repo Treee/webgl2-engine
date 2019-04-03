@@ -22,7 +22,7 @@ export declare class RendererEngine {
     textureImageProgramInfo: twgl.ProgramInfo;
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
-    addDrawableObject(type: string, position: number[]): void;
+    addDrawableObject(type: string, position: number[], imageSource?: string): void;
     drawFrame(dt: Number, renderableObjects: BoxGeometry[]): void;
     getCanvasDimensions(): Vec3;
     private initializeCanvasGL;

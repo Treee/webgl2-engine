@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const renderable_object_1 = require("./renderable-object");
 const twgl_js_1 = require("twgl.js");
 class TextureEntity extends renderable_object_1.RenderableObject {
-    constructor(gl, progInfo, uniforms) {
+    constructor(gl, progInfo, uniforms, imageSource) {
         super();
         this.xAxisRange = 1;
         this.zAxisRange = 1;
@@ -36,11 +36,12 @@ class TextureEntity extends renderable_object_1.RenderableObject {
             ]
         };
         let textures = twgl_js_1.createTextures(gl, {
-            default: { src: './assets/images/test-texture1.png', mag: gl.NEAREST }
+            // default: { src: './assets/images/test-texture1.png', mag: gl.NEAREST }
+            default: { src: imageSource, mag: gl.NEAREST }
         });
         let otherUniforms = {
             u_resolution: [gl.canvas.width, gl.canvas.height],
-            u_image: [textures.default]
+            u_image: textures.default
         };
         let textureBufferInfo = twgl_js_1.createBufferInfoFromArrays(gl, arrays);
         this.bufferInfo = textureBufferInfo;
