@@ -22,11 +22,11 @@ export declare class RendererEngine {
     textureImageProgramInfo: twgl.ProgramInfo;
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
+    addDrawableObject(type: string, position: number[]): void;
     drawFrame(dt: Number, renderableObjects: BoxGeometry[]): void;
     getCanvasDimensions(): Vec3;
     private initializeCanvasGL;
     drawScene(gl: WebGL2RenderingContext, dt: any): void;
     applyUserInput(activeKeysMap: any, mouseInputs: any): void;
-    drawObjects(gl: WebGL2RenderingContext, objectsToDraw: RenderableObject[]): void;
     degreesToRadian(degrees: number): number;
 }

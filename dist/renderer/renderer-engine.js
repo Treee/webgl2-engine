@@ -24,11 +24,11 @@ class RendererEngine {
         out vec4 v_color;
 
         void main() {
-        // Multiply the position by the matrix.
-        gl_Position = u_matrix * a_position;
+            // Multiply the position by the matrix.
+            gl_Position = u_matrix * a_position;
 
-        // Pass the color to the fragment shader.
-        v_color = a_color;
+            // Pass the color to the fragment shader.
+            v_color = a_color;
         }
     `;
         this.fs = `#version 300 es
@@ -42,7 +42,7 @@ class RendererEngine {
         out vec4 outColor;
 
         void main() {
-        outColor = v_color * u_colorMult;
+            outColor = v_color * u_colorMult;
         }
     `;
         this.textureVS = `#version 300 es
@@ -59,21 +59,20 @@ class RendererEngine {
 
         // all shaders have a main function
         void main() {
+            // convert the position from pixels to 0.0 to 1.0
+            vec2 zeroToOne = a_position / u_resolution;
 
-        // convert the position from pixels to 0.0 to 1.0
-        vec2 zeroToOne = a_position / u_resolution;
+            // convert from 0->1 to 0->2
+            vec2 zeroToTwo = zeroToOne * 2.0;
 
-        // convert from 0->1 to 0->2
-        vec2 zeroToTwo = zeroToOne * 2.0;
+            // convert from 0->2 to -1->+1 (clipspace)
+            vec2 clipSpace = zeroToTwo - 1.0;
 
-        // convert from 0->2 to -1->+1 (clipspace)
-        vec2 clipSpace = zeroToTwo - 1.0;
+            gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
 
-        gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-        // pass the texCoord to the fragment shader
-        // The GPU will interpolate this value between points.
-        v_texCoord = a_texCoord;
+            // pass the texCoord to the fragment shader
+            // The GPU will interpolate this value between points.
+            v_texCoord = a_texCoord;
         }
     `;
         this.textureFS = `#version 300 es
@@ -91,7 +90,7 @@ class RendererEngine {
         out vec4 outColor;
 
         void main() {
-        outColor = texture(u_image, v_texCoord);
+            outColor = texture(u_image, v_texCoord);
         }
     `;
         this.drawableObjects = [];
@@ -105,35 +104,53 @@ class RendererEngine {
         // create program info
         this.defaultProgramInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
         this.textureImageProgramInfo = twgl.createProgramInfo(this.gl, [this.textureVS, this.textureFS]);
-        let myCube = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
-        myCube.translate(0, [-40, 0, 0]);
-        let myCube1 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
-        let myCube2 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
-        let myCube3 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
-        let myCube4 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
-        let myCube5 = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
-        let myCone = new cone_1.Cone(this.gl, this.defaultProgramInfo, {});
-        myCone.translate(0, [40, 0, 0]);
-        let mySphere = new sphere_1.Sphere(this.gl, this.defaultProgramInfo, {});
-        let myAxis = new axis_3d_1.Axis3D(this.gl, this.defaultProgramInfo, {});
-        let myPlane = new plane_1.Plane(this.gl, this.defaultProgramInfo, {});
-        this.drawableObjects.push(myCube);
-        this.drawableObjects.push(myCone);
-        this.drawableObjects.push(mySphere);
-        this.drawableObjects.push(myAxis);
-        this.drawableObjects.push(myCube1);
-        this.drawableObjects.push(myCube2);
-        this.drawableObjects.push(myCube3);
-        this.drawableObjects.push(myCube4);
-        this.drawableObjects.push(myCube5);
-        this.drawableObjects.push(myPlane);
-        myCube1.translate(0, [-0, 0, -20]);
-        myCube2.translate(0, [-20, 0, 0]);
-        myCube3.translate(0, [0, 0, 20]);
-        myCube4.translate(0, [20, 0, 0]);
-        myCube5.translate(0, [40, 0, 0]);
-        myPlane.scale(0, [100, 0, 100]);
+        this.addDrawableObject('cube', [-40, 0, 0]);
+        this.addDrawableObject('cube', [-0, 0, -20]);
+        this.addDrawableObject('cube', [-20, 0, 0]);
+        this.addDrawableObject('cube', [0, 0, 20]);
+        this.addDrawableObject('cube', [20, 0, 0]);
+        this.addDrawableObject('cube', [40, 0, 0]);
+        this.addDrawableObject('cone', [0, -10, 0]);
+        this.addDrawableObject('sphere', [0, 0, -50]);
+        this.addDrawableObject('axis', [0, 0, 0]);
+        this.addDrawableObject('plane', [0, 0, 0]);
         this.shaderManager.initializeShaderPrograms(this.gl);
+    }
+    addDrawableObject(type, position) {
+        switch (type) {
+            case 'cube':
+                let myCube = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+                myCube.translate(0, position);
+                this.drawableObjects.push(myCube);
+                return;
+            case 'sphere':
+                let sphere = new sphere_1.Sphere(this.gl, this.defaultProgramInfo, {});
+                sphere.translate(0, position);
+                this.drawableObjects.push(sphere);
+                return;
+            case 'cone':
+                let cone = new cone_1.Cone(this.gl, this.defaultProgramInfo, {});
+                cone.translate(0, position);
+                this.drawableObjects.push(cone);
+                return;
+            case 'axis':
+                let axis = new axis_3d_1.Axis3D(this.gl, this.defaultProgramInfo, {});
+                axis.translate(0, position);
+                axis.scale(0, [100, 100, 100]);
+                this.drawableObjects.push(axis);
+                return;
+            case 'plane':
+                let plane = new plane_1.Plane(this.gl, this.defaultProgramInfo, {});
+                plane.translate(0, position);
+                plane.scale(0, [200, 0, 200]);
+                this.drawableObjects.push(plane);
+                return;
+            default:
+                let stuff = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
+                stuff.translate(0, position);
+                this.drawableObjects.push(stuff);
+                return;
+        }
     }
     drawFrame(dt, renderableObjects) {
         if (!this.gl) {
@@ -187,7 +204,7 @@ class RendererEngine {
         dt = dt * 0.001; // take the current dt and make it even smaller
         twgl.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-        gl.enable(gl.CULL_FACE);
+        // gl.enable(gl.CULL_FACE);
         gl.enable(gl.DEPTH_TEST);
         let aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
         let projectionMatrix = twgl.m4.perspective(this.fieldOfViewRadians, aspect, 1, 2000);
@@ -228,15 +245,15 @@ class RendererEngine {
             this.debugCamera.yaw(mouseInputs.x);
         }
     }
-    drawObjects(gl, objectsToDraw) {
-        objectsToDraw.forEach(obj => {
-            let programInfo = obj.programInfo;
-            gl.useProgram(programInfo.program);
-            gl.bindVertexArray(obj.vertexArray);
-            twgl.setUniforms(programInfo, obj.uniforms);
-            twgl.drawBufferInfo(gl, obj.bufferInfo);
-        });
-    }
+    // drawObjects(gl: WebGL2RenderingContext, objectsToDraw: RenderableObject[]) {
+    //     objectsToDraw.forEach(obj => {
+    //         let programInfo = obj.programInfo;
+    //         gl.useProgram(programInfo.program);
+    //         gl.bindVertexArray(obj.vertexArray);
+    //         twgl.setUniforms(programInfo, obj.uniforms);
+    //         twgl.drawBufferInfo(gl, obj.bufferInfo);
+    //     });
+    // }
     degreesToRadian(degrees) {
         return degrees * Math.PI / 180;
     }

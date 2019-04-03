@@ -49,8 +49,6 @@ class TextureEntity extends renderable_object_1.RenderableObject {
         otherUniforms = Object.assign({}, otherUniforms, uniforms);
         this.uniforms = Object.assign({}, this.defaultUniforms, otherUniforms);
     }
-    setTexture(gl, image) {
-    }
     rotate(dt) {
         this.rotationX = dt;
         this.rotationY = -dt;

@@ -9,6 +9,5 @@ export declare class TextureEntity extends RenderableObject {
         u_matrix: number[];
     };
     constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: ImageData);
-    setTexture(gl: WebGL2RenderingContext, image: ImageData): void;
     rotate(dt: number): void;
 }
