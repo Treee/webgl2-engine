@@ -11,7 +11,7 @@ export class TextureEntity extends RenderableObject {
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
   };
 
-  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any, imageSource: string) {
     super();
     this.alias = 'texture-entity';
 
@@ -40,12 +40,13 @@ export class TextureEntity extends RenderableObject {
     };
 
     let textures = createTextures(gl, {
-      default: { src: './assets/images/test-texture1.png', mag: gl.NEAREST }
+      // default: { src: './assets/images/test-texture1.png', mag: gl.NEAREST }
+      default: { src: imageSource, mag: gl.NEAREST }
     });
 
     let otherUniforms = {
       u_resolution: [gl.canvas.width, gl.canvas.height],
-      u_image: [textures.default]
+      u_image: textures.default
     }
 
     let textureBufferInfo = createBufferInfoFromArrays(gl, arrays);
