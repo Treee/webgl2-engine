@@ -6,6 +6,11 @@ class TextureEntity extends renderable_object_1.RenderableObject {
         super();
         this.xAxisRange = 1;
         this.zAxisRange = 1;
+        this.defaultUniforms = {
+            u_colorMult: [1, 1, 1, 1],
+            u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+        };
+        this.alias = 'texture-entity';
         this.setStuff(gl, progInfo.program, image);
     }
     setStuff(gl, program, image) {
