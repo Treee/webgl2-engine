@@ -30,12 +30,10 @@ export class TextureEntity extends RenderableObject {
       ],
       indices: [0, 2, 1, 1, 2, 3], // counter clock-wise is front face
       texCoord: [
+        0.0, 1.0,
+        1.0, 1.0,
         0.0, 0.0,
         1.0, 0.0,
-        0.0, 1.0,
-        0.0, 1.0,
-        1.0, 0.0,
-        1.0, 1.0,
       ]
     };
 
