@@ -27,12 +27,10 @@ class TextureEntity extends renderable_object_1.RenderableObject {
             ],
             indices: [0, 2, 1, 1, 2, 3],
             texCoord: [
+                0.0, 1.0,
+                1.0, 1.0,
                 0.0, 0.0,
                 1.0, 0.0,
-                0.0, 1.0,
-                0.0, 1.0,
-                1.0, 0.0,
-                1.0, 1.0,
             ]
         };
         let textures = twgl_js_1.createTextures(gl, {
