@@ -57,10 +57,6 @@ export class TextureEntity extends RenderableObject {
     this.uniforms = Object.assign({}, this.defaultUniforms, otherUniforms);
   }
 
-  setTexture(gl: WebGL2RenderingContext, image: ImageData) {
-
-  }
-
   rotate(dt: number) {
     this.rotationX = dt;
     this.rotationY = -dt;
