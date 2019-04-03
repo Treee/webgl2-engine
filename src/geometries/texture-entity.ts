@@ -11,7 +11,7 @@ export class TextureEntity extends RenderableObject {
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
   };
 
-  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: ImageData) {
+  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
     super();
     this.alias = 'texture-entity';
 

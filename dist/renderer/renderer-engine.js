@@ -10,6 +10,7 @@ const cone_1 = require("../geometries/cone");
 const sphere_1 = require("../geometries/sphere");
 const axis_3d_1 = require("../geometries/axis-3d");
 const plane_1 = require("../geometries/plane");
+const texture_entity_1 = require("../geometries/texture-entity");
 class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
@@ -118,6 +119,11 @@ class RendererEngine {
     }
     addDrawableObject(type, position) {
         switch (type) {
+            case 'cube':
+                let tex = new texture_entity_1.TextureEntity(this.gl, this.defaultProgramInfo, {});
+                tex.translate(0, position);
+                this.drawableObjects.push(tex);
+                return;
             case 'cube':
                 let myCube = new cube_1.Cube(this.gl, this.defaultProgramInfo, {});
                 myCube.translate(0, position);
