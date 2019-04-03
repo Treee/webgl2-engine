@@ -40,7 +40,7 @@ export class TextureEntity extends RenderableObject {
     };
 
     let textures = createTextures(gl, {
-      default: { src: './test-texture1.png', mag: gl.NEAREST }
+      default: { src: '.assets/images/test-texture1.png', mag: gl.NEAREST }
     });
 
     let otherUniforms = {
