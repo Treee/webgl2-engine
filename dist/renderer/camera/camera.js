@@ -121,7 +121,7 @@ class Camera {
     }
     applyRotation() {
         this.targetOrientation = new three_1.Quaternion().multiply(this.xRotation).multiply(this.yRotation);
-        console.log(`X: ${this.xAngle * (180 / this.pi)} Y: ${this.yAngle * (180 / this.pi)}`);
+        // console.log(`X: ${this.xAngle * (180 / this.pi)} Y: ${this.yAngle * (180 / this.pi)}`);
     }
 }
 exports.Camera = Camera;
