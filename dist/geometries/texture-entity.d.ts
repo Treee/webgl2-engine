@@ -8,9 +8,7 @@ export declare class TextureEntity extends RenderableObject {
         u_colorMult: number[];
         u_matrix: number[];
     };
-    constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, image: ImageData);
-    setStuff(gl: WebGL2RenderingContext, program: WebGLProgram, image: ImageData): void;
-    setRectangle(gl: WebGL2RenderingContext, x: number, y: number, width: number, height: number): void;
-    draw(gl: WebGL2RenderingContext): void;
+    constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: ImageData);
+    setTexture(gl: WebGL2RenderingContext, image: ImageData): void;
     rotate(dt: number): void;
 }
