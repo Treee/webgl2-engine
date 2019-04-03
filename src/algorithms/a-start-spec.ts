@@ -29,9 +29,9 @@ describe('A Star', () => {
       const expectedPath: Grid2DCell[] = [testGrid.grid[24], testGrid.grid[23], testGrid.grid[22], testGrid.grid[21], testGrid.grid[16], testGrid.grid[11], testGrid.grid[10], testGrid.grid[5], testGrid.grid[0]];
       const actualPath = testAStar.findPath(testGrid.grid[0], testGrid.grid[(gridRows * gridCols) - 1], gridRows, gridCols);
 
-      console.log('expected1', expectedPath[9]);
+      // console.log('expected1', expectedPath[9]);
       if (actualPath) {
-        console.log('actual', actualPath[9]);
+        // console.log('actual', actualPath[9]);
       }
 
       expect(actualPath).toEqual(expectedPath);

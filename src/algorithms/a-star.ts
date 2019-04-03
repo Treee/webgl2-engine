@@ -32,7 +32,7 @@ export class AStar {
       // best cell in the open set to move too
       current = this.getBestCellOption(openSet);
       if (current === destinationCell) {
-        console.log('finished');
+        // console.log('finished');
         // if (isDebugMode) {
         //   return this.everythingAStar(this.reconstructPath(cameFrom, current), gScore, fScore);
         // }

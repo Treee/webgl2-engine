@@ -16,7 +16,17 @@ describe('Camera', () => {
         it('can move forward one unit', () => {
             expect(testCamera.getPosition()).toEqual([0, 0, 0]);
             testCamera.moveForward();
-            expect(testCamera.getPosition()).toEqual([0, 0, -1]);
+            expect(testCamera.getPosition()[0]).toBeLessThan(0.000000000000001);
+            expect(testCamera.getPosition()[1]).toBeLessThan(0.000000000000001);
+            expect(testCamera.getPosition()[2]).toEqual(-1);
+        });
+
+        it('can move to the right one unit', () => {
+            expect(testCamera.getPosition()).toEqual([0, 0, 0]);
+            testCamera.moveRight();
+            expect(testCamera.getPosition()[0]).toBe(1);
+            expect(testCamera.getPosition()[1]).toBe(0);
+            expect(testCamera.getPosition()[2]).toEqual(0);
         });
     });
 
