@@ -52,6 +52,9 @@ export abstract class RenderableObject {
   update(dt: number) { }
 
   draw(gl: WebGL2RenderingContext) {
+    // gl.clearColor(0, 0, 0, 0);
+    // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
     let programInfo = this.programInfo;
     gl.useProgram(programInfo.program);
     gl.bindVertexArray(this.vertexArray);
