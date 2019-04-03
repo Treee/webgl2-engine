@@ -11,9 +11,11 @@ export class Camera {
 
   private xAngle: number = 0;
   private yAngle: number = 0;
+  private zAngle: number = 0;
 
   private xRotation: Quaternion = new Quaternion();
   private yRotation: Quaternion = new Quaternion();
+  private zRotation: Quaternion = new Quaternion();
 
   private targetOrientation: Quaternion = new Quaternion();
 
@@ -21,6 +23,8 @@ export class Camera {
   private pi: number = Math.PI;
   private twoPi = this.pi * 2;
 
+  private pureX: Quaternion = new Quaternion(1, 0, 0, 0);
+  private pureY: Quaternion = new Quaternion(0, 1, 0, 0);
   private pureZ: Quaternion = new Quaternion(0, 0, -1, 0);
 
   constructor(startPosition: v3.Vec3) {
@@ -49,6 +53,22 @@ export class Camera {
     const conj = new Quaternion().copy(qw).conjugate();
     const normalZ = conj.multiply(this.pureZ).multiply(qw);
     return [normalZ.x, normalZ.y, normalZ.z];
+  }
+
+  //returns an up vector based on where we have rotated from
+  getUp(): v3.Vec3 {
+    const qw = new Quaternion().copy(this.targetOrientation);
+    const conj = new Quaternion().copy(qw).conjugate();
+    const normalY = conj.multiply(this.pureY).multiply(qw);
+    return [normalY.x, normalY.y, normalY.z];
+  }
+
+  //returns a vec3 that is perpendicular to the cameras forward and up vectors
+  getRight(): v3.Vec3 {
+    const qw = new Quaternion().copy(this.targetOrientation);
+    const conj = new Quaternion().copy(qw).conjugate();
+    const normalX = conj.multiply(this.pureX).multiply(qw);
+    return [normalX.x, normalX.y, normalX.z];
   }
 
   getPosition(): v3.Vec3 {
@@ -88,7 +108,6 @@ export class Camera {
       this.yAngle = this.yAngle + this.twoPi;
     }
     //yaw the given angle over the y unit vector
-    // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.yAngle);
     this.yRotation = this.yRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.yAngle);
     this.applyRotation();
   }
@@ -103,8 +122,21 @@ export class Camera {
       this.xAngle = this.xAngle + this.twoPi;
     }
     //yaw the given angle over the y unit vector
-    // this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(0, 1, 0), this.xAngle);
     this.xRotation = this.xRotation.setFromAxisAngle(new Vector3(1, 0, 0), this.xAngle);
+    this.applyRotation();
+  }
+
+  roll(amount: number) {
+    this.zAngle += amount * -this.angleStepSize;
+    //while the Angle is greater than 2pi (a full revolution, 360degrees)
+    while (this.zAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
+      this.zAngle = this.zAngle - this.twoPi;
+    }//this is the same but for the reverse direction
+    while (this.zAngle < -this.twoPi) {
+      this.zAngle = this.zAngle + this.twoPi;
+    }
+    //roll the given angle over the z unit vector
+    this.zRotation = this.zRotation.setFromAxisAngle(new Vector3(0, 0, 1), this.zAngle);
     this.applyRotation();
   }
 
