@@ -36,7 +36,7 @@ class TextureEntity extends renderable_object_1.RenderableObject {
             ]
         };
         let textures = twgl_js_1.createTextures(gl, {
-            default: { src: './test-texture1.png', mag: gl.NEAREST }
+            default: { src: './assets/images/test-texture1.png', mag: gl.NEAREST }
         });
         let otherUniforms = {
             u_resolution: [gl.canvas.width, gl.canvas.height],
