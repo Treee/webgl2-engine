@@ -148,7 +148,7 @@ export class RendererEngine {
 
     addDrawableObject(type: string, position: number[]) {
         switch (type) {
-            case 'cube':
+            case 'texture':
                 let tex = new TextureEntity(this.gl, this.defaultProgramInfo, {});
                 tex.translate(0, position);
                 this.drawableObjects.push(tex);
