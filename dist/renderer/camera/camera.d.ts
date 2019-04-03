@@ -7,16 +7,22 @@ export declare class Camera {
     private translateStepSize;
     private xAngle;
     private yAngle;
+    private zAngle;
     private xRotation;
     private yRotation;
+    private zRotation;
     private targetOrientation;
     private angleStepSize;
     private pi;
     private twoPi;
+    private pureX;
+    private pureY;
     private pureZ;
     constructor(startPosition: v3.Vec3);
     getModelMatrix(): Matrix4;
     getForward(): v3.Vec3;
+    getUp(): v3.Vec3;
+    getRight(): v3.Vec3;
     getPosition(): v3.Vec3;
     getViewMatrix(): m4.Mat4;
     getViewProjectionMatrix(projectionMatrix: m4.Mat4): m4.Mat4;
@@ -29,5 +35,6 @@ export declare class Camera {
     moveDown(): void;
     yaw(amount: number): void;
     pitch(amount: number): void;
+    roll(amount: number): void;
     applyRotation(): void;
 }
