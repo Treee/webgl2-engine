@@ -17,7 +17,7 @@ export class Camera {
 
   private targetOrientation: Quaternion = new Quaternion();
 
-  private angleStepSize: number = 0.05;
+  private angleStepSize: number = 0.005;
   private pi: number = Math.PI;
   private twoPi = this.pi * 2;
 
