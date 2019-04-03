@@ -110,7 +110,7 @@ class RendererEngine {
     addDrawableObject(type, position, imageSource = './assets/images/test-texture1.png') {
         switch (type) {
             case 'texture':
-                let tex = new texture_entity_1.TextureEntity(this.gl, this.defaultProgramInfo, {}, imageSource);
+                let tex = new texture_entity_1.TextureEntity(this.gl, this.textureImageProgramInfo, {}, imageSource);
                 tex.translate(0, position);
                 tex.scale(0, [100, 0, 100]);
                 this.drawableObjects.push(tex);
