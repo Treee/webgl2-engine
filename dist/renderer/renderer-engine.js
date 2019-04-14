@@ -208,7 +208,7 @@ class RendererEngine {
         let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix(projectionMatrix);
         this.drawableObjects.forEach(obj => {
             // obj.rotate(dt);
-            obj.move(dt, viewProjectionMatrix);
+            obj.update(dt, viewProjectionMatrix);
             obj.draw(gl);
         });
     }

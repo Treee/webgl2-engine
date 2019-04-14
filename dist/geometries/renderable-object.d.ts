@@ -6,6 +6,7 @@ export declare abstract class RenderableObject {
     vertexArray: WebGLVertexArrayObject;
     uniforms: any;
     alias: string;
+    isDirty: boolean;
     position: v3.Vec3;
     rotationX: number;
     rotationY: number;
@@ -16,8 +17,9 @@ export declare abstract class RenderableObject {
     translate(dt: number, translateAmount: v3.Vec3): void;
     scale(dt: number, scaleAmount: v3.Vec3): void;
     rotate(dt: number): void;
-    move(dt: number, viewProjectionMatrix: any): void;
+    lerp(start: v3.Vec3, end: v3.Vec3, step: number): number[] | Float32Array;
     computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4;
-    update(dt: number): void;
+    update(dt: number, viewProjectionMatrix: any): void;
+    setDirty(isDirty: boolean): void;
     draw(gl: WebGL2RenderingContext): void;
 }
