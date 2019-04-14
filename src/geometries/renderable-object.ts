@@ -8,6 +8,8 @@ export abstract class RenderableObject {
 
   alias: string = 'default';
 
+  isDirty: boolean = false; // helps us only update things that need to be updated
+
   position: v3.Vec3 = [0, 0, 0];
 
   rotationX: number = 0;
@@ -25,19 +27,24 @@ export abstract class RenderableObject {
   translate(dt: number, translateAmount: v3.Vec3) {
     let newPosition = v3.add(this.position, translateAmount);
     this.position = newPosition;
+    this.setDirty(true);
   }
 
   scale(dt: number, scaleAmount: v3.Vec3) {
     let newScale = v3.add(this.scaleValue, scaleAmount);
     this.scaleValue = newScale;
+    this.setDirty(true);
   }
 
-  rotate(dt: number) { }
+  rotate(dt: number) {
+    this.rotationX = -dt;
+    this.rotationY = dt;
+    this.setDirty(true);
+  }
 
-  move(dt: number, viewProjectionMatrix: any) {
-    if (this.uniforms) {
-      this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
-    }
+  lerp(start: v3.Vec3, end: v3.Vec3, step: number) {
+    // ((1 - step) * start) + (step * end)
+    return v3.add(v3.mulScalar(start, (1 - step)), v3.mulScalar(end, step));
   }
 
   computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4 {
@@ -49,7 +56,18 @@ export abstract class RenderableObject {
     return matrix
   }
 
-  update(dt: number) { }
+  update(dt: number, viewProjectionMatrix: any) {
+    if (this.isDirty) { // if this object needs updating
+      if (this.uniforms) { //if there are uniforms
+        this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
+      }
+      this.setDirty(false);
+    }
+  }
+
+  setDirty(isDirty: boolean): void {
+    this.isDirty = isDirty;
+  }
 
   draw(gl: WebGL2RenderingContext) {
     // gl.clearColor(0, 0, 0, 0);
