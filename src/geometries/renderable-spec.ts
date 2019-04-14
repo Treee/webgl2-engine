@@ -7,7 +7,7 @@ class TestRenderableObject extends RenderableObject {
     }
 }
 
-fdescribe('Renderable Object', () => {
+describe('Renderable Object', () => {
 
     let testObject: TestRenderableObject;
 
