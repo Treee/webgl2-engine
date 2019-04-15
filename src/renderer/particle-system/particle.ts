@@ -1,8 +1,8 @@
-import { Vec3 } from "../math/vec3";
-import { Vec4 } from "../math/vec4";
-import { Mat3 } from "../math/mat3";
-import { Renderable } from '../renderer/renderables/renderable';
-import { ProgramInfoTree } from "../renderer/shaders/program-info";
+import { Vec3 } from "../../math/vec3";
+import { Vec4 } from "../../math/vec4";
+import { Mat3 } from "../../math/mat3";
+import { Renderable } from '../renderables/renderable';
+import { ProgramInfoTree } from "../shaders/program-info";
 
 export class Particle extends Renderable {
 

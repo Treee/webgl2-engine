@@ -1,8 +1,8 @@
 import { Particle } from "./particle";
-import { Mat3 } from '../math/mat3';
-import { Vec3 } from "../math/vec3";
-import { Vec4 } from "../math/vec4";
-import { ProgramInfoTree } from "../renderer/shaders/program-info";
+import { Mat3 } from '../../math/mat3';
+import { Vec3 } from "../../math/vec3";
+import { Vec4 } from "../../math/vec4";
+import { ProgramInfoTree } from "../shaders/program-info";
 
 export class ParticleSystem {
 
