@@ -1,5 +1,5 @@
-import { RenderableObject } from "./renderable-object";
-import { ProgramInfo, createVAOFromBufferInfo, createBufferInfoFromArrays, setUniforms, drawBufferInfo } from "twgl.js";
+import { RenderableObject } from './renderable-object';
+import { ProgramInfo, createVAOFromBufferInfo, createBufferInfoFromArrays, setUniforms, drawBufferInfo } from 'twgl.js';
 
 export class Axis3D extends RenderableObject {
 

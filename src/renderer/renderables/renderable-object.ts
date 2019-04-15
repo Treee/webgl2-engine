@@ -1,4 +1,4 @@
-import { ProgramInfo, BufferInfo, m4, setUniforms, drawBufferInfo, v3 } from "twgl.js";
+import { ProgramInfo, BufferInfo, m4, setUniforms, drawBufferInfo, v3 } from 'twgl.js';
 
 export abstract class RenderableObject {
   programInfo!: ProgramInfo;
