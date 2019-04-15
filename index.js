@@ -9,7 +9,6 @@ export { Grid2D } from './dist/data-structures/grid-2d';
 export { Grid2DCell } from './dist/data-structures/grid-2d-cell';
 
 // Geometries
-export { BoxGeometry } from './dist/geometries/box-geometry';
 export { Point2D } from './dist/geometries/point-2d';
 export { TextureEntity } from './dist/geometries/texture-entity';
 

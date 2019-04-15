@@ -1,6 +1,5 @@
 import { Vec3 } from '../math/vec3';
 import { Mat3 } from '../math/mat3';
-import { BoxGeometry } from '../geometries/box-geometry';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from '../geometries/renderable-object';
 import { Camera } from './camera/camera';
@@ -178,29 +177,6 @@ export class RendererEngine {
                 this.drawableObjects.push(stuff);
                 return;
         }
-    }
-
-    drawFrame(dt: Number, renderableObjects: BoxGeometry[]) {
-        if (!this.gl) {
-            throw new Error('Cannot Draw Frame, GL is undefined');
-        }
-        // Tell it to use our program (pair of shaders)
-        // this.gl.useProgram(this.shaderManager.getShader('basic-shader'));
-
-        // Clear the canvas
-        this.gl.clearColor(0, 0, 0, 0);
-        this.gl.clear(this.gl.COLOR_BUFFER_BIT);
-
-        if (!renderableObjects) {
-            throw new Error('Cannot Draw Frame, Renderable Objects is undefined');
-        }
-
-        renderableObjects.forEach(renderable => {
-            if (!this.gl) {
-                throw new Error('Cannot Draw Renderable, GL is undefined');
-            }
-            renderable.draw(this.gl, this.projectionMatrix);
-        });
     }
 
     getCanvasDimensions(): Vec3 {

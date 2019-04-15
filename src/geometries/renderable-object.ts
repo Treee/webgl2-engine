@@ -31,8 +31,7 @@ export abstract class RenderableObject {
   }
 
   scale(dt: number, scaleAmount: v3.Vec3) {
-    let newScale = v3.add(this.scaleValue, scaleAmount);
-    this.scaleValue = newScale;
+    this.scaleValue = scaleAmount;
     this.setDirty(true);
   }
 
