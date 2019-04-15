@@ -18,8 +18,7 @@ class RenderableObject {
         this.setDirty(true);
     }
     scale(dt, scaleAmount) {
-        let newScale = twgl_js_1.v3.add(this.scaleValue, scaleAmount);
-        this.scaleValue = newScale;
+        this.scaleValue = scaleAmount;
         this.setDirty(true);
     }
     rotate(dt) {

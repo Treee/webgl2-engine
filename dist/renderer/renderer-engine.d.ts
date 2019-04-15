@@ -1,7 +1,6 @@
 /// <reference types="webgl2" />
 import { Vec3 } from '../math/vec3';
 import { Mat3 } from '../math/mat3';
-import { BoxGeometry } from '../geometries/box-geometry';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from '../geometries/renderable-object';
 import { Camera } from './camera/camera';
@@ -23,7 +22,6 @@ export declare class RendererEngine {
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
     addDrawableObject(type: string, position: number[], imageSource?: string): void;
-    drawFrame(dt: Number, renderableObjects: BoxGeometry[]): void;
     getCanvasDimensions(): Vec3;
     private initializeCanvasGL;
     drawScene(gl: WebGL2RenderingContext, dt: any): void;
