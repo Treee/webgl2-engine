@@ -1,8 +1,8 @@
-import { Vec3 } from '../math/vec3';
-import { Vec4 } from '../math/vec4';
-import { Mat3 } from '../math/mat3';
+import { Vec3 } from '../../math/vec3';
+import { Vec4 } from '../../math/vec4';
+import { Mat3 } from '../../math/mat3';
 import { GeometryData } from './geometry-data';
-import { ProgramInfoTree } from '../renderer/shaders/program-info';
+import { ProgramInfoTree } from '../shaders/program-info';
 
 export abstract class Renderable {
 

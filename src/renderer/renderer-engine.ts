@@ -1,16 +1,16 @@
 import { Vec3 } from '../math/vec3';
 import { Mat3 } from '../math/mat3';
 import { ShaderManager } from './shaders/shader-manager';
-import { RenderableObject } from '../geometries/renderable-object';
+import { RenderableObject } from './renderables/renderable-object';
 import { Camera } from './camera/camera';
 
 import * as twgl from 'twgl.js';
-import { Cube } from '../geometries/cube';
-import { Cone } from '../geometries/cone';
-import { Sphere } from '../geometries/sphere';
-import { Axis3D } from '../geometries/axis-3d';
-import { Plane } from '../geometries/plane';
-import { TextureEntity } from '../geometries/texture-entity';
+import { Cube } from './renderables/cube';
+import { Cone } from './renderables/cone';
+import { Sphere } from './renderables/sphere';
+import { Axis3D } from './renderables/axis-3d';
+import { Plane } from './renderables/plane';
+import { TextureEntity } from './renderables/texture-entity';
 
 export class RendererEngine {
 

@@ -2,7 +2,7 @@
 import { Vec3 } from '../math/vec3';
 import { Vec4 } from '../math/vec4';
 import { Mat3 } from '../math/mat3';
-import { GeometryData } from '../geometries/geometry-data';
+import { GeometryData } from '../renderer/renderables/geometry-data';
 
 export class NewParticle {
   velocity: Vec3 = new Vec3();
