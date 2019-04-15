@@ -17,9 +17,6 @@ export { Vec4 } from './dist/math/vec4';
 export { Mat3 } from './dist/math/mat3';
 
 // Particle System
-export { ParticleSystem } from './dist/particle-system/particle-system';
-export { Particle } from './dist/particle-system/particle';
-
 export { NewParticleSystem, NewParticle } from './dist/particle-system/new-particle-system';
 
 // Shaders
