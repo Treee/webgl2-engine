@@ -2,7 +2,7 @@
 import { Vec3 } from '../math/vec3';
 import { Mat3 } from '../math/mat3';
 import { ShaderManager } from './shaders/shader-manager';
-import { RenderableObject } from '../geometries/renderable-object';
+import { RenderableObject } from './renderables/renderable-object';
 import { Camera } from './camera/camera';
 import * as twgl from 'twgl.js';
 export declare class RendererEngine {

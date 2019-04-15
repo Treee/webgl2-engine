@@ -2,7 +2,7 @@
 import { Vec3 } from "../math/vec3";
 import { Vec4 } from "../math/vec4";
 import { Mat3 } from "../math/mat3";
-import { Renderable } from '../geometries/renderable';
+import { Renderable } from '../renderer/renderables/renderable';
 import { ProgramInfoTree } from "../renderer/shaders/program-info";
 export declare class Particle extends Renderable {
     velocity: Vec3;

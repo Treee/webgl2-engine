@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const vec3_1 = require("../math/vec3");
 const vec4_1 = require("../math/vec4");
-const renderable_1 = require("../geometries/renderable");
+const renderable_1 = require("../renderer/renderables/renderable");
 class Particle extends renderable_1.Renderable {
     constructor(position = new vec3_1.Vec3(), velocity = new vec3_1.Vec3(), color = new vec4_1.Vec4(), decay = 3, gl, programInfo) {
         super(programInfo);

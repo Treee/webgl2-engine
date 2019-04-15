@@ -5,12 +5,12 @@ const mat3_1 = require("../math/mat3");
 const shader_manager_1 = require("./shaders/shader-manager");
 const camera_1 = require("./camera/camera");
 const twgl = require("twgl.js");
-const cube_1 = require("../geometries/cube");
-const cone_1 = require("../geometries/cone");
-const sphere_1 = require("../geometries/sphere");
-const axis_3d_1 = require("../geometries/axis-3d");
-const plane_1 = require("../geometries/plane");
-const texture_entity_1 = require("../geometries/texture-entity");
+const cube_1 = require("./renderables/cube");
+const cone_1 = require("./renderables/cone");
+const sphere_1 = require("./renderables/sphere");
+const axis_3d_1 = require("./renderables/axis-3d");
+const plane_1 = require("./renderables/plane");
+const texture_entity_1 = require("./renderables/texture-entity");
 class RendererEngine {
     constructor() {
         this.projectionMatrix = new mat3_1.Mat3();
