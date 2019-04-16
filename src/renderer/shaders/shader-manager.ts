@@ -7,13 +7,13 @@ import { FragmentShader } from './fragment-shader';
 export class ShaderManager {
 
   programs: Map<string, twgl.ProgramInfo>;
-  vertexShader: VertexShader;
-  fragmentShader: FragmentShader;
+  vs: VertexShader;
+  fs: FragmentShader;
 
   constructor() {
     this.programs = new Map<string, twgl.ProgramInfo>();
-    this.vertexShader = new VertexShader();
-    this.fragmentShader = new FragmentShader();
+    this.vs = new VertexShader();
+    this.fs = new FragmentShader();
   }
 
   public initializeShaderPrograms(gl: WebGL2RenderingContext) {
@@ -32,7 +32,7 @@ export class ShaderManager {
   }
 
   private initializeBasicShader(gl: WebGL2RenderingContext) {
-    return this.initializeShaderProgram(gl, this.vertexShader.getVertexShaderCode(VertexShaderType.TWO_D), this.fragmentShader.getfragmentShaderCode(FragmentShaderType.PASS_THROUGH));
+    return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.TWO_D), this.fs.getfragmentShaderCode(FragmentShaderType.PASS_THROUGH));
   }
 
   private initializeShaderProgram(gl: WebGL2RenderingContext, vertexShader: string, fragmentShader: string, attributePrefix: string = 'a_'): twgl.ProgramInfo {
