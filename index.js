@@ -12,9 +12,7 @@ export { Grid2DCell } from './dist/data-structures/grid-2d-cell';
 export { TextureEntity } from './dist/geometries/texture-entity';
 
 // Math
-export { Vec3 } from './dist/math/vec3';
-export { Vec4 } from './dist/math/vec4';
-export { Mat3 } from './dist/math/mat3';
+export { degreesToRadian } from './dist/math/helper';
 
 // Particle System
 
