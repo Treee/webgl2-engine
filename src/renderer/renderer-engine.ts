@@ -195,7 +195,7 @@ export class RendererEngine {
         }
 
         // get the webgl 2 context
-        this.gl = this.canvas.getContext('webgl2') as any;
+        this.gl = this.canvas.getContext('webgl2') as WebGL2RenderingContext;
         if (!this.gl) {
             throw new Error('GL Context not initialized.');
         }
@@ -217,7 +217,7 @@ export class RendererEngine {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
 
-    drawScene(gl: WebGL2RenderingContext, dt: any) {
+    drawScene(gl: WebGL2RenderingContext, dt: number) {
         dt = dt * 0.001; // take the current dt and make it even smaller
         twgl.resizeCanvasToDisplaySize(gl.canvas);
 
@@ -234,7 +234,6 @@ export class RendererEngine {
         this.drawableObjects.forEach(obj => {
             // obj.rotate(dt);
             obj.update(dt, viewProjectionMatrix);
-
             obj.draw(gl);
         });
     }
@@ -264,18 +263,7 @@ export class RendererEngine {
         }
     }
 
-    // drawObjects(gl: WebGL2RenderingContext, objectsToDraw: RenderableObject[]) {
-    //     objectsToDraw.forEach(obj => {
-    //         let programInfo = obj.programInfo;
-    //         gl.useProgram(programInfo.program);
-    //         gl.bindVertexArray(obj.vertexArray);
-    //         twgl.setUniforms(programInfo, obj.uniforms);
-    //         twgl.drawBufferInfo(gl, obj.bufferInfo);
-    //     });
-    // }
-
     degreesToRadian(degrees: number) {
         return degrees * Math.PI / 180;
     }
-
 }
