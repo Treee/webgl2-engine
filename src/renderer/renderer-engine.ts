@@ -1,4 +1,3 @@
-import { Vec3 } from '../math/vec3';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from './renderables/renderable-object';
 import { Camera } from './camera/camera';
@@ -177,10 +176,10 @@ export class RendererEngine {
         }
     }
 
-    getCanvasDimensions(): Vec3 {
-        let canvasDimensions = new Vec3();
+    getCanvasDimensions(): twgl.v3.Vec3 {
+        let canvasDimensions = [0, 0, 0];
         if (this.canvas) {
-            canvasDimensions.set(this.canvas.width, this.canvas.height, 0);
+            canvasDimensions = [this.canvas.width, this.canvas.height, 0];
         }
         return canvasDimensions;
     }
@@ -205,7 +204,7 @@ export class RendererEngine {
 
         let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
         let fieldOfViewRadians = degreesToRadian(90);
-        this.projectionMatrix = twgl.m4.perspective(fieldOfViewRadians, aspect, 1, 2000);
+        this.projectionMatrix = twgl.m4.perspective(fieldOfViewRadians, aspect, 0.01, 2000);
         // set the viewport for the renderer
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
