@@ -1,5 +1,4 @@
 import { Vec3 } from '../math/vec3';
-import { Mat3 } from '../math/mat3';
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableObject } from './renderables/renderable-object';
 import { Camera } from './camera/camera';
@@ -12,6 +11,8 @@ import { Axis3D } from './renderables/axis-3d';
 import { Plane } from './renderables/plane';
 import { TextureEntity } from './renderables/texture-entity';
 
+import { degreesToRadian } from '../math/helper';
+
 export class RendererEngine {
 
     canvas!: HTMLCanvasElement;
@@ -21,9 +22,7 @@ export class RendererEngine {
     shaderManager!: ShaderManager;
     debugCamera!: Camera;
 
-    projectionMatrix: Mat3 = new Mat3();
-
-    fieldOfViewRadians: number = 0;
+    projectionMatrix: twgl.m4.Mat4 = twgl.m4.identity();
 
     vs = `#version 300 es
 
@@ -110,7 +109,6 @@ export class RendererEngine {
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
 
-        this.fieldOfViewRadians = this.degreesToRadian(60);
         twgl.setAttributePrefix("a_");
         // create program info
         this.defaultProgramInfo = twgl.createProgramInfo(this.gl, [this.vs, this.fs]);
@@ -204,15 +202,10 @@ export class RendererEngine {
         this.canvas.width = width;
         this.canvas.height = height;
 
-        // note the -2 for the height. this flips the axis so 0 is at the top
-        // width    0     0
-        //   0   -height  0
-        //  -1      1     1
-        this.projectionMatrix.set(
-            2 / width, 0, 0,
-            0, -2 / height, 0,
-            -1, 1, 1
-        );
+
+        let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
+        let fieldOfViewRadians = degreesToRadian(90);
+        this.projectionMatrix = twgl.m4.perspective(fieldOfViewRadians, aspect, 1, 2000);
         // set the viewport for the renderer
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
@@ -226,10 +219,8 @@ export class RendererEngine {
         // gl.enable(gl.CULL_FACE);
         gl.enable(gl.DEPTH_TEST);
 
-        let aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
-        let projectionMatrix = twgl.m4.perspective(this.fieldOfViewRadians, aspect, 1, 2000);
 
-        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix(projectionMatrix);
+        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix(this.projectionMatrix);
 
         this.drawableObjects.forEach(obj => {
             // obj.rotate(dt);
@@ -261,9 +252,5 @@ export class RendererEngine {
             this.debugCamera.pitch(mouseInputs.y);
             this.debugCamera.yaw(mouseInputs.x);
         }
-    }
-
-    degreesToRadian(degrees: number) {
-        return degrees * Math.PI / 180;
     }
 }
