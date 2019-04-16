@@ -1,8 +1,14 @@
 /// <reference types="webgl2" />
-import { ProgramInfoTree } from './program-info';
+import * as twgl from 'twgl.js';
+import { VertexShader } from './vertex-shader';
+import { FragmentShader } from './fragment-shader';
 export declare class ShaderManager {
-    programs: Map<string, ProgramInfoTree>;
+    programs: Map<string, twgl.ProgramInfo>;
+    vertexShader: VertexShader;
+    fragmentShader: FragmentShader;
     constructor();
     initializeShaderPrograms(gl: WebGL2RenderingContext): void;
     getShader(shaderKey: string): WebGLProgram;
+    private initializeBasicShader;
+    private initializeShaderProgram;
 }

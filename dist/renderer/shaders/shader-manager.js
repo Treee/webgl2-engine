@@ -1,22 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const shader_program_1 = require("./shader-program");
-const program_info_1 = require("./program-info");
+const shader_types_1 = require("./shader-types");
+const twgl = require("twgl.js");
+const vertex_shader_1 = require("./vertex-shader");
+const fragment_shader_1 = require("./fragment-shader");
 class ShaderManager {
     constructor() {
         this.programs = new Map();
+        this.vertexShader = new vertex_shader_1.VertexShader();
+        this.fragmentShader = new fragment_shader_1.FragmentShader();
     }
     initializeShaderPrograms(gl) {
-        // create the default shader program for a 2d program
-        const shaderProgram = new shader_program_1.ShaderProgram();
-        const basicProgramInfo = new program_info_1.ProgramInfoTree();
-        basicProgramInfo.program = shaderProgram.getBasic2dProgram(gl);
-        basicProgramInfo.setUniforms(gl, ['u_transform', 'u_color']);
-        this.programs.set('basic-shader', basicProgramInfo);
-        const basicParticleProgramInfo = new program_info_1.ProgramInfoTree();
-        basicParticleProgramInfo.program = shaderProgram.getBasicParticleProgram(gl);
-        basicParticleProgramInfo.setUniforms(gl, ['u_transform', 'u_color']);
-        this.programs.set('basic-particle-shader', basicParticleProgramInfo);
+        this.programs.set('basic-shader', this.initializeBasicShader(gl));
     }
     getShader(shaderKey) {
         if (!this.programs.has(shaderKey)) {
@@ -27,6 +22,13 @@ class ShaderManager {
             throw new Error('Shader program does not exist.');
         }
         return shaderProgram.program;
+    }
+    initializeBasicShader(gl) {
+        return this.initializeShaderProgram(gl, this.vertexShader.getVertexShaderCode(shader_types_1.VertexShaderType.TWO_D), this.fragmentShader.getfragmentShaderCode(shader_types_1.FragmentShaderType.PASS_THROUGH));
+    }
+    initializeShaderProgram(gl, vertexShader, fragmentShader, attributePrefix = 'a_') {
+        twgl.setAttributePrefix(attributePrefix);
+        return twgl.createProgramInfo(gl, [vertexShader, fragmentShader]);
     }
 }
 exports.ShaderManager = ShaderManager;
