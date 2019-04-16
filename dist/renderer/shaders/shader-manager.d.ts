@@ -8,7 +8,8 @@ export declare class ShaderManager {
     fs: FragmentShader;
     constructor();
     initializeShaderPrograms(gl: WebGL2RenderingContext): void;
-    getShader(shaderKey: string): WebGLProgram;
+    getShader(shaderKey: string): twgl.ProgramInfo;
     private initializeBasicShader;
+    private initializeBasicTextureShader;
     private initializeShaderProgram;
 }

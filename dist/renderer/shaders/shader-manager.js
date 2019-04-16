@@ -12,6 +12,7 @@ class ShaderManager {
     }
     initializeShaderPrograms(gl) {
         this.programs.set('basic-shader', this.initializeBasicShader(gl));
+        this.programs.set('basic-texture-shader', this.initializeBasicTextureShader(gl));
     }
     getShader(shaderKey) {
         if (!this.programs.has(shaderKey)) {
@@ -21,10 +22,13 @@ class ShaderManager {
         if (!shaderProgram) {
             throw new Error('Shader program does not exist.');
         }
-        return shaderProgram.program;
+        return shaderProgram;
     }
     initializeBasicShader(gl) {
         return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(shader_types_1.VertexShaderType.TWO_D), this.fs.getfragmentShaderCode(shader_types_1.FragmentShaderType.PASS_THROUGH));
+    }
+    initializeBasicTextureShader(gl) {
+        return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(shader_types_1.VertexShaderType.TEXTURE), this.fs.getfragmentShaderCode(shader_types_1.FragmentShaderType.TEXTURE));
     }
     initializeShaderProgram(gl, vertexShader, fragmentShader, attributePrefix = 'a_') {
         twgl.setAttributePrefix(attributePrefix);

@@ -14,6 +14,7 @@ export declare abstract class RenderableObject {
     scaleValue: v3.Vec3;
     modelMatrix: m4.Mat4;
     constructor();
+    initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any): void;
     translate(dt: number, translateAmount: v3.Vec3): void;
     scale(dt: number, scaleAmount: v3.Vec3): void;
     rotate(dt: number): void;

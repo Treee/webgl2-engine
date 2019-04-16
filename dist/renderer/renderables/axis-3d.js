@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const renderable_object_1 = require("./renderable-object");
 const twgl_js_1 = require("twgl.js");
 class Axis3D extends renderable_object_1.RenderableObject {
-    constructor(gl, progInfo, uniforms) {
+    constructor() {
         super();
         this.xAxisRange = 100;
         this.yAxisRange = 100;
@@ -13,6 +13,8 @@ class Axis3D extends renderable_object_1.RenderableObject {
             u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
         this.alias = 'axis-3d';
+    }
+    initializeObject(gl, progInfo, uniforms) {
         let arrays = {
             position: [-this.xAxisRange, 0, 0, this.xAxisRange, 0, 0, 0, -this.yAxisRange, 0, 0, this.yAxisRange, 0, 0, 0, -this.zAxisRange, 0, 0, this.zAxisRange],
             color: [0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],

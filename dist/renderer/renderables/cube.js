@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const renderable_object_1 = require("./renderable-object");
 const twgl_js_1 = require("twgl.js");
 class Cube extends renderable_object_1.RenderableObject {
-    constructor(gl, progInfo, uniforms) {
+    constructor() {
         super();
         this.xAxisRange = 1;
         this.yAxisRange = 1;
@@ -13,6 +13,8 @@ class Cube extends renderable_object_1.RenderableObject {
             u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
         this.alias = 'cube';
+    }
+    initializeObject(gl, progInfo, uniforms) {
         let arrays = {
             position: [
                 // top
