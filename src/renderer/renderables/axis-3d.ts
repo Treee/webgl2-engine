@@ -12,10 +12,12 @@ export class Axis3D extends RenderableObject {
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   };
 
-  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  constructor() {
     super();
     this.alias = 'axis-3d';
+  }
 
+  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let arrays = {
       position: [-this.xAxisRange, 0, 0, this.xAxisRange, 0, 0, 0, -this.yAxisRange, 0, 0, this.yAxisRange, 0, 0, 0, -this.zAxisRange, 0, 0, this.zAxisRange],
       color: [0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],

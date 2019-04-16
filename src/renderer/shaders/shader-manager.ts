@@ -18,9 +18,10 @@ export class ShaderManager {
 
   public initializeShaderPrograms(gl: WebGL2RenderingContext) {
     this.programs.set('basic-shader', this.initializeBasicShader(gl));
+    this.programs.set('basic-texture-shader', this.initializeBasicTextureShader(gl));
   }
 
-  public getShader(shaderKey: string): WebGLProgram {
+  public getShader(shaderKey: string): twgl.ProgramInfo {
     if (!this.programs.has(shaderKey)) {
       throw new Error('Shader key does not exist.');
     }
@@ -28,11 +29,16 @@ export class ShaderManager {
     if (!shaderProgram) {
       throw new Error('Shader program does not exist.');
     }
-    return shaderProgram.program;
+    return shaderProgram;
   }
 
-  private initializeBasicShader(gl: WebGL2RenderingContext) {
+
+  private initializeBasicShader(gl: WebGL2RenderingContext): twgl.ProgramInfo {
     return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.TWO_D), this.fs.getfragmentShaderCode(FragmentShaderType.PASS_THROUGH));
+  }
+
+  private initializeBasicTextureShader(gl: WebGL2RenderingContext): twgl.ProgramInfo {
+    return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.TEXTURE), this.fs.getfragmentShaderCode(FragmentShaderType.TEXTURE));
   }
 
   private initializeShaderProgram(gl: WebGL2RenderingContext, vertexShader: string, fragmentShader: string, attributePrefix: string = 'a_'): twgl.ProgramInfo {

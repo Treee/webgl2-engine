@@ -8,9 +8,12 @@ export class Sphere extends RenderableObject {
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
   };
 
-  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  constructor() {
     super();
     this.alias = 'sphere';
+  }
+
+  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let sphereBufferInfo = primitives.createSphereBufferInfo(gl, 10, 12, 6);
     // let attr = {
     //   color: [0, 1, 0, 1]

@@ -1,11 +1,12 @@
 export enum VertexShaderType {
     TWO_D,
     THREE_D,
-    PARTICLE,
+    TEXTURE,
     DEBUG
 }
 
 export enum FragmentShaderType {
     DEBUG,
-    PASS_THROUGH
+    PASS_THROUGH,
+    TEXTURE
 }

@@ -12,10 +12,12 @@ export class Cube extends RenderableObject {
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   };
 
-  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  constructor() {
     super();
     this.alias = 'cube';
+  }
 
+  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let arrays = {
       position: [
         // top

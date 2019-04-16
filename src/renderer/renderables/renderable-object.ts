@@ -24,6 +24,8 @@ export abstract class RenderableObject {
 
   }
 
+  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) { };
+
   translate(dt: number, translateAmount: v3.Vec3) {
     let newPosition = v3.add(this.position, translateAmount);
     this.position = newPosition;

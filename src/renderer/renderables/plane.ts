@@ -11,10 +11,12 @@ export class Plane extends RenderableObject {
     u_matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
   };
 
-  constructor(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  constructor() {
     super();
     this.alias = 'plane';
+  }
 
+  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let arrays = {
       position: [
         -this.xAxisRange, 0, -this.zAxisRange, // back left corner
