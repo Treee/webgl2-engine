@@ -40,8 +40,8 @@ export class RendererEngine {
         return canvasDimensions;
     }
 
-    public drawScene(gl: WebGL2RenderingContext, dt: number): void {
-        this.renderableManager.drawScene(gl, dt, this.debugCamera, this.projectionMatrix);
+    public drawScene(dt: number): void {
+        this.renderableManager.drawScene(this.gl, dt, this.debugCamera, this.projectionMatrix);
     }
 
     public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
