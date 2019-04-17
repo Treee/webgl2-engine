@@ -24,8 +24,8 @@ class RendererEngine {
         }
         return canvasDimensions;
     }
-    drawScene(gl, dt) {
-        this.renderableManager.drawScene(gl, dt, this.debugCamera, this.projectionMatrix);
+    drawScene(dt) {
+        this.renderableManager.drawScene(this.gl, dt, this.debugCamera, this.projectionMatrix);
     }
     applyUserInput(activeKeysMap, mouseInputs) {
         if (activeKeysMap['w']) {

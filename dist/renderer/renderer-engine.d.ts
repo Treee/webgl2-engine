@@ -13,7 +13,7 @@ export declare class RendererEngine {
     constructor();
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
     getCanvasDimensions(): twgl.v3.Vec3;
-    drawScene(gl: WebGL2RenderingContext, dt: number): void;
+    drawScene(dt: number): void;
     applyUserInput(activeKeysMap: any, mouseInputs: any): void;
     private initializeCanvasGL;
 }
