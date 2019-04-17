@@ -48,6 +48,7 @@ export class FragmentShader {
 
         void main() {
           outColor = v_color;
-        }`;
+        }
+        `;
     }
 }
