@@ -10,7 +10,7 @@ export class VertexShader {
                 vertexShaderCode = this.getBasic2dShaderCode();
                 break;
 
-            case VertexShaderType.TWO_D:
+            case VertexShaderType.THREE_D:
                 vertexShaderCode = this.getBasic3dShaderCode();
                 break;
 
