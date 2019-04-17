@@ -34,6 +34,7 @@ class Plane extends renderable_object_1.RenderableObject {
         this.programInfo = progInfo;
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, planeBufferInfo);
         this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
+        this.setDirty(true);
     }
     rotate(dt) {
         this.rotationX = dt;

@@ -49,6 +49,7 @@ class TextureEntity extends renderable_object_1.RenderableObject {
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, textureBufferInfo);
         otherUniforms = Object.assign({}, otherUniforms, uniforms);
         this.uniforms = Object.assign({}, this.defaultUniforms, otherUniforms);
+        this.setDirty(true);
     }
     rotate(dt) {
         this.rotationX = dt;

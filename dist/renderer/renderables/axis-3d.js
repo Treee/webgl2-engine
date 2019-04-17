@@ -26,6 +26,7 @@ class Axis3D extends renderable_object_1.RenderableObject {
         this.vertexArray = twgl_js_1.createVAOFromBufferInfo(gl, progInfo, axisBufferInfo);
         this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
         this.position = [0, 0, 0];
+        this.setDirty(true);
     }
     draw(gl) {
         let programInfo = this.programInfo;
