@@ -9,6 +9,9 @@ class VertexShader {
             case shader_types_1.VertexShaderType.TWO_D:
                 vertexShaderCode = this.getBasic2dShaderCode();
                 break;
+            case shader_types_1.VertexShaderType.TWO_D:
+                vertexShaderCode = this.getBasic3dShaderCode();
+                break;
             case shader_types_1.VertexShaderType.TEXTURE:
                 vertexShaderCode = this.getBasicTextureShaderCode();
                 break;
@@ -17,6 +20,24 @@ class VertexShader {
                 break;
         }
         return vertexShaderCode;
+    }
+    getBasic3dShaderCode() {
+        return `#version 300 es
+
+        in vec4 a_position;	
+        in vec4 a_color;	
+
+        uniform mat4 u_matrix;	
+        
+        out vec4 v_color;	
+            
+        void main() {	
+            // Multiply the position by the matrix.	
+            gl_Position = u_matrix * a_position;	
+            // Pass the color to the fragment shader.	
+            v_color = a_color;	
+        }	
+        `;
     }
     getBasicTextureShaderCode() {
         return `#version 300 es
