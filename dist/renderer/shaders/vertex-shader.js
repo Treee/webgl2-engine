@@ -9,7 +9,7 @@ class VertexShader {
             case shader_types_1.VertexShaderType.TWO_D:
                 vertexShaderCode = this.getBasic2dShaderCode();
                 break;
-            case shader_types_1.VertexShaderType.TWO_D:
+            case shader_types_1.VertexShaderType.THREE_D:
                 vertexShaderCode = this.getBasic3dShaderCode();
                 break;
             case shader_types_1.VertexShaderType.TEXTURE:
