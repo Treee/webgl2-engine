@@ -1,5 +1,5 @@
 import { RenderableObject } from "./renderable-object";
-import { v3 } from "twgl.js";
+import { v3, ProgramInfo } from "twgl.js";
 
 // stub for abstract class, intentionally left empty so we can test base functionality
 class TestRenderableObject extends RenderableObject {
@@ -60,4 +60,5 @@ describe('Renderable Object', () => {
             expect(testObject.isDirty).toBe(true);
         });
     });
+
 });

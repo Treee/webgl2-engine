@@ -24,6 +24,7 @@ export class Sphere extends RenderableObject {
     this.programInfo = progInfo;
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, sphereBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
+    this.setDirty(true);
   }
 
   rotate(dt: number) {

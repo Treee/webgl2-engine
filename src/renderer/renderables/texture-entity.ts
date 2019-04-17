@@ -57,6 +57,7 @@ export class TextureEntity extends RenderableObject {
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, textureBufferInfo) as unknown as WebGLVertexArrayObject;
     otherUniforms = Object.assign({}, otherUniforms, uniforms);
     this.uniforms = Object.assign({}, this.defaultUniforms, otherUniforms);
+    this.setDirty(true);
   }
 
   rotate(dt: number) {

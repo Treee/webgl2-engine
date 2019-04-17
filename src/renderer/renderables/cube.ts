@@ -59,6 +59,7 @@ export class Cube extends RenderableObject {
     this.programInfo = progInfo;
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, cubeBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
+    this.setDirty(true);
   }
 
   rotate(dt: number) {

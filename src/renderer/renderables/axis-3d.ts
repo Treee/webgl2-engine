@@ -31,6 +31,7 @@ export class Axis3D extends RenderableObject {
     this.vertexArray = createVAOFromBufferInfo(gl, progInfo, axisBufferInfo) as unknown as WebGLVertexArrayObject;
     this.uniforms = Object.assign({}, this.defaultUniforms, uniforms);
     this.position = [0, 0, 0];
+    this.setDirty(true);
   }
 
   draw(gl: WebGL2RenderingContext) {
