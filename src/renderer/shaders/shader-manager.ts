@@ -34,7 +34,7 @@ export class ShaderManager {
 
 
   private initializeBasicShader(gl: WebGL2RenderingContext): twgl.ProgramInfo {
-    return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.TWO_D), this.fs.getfragmentShaderCode(FragmentShaderType.PASS_THROUGH));
+    return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.THREE_D), this.fs.getfragmentShaderCode(FragmentShaderType.PASS_THROUGH));
   }
 
   private initializeBasicTextureShader(gl: WebGL2RenderingContext): twgl.ProgramInfo {
