@@ -25,7 +25,7 @@ class ShaderManager {
         return shaderProgram;
     }
     initializeBasicShader(gl) {
-        return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(shader_types_1.VertexShaderType.TWO_D), this.fs.getfragmentShaderCode(shader_types_1.FragmentShaderType.PASS_THROUGH));
+        return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(shader_types_1.VertexShaderType.THREE_D), this.fs.getfragmentShaderCode(shader_types_1.FragmentShaderType.PASS_THROUGH));
     }
     initializeBasicTextureShader(gl) {
         return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(shader_types_1.VertexShaderType.TEXTURE), this.fs.getfragmentShaderCode(shader_types_1.FragmentShaderType.TEXTURE));

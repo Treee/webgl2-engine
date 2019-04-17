@@ -73,7 +73,7 @@ class RendererEngine {
         this.canvas.height = height;
         let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
         let fieldOfViewRadians = helper_1.degreesToRadian(90);
-        this.projectionMatrix = twgl.m4.perspective(fieldOfViewRadians, aspect, 0.01, 2000);
+        this.projectionMatrix = twgl.m4.perspective(fieldOfViewRadians, aspect, 1, 2000);
         // set the viewport for the renderer
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
