@@ -1,4 +1,4 @@
-import { m4, resizeCanvasToDisplaySize } from "twgl.js";
+import { resizeCanvasToDisplaySize } from "twgl.js";
 import { RenderableObject } from "./renderable-object";
 import { TextureEntity } from "./texture-entity";
 import { Axis3D } from "./axis-3d";
@@ -7,17 +7,21 @@ import { Cone } from "./cone";
 import { Sphere } from "./sphere";
 import { Plane } from "./plane";
 import { ShaderManager } from "../shaders/shader-manager";
+import { Camera } from "../camera/camera";
 
 export class RenderableManager {
 
     gl: WebGL2RenderingContext;
     shaderManager: ShaderManager;
 
+    debugCamera: Camera;
+
     renderables: RenderableObject[] = [];
 
     constructor(gl: WebGL2RenderingContext, shaderManager: ShaderManager) {
         this.gl = gl;
         this.shaderManager = shaderManager;
+        this.debugCamera = new Camera([0, 0, 0]);
     }
 
     public setDefaultScene() {
@@ -78,7 +82,7 @@ export class RenderableManager {
         }
     }
 
-    public drawScene(gl: WebGL2RenderingContext, dt: number, debugCamera: any) {
+    public drawScene(gl: WebGL2RenderingContext, dt: number) {
         dt = dt * 0.001; // take the current dt and make it even smaller
         resizeCanvasToDisplaySize(gl.canvas);
 
@@ -88,7 +92,7 @@ export class RenderableManager {
         gl.enable(gl.DEPTH_TEST);
 
 
-        let viewProjectionMatrix = debugCamera.getViewProjectionMatrix();
+        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix();
 
         this.renderables.forEach(renderable => {
             // renderable.rotate(dt);
@@ -97,4 +101,28 @@ export class RenderableManager {
         });
     }
 
+    public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
+        if (activeKeysMap['w']) {
+            // move forward
+            this.debugCamera.moveForward();
+        } if (activeKeysMap['s']) {
+            // movve backward
+            this.debugCamera.moveBackward();
+        } if (activeKeysMap['a']) {
+            // strafe left
+            this.debugCamera.moveLeft();
+        } if (activeKeysMap['d']) {
+            // strafe right
+            this.debugCamera.moveRight();
+        } if (activeKeysMap['r']) {
+            // rise
+            this.debugCamera.moveUp();
+        } if (activeKeysMap['f']) {
+            // fall
+            this.debugCamera.moveDown();
+        } if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
+            this.debugCamera.pitch(mouseInputs.y);
+            this.debugCamera.yaw(mouseInputs.x);
+        }
+    }
 }

@@ -1,9 +1,4 @@
 import { ShaderManager } from './shaders/shader-manager';
-import { Camera } from './camera/camera';
-
-import * as twgl from 'twgl.js';
-
-import { degreesToRadian } from '../math/helper';
 import { RenderableManager } from './renderables/renderable-manager';
 
 export class RendererEngine {
@@ -14,13 +9,9 @@ export class RendererEngine {
 
     renderableManager!: RenderableManager;
     shaderManager!: ShaderManager;
-    debugCamera!: Camera;
-
-    projectionMatrix: twgl.m4.Mat4 = twgl.m4.identity();
 
     constructor() {
         this.shaderManager = new ShaderManager();
-        this.debugCamera = new Camera([0, 0, 0]);
     }
 
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
@@ -32,41 +23,12 @@ export class RendererEngine {
         this.renderableManager.setDefaultScene();
     }
 
-    public getCanvasDimensions(): twgl.v3.Vec3 {
-        let canvasDimensions = [0, 0, 0];
-        if (this.canvas) {
-            canvasDimensions = [this.canvas.width, this.canvas.height, 0];
-        }
-        return canvasDimensions;
-    }
-
     public drawScene(dt: number): void {
-        this.renderableManager.drawScene(this.gl, dt, this.debugCamera);
+        this.renderableManager.drawScene(this.gl, dt);
     }
 
     public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
-        if (activeKeysMap['w']) {
-            // move forward
-            this.debugCamera.moveForward();
-        } if (activeKeysMap['s']) {
-            // movve backward
-            this.debugCamera.moveBackward();
-        } if (activeKeysMap['a']) {
-            // strafe left
-            this.debugCamera.moveLeft();
-        } if (activeKeysMap['d']) {
-            // strafe right
-            this.debugCamera.moveRight();
-        } if (activeKeysMap['r']) {
-            // rise
-            this.debugCamera.moveUp();
-        } if (activeKeysMap['f']) {
-            // fall
-            this.debugCamera.moveDown();
-        } if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
-            this.debugCamera.pitch(mouseInputs.y);
-            this.debugCamera.yaw(mouseInputs.x);
-        }
+        this.renderableManager.applyUserInput(activeKeysMap, mouseInputs);
     }
 
     private initializeCanvasGL(htmlCanvasElement: HTMLCanvasElement, width: number, height: number): void {
