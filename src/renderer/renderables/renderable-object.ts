@@ -58,12 +58,12 @@ export abstract class RenderableObject {
   }
 
   update(dt: number, viewProjectionMatrix: any) {
-    if (this.isDirty) { // if this object needs updating
-      if (this.uniforms) { //if there are uniforms
-        this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
-      }
-      this.setDirty(false);
+    // if (this.isDirty) { // if this object needs updating
+    if (this.uniforms) { //if there are uniforms
+      this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
     }
+    // this.setDirty(false);
+    // }
   }
 
   setDirty(isDirty: boolean): void {
