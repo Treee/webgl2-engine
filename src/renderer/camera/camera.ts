@@ -4,7 +4,7 @@ import { Quaternion, Vector3, Matrix4 } from "three";
 export class Camera {
 
   private cameraMatrix: m4.Mat4 = m4.identity();
-  private projectionMatrix: m4.Mat4 = m4.identity();
+  protected projectionMatrix: m4.Mat4 = m4.identity();
 
   private position: v3.Vec3 = [0, 0, 1];
   private up: v3.Vec3 = [0, 1, 0];
