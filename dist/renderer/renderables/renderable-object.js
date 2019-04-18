@@ -41,12 +41,12 @@ class RenderableObject {
         return matrix;
     }
     update(dt, viewProjectionMatrix) {
-        if (this.isDirty) { // if this object needs updating
-            if (this.uniforms) { //if there are uniforms
-                this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
-            }
-            this.setDirty(false);
+        // if (this.isDirty) { // if this object needs updating
+        if (this.uniforms) { //if there are uniforms
+            this.uniforms.u_matrix = this.computeMatrix(viewProjectionMatrix);
         }
+        // this.setDirty(false);
+        // }
     }
     setDirty(isDirty) {
         this.isDirty = isDirty;
