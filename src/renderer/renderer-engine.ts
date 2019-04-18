@@ -41,7 +41,7 @@ export class RendererEngine {
     }
 
     public drawScene(dt: number): void {
-        this.renderableManager.drawScene(this.gl, dt, this.debugCamera, this.projectionMatrix);
+        this.renderableManager.drawScene(this.gl, dt, this.debugCamera);
     }
 
     public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
@@ -86,10 +86,6 @@ export class RendererEngine {
         this.canvas.width = width;
         this.canvas.height = height;
 
-
-        let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
-        let fieldOfViewRadians = degreesToRadian(90);
-        this.projectionMatrix = twgl.m4.perspective(fieldOfViewRadians, aspect, 1, 2000);
         // set the viewport for the renderer
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }

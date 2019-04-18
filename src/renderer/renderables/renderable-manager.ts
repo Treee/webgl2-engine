@@ -78,7 +78,7 @@ export class RenderableManager {
         }
     }
 
-    public drawScene(gl: WebGL2RenderingContext, dt: number, debugCamera: any, projectionMatrix: m4.Mat4) {
+    public drawScene(gl: WebGL2RenderingContext, dt: number, debugCamera: any) {
         dt = dt * 0.001; // take the current dt and make it even smaller
         resizeCanvasToDisplaySize(gl.canvas);
 
@@ -88,7 +88,7 @@ export class RenderableManager {
         gl.enable(gl.DEPTH_TEST);
 
 
-        let viewProjectionMatrix = debugCamera.getViewProjectionMatrix(projectionMatrix);
+        let viewProjectionMatrix = debugCamera.getViewProjectionMatrix();
 
         this.renderables.forEach(renderable => {
             // renderable.rotate(dt);

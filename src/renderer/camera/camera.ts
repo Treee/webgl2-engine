@@ -4,6 +4,7 @@ import { Quaternion, Vector3, Matrix4 } from "three";
 export class Camera {
 
   private cameraMatrix: m4.Mat4 = m4.identity();
+  private projectionMatrix: m4.Mat4 = m4.identity();
 
   private position: v3.Vec3 = [0, 0, 1];
   private up: v3.Vec3 = [0, 1, 0];
@@ -33,6 +34,11 @@ export class Camera {
     this.yAngle = -this.pi;
     this.yaw(0);
     this.pitch(0);
+    this.setProjectionMatrix();
+  }
+
+  setProjectionMatrix(fieldOfViewRadians: number = 1.5708, aspectRatio: number = 4 / 3, near: number = 1, far: number = 1000) {
+    this.projectionMatrix = m4.perspective(fieldOfViewRadians, aspectRatio, near, far);
   }
 
   getModelMatrix(): Matrix4 {
@@ -81,8 +87,8 @@ export class Camera {
     return m4.inverse(this.cameraMatrix);
   }
 
-  getViewProjectionMatrix(projectionMatrix: m4.Mat4): m4.Mat4 {
-    return m4.multiply(projectionMatrix, this.getViewMatrix());
+  getViewProjectionMatrix(): m4.Mat4 {
+    return m4.multiply(this.projectionMatrix, this.getViewMatrix());
   }
 
   private moveCamera(amountToMove: v3.Vec3) {
