@@ -7,11 +7,13 @@ const cube_1 = require("./cube");
 const cone_1 = require("./cone");
 const sphere_1 = require("./sphere");
 const plane_1 = require("./plane");
+const camera_1 = require("../camera/camera");
 class RenderableManager {
     constructor(gl, shaderManager) {
         this.renderables = [];
         this.gl = gl;
         this.shaderManager = shaderManager;
+        this.debugCamera = new camera_1.Camera([0, 0, 0]);
     }
     setDefaultScene() {
         this.addRenderableObjectByType('cube');
@@ -68,18 +70,48 @@ class RenderableManager {
                 return;
         }
     }
-    drawScene(gl, dt, debugCamera, projectionMatrix) {
+    drawScene(gl, dt) {
         dt = dt * 0.001; // take the current dt and make it even smaller
         twgl_js_1.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
         // gl.enable(gl.CULL_FACE);
         gl.enable(gl.DEPTH_TEST);
-        let viewProjectionMatrix = debugCamera.getViewProjectionMatrix(projectionMatrix);
+        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix();
         this.renderables.forEach(renderable => {
             // renderable.rotate(dt);
             renderable.update(dt, viewProjectionMatrix);
             renderable.draw(gl);
         });
+    }
+    applyUserInput(activeKeysMap, mouseInputs) {
+        if (activeKeysMap['w']) {
+            // move forward
+            this.debugCamera.moveForward();
+        }
+        if (activeKeysMap['s']) {
+            // movve backward
+            this.debugCamera.moveBackward();
+        }
+        if (activeKeysMap['a']) {
+            // strafe left
+            this.debugCamera.moveLeft();
+        }
+        if (activeKeysMap['d']) {
+            // strafe right
+            this.debugCamera.moveRight();
+        }
+        if (activeKeysMap['r']) {
+            // rise
+            this.debugCamera.moveUp();
+        }
+        if (activeKeysMap['f']) {
+            // fall
+            this.debugCamera.moveDown();
+        }
+        if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
+            this.debugCamera.pitch(mouseInputs.y);
+            this.debugCamera.yaw(mouseInputs.x);
+        }
     }
 }
 exports.RenderableManager = RenderableManager;

@@ -5,6 +5,7 @@ const three_1 = require("three");
 class Camera {
     constructor(startPosition) {
         this.cameraMatrix = twgl_js_1.m4.identity();
+        this.projectionMatrix = twgl_js_1.m4.identity();
         this.position = [0, 0, 1];
         this.up = [0, 1, 0];
         this.translateStepSize = 1.0;
@@ -26,6 +27,10 @@ class Camera {
         this.yAngle = -this.pi;
         this.yaw(0);
         this.pitch(0);
+        this.setProjectionMatrix();
+    }
+    setProjectionMatrix(fieldOfViewRadians = 1.5708, aspectRatio = 4 / 3, near = 1, far = 1000) {
+        this.projectionMatrix = twgl_js_1.m4.perspective(fieldOfViewRadians, aspectRatio, near, far);
     }
     getModelMatrix() {
         // let rotation = new Matrix4().makeRotationFromQuaternion(this.targetOrientation);
@@ -67,8 +72,8 @@ class Camera {
         this.cameraMatrix = twgl_js_1.m4.lookAt(this.getPosition(), translatedForward, this.up);
         return twgl_js_1.m4.inverse(this.cameraMatrix);
     }
-    getViewProjectionMatrix(projectionMatrix) {
-        return twgl_js_1.m4.multiply(projectionMatrix, this.getViewMatrix());
+    getViewProjectionMatrix() {
+        return twgl_js_1.m4.multiply(this.projectionMatrix, this.getViewMatrix());
     }
     moveCamera(amountToMove) {
         this.position = twgl_js_1.v3.add(this.getPosition(), amountToMove);
