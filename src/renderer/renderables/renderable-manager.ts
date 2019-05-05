@@ -105,7 +105,7 @@ export class RenderableManager {
     }
 
     public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
-        if (activeKeysMap['tab']) {
+        if (activeKeysMap['Tab']) {
             this.activeCameraIndex = (this.activeCameraIndex + 1) % this.cameras.length;
         }
         if (activeKeysMap['w']) {
