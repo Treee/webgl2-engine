@@ -32,6 +32,16 @@ class Camera {
     setProjectionMatrix(fieldOfViewRadians = 1.5708, aspectRatio = 4 / 3, near = 1, far = 1000) {
         this.projectionMatrix = twgl_js_1.m4.perspective(fieldOfViewRadians, aspectRatio, near, far);
     }
+    setDiametricProjection(left = 0, right = 640, top = 0, bot = 480, near = 1, far = 10) {
+        this.yaw(-45);
+        this.pitch(-30);
+        this.projectionMatrix = twgl_js_1.m4.identity([
+            ((right - left) / 2), 0, 0, 0,
+            0, ((top - bot) / 2), 0, 0,
+            0, 0, ((far - near) / -2), 0,
+            ((left + right) / 2), ((top + bot) / 2), -((far + near) / 2), 1
+        ]);
+    }
     getModelMatrix() {
         // let rotation = new Matrix4().makeRotationFromQuaternion(this.targetOrientation);
         // let scale = new Matrix4().makeScale(1, 1, 1);

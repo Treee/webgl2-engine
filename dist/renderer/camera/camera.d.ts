@@ -2,7 +2,7 @@ import { m4, v3 } from "twgl.js";
 import { Matrix4 } from "three";
 export declare class Camera {
     private cameraMatrix;
-    private projectionMatrix;
+    protected projectionMatrix: m4.Mat4;
     private position;
     private up;
     private translateStepSize;
@@ -21,6 +21,7 @@ export declare class Camera {
     private pureZ;
     constructor(startPosition: v3.Vec3);
     setProjectionMatrix(fieldOfViewRadians?: number, aspectRatio?: number, near?: number, far?: number): void;
+    setDiametricProjection(left?: number, right?: number, top?: number, bot?: number, near?: number, far?: number): void;
     getModelMatrix(): Matrix4;
     getForward(): v3.Vec3;
     getUp(): v3.Vec3;
