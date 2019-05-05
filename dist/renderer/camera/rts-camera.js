@@ -8,8 +8,12 @@ class RtsCamera extends camera_1.Camera {
         this.setDiametricProjection(0, width, 0, height, near, far);
     }
     getForward() {
-        const right = new three_1.Quaternion().setFromAxisAngle(new three_1.Vector3(0, 1, 0), 1.5708).multiplyVector3(this.getRight());
-        return right;
+        const forward = new three_1.Quaternion().setFromAxisAngle(new three_1.Vector3(0, 1, 0), 1.5708);
+        const oldRight = this.getRight();
+        const converted = new three_1.Vector3(oldRight[0], oldRight[1], oldRight[2]);
+        const forwardVec = converted.applyQuaternion(forward);
+        const convertedVec = [forwardVec.x, forwardVec.y, forwardVec.z];
+        return convertedVec;
     }
 }
 exports.RtsCamera = RtsCamera;
