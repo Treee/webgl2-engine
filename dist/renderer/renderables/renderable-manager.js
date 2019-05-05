@@ -8,12 +8,16 @@ const cone_1 = require("./cone");
 const sphere_1 = require("./sphere");
 const plane_1 = require("./plane");
 const camera_1 = require("../camera/camera");
+const rts_camera_1 = require("../camera/rts-camera");
 class RenderableManager {
     constructor(gl, shaderManager) {
+        this.activeCameraIndex = 0;
+        this.cameras = [];
         this.renderables = [];
         this.gl = gl;
         this.shaderManager = shaderManager;
-        this.debugCamera = new camera_1.Camera([0, 0, 0]);
+        this.cameras.push(new camera_1.Camera([0, 0, 0]));
+        this.cameras.push(new rts_camera_1.RtsCamera([0, 0, 0]));
     }
     setDefaultScene() {
         this.addRenderableObjectByType('cube');
@@ -76,7 +80,7 @@ class RenderableManager {
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
         // gl.enable(gl.CULL_FACE);
         gl.enable(gl.DEPTH_TEST);
-        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix();
+        let viewProjectionMatrix = this.cameras[this.activeCameraIndex].getViewProjectionMatrix();
         this.renderables.forEach(renderable => {
             // renderable.rotate(dt);
             renderable.update(dt, viewProjectionMatrix);
@@ -84,33 +88,50 @@ class RenderableManager {
         });
     }
     applyUserInput(activeKeysMap, mouseInputs) {
+        if (activeKeysMap['tab']) {
+            this.activeCameraIndex = (this.activeCameraIndex + 1) % this.cameras.length;
+        }
         if (activeKeysMap['w']) {
             // move forward
-            this.debugCamera.moveForward();
+            this.cameras.forEach(camera => {
+                camera.moveForward();
+            });
         }
         if (activeKeysMap['s']) {
-            // movve backward
-            this.debugCamera.moveBackward();
+            // move backward
+            this.cameras.forEach(camera => {
+                camera.moveBackward();
+            });
         }
         if (activeKeysMap['a']) {
             // strafe left
-            this.debugCamera.moveLeft();
+            this.cameras.forEach(camera => {
+                camera.moveLeft();
+            });
         }
         if (activeKeysMap['d']) {
             // strafe right
-            this.debugCamera.moveRight();
+            this.cameras.forEach(camera => {
+                camera.moveRight();
+            });
         }
         if (activeKeysMap['r']) {
             // rise
-            this.debugCamera.moveUp();
+            this.cameras.forEach(camera => {
+                camera.moveUp();
+            });
         }
         if (activeKeysMap['f']) {
             // fall
-            this.debugCamera.moveDown();
+            this.cameras.forEach(camera => {
+                camera.moveDown();
+            });
         }
         if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
-            this.debugCamera.pitch(mouseInputs.y);
-            this.debugCamera.yaw(mouseInputs.x);
+            this.cameras.forEach(camera => {
+                camera.pitch(mouseInputs.y);
+                camera.yaw(mouseInputs.x);
+            });
         }
     }
 }

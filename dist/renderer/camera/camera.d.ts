@@ -13,7 +13,6 @@ export declare class Camera {
     private yRotation;
     private zRotation;
     private targetOrientation;
-    private angleStepSize;
     private pi;
     private twoPi;
     private pureX;
@@ -21,7 +20,7 @@ export declare class Camera {
     private pureZ;
     constructor(startPosition: v3.Vec3);
     setProjectionMatrix(fieldOfViewRadians?: number, aspectRatio?: number, near?: number, far?: number): void;
-    setDiametricProjection(left?: number, right?: number, top?: number, bot?: number, near?: number, far?: number): void;
+    setDiametricProjection(left?: number, right?: number, top?: number, bot?: number, near?: number, far?: number): number[] | Float32Array;
     getModelMatrix(): Matrix4;
     getForward(): v3.Vec3;
     getUp(): v3.Vec3;

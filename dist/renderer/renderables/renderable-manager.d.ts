@@ -5,7 +5,8 @@ import { Camera } from "../camera/camera";
 export declare class RenderableManager {
     gl: WebGL2RenderingContext;
     shaderManager: ShaderManager;
-    debugCamera: Camera;
+    activeCameraIndex: number;
+    cameras: Camera[];
     renderables: RenderableObject[];
     constructor(gl: WebGL2RenderingContext, shaderManager: ShaderManager);
     setDefaultScene(): void;

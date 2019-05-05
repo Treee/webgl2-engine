@@ -16,7 +16,6 @@ class Camera {
         this.yRotation = new three_1.Quaternion();
         this.zRotation = new three_1.Quaternion();
         this.targetOrientation = new three_1.Quaternion();
-        this.angleStepSize = 0.005;
         this.pi = Math.PI;
         this.twoPi = this.pi * 2;
         this.pureX = new three_1.Quaternion(1, 0, 0, 0);
@@ -41,6 +40,7 @@ class Camera {
             0, 0, ((far - near) / -2), 0,
             ((left + right) / 2), ((top + bot) / 2), -((far + near) / 2), 1
         ]);
+        return this.projectionMatrix;
     }
     getModelMatrix() {
         // let rotation = new Matrix4().makeRotationFromQuaternion(this.targetOrientation);
@@ -96,7 +96,7 @@ class Camera {
     moveUp() { this.moveCamera(twgl_js_1.v3.mulScalar([0, 1, 0], this.translateStepSize)); }
     moveDown() { this.moveCamera(twgl_js_1.v3.mulScalar([0, -1, 0], this.translateStepSize)); }
     yaw(amount) {
-        this.yAngle += amount * -this.angleStepSize;
+        this.yAngle += amount;
         //while the Angle is greater than 2pi (a full revolution, 360degrees)
         while (this.yAngle > this.twoPi) { //subtract 2pi from the angle to "wrap" it back to 0ish
             this.yAngle = this.yAngle - this.twoPi;
@@ -109,7 +109,7 @@ class Camera {
         this.applyRotation();
     }
     pitch(amount) {
-        this.xAngle += amount * -this.angleStepSize;
+        this.xAngle += amount;
         //while the Angle is greater than 2pi (a full revolution, 360degrees)
         while (this.xAngle > this.twoPi) { //subtract 2pi from the angle to "wrap" it back to 0ish
             this.xAngle = this.xAngle - this.twoPi;
@@ -122,7 +122,7 @@ class Camera {
         this.applyRotation();
     }
     roll(amount) {
-        this.zAngle += amount * -this.angleStepSize;
+        this.zAngle += amount;
         //while the Angle is greater than 2pi (a full revolution, 360degrees)
         while (this.zAngle > this.twoPi) { //subtract 2pi from the angle to "wrap" it back to 0ish
             this.zAngle = this.zAngle - this.twoPi;
