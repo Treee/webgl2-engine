@@ -20,7 +20,6 @@ export class Camera {
 
   private targetOrientation: Quaternion = new Quaternion();
 
-  private angleStepSize: number = 0.005;
   private pi: number = Math.PI;
   private twoPi = this.pi * 2;
 
@@ -116,7 +115,7 @@ export class Camera {
   moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
 
   yaw(amount: number) {
-    this.yAngle += amount * -this.angleStepSize;
+    this.yAngle += amount;
     //while the Angle is greater than 2pi (a full revolution, 360degrees)
     while (this.yAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
       this.yAngle = this.yAngle - this.twoPi;
@@ -130,7 +129,7 @@ export class Camera {
   }
 
   pitch(amount: number) {
-    this.xAngle += amount * -this.angleStepSize;
+    this.xAngle += amount;
     //while the Angle is greater than 2pi (a full revolution, 360degrees)
     while (this.xAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
       this.xAngle = this.xAngle - this.twoPi;
@@ -144,7 +143,7 @@ export class Camera {
   }
 
   roll(amount: number) {
-    this.zAngle += amount * -this.angleStepSize;
+    this.zAngle += amount;
     //while the Angle is greater than 2pi (a full revolution, 360degrees)
     while (this.zAngle > this.twoPi) {//subtract 2pi from the angle to "wrap" it back to 0ish
       this.zAngle = this.zAngle - this.twoPi;
