@@ -1,7 +1,7 @@
 import { GameWorld } from './game-world';
 import { RendererEngine } from '../renderer/renderer-engine';
 
-fdescribe('GameWorld', () => {
+describe('GameWorld', () => {
     let testGameWorld: GameWorld;
     let rendererMock: RendererEngine;
     beforeEach(() => {
