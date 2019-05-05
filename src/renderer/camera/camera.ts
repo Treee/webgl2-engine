@@ -8,7 +8,7 @@ export class Camera {
 
   private position: v3.Vec3 = [0, 0, 1];
   private up: v3.Vec3 = [0, 1, 0];
-  private translateStepSize: number = 1.0;
+  protected translateStepSize: number = 1.0;
 
   private xAngle: number = 0;
   private yAngle: number = 0;
@@ -102,7 +102,7 @@ export class Camera {
     return m4.multiply(this.projectionMatrix, this.getViewMatrix());
   }
 
-  private moveCamera(amountToMove: v3.Vec3) {
+  protected moveCamera(amountToMove: v3.Vec3) {
     this.position = v3.add(this.getPosition(), amountToMove);
     // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
   }

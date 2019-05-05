@@ -8,7 +8,7 @@ export class RtsCamera extends Camera {
         this.setDiametricProjection(0, width, 0, height, near, far);
     }
 
-    getForward(): v3.Vec3 {
+    getRtsForward(): v3.Vec3 {
         const forward = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), 1.5708);
         const oldRight = this.getRight();
         const converted = new Vector3(oldRight[0], oldRight[1], oldRight[2]);
@@ -16,6 +16,9 @@ export class RtsCamera extends Camera {
         const convertedVec = [forwardVec.x, forwardVec.y, forwardVec.z];
         return convertedVec;
     }
+
+    moveForward() { this.moveCamera(v3.mulScalar(this.getRtsForward(), this.translateStepSize)); }
+    moveBackward() { this.moveCamera(v3.mulScalar(this.getRtsForward(), -this.translateStepSize)); }
 
     // getUp(): v3.Vec3 {
     //     return [0, 0, 0];
