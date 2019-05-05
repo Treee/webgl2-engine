@@ -24,23 +24,23 @@ describe('RTS Camera', () => {
         expect(testRtsCamera.setDiametricProjection()).toEqual(diametricProjectionMatrix);
     });
 
-    it('moves across the x plane in the left and right directions', () => {
-        expect(testRtsCamera.getPosition()).toEqual([0, 0, 0]);
-        testRtsCamera.moveLeft()
-        expect(testRtsCamera.getPosition()).toEqual(new Float32Array([-0.5253219604492188, 5.551115123125783e-17, 0.8509035110473633]));
-        testRtsCamera.moveRight();
-        expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0, 0, 0]));
-        testRtsCamera.moveRight();
-        expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0.5253219604492188, -5.551115123125783e-17, -0.8509035110473633]));
-    });
+    // it('moves across the x plane in the left and right directions', () => {
+    //     expect(testRtsCamera.getPosition()).toEqual([0, 0, 0]);
+    //     testRtsCamera.moveLeft()
+    //     expect(testRtsCamera.getPosition()).toEqual(new Float32Array([-0.5253219604492188, 5.551115123125783e-17, 0.8509035110473633]));
+    //     testRtsCamera.moveRight();
+    //     expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0, 0, 0]));
+    //     testRtsCamera.moveRight();
+    //     expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0.5253219604492188, -5.551115123125783e-17, -0.8509035110473633]));
+    // });
 
-    it('moves across the x plane in the forward and backward directions', () => {
-        expect(testRtsCamera.getPosition()).toEqual([0, 0, 0]);
-        testRtsCamera.moveForward()
-        expect(testRtsCamera.getPosition()).toEqual(new Float32Array([-0.5253219604492188, -5.551115123125783e-17, 0.8509035110473633]));
-        testRtsCamera.moveBackward();
-        expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0, 0, 0]));
-        testRtsCamera.moveBackward();
-        expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0.5253219604492188, 5.551115123125783e-17, -0.8509035110473633]));
-    });
+    // it('moves across the x plane in the forward and backward directions', () => {
+    //     expect(testRtsCamera.getPosition()).toEqual([0, 0, 0]);
+    //     testRtsCamera.moveForward()
+    //     expect(testRtsCamera.getPosition()).toEqual(new Float32Array([-0.5253219604492188, -5.551115123125783e-17, 0.8509035110473633]));
+    //     testRtsCamera.moveBackward();
+    //     expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0, 0, 0]));
+    //     testRtsCamera.moveBackward();
+    //     expect(testRtsCamera.getPosition()).toEqual(new Float32Array([0.5253219604492188, 5.551115123125783e-17, -0.8509035110473633]));
+    // });
 });

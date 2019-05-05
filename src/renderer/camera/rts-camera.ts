@@ -7,12 +7,12 @@ export class RtsCamera extends Camera {
         this.setDiametricProjection(0, width, 0, height, near, far);
     }
 
-    getForward(): v3.Vec3 {
-        const right = this.getRight();
-        return [right[0], -right[1], right[2]];
-    }
+    // getForward(): v3.Vec3 {
+    //     const right = this.getRight();
+    //     return [right[0], -right[1], right[2]];
+    // }
 
-    getUp(): v3.Vec3 {
-        return [0, 0, 0];
-    }
+    // getUp(): v3.Vec3 {
+    //     return [0, 0, 0];
+    // }
 }
