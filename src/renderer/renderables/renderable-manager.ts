@@ -15,7 +15,7 @@ export class RenderableManager {
     gl: WebGL2RenderingContext;
     shaderManager: ShaderManager;
 
-    activeCameraIndex = 0;
+    activeCameraIndex = 1;
     cameras: Camera[] = [];
     renderables: RenderableObject[] = [];
 

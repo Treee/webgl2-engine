@@ -6,6 +6,7 @@ export class RtsCamera extends Camera {
     constructor(startPosition: v3.Vec3 = [0, 0, 0], width: number = 1366, height: number = 768, near: number = 1, far: number = 100) {
         super(startPosition);
         this.setDiametricProjection(0, width, 0, height, near, far);
+        this.translateStepSize = 0.1;
     }
 
     getRtsForward(): v3.Vec3 {
@@ -20,7 +21,7 @@ export class RtsCamera extends Camera {
     moveForward() { this.moveCamera(v3.mulScalar(this.getRtsForward(), this.translateStepSize)); }
     moveBackward() { this.moveCamera(v3.mulScalar(this.getRtsForward(), -this.translateStepSize)); }
 
-    // getUp(): v3.Vec3 {
-    //     return [0, 0, 0];
-    // }
+    moveUp() { this.moveCamera(v3.mulScalar([0, 1, 0], this.translateStepSize)); }
+    moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
+
 }
