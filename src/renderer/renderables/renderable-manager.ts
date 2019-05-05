@@ -53,6 +53,7 @@ export class RenderableManager {
             case 'cube':
                 let cube = new Cube();
                 cube.initializeObject(this.gl, this.shaderManager.getShader('basic-shader'), {});
+                cube.scale(0, [0.1, 0.1, 0.1]);
                 this.addRenderableObject(cube);
                 return;
             case 'sphere':
