@@ -5,7 +5,7 @@ export declare class Camera {
     protected projectionMatrix: m4.Mat4;
     private position;
     private up;
-    private translateStepSize;
+    protected translateStepSize: number;
     private xAngle;
     private yAngle;
     private zAngle;
@@ -28,7 +28,7 @@ export declare class Camera {
     getPosition(): v3.Vec3;
     getViewMatrix(): m4.Mat4;
     getViewProjectionMatrix(): m4.Mat4;
-    private moveCamera;
+    protected moveCamera(amountToMove: v3.Vec3): void;
     moveForward(): void;
     moveBackward(): void;
     moveLeft(): void;
