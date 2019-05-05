@@ -21,6 +21,9 @@ export class RtsCamera extends Camera {
     moveForward() { this.moveCamera(v3.mulScalar(this.getRtsForward(), this.translateStepSize)); }
     moveBackward() { this.moveCamera(v3.mulScalar(this.getRtsForward(), -this.translateStepSize)); }
 
+    zoomIn() { this.moveCamera(v3.mulScalar(this.getForward(), this.translateStepSize)); }
+    zoomOut() { this.moveCamera(v3.mulScalar(this.getForward(), -this.translateStepSize)); }
+
     moveUp() { this.moveCamera(v3.mulScalar([0, 1, 0], this.translateStepSize)); }
     moveDown() { this.moveCamera(v3.mulScalar([0, -1, 0], this.translateStepSize)); }
 

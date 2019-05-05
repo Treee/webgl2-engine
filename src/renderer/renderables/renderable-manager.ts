@@ -105,10 +105,13 @@ export class RenderableManager {
     }
 
     public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
-        if (activeKeysMap['Tab']) {
+        if (activeKeysMap['p'] && this.activeCameraIndex === 1) {
+            (this.cameras[this.activeCameraIndex] as RtsCamera).zoomIn();
+        } if (activeKeysMap['o'] && this.activeCameraIndex === 1) {
+            (this.cameras[this.activeCameraIndex] as RtsCamera).zoomOut();
+        } if (activeKeysMap['Tab']) {
             this.activeCameraIndex = (this.activeCameraIndex + 1) % this.cameras.length;
-        }
-        if (activeKeysMap['w']) {
+        } if (activeKeysMap['w']) {
             // move forward
             this.cameras.forEach(camera => {
                 camera.moveForward();
