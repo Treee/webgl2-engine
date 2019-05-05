@@ -49,6 +49,7 @@ export class Camera {
       0, 0, ((far - near) / -2), 0,
       ((left + right) / 2), ((top + bot) / 2), -((far + near) / 2), 1
     ]);
+    return this.projectionMatrix;
   }
 
   getModelMatrix(): Matrix4 {
