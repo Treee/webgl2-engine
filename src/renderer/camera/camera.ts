@@ -41,6 +41,17 @@ export class Camera {
     this.projectionMatrix = m4.perspective(fieldOfViewRadians, aspectRatio, near, far);
   }
 
+  setDiametricProjection(left: number = 0, right: number = 640, top: number = 0, bot: number = 480, near: number = 1, far: number = 10) {
+    this.yaw(-45);
+    this.pitch(-30);
+    this.projectionMatrix = m4.identity([
+      ((right - left) / 2), 0, 0, 0,
+      0, ((top - bot) / 2), 0, 0,
+      0, 0, ((far - near) / -2), 0,
+      ((left + right) / 2), ((top + bot) / 2), -((far + near) / 2), 1
+    ]);
+  }
+
   getModelMatrix(): Matrix4 {
     // let rotation = new Matrix4().makeRotationFromQuaternion(this.targetOrientation);
     // let scale = new Matrix4().makeScale(1, 1, 1);
