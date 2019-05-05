@@ -88,7 +88,7 @@ class RenderableManager {
         });
     }
     applyUserInput(activeKeysMap, mouseInputs) {
-        if (activeKeysMap['tab']) {
+        if (activeKeysMap['Tab']) {
             this.activeCameraIndex = (this.activeCameraIndex + 1) % this.cameras.length;
         }
         if (activeKeysMap['w']) {

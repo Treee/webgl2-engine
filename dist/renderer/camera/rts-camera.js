@@ -6,13 +6,6 @@ class RtsCamera extends camera_1.Camera {
         super(startPosition);
         this.setDiametricProjection(0, width, 0, height, near, far);
     }
-    getForward() {
-        const right = this.getRight();
-        return [right[0], -right[1], right[2]];
-    }
-    getUp() {
-        return [0, 0, 0];
-    }
 }
 exports.RtsCamera = RtsCamera;
 //# sourceMappingURL=rts-camera.js.map
