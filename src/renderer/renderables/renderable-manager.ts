@@ -8,20 +8,23 @@ import { Sphere } from "./sphere";
 import { Plane } from "./plane";
 import { ShaderManager } from "../shaders/shader-manager";
 import { Camera } from "../camera/camera";
+import { RtsCamera } from "../camera/rts-camera";
 
 export class RenderableManager {
 
     gl: WebGL2RenderingContext;
     shaderManager: ShaderManager;
 
-    debugCamera: Camera;
-
+    activeCameraIndex = 0;
+    cameras: Camera[] = [];
     renderables: RenderableObject[] = [];
 
     constructor(gl: WebGL2RenderingContext, shaderManager: ShaderManager) {
         this.gl = gl;
         this.shaderManager = shaderManager;
-        this.debugCamera = new Camera([0, 0, 0]);
+
+        this.cameras.push(new Camera([0, 0, 0]));
+        this.cameras.push(new RtsCamera([0, 0, 0]));
     }
 
     public setDefaultScene() {
@@ -92,7 +95,7 @@ export class RenderableManager {
         gl.enable(gl.DEPTH_TEST);
 
 
-        let viewProjectionMatrix = this.debugCamera.getViewProjectionMatrix();
+        let viewProjectionMatrix = this.cameras[this.activeCameraIndex].getViewProjectionMatrix();
 
         this.renderables.forEach(renderable => {
             // renderable.rotate(dt);
@@ -102,27 +105,44 @@ export class RenderableManager {
     }
 
     public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
+        if (activeKeysMap['tab']) {
+            this.activeCameraIndex = (this.activeCameraIndex + 1) % this.cameras.length;
+        }
         if (activeKeysMap['w']) {
             // move forward
-            this.debugCamera.moveForward();
+            this.cameras.forEach(camera => {
+                camera.moveForward();
+            });
         } if (activeKeysMap['s']) {
-            // movve backward
-            this.debugCamera.moveBackward();
+            // move backward
+            this.cameras.forEach(camera => {
+                camera.moveBackward();
+            });
         } if (activeKeysMap['a']) {
             // strafe left
-            this.debugCamera.moveLeft();
+            this.cameras.forEach(camera => {
+                camera.moveLeft();
+            });
         } if (activeKeysMap['d']) {
             // strafe right
-            this.debugCamera.moveRight();
+            this.cameras.forEach(camera => {
+                camera.moveRight();
+            });
         } if (activeKeysMap['r']) {
             // rise
-            this.debugCamera.moveUp();
+            this.cameras.forEach(camera => {
+                camera.moveUp();
+            });
         } if (activeKeysMap['f']) {
             // fall
-            this.debugCamera.moveDown();
+            this.cameras.forEach(camera => {
+                camera.moveDown();
+            });
         } if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
-            this.debugCamera.pitch(mouseInputs.y);
-            this.debugCamera.yaw(mouseInputs.x);
+            this.cameras.forEach(camera => {
+                camera.pitch(mouseInputs.y);
+                camera.yaw(mouseInputs.x);
+            });
         }
     }
 }
