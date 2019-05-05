@@ -5,4 +5,8 @@ export declare class RtsCamera extends Camera {
     getRtsForward(): v3.Vec3;
     moveForward(): void;
     moveBackward(): void;
+    zoomIn(): void;
+    zoomOut(): void;
+    moveUp(): void;
+    moveDown(): void;
 }

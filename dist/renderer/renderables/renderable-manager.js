@@ -11,7 +11,7 @@ const camera_1 = require("../camera/camera");
 const rts_camera_1 = require("../camera/rts-camera");
 class RenderableManager {
     constructor(gl, shaderManager) {
-        this.activeCameraIndex = 0;
+        this.activeCameraIndex = 1;
         this.cameras = [];
         this.renderables = [];
         this.gl = gl;
@@ -88,6 +88,12 @@ class RenderableManager {
         });
     }
     applyUserInput(activeKeysMap, mouseInputs) {
+        if (activeKeysMap['p'] && this.activeCameraIndex === 1) {
+            this.cameras[this.activeCameraIndex].zoomIn();
+        }
+        if (activeKeysMap['o'] && this.activeCameraIndex === 1) {
+            this.cameras[this.activeCameraIndex].zoomOut();
+        }
         if (activeKeysMap['Tab']) {
             this.activeCameraIndex = (this.activeCameraIndex + 1) % this.cameras.length;
         }
