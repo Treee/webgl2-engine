@@ -1,8 +1,6 @@
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableManager } from './renderables/renderable-manager';
 import { InputManager } from '../input-interfaces/input-manager';
-import { KeyboardInput } from '../input-interfaces/keyboard-input';
-import { MouseInput } from '../input-interfaces/mouse-input';
 
 export class RendererEngine {
 
@@ -14,9 +12,9 @@ export class RendererEngine {
     shaderManager: ShaderManager;
     inputManager: InputManager;
 
-    constructor() {
+    constructor(inputManager: InputManager) {
         this.shaderManager = new ShaderManager();
-        this.inputManager = new InputManager(new KeyboardInput, new MouseInput());
+        this.inputManager = inputManager;
     }
 
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
