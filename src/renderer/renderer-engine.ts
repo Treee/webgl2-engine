@@ -1,5 +1,8 @@
 import { ShaderManager } from './shaders/shader-manager';
 import { RenderableManager } from './renderables/renderable-manager';
+import { InputManager } from '../input-interfaces/input-manager';
+import { KeyboardInput } from '../input-interfaces/keyboard-input';
+import { MouseInput } from '../input-interfaces/mouse-input';
 
 export class RendererEngine {
 
@@ -8,10 +11,12 @@ export class RendererEngine {
     gl!: WebGL2RenderingContext;
 
     renderableManager!: RenderableManager;
-    shaderManager!: ShaderManager;
+    shaderManager: ShaderManager;
+    inputManager: InputManager;
 
     constructor() {
         this.shaderManager = new ShaderManager();
+        this.inputManager = new InputManager(new KeyboardInput, new MouseInput());
     }
 
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number) {
@@ -19,7 +24,7 @@ export class RendererEngine {
 
         this.shaderManager.initializeShaderPrograms(this.gl);
 
-        this.renderableManager = new RenderableManager(this.gl, this.shaderManager);
+        this.renderableManager = new RenderableManager(this.gl, this.shaderManager, this.inputManager);
         this.renderableManager.setDefaultScene();
     }
 
@@ -27,8 +32,8 @@ export class RendererEngine {
         this.renderableManager.drawScene(this.gl, dt);
     }
 
-    public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
-        this.renderableManager.applyUserInput(activeKeysMap, mouseInputs);
+    public applyUserInput(input: InputManager): void {
+        this.renderableManager.applyUserInput(input);
     }
 
     private initializeCanvasGL(htmlCanvasElement: HTMLCanvasElement, width: number, height: number): void {

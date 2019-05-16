@@ -9,19 +9,22 @@ import { Plane } from "./plane";
 import { ShaderManager } from "../shaders/shader-manager";
 import { Camera } from "../camera/camera";
 import { RtsCamera } from "../camera/rts-camera";
+import { InputManager } from "../../input-interfaces/input-manager";
 
 export class RenderableManager {
 
     gl: WebGL2RenderingContext;
     shaderManager: ShaderManager;
+    inputManager: InputManager;
 
     activeCameraIndex = 1;
     cameras: Camera[] = [];
     renderables: RenderableObject[] = [];
 
-    constructor(gl: WebGL2RenderingContext, shaderManager: ShaderManager) {
+    constructor(gl: WebGL2RenderingContext, shaderManager: ShaderManager, inputManager: InputManager) {
         this.gl = gl;
         this.shaderManager = shaderManager;
+        this.inputManager = inputManager;
 
         this.cameras.push(new Camera([0, 0, 0]));
         this.cameras.push(new RtsCamera([0, 0, 0]));
@@ -105,7 +108,9 @@ export class RenderableManager {
         });
     }
 
-    public applyUserInput(activeKeysMap: any, mouseInputs: any): void {
+    public applyUserInput(input: InputManager): void {
+        let activeKeysMap = input.keyboard.activeKeysMap;
+        let mouseInputs = input.mouse
         if (activeKeysMap['p'] && this.activeCameraIndex === 1) {
             (this.cameras[this.activeCameraIndex] as RtsCamera).zoomIn();
         } if (activeKeysMap['o'] && this.activeCameraIndex === 1) {
@@ -142,10 +147,10 @@ export class RenderableManager {
             this.cameras.forEach(camera => {
                 camera.moveDown();
             });
-        } if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
+        } if (mouseInputs.leftMouseButtonInfo.isButtonClicked && mouseInputs.leftMouseButtonInfo.isMouseMoving) {
             this.cameras.forEach(camera => {
-                camera.pitch(mouseInputs.y);
-                camera.yaw(mouseInputs.x);
+                camera.pitch(mouseInputs.leftMouseButtonInfo.y);
+                camera.yaw(mouseInputs.leftMouseButtonInfo.x);
             });
         }
     }
