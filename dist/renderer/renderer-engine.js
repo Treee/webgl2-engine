@@ -2,21 +2,25 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const shader_manager_1 = require("./shaders/shader-manager");
 const renderable_manager_1 = require("./renderables/renderable-manager");
+const input_manager_1 = require("../input-interfaces/input-manager");
+const keyboard_input_1 = require("../input-interfaces/keyboard-input");
+const mouse_input_1 = require("../input-interfaces/mouse-input");
 class RendererEngine {
     constructor() {
         this.shaderManager = new shader_manager_1.ShaderManager();
+        this.inputManager = new input_manager_1.InputManager(new keyboard_input_1.KeyboardInput, new mouse_input_1.MouseInput());
     }
     initializeRenderer(htmlCanvasElement, width, height) {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
         this.shaderManager.initializeShaderPrograms(this.gl);
-        this.renderableManager = new renderable_manager_1.RenderableManager(this.gl, this.shaderManager);
+        this.renderableManager = new renderable_manager_1.RenderableManager(this.gl, this.shaderManager, this.inputManager);
         this.renderableManager.setDefaultScene();
     }
     drawScene(dt) {
         this.renderableManager.drawScene(this.gl, dt);
     }
-    applyUserInput(activeKeysMap, mouseInputs) {
-        this.renderableManager.applyUserInput(activeKeysMap, mouseInputs);
+    applyUserInput(input) {
+        this.renderableManager.applyUserInput(input);
     }
     initializeCanvasGL(htmlCanvasElement, width, height) {
         // get the canvas from the html

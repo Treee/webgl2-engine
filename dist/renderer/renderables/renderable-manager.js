@@ -10,12 +10,13 @@ const plane_1 = require("./plane");
 const camera_1 = require("../camera/camera");
 const rts_camera_1 = require("../camera/rts-camera");
 class RenderableManager {
-    constructor(gl, shaderManager) {
+    constructor(gl, shaderManager, inputManager) {
         this.activeCameraIndex = 1;
         this.cameras = [];
         this.renderables = [];
         this.gl = gl;
         this.shaderManager = shaderManager;
+        this.inputManager = inputManager;
         this.cameras.push(new camera_1.Camera([0, 0, 0]));
         this.cameras.push(new rts_camera_1.RtsCamera([0, 0, 0]));
     }
@@ -88,7 +89,9 @@ class RenderableManager {
             renderable.draw(gl);
         });
     }
-    applyUserInput(activeKeysMap, mouseInputs) {
+    applyUserInput(input) {
+        let activeKeysMap = input.keyboard.activeKeysMap;
+        let mouseInputs = input.mouse;
         if (activeKeysMap['p'] && this.activeCameraIndex === 1) {
             this.cameras[this.activeCameraIndex].zoomIn();
         }
@@ -134,10 +137,10 @@ class RenderableManager {
                 camera.moveDown();
             });
         }
-        if (mouseInputs.leftMouseClicked && mouseInputs.mouseIsMoving) {
+        if (mouseInputs.leftMouseButtonInfo.isButtonClicked && mouseInputs.leftMouseButtonInfo.isMouseMoving) {
             this.cameras.forEach(camera => {
-                camera.pitch(mouseInputs.y);
-                camera.yaw(mouseInputs.x);
+                camera.pitch(mouseInputs.leftMouseButtonInfo.y);
+                camera.yaw(mouseInputs.leftMouseButtonInfo.x);
             });
         }
     }

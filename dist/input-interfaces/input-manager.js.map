@@ -1,0 +1,1 @@
+{"version":3,"file":"input-manager.js","sourceRoot":"","sources":["../../src/input-interfaces/input-manager.ts"],"names":[],"mappings":";;AAGA,MAAa,YAAY;IAGrB,YAAY,QAAuB,EAAE,KAAiB;QAClD,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;QACzB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACvB,CAAC;CACJ;AAPD,oCAOC"}
