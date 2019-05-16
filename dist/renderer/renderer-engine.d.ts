@@ -8,7 +8,7 @@ export declare class RendererEngine {
     renderableManager: RenderableManager;
     shaderManager: ShaderManager;
     inputManager: InputManager;
-    constructor();
+    constructor(inputManager: InputManager);
     initializeRenderer(htmlCanvasElement: HTMLCanvasElement, width?: number, height?: number): void;
     drawScene(dt: number): void;
     applyUserInput(input: InputManager): void;

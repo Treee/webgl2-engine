@@ -2,13 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const shader_manager_1 = require("./shaders/shader-manager");
 const renderable_manager_1 = require("./renderables/renderable-manager");
-const input_manager_1 = require("../input-interfaces/input-manager");
-const keyboard_input_1 = require("../input-interfaces/keyboard-input");
-const mouse_input_1 = require("../input-interfaces/mouse-input");
 class RendererEngine {
-    constructor() {
+    constructor(inputManager) {
         this.shaderManager = new shader_manager_1.ShaderManager();
-        this.inputManager = new input_manager_1.InputManager(new keyboard_input_1.KeyboardInput, new mouse_input_1.MouseInput());
+        this.inputManager = inputManager;
     }
     initializeRenderer(htmlCanvasElement, width, height) {
         this.initializeCanvasGL(htmlCanvasElement, width ? width : 600, height ? height : 400);
