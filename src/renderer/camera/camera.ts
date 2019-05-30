@@ -104,7 +104,7 @@ export class Camera {
 
   protected moveCamera(amountToMove: v3.Vec3) {
     this.position = v3.add(this.getPosition(), amountToMove);
-    // console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
+    console.log(`Pos: ${this.getPosition()} Forward: ${this.getForward()} Test: ${v3.add(this.getPosition(), this.getForward())}`);
   }
 
   moveForward() { this.moveCamera(v3.mulScalar(this.getForward(), this.translateStepSize)); }
