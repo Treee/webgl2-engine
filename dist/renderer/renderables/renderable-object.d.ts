@@ -1,4 +1,3 @@
-/// <reference types="webgl2" />
 import { ProgramInfo, BufferInfo, m4, v3 } from 'twgl.js';
 export declare abstract class RenderableObject {
     programInfo: ProgramInfo;
@@ -14,7 +13,7 @@ export declare abstract class RenderableObject {
     scaleValue: v3.Vec3;
     modelMatrix: m4.Mat4;
     constructor();
-    initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any): void;
+    initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any): void;
     translate(dt: number, translateAmount: v3.Vec3): void;
     scale(dt: number, scaleAmount: v3.Vec3): void;
     rotate(dt: number): void;
@@ -22,5 +21,5 @@ export declare abstract class RenderableObject {
     computeMatrix(viewProjectionMatrix: m4.Mat4): m4.Mat4;
     update(dt: number, viewProjectionMatrix: any): void;
     setDirty(isDirty: boolean): void;
-    draw(gl: WebGL2RenderingContext): void;
+    draw(gl: WebGLRenderingContext): void;
 }

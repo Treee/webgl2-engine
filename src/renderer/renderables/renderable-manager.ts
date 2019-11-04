@@ -13,7 +13,7 @@ import { InputManager } from "../../input-interfaces/input-manager";
 
 export class RenderableManager {
 
-    gl: WebGL2RenderingContext;
+    gl: WebGLRenderingContext;
     shaderManager: ShaderManager;
     inputManager: InputManager;
 
@@ -21,7 +21,7 @@ export class RenderableManager {
     cameras: Camera[] = [];
     renderables: RenderableObject[] = [];
 
-    constructor(gl: WebGL2RenderingContext, shaderManager: ShaderManager, inputManager: InputManager) {
+    constructor(gl: WebGLRenderingContext, shaderManager: ShaderManager, inputManager: InputManager) {
         this.gl = gl;
         this.shaderManager = shaderManager;
         this.inputManager = inputManager;
@@ -89,9 +89,9 @@ export class RenderableManager {
         }
     }
 
-    public drawScene(gl: WebGL2RenderingContext, dt: number) {
+    public drawScene(gl: WebGLRenderingContext, dt: number) {
         dt = dt * 0.001; // take the current dt and make it even smaller
-        resizeCanvasToDisplaySize(gl.canvas);
+        resizeCanvasToDisplaySize(gl.canvas as HTMLCanvasElement);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 

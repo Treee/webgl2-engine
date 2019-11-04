@@ -6,7 +6,7 @@ export class RendererEngine {
 
     canvas!: HTMLCanvasElement;
 
-    gl!: WebGL2RenderingContext;
+    gl!: WebGLRenderingContext;
 
     renderableManager!: RenderableManager;
     shaderManager: ShaderManager;
@@ -42,7 +42,7 @@ export class RendererEngine {
         }
 
         // get the webgl 2 context
-        this.gl = this.canvas.getContext('webgl2') as WebGL2RenderingContext;
+        this.gl = this.canvas.getContext('webgl2') as WebGLRenderingContext;
         if (!this.gl) {
             throw new Error('GL Context not initialized.');
         }

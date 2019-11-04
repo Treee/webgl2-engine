@@ -16,7 +16,7 @@ export class ShaderManager {
     this.fs = new FragmentShader();
   }
 
-  public initializeShaderPrograms(gl: WebGL2RenderingContext) {
+  public initializeShaderPrograms(gl: WebGLRenderingContext) {
     this.programs.set('basic-shader', this.initializeBasicShader(gl));
     this.programs.set('basic-texture-shader', this.initializeBasicTextureShader(gl));
   }
@@ -33,15 +33,15 @@ export class ShaderManager {
   }
 
 
-  private initializeBasicShader(gl: WebGL2RenderingContext): twgl.ProgramInfo {
+  private initializeBasicShader(gl: WebGLRenderingContext): twgl.ProgramInfo {
     return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.THREE_D), this.fs.getfragmentShaderCode(FragmentShaderType.PASS_THROUGH));
   }
 
-  private initializeBasicTextureShader(gl: WebGL2RenderingContext): twgl.ProgramInfo {
+  private initializeBasicTextureShader(gl: WebGLRenderingContext): twgl.ProgramInfo {
     return this.initializeShaderProgram(gl, this.vs.getVertexShaderCode(VertexShaderType.TEXTURE), this.fs.getfragmentShaderCode(FragmentShaderType.TEXTURE));
   }
 
-  private initializeShaderProgram(gl: WebGL2RenderingContext, vertexShader: string, fragmentShader: string, attributePrefix: string = 'a_'): twgl.ProgramInfo {
+  private initializeShaderProgram(gl: WebGLRenderingContext, vertexShader: string, fragmentShader: string, attributePrefix: string = 'a_'): twgl.ProgramInfo {
     twgl.setAttributePrefix(attributePrefix);
     return twgl.createProgramInfo(gl, [vertexShader, fragmentShader]);
   }

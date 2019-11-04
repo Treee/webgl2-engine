@@ -31,7 +31,7 @@ class Axis3D extends renderable_object_1.RenderableObject {
     draw(gl) {
         let programInfo = this.programInfo;
         gl.useProgram(programInfo.program);
-        gl.bindVertexArray(this.vertexArray);
+        // gl.bindVertexArray(this.vertexArray);
         twgl_js_1.setUniforms(programInfo, this.uniforms);
         twgl_js_1.drawBufferInfo(gl, this.bufferInfo, gl.LINES);
     }

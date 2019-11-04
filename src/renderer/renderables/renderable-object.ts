@@ -24,7 +24,7 @@ export abstract class RenderableObject {
 
   }
 
-  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) { };
+  initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any) { };
 
   translate(dt: number, translateAmount: v3.Vec3) {
     let newPosition = v3.add(this.position, translateAmount);
@@ -70,13 +70,13 @@ export abstract class RenderableObject {
     this.isDirty = isDirty;
   }
 
-  draw(gl: WebGL2RenderingContext) {
+  draw(gl: WebGLRenderingContext) {
     // gl.clearColor(0, 0, 0, 0);
     // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     let programInfo = this.programInfo;
     gl.useProgram(programInfo.program);
-    gl.bindVertexArray(this.vertexArray);
+    // gl.bindVertexArray(this.vertexArray);
     setUniforms(programInfo, this.uniforms);
     drawBufferInfo(gl, this.bufferInfo);
   }

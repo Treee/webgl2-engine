@@ -17,7 +17,7 @@ export class Cube extends RenderableObject {
     this.alias = 'cube';
   }
 
-  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let arrays = {
       position: [
         // top

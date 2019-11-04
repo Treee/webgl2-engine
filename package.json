@@ -28,7 +28,6 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "@types/three": "^0.93.31",
-    "@types/webgl2": "^0.0.4",
     "jasmine": "^3.5.0",
     "jasmine-spec-reporter": "^4.2.1",
     "nodemon": "^1.19.4",

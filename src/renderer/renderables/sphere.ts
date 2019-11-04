@@ -13,7 +13,7 @@ export class Sphere extends RenderableObject {
     this.alias = 'sphere';
   }
 
-  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let sphereBufferInfo = primitives.createSphereBufferInfo(gl, 10, 12, 6);
     // let attr = {
     //   color: [0, 1, 0, 1]

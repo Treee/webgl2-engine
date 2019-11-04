@@ -17,7 +17,7 @@ export class Axis3D extends RenderableObject {
     this.alias = 'axis-3d';
   }
 
-  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let arrays = {
       position: [-this.xAxisRange, 0, 0, this.xAxisRange, 0, 0, 0, -this.yAxisRange, 0, 0, this.yAxisRange, 0, 0, 0, -this.zAxisRange, 0, 0, this.zAxisRange],
       color: [0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],
@@ -34,10 +34,10 @@ export class Axis3D extends RenderableObject {
     this.setDirty(true);
   }
 
-  draw(gl: WebGL2RenderingContext) {
+  draw(gl: WebGLRenderingContext) {
     let programInfo = this.programInfo;
     gl.useProgram(programInfo.program);
-    gl.bindVertexArray(this.vertexArray);
+    // gl.bindVertexArray(this.vertexArray);
     setUniforms(programInfo, this.uniforms);
     drawBufferInfo(gl, this.bufferInfo, gl.LINES);
   }

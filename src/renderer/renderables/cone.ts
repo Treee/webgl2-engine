@@ -17,7 +17,7 @@ export class Cone extends RenderableObject {
     this.alias = 'cone';
   }
 
-  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any) {
     // cone height
     let conePositions = [0, this.coneHeight, 0, 0, 0, 0];
     let coneIndices = [];

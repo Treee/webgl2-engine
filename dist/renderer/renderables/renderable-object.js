@@ -56,7 +56,7 @@ class RenderableObject {
         // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         let programInfo = this.programInfo;
         gl.useProgram(programInfo.program);
-        gl.bindVertexArray(this.vertexArray);
+        // gl.bindVertexArray(this.vertexArray);
         twgl_js_1.setUniforms(programInfo, this.uniforms);
         twgl_js_1.drawBufferInfo(gl, this.bufferInfo);
     }

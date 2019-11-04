@@ -17,7 +17,7 @@ export class TextureEntity extends RenderableObject {
 
   }
 
-  initializeObject(gl: WebGL2RenderingContext, progInfo: ProgramInfo, uniforms: any) {
+  initializeObject(gl: WebGLRenderingContext, progInfo: ProgramInfo, uniforms: any) {
     let arrays = {
       position: [
         -this.xAxisRange, 0, -this.zAxisRange, // back left corner
