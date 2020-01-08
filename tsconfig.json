@@ -4,7 +4,6 @@
     ],
     "exclude": [
         "src/**/*-spec.ts",
-        "dist",
         "node_modules"
     ],
     "compilerOptions": {
