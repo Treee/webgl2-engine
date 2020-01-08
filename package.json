@@ -10,7 +10,8 @@
     "test": "ts-node --project ./tsconfig.json node_modules/jasmine/bin/jasmine --config=spec/support/jasmine.json",
     "version": "npm run test && npm audit && npm run build && git add -A dist",
     "postversion": "git push",
-    "build": "ts-node node_modules/typescript/bin/tsc -p tsconfig.json",
+    "build": "npm test && tsc -p tsconfig.json",
+    "browserify-build": "npm run build && browserify src/index.ts > dist/webgl2-engine-bundle.js",
     "precommit": "npm version patch",
     "build-prod-minor": "npm version minor",
     "build-prod-major": "npm version major"
@@ -20,7 +21,7 @@
     "url": "git+https://github.com/Treee/webgl2-engine.git"
   },
   "author": "Tree",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/Treee/webgl2-engine/issues"
   },
@@ -28,10 +29,10 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "@types/three": "^0.93.31",
+    "browserify": "^16.5.0",
     "jasmine": "^3.5.0",
     "jasmine-spec-reporter": "^4.2.1",
-    "nodemon": "^1.19.4",
-    "ts-node": "^6.0.1",
+    "ts-node": "^8.5.4",
     "typescript": "^3.6.4"
   },
   "dependencies": {
