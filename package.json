@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/Treee/webgl2-engine#readme",
   "devDependencies": {
+    "@types/three": "^0.93.31",
     "@types/jasmine": "^2.8.6",
     "browserify": "^16.5.0",
     "jasmine": "^3.5.0",
@@ -35,7 +36,6 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@types/three": "^0.93.31",
     "three": "^0.99.0",
     "twgl.js": "^4.13.1"
   }
